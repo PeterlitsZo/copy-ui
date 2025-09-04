@@ -1,5 +1,5 @@
-import { ArrowDownUp, ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react"
 import { useState } from "react";
+import { SortIndicator, type SortIndicatorDirection } from "src/components/SortIndicator";
 
 export function Welcome() {
   const [direction, setDirection] = useState<SortIndicatorDirection>('asc');
@@ -11,28 +11,57 @@ export function Welcome() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem', border: '1px solid oklch(92.8% 0.006 264.531)', borderRadius: '0.75rem' }}>
           <SortIndicator direction={direction} onDirectionChange={setDirection} />
         </div>
-        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem', maxHeight: '50vh', overflow: 'auto' }}>
-          <pre style={{ fontSize: '0.875rem' }}>
-            <code>{sortIndicatorCode}</code>
-          </pre>
+        <div>
+          <h2 style={{ fontSize: '1.25rem' }}>index.ts</h2>
+          <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem', maxHeight: '50vh', overflow: 'auto' }}>
+            <pre style={{ fontSize: '0.875rem' }}>
+              <code>{sortIndicatorFiles['index.ts']}</code>
+            </pre>
+          </div>
         </div>
-        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem' }}>
-          <pre style={{ fontSize: '0.875rem' }}>
-            <code>{sortIndicatorUsage}</code>
-          </pre>
+        <div>
+          <h2 style={{ fontSize: '1.25rem' }}>SortIndicator.tsx</h2>
+          <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem', maxHeight: '50vh', overflow: 'auto' }}>
+            <pre style={{ fontSize: '0.875rem' }}>
+              <code>{sortIndicatorFiles['SortIndicator.tsx']}</code>
+            </pre>
+          </div>
         </div>
-        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem' }}>
-          <pre style={{ fontSize: '0.875rem' }}>
-            <code>{sortIndicatorChangelog}</code>
-          </pre>
+        <div>
+          <h2 style={{ fontSize: '1.25rem' }}>Usage</h2>
+          <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem' }}>
+            <pre style={{ fontSize: '0.875rem' }}>
+              <code>{sortIndicatorUsage}</code>
+            </pre>
+          </div>
+        </div>
+        <div>
+          <h2 style={{ fontSize: '1.25rem' }}>Change Log</h2>
+          <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', borderRadius: '0.75rem' }}>
+            <pre style={{ fontSize: '0.875rem' }}>
+              <code>{sortIndicatorChangelog}</code>
+            </pre>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-const sortIndicatorCode = `\
+const sortIndicatorFiles: Record<string, string> = {};
+
+sortIndicatorFiles['index.ts'] = `\
 // SortIndicator from copy-ui @ 2025-09-04
+
+export { SortIndicator } from './SortIndicator';
+export type {
+  SortIndicatorDirection,
+  SortIndicatorProps
+} from './SortIndicator';
+`;
+
+sortIndicatorFiles['SortIndicator.tsx'] = `\
+import { ArrowDownUp, ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react";
 
 export type SortIndicatorDirection = 'asc' | 'desc' | 'none';
 
@@ -42,29 +71,26 @@ export interface SortIndicatorProps {
 }
 
 export function SortIndicator(props: SortIndicatorProps) {
-  switch (props.direction) {
-    case 'asc': {
-      return (
-        <ArrowUpWideNarrow
-          onClick={() => props.onDirectionChange?.('desc')}
-        />
-      );
-    }
-    case 'desc': {
-      return (
-        <ArrowDownWideNarrow
-          onClick={() => props.onDirectionChange?.('none')}
-        />
-      );
-    }
-    default: {
-      return (
-        <ArrowDownUp
-          onClick={() => props.onDirectionChange?.('asc')}
-        />
-      );
-    }
-  }
+  const Icon = {
+    asc: ArrowUpWideNarrow,
+    desc: ArrowDownWideNarrow,
+    none: ArrowDownUp
+  }[props.direction];
+
+  const handleClick = () => {
+    const nextDirection = ({
+      asc: 'desc',
+      desc: 'none',
+      none: 'asc'
+    } as const)[props.direction];
+    props.onDirectionChange?.(nextDirection);
+  };
+
+  return (
+    <button>
+      <Icon onClick={handleClick} style={{ cursor: 'pointer' }} />
+    </button>
+  );
 }
 `;
 
@@ -79,36 +105,3 @@ return (
 const sortIndicatorChangelog = `\
 - 2025-09-04: Initial version.
 `;
-
-export type SortIndicatorDirection = 'asc' | 'desc' | 'none';
-
-export interface SortIndicatorProps {
-  direction: SortIndicatorDirection;
-  onDirectionChange?: (direction: SortIndicatorDirection) => void;
-}
-
-export function SortIndicator(props: SortIndicatorProps) {
-  switch (props.direction) {
-    case 'asc': {
-      return (
-        <ArrowUpWideNarrow
-          onClick={() => props.onDirectionChange?.('desc')}
-        />
-      );
-    }
-    case 'desc': {
-      return (
-        <ArrowDownWideNarrow
-          onClick={() => props.onDirectionChange?.('none')}
-        />
-      );
-    }
-    default: {
-      return (
-        <ArrowDownUp
-          onClick={() => props.onDirectionChange?.('asc')}
-        />
-      );
-    }
-  }
-}
