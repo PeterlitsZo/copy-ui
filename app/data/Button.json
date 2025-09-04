@@ -1,0 +1,5 @@
+{
+    "index.ts": "// Button from copy-ui @ 2025-09-04\n\nexport { Button } from './Button';\nexport type { ButtonProps } from './Button';\n",
+    "Button.tsx": "import styles from './Button.module.scss';\n\nexport type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;\n\nexport function Button(props: ButtonProps) {\n  return (\n    <button className={styles.button} {...props} />\n  )\n}\n",
+    "Button.module.scss": ".button {\n  padding: 8px 16px;\n  background-color: #007bff;\n  color: white;\n  border: none;\n  cursor: pointer;\n  font-size: 16px;\n}\n"
+}
