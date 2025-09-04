@@ -1,0 +1,12 @@
+.sortIndicatorButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: oklch(98.5% 0.002 247.839);
+  }
+}
