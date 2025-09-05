@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classNames from "classnames";
 
 import { SortIndicator, useSortIndicatorState } from "src/components/SortIndicator";
 import { Button } from "src/components/Button";
-import { ThemeProvider } from "src/components/ThemeProvider";
+import { ThemeContext, ThemeProvider } from "src/components/ThemeProvider";
 
 import themeProviderFilesJson from "app/data/ThemeProvider.json";
 import sortIndicatorFilesJson from "app/data/SortIndicator.json";
@@ -14,7 +14,6 @@ import styles from "./welcome.module.scss";
 import { TimeSelector } from "src/components/TimeSelector";
 
 export function Welcome() {
-  const { direction, handleClick } = useSortIndicatorState('asc');
 
   return (
     <ThemeProvider>
@@ -24,17 +23,7 @@ export function Welcome() {
           files={themeProviderFilesJson}
           changelog={'- 2025-09-05: Initial version.'}
         />
-        <Section
-          title="SortIndicator"
-          demoAndCode={[(
-            <button className={styles.sortIndicatorButton} onClick={handleClick}>
-              <span>Volume</span>
-              <SortIndicator size="1rem" direction={direction} />
-            </button>
-          ), sortIndicatorCode]}
-          files={sortIndicatorFilesJson}
-          changelog={sortIndicatorChangelog}
-        />
+        <SortIndicatorSection />
         <Section
           title="Button"
           demoAndCode={[<Button>Click Me</Button>, buttonCode]}
@@ -54,13 +43,27 @@ export function Welcome() {
   )
 }
 
+const buttonCode = `\
+<Button>Click Me</Button>
+`;
+
+const buttonChangelog = `\
+- 2025-09-04: Initial version.
+- 2025-09-05: Use ThemeProvider for theming.
+`;
+
 const sortIndicatorCode = `\
+const theme = useContext(ThemeContext);
 const { direction, handleClick } = useSortIndicatorState('asc');
 
 return (
   <button className={styles.sortIndicatorButton} onClick={handleClick}>
     <span>Volume</span>
-    <SortIndicator size='1rem' direction={direction} />
+    <SortIndicator
+      style={{ color: theme.colors.gray['100'] }}
+      size="1rem"
+      direction={direction}
+    />
   </button>
 )
 `;
@@ -70,14 +73,30 @@ const sortIndicatorChangelog = `\
 - 2025-09-05: Add the \`size\` prop.
 `;
 
-const buttonCode = `\
-<Button>Click Me</Button>
-`;
+function SortIndicatorSection() {
+  const theme = useContext(ThemeContext);
+  const { direction, handleClick } = useSortIndicatorState('asc');
 
-const buttonChangelog = `\
-- 2025-09-04: Initial version.
-- 2025-09-05: Use ThemeProvider for theming.
-`;
+  const demo = (
+    <button className={styles.sortIndicatorButton} onClick={handleClick}>
+      <span>Volume</span>
+      <SortIndicator
+        style={{ color: theme.colors.gray['600'] }}
+        size="1rem"
+        direction={direction}
+      />
+    </button>
+  )
+
+  return (
+    <Section
+      title="SortIndicator"
+      demoAndCode={[demo, sortIndicatorCode]}
+      files={sortIndicatorFilesJson}
+      changelog={sortIndicatorChangelog}
+    />
+  )
+}
 
 interface SectionProps {
   title: string;
