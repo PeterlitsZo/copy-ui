@@ -8,8 +8,10 @@ import { ThemeProvider } from "src/components/ThemeProvider";
 import themeProviderFilesJson from "app/data/ThemeProvider.json";
 import sortIndicatorFilesJson from "app/data/SortIndicator.json";
 import buttonFilesJson from "app/data/Button.json";
+import timeSelectorFilesJson from "app/data/TimeSelector.json";
 
 import styles from "./welcome.module.scss";
+import { TimeSelector } from "src/components/TimeSelector";
 
 export function Welcome() {
   const { direction, handleClick } = useSortIndicatorState('asc');
@@ -41,8 +43,10 @@ export function Welcome() {
         />
         <Section
           title="TimeSelector"
-          demoAndCode={[<>TODO</>, 'TODO']}
-          files={{}}
+          demoAndCode={[(
+            <TimeSelector />
+          ), '<TimeSelector />']}
+          files={timeSelectorFilesJson}
           changelog={'TODO'}
         />
       </div>
@@ -109,6 +113,7 @@ function Section({ title, demoAndCode, files, changelog }: SectionProps) {
           <div style={{ display: 'flex', flexDirection: 'column', padding: '0.5rem', width: '15rem', borderRight: '1px solid oklch(92.8% 0.006 264.531)' }}>
             {Object.keys(files).map((filename) => (
               <button
+                key={filename}
                 className={classNames(styles.sourceCodeTreeFilename, filename === currentFilename && styles.active)}
                 onClick={() => setCurrentFilename(filename)}
               >

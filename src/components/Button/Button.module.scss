@@ -1,4 +1,7 @@
 .button {
+  display: flex;
+  align-items: center;
+
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
   background-color: var(--button-bg);
@@ -7,4 +10,16 @@
   border-radius: var(--button-radius);
 
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-bg-hover);
+  }
+}
+
+.buttonLeftSection {
+  margin-right: 0.625rem;
+}
+
+.buttonRightSection {
+  margin-left: 0.625rem;
 }
