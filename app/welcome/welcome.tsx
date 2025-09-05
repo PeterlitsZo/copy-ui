@@ -16,7 +16,7 @@ export function Welcome() {
         demo={(
           <button className={styles.sortIndicatorButton} onClick={handleClick}>
             <span>Volume</span>
-            <SortIndicator direction={direction} />
+            <SortIndicator size="1rem" direction={direction} />
           </button>
         )}
         files={sortIndicatorFilesJson}
@@ -47,13 +47,14 @@ const { direction, handleClick } = useSortIndicatorState('asc');
 return (
   <button className={styles.sortIndicatorButton} onClick={handleClick}>
     <span>Volume</span>
-    <SortIndicator direction={direction} />
+    <SortIndicator size='1rem' direction={direction} />
   </button>
 )
 `;
 
 const sortIndicatorChangelog = `\
 - 2025-09-04: Initial version.
+- 2025-09-05: Add the \`size\` prop.
 `;
 
 const buttonCode = `\

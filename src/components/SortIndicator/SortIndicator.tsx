@@ -7,10 +7,6 @@ import { useState } from "react";
 
 export type SortIndicatorDirection = 'asc' | 'desc' | 'none';
 
-export interface SortIndicatorProps {
-  direction: SortIndicatorDirection;
-}
-
 export function useSortIndicatorState(
   defaultDirection: SortIndicatorDirection = 'none'
 ) {
@@ -28,6 +24,11 @@ export function useSortIndicatorState(
   return { direction, handleClick };
 }
 
+export interface SortIndicatorProps {
+  direction: SortIndicatorDirection;
+  size?: string | number;
+}
+
 export function SortIndicator(props: SortIndicatorProps) {
   const Icon = {
     asc: ArrowUpWideNarrow,
@@ -36,6 +37,6 @@ export function SortIndicator(props: SortIndicatorProps) {
   }[props.direction];
 
   return (
-    <Icon />
+    <Icon size={props.size} />
   );
 }
