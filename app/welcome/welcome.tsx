@@ -4,14 +4,16 @@ import classNames from "classnames";
 import { SortIndicator, useSortIndicatorState } from "src/components/SortIndicator";
 import { Button } from "src/components/Button";
 import { ThemeContext, ThemeProvider } from "src/components/ThemeProvider";
+import { TimeSelector } from "src/components/TimeSelector";
+import { Popover } from "src/components/Popover";
 
 import themeProviderFilesJson from "app/data/ThemeProvider.json";
 import sortIndicatorFilesJson from "app/data/SortIndicator.json";
 import buttonFilesJson from "app/data/Button.json";
 import timeSelectorFilesJson from "app/data/TimeSelector.json";
+import popoverFilesJson from "app/data/Popover.json";
 
 import styles from "./welcome.module.scss";
-import { TimeSelector } from "src/components/TimeSelector";
 
 export function Welcome() {
 
@@ -24,12 +26,8 @@ export function Welcome() {
           changelog={'- 2025-09-05: Initial version.'}
         />
         <SortIndicatorSection />
-        <Section
-          title="Button"
-          demoAndCode={[<Button>Click Me</Button>, buttonCode]}
-          files={buttonFilesJson}
-          changelog={buttonChangelog}
-        />
+        <ButtonSection />
+        <PopoverSection />
         <Section
           title="TimeSelector"
           demoAndCode={[(
@@ -43,6 +41,9 @@ export function Welcome() {
   )
 }
 
+// Button
+// =============================================================================
+
 const buttonCode = `\
 <Button>Click Me</Button>
 `;
@@ -50,7 +51,22 @@ const buttonCode = `\
 const buttonChangelog = `\
 - 2025-09-04: Initial version.
 - 2025-09-05: Use ThemeProvider for theming.
+- 2025-09-08: Add the prop \`ref\`.
 `;
+
+function ButtonSection() {
+  return (
+    <Section
+      title="Button"
+      demoAndCode={[<Button>Click Me</Button>, buttonCode]}
+      files={buttonFilesJson}
+      changelog={buttonChangelog}
+    />
+  )
+}
+
+// SortIndicator
+// =============================================================================
 
 const sortIndicatorCode = `\
 const theme = useContext(ThemeContext);
@@ -97,6 +113,69 @@ function SortIndicatorSection() {
     />
   )
 }
+
+// PopoverSection
+// =============================================================================
+
+const popoverCode = `\
+<Popover>
+  <Popover.Trigger
+    render={({ setRef, onClick }) => (
+      <Button ref={(el) => setRef(el!)} onClick={onClick}>Open</Button>
+    )}
+  />
+  <Popover.Portal
+    render={({ setRef, isOpen, floatingStyles }) => (
+      isOpen && (
+        <div
+          ref={(el) => setRef(el!)}
+          style={floatingStyles}
+          className={styles.popoverPortal}
+        >
+          You click to open me!
+        </div>
+      )
+    )}
+  />
+</Popover>
+`;
+
+function PopoverSection() {
+  const demo = (
+    <Popover>
+      <Popover.Trigger
+        render={({ setRef, onClick }) => (
+          <Button ref={(el) => setRef(el!)} onClick={onClick}>Open</Button>
+        )}
+      />
+      <Popover.Portal
+        render={({ setRef, isOpen, floatingStyles }) => (
+          isOpen && (
+            <div
+              ref={(el) => setRef(el!)}
+              style={floatingStyles}
+              className={styles.popoverPortal}
+            >
+              You click to open me!
+            </div>
+          )
+        )}
+      />
+    </Popover>
+  )
+
+  return (
+    <Section
+      title="Popover"
+      demoAndCode={[demo, popoverCode]}
+      files={popoverFilesJson}
+      changelog={'- 2025-09-08: Initial version.'}
+    />
+  )
+}
+
+// Section
+// =============================================================================
 
 interface SectionProps {
   title: string;

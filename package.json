@@ -9,6 +9,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.16",
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
     "classnames": "^2.5.1",

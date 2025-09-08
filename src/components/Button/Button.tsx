@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../ThemeProvider/ThemeProvider';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  ref?: React.Ref<HTMLButtonElement>;
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 };
@@ -12,6 +13,7 @@ export function Button(props: ButtonProps) {
   const theme = useContext(ThemeContext);
 
   const {
+    ref,
     className,
     style,
     children,
@@ -34,6 +36,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <button
+      ref={props.ref}
       className={classNames(styles.button, className)}
       style={computedStyle}
       {...rest}
