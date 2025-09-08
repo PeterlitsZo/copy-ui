@@ -11,21 +11,6 @@
   }
 }
 
-.sourceCodeTreeFilename {
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  border-radius: 0.75rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: oklch(98.5% 0.002 247.839);
-  }
-
-  &.active {
-    background-color: oklch(96.7% 0.003 264.542);
-  }
-}
-
 .popoverPortal {
   background-color: #f8f9fa;
   padding: 0.5rem 1rem;
