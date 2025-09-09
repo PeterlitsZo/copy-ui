@@ -20,7 +20,6 @@ import { Section } from "./Section";
 import styles from "./welcome.module.scss";
 
 export function Welcome() {
-
   return (
     <ThemeProvider>
       <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -57,8 +56,9 @@ const buttonCode = `\
 
 const buttonChangelog = `\
 - 2025-09-04: Initial version.
-- 2025-09-05: Use ThemeProvider for theming.
-- 2025-09-08: Add the prop \`ref\`.
+- 2025-09-05: Use ThemeProvider for theming, support the props \`leftSection\` and \`rightSection\`.
+- 2025-09-08: Support the prop \`ref\`.
+- 2025-09-09: Support the prop \`variant\`.
 `;
 
 function ButtonSection() {
