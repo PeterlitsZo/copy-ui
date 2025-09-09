@@ -29,13 +29,17 @@ export function Button(props: ButtonProps) {
     variant === 'default' && {
       '--button-bg': 'white',
       '--button-color': theme.colors.gray['800'],
-      '--button-border': `1px solid ${theme.colors.gray['200']}`,
+      '--button-border-width': '1px',
+      '--button-border-style': 'solid',
+      '--button-border-color': theme.colors.gray['200'],
       '--button-bg-hover': theme.colors.gray['100'],
     } as CSSProperties,
     variant === 'filled' && {
       '--button-bg': theme.colors.blue['600'],
       '--button-color': 'white',
-      '--button-border': 'none',
+      '--button-border-width': '1px',
+      '--button-border-style': 'solid',
+      '--button-border-color': theme.colors.blue['700'],
       '--button-bg-hover': theme.colors.blue['700'],
     } as CSSProperties,
     {

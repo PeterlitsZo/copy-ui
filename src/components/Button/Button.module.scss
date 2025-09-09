@@ -6,7 +6,7 @@
   padding-inline: var(--button-padding-x);
   background-color: var(--button-bg);
   color: var(--button-color);
-  border: var(--button-border);
+  border: var(--button-border-width) var(--button-border-style) var(--button-border-color);
   border-radius: var(--button-radius);
 
   cursor: pointer;
