@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Save, Send, Star, Trash } from "lucide-react";
 
 import { SortIndicator, useSortIndicatorState } from "src/components/SortIndicator";
 import { Button } from "src/components/Button";
 import { ThemeContext, ThemeProvider } from "src/components/ThemeProvider";
-import { TimeSelector } from "src/components/TimeSelector";
+import { TimeSelector, type TimeRange } from "src/components/TimeSelector";
 import { Popover } from "src/components/Popover";
 import { IconButton } from "src/components/IconButton";
 import { ButtonGroup } from "src/components/ButtonGroup";
@@ -271,7 +271,7 @@ function PopoverSection() {
         )}
       />
       <Popover.Portal
-        onClickOutside={({ close }) => close()}
+        onClickOutside={({ closePortal: close }) => close()}
         render={({ setRef, isOpen, floatingStyles }) => (
           isOpen && (
             <div
@@ -301,14 +301,16 @@ function PopoverSection() {
 // =============================================================================
 
 function TimeSelectorSection() {
+  const [timeRange, setTimeRange] = useState<TimeRange | undefined>(undefined);
+
   return (
     <Section
       title="TimeSelector"
       demoAndCode={[(
-        <TimeSelector />
+        <TimeSelector value={timeRange} onChange={setTimeRange} />
       ), '<TimeSelector />']}
       files={timeSelectorFilesJson}
-      changelog={'TODO'}
+      changelog={'- 2025-09-11: Initial version.'}
     />
   )
 }
