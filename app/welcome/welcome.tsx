@@ -40,12 +40,17 @@ export function Welcome() {
 // ThemeProvider
 // =============================================================================
 
+const themeProviderChangelog = `\
+- 2025-09-05: Initial version.
+- 2025-09-09: Extend DEFAULT_THEME with additional color palettes for red, green, and yellow.
+`;
+
 function ThemeProviderSection() {
   return (
     <Section
       title="ThemeProvider"
       files={themeProviderFilesJson}
-      changelog={'- 2025-09-05: Initial version.'}
+      changelog={themeProviderChangelog}
     />
   )
 }
