@@ -1,14 +1,17 @@
 import { useContext } from "react";
+import { Trash } from "lucide-react";
 
 import { SortIndicator, useSortIndicatorState } from "src/components/SortIndicator";
 import { Button } from "src/components/Button";
 import { ThemeContext, ThemeProvider } from "src/components/ThemeProvider";
 import { TimeSelector } from "src/components/TimeSelector";
 import { Popover } from "src/components/Popover";
+import { IconButton } from "src/components/IconButton/IconButton";
 
 import themeProviderFilesJson from "app/data/ThemeProvider.json";
 import sortIndicatorFilesJson from "app/data/SortIndicator.json";
 import buttonFilesJson from "app/data/Button.json";
+import iconButtonFilesJson from "app/data/IconButton.json";
 import timeSelectorFilesJson from "app/data/TimeSelector.json";
 import popoverFilesJson from "app/data/Popover.json";
 
@@ -24,6 +27,7 @@ export function Welcome() {
         <ThemeProviderSection />
         <SortIndicatorSection />
         <ButtonSection />
+        <IconButtonSection />
         <PopoverSection />
         <TimeSelectorSection />
       </div>
@@ -64,6 +68,34 @@ function ButtonSection() {
       demoAndCode={[<Button>Click Me</Button>, buttonCode]}
       files={buttonFilesJson}
       changelog={buttonChangelog}
+    />
+  )
+}
+
+// IconButton
+// =============================================================================
+
+const iconButtonCode = `\
+<IconButton>
+  <Trash size={'1.25rem'} />
+</IconButton>
+`;
+
+const iconButtonChangelog = `\
+- 2025-09-09: Initial version.
+`;
+
+function IconButtonSection() {
+  return (
+    <Section
+      title="IconButton"
+      demoAndCode={[(
+        <IconButton>
+          <Trash size={'1.25rem'} />
+        </IconButton>
+      ), iconButtonCode]}
+      files={iconButtonFilesJson}
+      changelog={iconButtonChangelog}
     />
   )
 }
