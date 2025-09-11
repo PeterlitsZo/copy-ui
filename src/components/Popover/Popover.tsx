@@ -1,66 +1,70 @@
-'use client';
-
-import { flip, offset, useFloating } from "@floating-ui/react";
+import { autoUpdate, flip, offset, useFloating } from "@floating-ui/react";
 import {
-  createContext, useContext, useEffect, useLayoutEffect, useReducer,
-  useState,
-  type CSSProperties, type ReactNode,
+  createContext, memo, useContext, useEffect, useMemo, useState,
+  type CSSProperties, type FC, type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
+import { createStore, useStore, type StoreApi } from "zustand";
+
+// PopoverStore
+// =============================================================================
+
+type PopoverStoreState = {
+  isOpen: boolean;
+
+  floatingStyles: CSSProperties;
+  elRef: Element | null;
+  floatingRef: HTMLElement | null;
+}
+
+type PopoverStoreActions = {
+  toggle: () => void;
+  close: () => void;
+
+  setFloatingStyles: (floatingStyles: CSSProperties) => void;
+  setElRef: (el: Element | null) => void;
+  setFloatingRef: (el: HTMLElement | null) => void;
+}
+
+type PopoverStore = PopoverStoreState & PopoverStoreActions;
+
+type BuildPopoverStoreArgs = {
+  onSetElRef: (el: Element | null) => void;
+  onSetFloatingRef: (el: HTMLElement | null) => void;
+}
+
+function buildPopoverStore(args: BuildPopoverStoreArgs) {
+  return createStore<PopoverStore>()((set) => ({
+    isOpen: false,
+    floatingStyles: {},
+    elRef: null,
+    floatingRef: null,
+
+    toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+    close: () => set(() => ({ isOpen: false })),
+    setFloatingStyles: (floatingStyles) => set(() => ({ floatingStyles })),
+    setElRef: (el) => set(() => {
+      args.onSetElRef(el);
+      return { elRef: el };
+    }),
+    setFloatingRef: (el) => set(() => {
+      console.log('setFloatingRef', el);
+      args.onSetFloatingRef(el);
+      return { floatingRef: el };
+    }),
+  }));
+}
 
 // PopoverContext
 // =============================================================================
 
-const PopoverContext = createContext<PopoverContextInner | null>(null);
-
-type PopoverContextInner = {
-  state: PopoverState;
-  dispatch: React.Dispatch<PopoverAction>;
-}
-
-type PopoverState = {
-  isOpen: boolean;
-  floatingStyles: CSSProperties,
-}
-
-type PopoverAction =
-  | { type: 'set-el-ref', ref: Element }
-  | { type: 'set-floating-ref', ref: HTMLElement }
-  | { type: 'toggle' }
-  | { type: 'set-floating-styles', floatingStyles: CSSProperties };
-
-interface ReducerBuilderArgs {
-  setElRef: (el: Element) => void;
-  setFloatingRef: (el: HTMLElement) => void;
-}
-
-function reducerBuilder({
-  setElRef,
-  setFloatingRef
-}: ReducerBuilderArgs) {
-  return (state: PopoverState, action: PopoverAction) => {
-    switch (action.type) {
-      case 'set-el-ref':
-        setElRef(action.ref);
-        return state;
-      case 'set-floating-ref':
-        setFloatingRef(action.ref);
-        return state;
-      case 'toggle':
-        return { ...state, isOpen: !state.isOpen };
-      case 'set-floating-styles':
-        return { ...state, floatingStyles: action.floatingStyles };
-      default:
-        return state;
-    }
-  }
-}
+const PopoverContext = createContext<StoreApi<PopoverStore> | null>(null);
 
 // PopoverTrigger
 // =============================================================================
 
 interface PopoverTriggerRenderProps {
-  setRef: (el: Element) => void;
+  setRef: (el: Element | null) => void;
 
   onClick: () => void;
 }
@@ -69,39 +73,55 @@ interface PopoverTriggerProps {
   render: (props: PopoverTriggerRenderProps) => ReactNode
 }
 
-function PopoverTrigger({ render }: PopoverTriggerProps) {
+const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
+  const { render } = props;
+
   const context = useContext(PopoverContext);
   if (!context) {
     throw new Error('Popover.Trigger must be used within a Popover');
   }
 
-  const handleClick = () => {
-    context.dispatch({ type: 'toggle' });
-  }
+  const toggle = useStore(context, (state) => state.toggle);
+  const setElRef = useStore(context, (state) => state.setElRef);
 
-  return render({
-    setRef: (el) => context.dispatch({ type: 'set-el-ref', ref: el }),
-    onClick: handleClick,
-  });
+  const PopoverTriggerRender = useMemo(() => memo(render), [render]);
+
+  return (
+    <PopoverTriggerRender
+      setRef={setElRef}
+      onClick={toggle}
+    />
+  );
 }
+
+PopoverTrigger.displayName = 'PopoverTrigger';
 
 // PopoverPortal
 // =============================================================================
 
 interface PopoverPortalRenderProps {
-  setRef: (el: HTMLElement) => void;
+  setRef: (el: HTMLElement | null) => void;
+  togglePortal: () => void;
 
   isOpen: boolean;
   floatingStyles: CSSProperties;
 }
 
+interface OnClickOutsideArgs {
+  closePortal: () => void;
+}
+
 interface PopoverPortalProps {
+  onClickOutside?: (args: OnClickOutsideArgs) => void;
+
   render: (props: PopoverPortalRenderProps) => ReactNode
 }
 
-function PopoverPortal({ render }: PopoverPortalProps) {
+const PopoverPortal: FC<PopoverPortalProps> = (props) => {
+  const { onClickOutside, render } = props;
+
   const [mounted, setMounted] = useState(false);
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
@@ -110,54 +130,93 @@ function PopoverPortal({ render }: PopoverPortalProps) {
     throw new Error('Popover.Portal must be used within a Popover');
   }
 
+  const isOpen = useStore(context, (state) => state.isOpen);
+  const floatingStyles = useStore(context, (state) => state.floatingStyles);
+  const floatingRef = useStore(context, (state) => state.floatingRef);
+  const setFloatingRef = useStore(context, (state) => state.setFloatingRef);
+  const toggle = useStore(context, (state) => state.toggle);
+  const close = useStore(context, (state) => state.close);
+
+  useEffect(() => {
+    const ref = floatingRef;
+    if (!ref) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (!ref || !event.target) return;
+
+      if (!ref.contains(event.target as Node)) {
+        onClickOutside?.({
+          closePortal: close,
+        });
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [floatingRef]);
+
+  const PopoverPortalRender = useMemo(() => memo(render), [render]);
+
   if (!mounted) return null;
 
   return createPortal(
-    render({
-      setRef: (el) => context.dispatch({ type: 'set-floating-ref', ref: el }),
-      isOpen: context.state.isOpen,
-      floatingStyles: context.state.floatingStyles,
-    }),
+    <PopoverPortalRender
+      setRef={setFloatingRef}
+      togglePortal={toggle}
+      isOpen={isOpen}
+      floatingStyles={floatingStyles}
+    />,
     document.body
   );
 }
 
+PopoverPortal.displayName = 'PopoverPortal';
+
 // Popover
 // =============================================================================
 
-export function Popover(props: { children: ReactNode }) {
+export type PopoverProps = {
+  children: ReactNode
+}
+
+type PopoverComponent = FC<PopoverProps> & {
+  Trigger: typeof PopoverTrigger;
+  Portal: typeof PopoverPortal;
+};
+
+export const Popover: PopoverComponent = (props) => {
   const { children } = props;
 
   const { refs, floatingStyles } = useFloating({
     placement: 'bottom-end',
+    whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),
       flip(),
     ],
   });
 
-  const reducer = reducerBuilder({
-    setElRef: refs.setReference,
-    setFloatingRef: refs.setFloating,
-  });
-  const [state, dispatch] = useReducer(reducer, {
-    isOpen: false,
-    floatingStyles,
-  });
+  const popoverStore = useMemo(() => {
+    return buildPopoverStore({
+      onSetElRef: refs.setReference,
+      onSetFloatingRef: refs.setFloating,
+    });
+  }, [refs]);
 
   useEffect(() => {
-    dispatch({
-      type: 'set-floating-styles',
-      floatingStyles,
-    })
+    popoverStore.getState().setFloatingStyles(floatingStyles);
   }, [floatingStyles]);
 
   return (
-    <PopoverContext value={{ state, dispatch }}>
+    <PopoverContext value={popoverStore}>
       {children}
     </PopoverContext>
   )
-}
+};
+
+Popover.displayName = 'Popover';
 
 Popover.Trigger = PopoverTrigger;
 Popover.Portal = PopoverPortal;

@@ -230,19 +230,27 @@ const popoverCode = `\
 </Popover>
 `;
 
+const popoverChangelog = `\
+- 2025-09-08: Initial version.
+- 2025-09-11: Support the prop \`onClickOutside\` of \`Popover.Portal\`.
+  Refactor it to make it simpler with zustand. Use \`autoUpdate\` from
+  \`@floating-ui/react\` to handle the position update automatically. etc.
+`;
+
 function PopoverSection() {
   const demo = (
     <Popover>
       <Popover.Trigger
         render={({ setRef, onClick }) => (
-          <Button ref={(el) => setRef(el!)} onClick={onClick}>Open</Button>
+          <Button ref={(el) => setRef(el)} onClick={onClick}>Open</Button>
         )}
       />
       <Popover.Portal
+        onClickOutside={({ close }) => close()}
         render={({ setRef, isOpen, floatingStyles }) => (
           isOpen && (
             <div
-              ref={(el) => setRef(el!)}
+              ref={(el) => setRef(el)}
               style={floatingStyles}
               className={styles.popoverPortal}
             >
@@ -259,7 +267,7 @@ function PopoverSection() {
       title="Popover"
       demoAndCode={[demo, popoverCode]}
       files={popoverFilesJson}
-      changelog={'- 2025-09-08: Initial version.'}
+      changelog={popoverChangelog}
     />
   )
 }
