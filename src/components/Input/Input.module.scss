@@ -1,0 +1,16 @@
+.input {
+  height: 2.25rem;
+  min-width: 16rem;
+  padding-inline: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--input-border-color);;
+  border-radius: var(--input-border-radius);
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--input-border-color-focus);
+  }
+}

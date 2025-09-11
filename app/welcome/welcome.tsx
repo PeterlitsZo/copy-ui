@@ -8,6 +8,7 @@ import { TimeSelector } from "src/components/TimeSelector";
 import { Popover } from "src/components/Popover";
 import { IconButton } from "src/components/IconButton";
 import { ButtonGroup } from "src/components/ButtonGroup";
+import { Input } from "src/components/Input/Input";
 
 import themeProviderFilesJson from "app/data/ThemeProvider.json";
 import sortIndicatorFilesJson from "app/data/SortIndicator.json";
@@ -16,6 +17,7 @@ import iconButtonFilesJson from "app/data/IconButton.json";
 import timeSelectorFilesJson from "app/data/TimeSelector.json";
 import popoverFilesJson from "app/data/Popover.json";
 import buttonGroupFilesJson from "app/data/ButtonGroup.json";
+import inputFilesJson from "app/data/Input.json";
 
 import { Section } from "./Section";
 
@@ -30,6 +32,7 @@ export function Welcome() {
         <ButtonSection />
         <IconButtonSection />
         <ButtonGroupSection />
+        <InputSection />
         <PopoverSection />
         <TimeSelectorSection />
       </div>
@@ -151,6 +154,28 @@ function ButtonGroupSection() {
       ), buttonGroupCode]}
       files={buttonGroupFilesJson}
       changelog={buttonGroupChangelog}
+    />
+  )
+}
+
+// Input
+// =============================================================================
+
+const inputCode = `\
+<Input />
+`;
+
+const inputChangelog = `\
+- 2025-09-11: Initial version.
+`;
+
+function InputSection() {
+  return (
+    <Section
+      title="Input"
+      demoAndCode={[<Input />, inputCode]}
+      files={inputFilesJson}
+      changelog={inputChangelog}
     />
   )
 }
