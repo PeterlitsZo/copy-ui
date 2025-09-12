@@ -1,0 +1,2 @@
+- 2025-09-04: Initial version.
+- 2025-09-05: Add the `size` prop.

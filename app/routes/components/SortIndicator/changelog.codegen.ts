@@ -1,0 +1,4 @@
+export const changelog = ''
+  + '- 2025-09-04: Initial version.\n'
+  + '- 2025-09-05: Add the `size` prop.\n'
+  ;

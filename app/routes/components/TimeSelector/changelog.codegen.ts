@@ -1,0 +1,3 @@
+export const changelog = ''
+  + '- 2025-09-11: Initial version.\n'
+  ;

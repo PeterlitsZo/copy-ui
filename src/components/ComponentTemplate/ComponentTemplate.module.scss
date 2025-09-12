@@ -1,0 +1,23 @@
+.page {
+  display: flex;
+  flex-direction: row;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+.childrenContainer {
+  flex: 1;
+
+  overflow: auto;
+}
+
+.childrenWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  margin: 0 auto;
+  max-width: 64rem;
+  padding: 2rem;
+}

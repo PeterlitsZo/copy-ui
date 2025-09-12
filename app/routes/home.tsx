@@ -1,13 +1,13 @@
+import { Navigate } from "react-router";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Copy UI" },
+    { name: "description", content: "The Copy UI." }
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <Navigate to="/components/Button" replace />;
 }

@@ -1,0 +1,26 @@
+export const demoSourceCode = ''
+  + 'import { Save, Send, Star, Trash } from "lucide-react";\n'
+  + '\n'
+  + 'import { Button } from "src/components/Button";\n'
+  + 'import { ButtonGroup } from "src/components/ButtonGroup";\n'
+  + 'import { IconButton } from "src/components/IconButton";\n'
+  + '\n'
+  + 'export function Demo() {\n'
+  + '  return (\n'
+  + '    <ButtonGroup>\n'
+  + "      <Button leftSection={<Send size={'1.25rem'} />}>\n"
+  + '        Send\n'
+  + '      </Button>\n'
+  + '      <IconButton>\n'
+  + "        <Save size={'1.25rem'} />\n"
+  + '      </IconButton>\n'
+  + '      <IconButton>\n'
+  + "        <Star size={'1.25rem'} />\n"
+  + '      </IconButton>\n'
+  + '      <IconButton>\n'
+  + "        <Trash size={'1.25rem'} />\n"
+  + '      </IconButton>\n'
+  + '    </ButtonGroup>\n'
+  + '  );\n'
+  + '}\n'
+  ;
