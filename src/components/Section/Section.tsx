@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { useState } from "react";
 
 import styles from "./Section.module.scss";
+import { CodeHighlight } from "../CodeHighlight";
 
 interface SectionProps {
   title: string;
@@ -14,6 +15,12 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
   const [demo, code] = demoAndCode || [];
 
   const [currentFilename, setCurrentFilename] = useState(Object.keys(files)[0] || '');
+  const currentFileType = {
+    ts: 'typescript',
+    tsx: 'typescript',
+    md: 'markdown',
+    scss: 'scss',
+  }[currentFilename.split('.').pop() ?? ''] || 'none';
   const fileContentToShow = Object.entries(files).find(([filename]) => filename === currentFilename)?.[1] || '';
 
   return (
@@ -24,11 +31,9 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem', borderBottom: '1px solid oklch(92.8% 0.006 264.531)', minHeight: '30vh' }}>
             {demo}
           </div>
-          <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem' }}>
-            <pre style={{ fontSize: '0.875rem' }}>
-              <code>{code}</code>
-            </pre>
-          </div>
+          {code && <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', fontSize: '0.75rem' }}>
+            <CodeHighlight code={code} lang="typescript" />
+          </div>}
         </div>
       )}
       <div>
@@ -46,20 +51,16 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
             ))}
           </div>
           <div style={{ flex: 1 }}>
-            <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', height: '50vh', overflow: 'auto' }}>
-              <pre style={{ fontSize: '0.875rem' }}>
-                <code>{fileContentToShow}</code>
-              </pre>
+            <div className={styles.codeBlock}>
+              <CodeHighlight code={fileContentToShow} lang={currentFileType} />
             </div>
           </div>
         </div>
       </div>
       <div>
         <h2 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>Change Log</h2>
-        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', border: '1px solid oklch(92.8% 0.006 264.531)', padding: '0.75rem', borderRadius: '0.75rem' }}>
-          <pre style={{ fontSize: '0.875rem' }}>
-            <code>{changelog}</code>
-          </pre>
+        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', border: '1px solid oklch(92.8% 0.006 264.531)', padding: '0.75rem', borderRadius: '0.75rem', fontSize: '0.75rem' }}>
+          <CodeHighlight code={changelog} lang="markdown" />
         </div>
       </div>
     </div>

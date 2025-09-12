@@ -1,0 +1,47 @@
+export const sourceCode: Record<string, string> = {};
+
+sourceCode['CodeHighlight.tsx'] = ''
+  + "import { useMemo, type FC } from 'react';\n"
+  + "import { createHighlighterCore } from 'shiki/core';\n"
+  + "import { createOnigurumaEngine } from 'shiki/engine/oniguruma';\n"
+  + "import lightPlus from '@shikijs/themes/light-plus';\n"
+  + '\n'
+  + 'interface CodeHighlightProps {\n'
+  + '  code: string;\n'
+  + '  lang: string;\n'
+  + '}\n'
+  + '\n'
+  + 'export const CodeHighlight: FC<CodeHighlightProps> = (props) => {\n'
+  + '  const html = useMemo(() => {\n'
+  + '    return highlighter.codeToHtml(\n'
+  + '      props.code,\n'
+  + "      { lang: props.lang, theme: 'light-plus' }\n"
+  + '    );\n'
+  + '  }, [props.code, props.lang]);\n'
+  + '\n'
+  + '  return (\n'
+  + '    <div dangerouslySetInnerHTML={{ __html: html }} />\n'
+  + '  );\n'
+  + '}\n'
+  + '\n'
+  + "CodeHighlight.displayName = 'CodeHighlight';\n"
+  + '\n'
+  + 'const highlighter = await createHighlighterCore({\n'
+  + '  themes: [\n'
+  + "    { ...lightPlus, colors: { ...lightPlus.colors, 'editor.background': 'transparent' } },\n"
+  + '  ],\n'
+  + '  langs: [\n'
+  + "    () => import('@shikijs/langs/typescript'),\n"
+  + "    () => import('@shikijs/langs/markdown'),\n"
+  + "    () => import('@shikijs/langs/scss'),\n"
+  + '  ],\n'
+  + "  engine: createOnigurumaEngine(import('shiki/wasm'))\n"
+  + '});\n'
+  ;
+
+sourceCode['index.ts'] = ''
+  + '// CodeHighlight from copy-ui @ 2025-09-12\n'
+  + '\n'
+  + 'export { CodeHighlight } from "./CodeHighlight";\n'
+  ;
+
