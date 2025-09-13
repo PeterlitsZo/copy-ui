@@ -16,6 +16,10 @@ export const Input: FC<InputProps> = (props) => {
     '--input-border-color': theme.colors.gray['200'],
     '--input-border-color-focus': theme.colors.blue['800'],
     '--input-border-radius': '0.375rem',
+    '--input-font-size': '1rem',
+    '--input-line-height': '1.5rem',
+    '--input-placeholder-color': theme.colors.gray['600'],
+    '--input-caret-color': theme.colors.blue['600'],
     ...style,
   } as React.CSSProperties;
 

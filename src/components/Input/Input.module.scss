@@ -6,11 +6,16 @@
   border-style: solid;
   border-color: var(--input-border-color);;
   border-radius: var(--input-border-radius);
-  font-size: 1.125rem;
-  line-height: 1.5rem;
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  caret-color: var(--input-caret-color);
 
   &:focus {
     outline: none;
     border-color: var(--input-border-color-focus);
+  }
+
+  &::placeholder {
+    color: var(--input-placeholder-color);
   }
 }

@@ -26,6 +26,10 @@ sourceCode['Input.tsx'] = ''
   + "    '--input-border-color': theme.colors.gray['200'],\n"
   + "    '--input-border-color-focus': theme.colors.blue['800'],\n"
   + "    '--input-border-radius': '0.375rem',\n"
+  + "    '--input-font-size': '1rem',\n"
+  + "    '--input-line-height': '1.5rem',\n"
+  + "    '--input-placeholder-color': theme.colors.gray['600'],\n"
+  + "    '--input-caret-color': theme.colors.blue['600'],\n"
   + '    ...style,\n'
   + '  } as React.CSSProperties;\n'
   + '\n'
@@ -48,12 +52,17 @@ sourceCode['Input.module.scss'] = ''
   + '  border-style: solid;\n'
   + '  border-color: var(--input-border-color);;\n'
   + '  border-radius: var(--input-border-radius);\n'
-  + '  font-size: 1.125rem;\n'
-  + '  line-height: 1.5rem;\n'
+  + '  font-size: var(--input-font-size);\n'
+  + '  line-height: var(--input-line-height);\n'
+  + '  caret-color: var(--input-caret-color);\n'
   + '\n'
   + '  &:focus {\n'
   + '    outline: none;\n'
   + '    border-color: var(--input-border-color-focus);\n'
+  + '  }\n'
+  + '\n'
+  + '  &::placeholder {\n'
+  + '    color: var(--input-placeholder-color);\n'
   + '  }\n'
   + '}\n'
   ;
