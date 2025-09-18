@@ -1,7 +1,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Button from copy-ui @ 2025-09-09\n'
+  + '// Button from copy-ui @ 2025-09-18\n'
   + '\n'
   + "export { Button } from './Button';\n"
   + "export type { ButtonProps } from './Button';\n"
@@ -18,6 +18,7 @@ sourceCode['Button.tsx'] = ''
   + '\n'
   + "export type ButtonProps = ComponentProps<'button'> & {\n"
   + "  variant?: 'default' | 'filled';\n"
+  + "  size?: 'sm' | 'md' | 'lg';\n"
   + '  leftSection?: React.ReactNode;\n'
   + '  rightSection?: React.ReactNode;\n'
   + '};\n'
@@ -32,6 +33,7 @@ sourceCode['Button.tsx'] = ''
   + '    leftSection,\n'
   + '    rightSection,\n'
   + "    variant = 'default',\n"
+  + "    size = 'md',\n"
   + '    ...rest\n'
   + '  } = props;\n'
   + '\n'
@@ -52,9 +54,25 @@ sourceCode['Button.tsx'] = ''
   + "      '--button-border-color': theme.colors.blue['700'],\n"
   + "      '--button-bg-hover': theme.colors.blue['700'],\n"
   + '    } as CSSProperties,\n'
-  + '    {\n'
+  + "    size === 'sm' && {\n"
+  + "      '--button-height': '2rem',\n"
+  + "      '--button-padding-x': '0.75rem',\n"
+  + "      '--button-section-gap': '0.5rem',\n"
+  + "      '--button-font-size': '0.875rem',\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'md' && {\n"
   + "      '--button-height': '2.25rem',\n"
   + "      '--button-padding-x': '1rem',\n"
+  + "      '--button-section-gap': '0.625rem',\n"
+  + "      '--button-font-size': '1rem',\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'lg' && {\n"
+  + "      '--button-height': '2.5rem',\n"
+  + "      '--button-padding-x': '1.25rem',\n"
+  + "      '--button-section-gap': '0.75rem',\n"
+  + "      '--button-font-size': '1.125rem',\n"
+  + '    } as CSSProperties,\n'
+  + '    {\n'
   + "      '--button-radius': '0.375rem',\n"
   + '    } as CSSProperties,\n'
   + '    style,\n'
@@ -89,8 +107,11 @@ sourceCode['Button.module.scss'] = ''
   + '  padding-inline: var(--button-padding-x);\n'
   + '  background-color: var(--button-bg);\n'
   + '  color: var(--button-color);\n'
-  + '  border: var(--button-border-width) var(--button-border-style) var(--button-border-color);\n'
+  + '  border-width: var(--button-border-width);\n'
+  + '  border-style: var(--button-border-style);\n'
+  + '  border-color: var(--button-border-color);\n'
   + '  border-radius: var(--button-radius);\n'
+  + '  font-size: var(--button-font-size);\n'
   + '\n'
   + '  cursor: pointer;\n'
   + '\n'
@@ -100,11 +121,11 @@ sourceCode['Button.module.scss'] = ''
   + '}\n'
   + '\n'
   + '.buttonLeftSection {\n'
-  + '  margin-right: 0.625rem;\n'
+  + '  margin-right: var(--button-section-gap);\n'
   + '}\n'
   + '\n'
   + '.buttonRightSection {\n'
-  + '  margin-left: 0.625rem;\n'
+  + '  margin-left: var(--button-section-gap);\n'
   + '}\n'
   ;
 
