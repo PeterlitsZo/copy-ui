@@ -8,12 +8,13 @@ import styles from "./IconButton.module.scss";
 
 export type IconButtonProps = ComponentProps<'button'> & {
   variant?: 'default' | 'filled';
+  size?: 'sm' | 'md' | 'lg';
 };
 
 export const IconButton: FC<IconButtonProps> = (props) => {
   const theme = useContext(ThemeContext);
 
-  const { className, style, variant = 'default', ...rest } = props;
+  const { className, style, variant = 'default', size = 'md', ...rest } = props;
 
   const computedStyle = mergeStyles([
     variant === 'default' && {
@@ -32,8 +33,16 @@ export const IconButton: FC<IconButtonProps> = (props) => {
       '--button-border-color': theme.colors.blue['700'],
       '--button-bg-hover': theme.colors.blue['700'],
     } as CSSProperties,
-    {
+    size === 'sm' && {
+      '--button-size': '2rem',
+    } as CSSProperties,
+    size === 'md' && {
       '--button-size': '2.25rem',
+    } as CSSProperties,
+    size === 'lg' && {
+      '--button-size': '2.5rem',
+    } as CSSProperties,
+    {
       '--button-radius': '0.375rem',
     } as CSSProperties,
     style,

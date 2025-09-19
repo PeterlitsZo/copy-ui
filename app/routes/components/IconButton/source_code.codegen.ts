@@ -32,12 +32,13 @@ sourceCode['IconButton.tsx'] = ''
   + '\n'
   + "export type IconButtonProps = ComponentProps<'button'> & {\n"
   + "  variant?: 'default' | 'filled';\n"
+  + "  size?: 'sm' | 'md' | 'lg';\n"
   + '};\n'
   + '\n'
   + 'export const IconButton: FC<IconButtonProps> = (props) => {\n'
   + '  const theme = useContext(ThemeContext);\n'
   + '\n'
-  + "  const { className, style, variant = 'default', ...rest } = props;\n"
+  + "  const { className, style, variant = 'default', size = 'md', ...rest } = props;\n"
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
   + "    variant === 'default' && {\n"
@@ -56,8 +57,16 @@ sourceCode['IconButton.tsx'] = ''
   + "      '--button-border-color': theme.colors.blue['700'],\n"
   + "      '--button-bg-hover': theme.colors.blue['700'],\n"
   + '    } as CSSProperties,\n'
-  + '    {\n'
+  + "    size === 'sm' && {\n"
+  + "      '--button-size': '2rem',\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'md' && {\n"
   + "      '--button-size': '2.25rem',\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'lg' && {\n"
+  + "      '--button-size': '2.5rem',\n"
+  + '    } as CSSProperties,\n'
+  + '    {\n'
   + "      '--button-radius': '0.375rem',\n"
   + '    } as CSSProperties,\n'
   + '    style,\n'
@@ -78,7 +87,7 @@ sourceCode['IconButton.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// IconButton from copy-ui @ 2025-09-09\n'
+  + '// IconButton from copy-ui @ 2025-09-19\n'
   + '\n'
   + "export { IconButton } from './IconButton';\n"
   + "export type { IconButtonProps } from './IconButton';\n"

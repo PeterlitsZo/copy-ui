@@ -5,9 +5,17 @@ export const demoSourceCode = ''
   + '\n'
   + 'export function Demo() {\n'
   + '  return (\n'
-  + '    <IconButton>\n'
-  + "      <Trash size={'1.25rem'} />\n"
-  + '    </IconButton>\n'
+  + "    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>\n"
+  + '      <IconButton size="sm">\n'
+  + "        <Trash size={'60%'} />\n"
+  + '      </IconButton>\n'
+  + '      <IconButton>\n'
+  + "        <Trash size={'60%'} />\n"
+  + '      </IconButton>\n'
+  + '      <IconButton size="lg" variant="filled">\n'
+  + "        <Trash size={'60%'} />\n"
+  + '      </IconButton>\n'
+  + '    </div>\n'
   + '  );\n'
   + '}\n'
   ;
