@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, type FC } from "react";
 
 import { ThemeContext } from "../ThemeProvider";
 
 import { components } from "./components.codegen";
 import styles from "./Navbar.module.scss";
 
-export const Navbar = () => {
+export const Navbar: FC = () => {
   const theme = useContext(ThemeContext);
 
   const computedStyles = {

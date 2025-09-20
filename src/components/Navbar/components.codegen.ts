@@ -8,4 +8,5 @@ export const components: { name: string, path: string }[] = [
   {"name": "SortIndicator", "path": "/components/SortIndicator"},
   {"name": "ThemeProvider", "path": "/components/ThemeProvider"},
   {"name": "TimeSelector", "path": "/components/TimeSelector"},
+  {"name": "Toast", "path": "/components/Toast"},
 ];
