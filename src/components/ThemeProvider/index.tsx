@@ -1,3 +1,3 @@
-// ThemeProvider from copy-ui @ 2025-09-09
+// ThemeProvider from copy-ui @ 2025-09-20
 
-export { ThemeProvider, ThemeContext } from "./ThemeProvider";
+export { ThemeProvider, ThemeContext, useTheme } from "./ThemeProvider";
