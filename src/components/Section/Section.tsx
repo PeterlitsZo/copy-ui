@@ -1,8 +1,13 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useState, type CSSProperties, type FC } from "react";
+
+import { CodeHighlight } from "../CodeHighlight";
+import { useTheme } from "../ThemeProvider";
 
 import styles from "./Section.module.scss";
-import { CodeHighlight } from "../CodeHighlight";
+import { IconButton } from "../IconButton";
+import { ClipboardCopy } from "lucide-react";
+import { useToast } from "../Toast";
 
 interface SectionProps {
   title: string;
@@ -12,7 +17,9 @@ interface SectionProps {
 }
 
 export function Section({ title, demoAndCode, sourceCode: files, changelog }: SectionProps) {
-  const [demo, code] = demoAndCode || [];
+  const theme = useTheme();
+
+  const [demo, demoCode] = demoAndCode || [];
 
   const [currentFilename, setCurrentFilename] = useState(Object.keys(files)[0] || '');
   const currentFileType = {
@@ -23,23 +30,28 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
   }[currentFilename.split('.').pop() ?? ''] || 'none';
   const fileContentToShow = Object.entries(files).find(([filename]) => filename === currentFilename)?.[1] || '';
 
+  const computedStyle = {
+    '--border-color': theme.colors.gray['200'],
+    '--background-color': theme.colors.gray['000'],
+  } as CSSProperties;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem', gap: '1rem' }}>
+    <div className={styles.section} style={computedStyle}>
       <h1 style={{ fontSize: '2.5rem' }}>{title}</h1>
       {demoAndCode && (
-        <div style={{ borderRadius: '0.75rem', border: '1px solid oklch(92.8% 0.006 264.531)', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4rem', borderBottom: '1px solid oklch(92.8% 0.006 264.531)', minHeight: '30vh' }}>
+        <div className={styles.demoAndCode} >
+          <div className={styles.demo}>
             {demo}
           </div>
-          {code && <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', padding: '0.75rem', fontSize: '0.75rem' }}>
-            <CodeHighlight code={code} lang="typescript" />
+          {demoCode && <div className={styles.demoCode}>
+            <CodeHighlight code={demoCode} lang="typescript" />
           </div>}
         </div>
       )}
       <div>
-        <h2 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>Source Code</h2>
-        <div style={{ display: 'flex', borderRadius: '0.75rem', border: '1px solid oklch(92.8% 0.006 264.531)', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', padding: '0.5rem', width: '15rem', borderRight: '1px solid oklch(92.8% 0.006 264.531)' }}>
+        <h2 className={styles.subtitle}>Source Code</h2>
+        <div className={styles.sourceCode}>
+          <div className={styles.sourceCodeTree}>
             {Object.keys(files).map((filename) => (
               <button
                 key={filename}
@@ -51,18 +63,42 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
             ))}
           </div>
           <div style={{ flex: 1 }}>
-            <div className={styles.codeBlock}>
-              <CodeHighlight code={fileContentToShow} lang={currentFileType} />
-            </div>
+            <CodeBlock content={fileContentToShow} type={currentFileType} />
           </div>
         </div>
       </div>
       <div>
-        <h2 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>Change Log</h2>
-        <div style={{ backgroundColor: 'oklch(98.5% 0.002 247.839)', border: '1px solid oklch(92.8% 0.006 264.531)', padding: '0.75rem', borderRadius: '0.75rem', fontSize: '0.75rem' }}>
+        <h2 className={styles.subtitle}>Change Log</h2>
+        <div className={styles.changeLogContent}>
           <CodeHighlight code={changelog} lang="markdown" />
         </div>
       </div>
+    </div>
+  )
+}
+
+interface CodeBlockProps {
+  content: string;
+  type: string;
+}
+
+const CodeBlock: FC<CodeBlockProps> = ({ content, type }) => {
+  const theme = useTheme();
+  const { addToast } = useToast();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(content);
+    addToast('Copied to clipboard!');
+  }
+
+  return (
+    <div className={styles.codeBlock}>
+      <div className={styles.codeBlockContent}>
+        <CodeHighlight code={content} lang={type} />
+      </div>
+      <IconButton className={styles.copyButton} onClick={handleCopy}>
+        <ClipboardCopy size={'60%'} color={theme.colors.gray['700']} />
+      </IconButton>
     </div>
   )
 }

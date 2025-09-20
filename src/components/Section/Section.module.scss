@@ -1,3 +1,51 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.demoAndCode {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  border-bottom: 1px solid var(--border-color);
+  min-height: 30vh;
+}
+
+.demoCode {
+  background-color: var(--background-color);
+  padding: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.sourceCode {
+  display: flex;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.sourceCodeTree {
+  display: flex;;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: 15rem;
+  border-right: 1px solid var(--border-color);
+}
+
 .sourceCodeTreeFilename {
   padding: 0.5rem 0.75rem;
   text-align: left;
@@ -14,9 +62,30 @@
 }
 
 .codeBlock {
-  background-color: oklch(98.5% 0.002 247.839);
+  position: relative;
+  background-color: var(--background-color);
   height: 50vh;
+  overflow: auto;
+  font-size: 0.75rem;
+
+  .copyButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+.codeBlockContent {
+  position: absolute;
+  inset: 0;
   padding: 0.75rem;
   overflow: auto;
+}
+
+.changeLogContent {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
   font-size: 0.75rem;
 }
