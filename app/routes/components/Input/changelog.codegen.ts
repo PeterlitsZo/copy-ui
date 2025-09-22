@@ -3,4 +3,6 @@ export const changelog = ''
   + '- 2025-09-13: Enhance Input component with more styling variables (\n'
   + '  `--input-font-size`, `--input-line-height`, `--input-caret-color`,\n'
   + '  `--input-placeholder-color`).\n'
+  + '- 2025-09-22: Support the `size` props (`sm`, `md`, `lg`) for Input component to\n'
+  + '  adjust height and font size. Etc.\n'
   ;

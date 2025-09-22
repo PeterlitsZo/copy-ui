@@ -1,7 +1,7 @@
 .input {
-  height: 2.25rem;
-  min-width: 16rem;
-  padding-inline: 0.5rem;
+  height: var(--input-height);
+  min-width: var(--input-min-width);
+  padding-inline: var(--input-padding-inline);
   border-width: 1px;
   border-style: solid;
   border-color: var(--input-border-color);;
