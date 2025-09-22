@@ -1,7 +1,7 @@
 import { autoUpdate, flip, offset, useFloating } from "@floating-ui/react";
 import {
   createContext, memo, useContext, useEffect, useMemo, useState,
-  type CSSProperties, type FC, type ReactNode,
+  type CSSProperties, type FC, type MouseEventHandler, type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
 import { createStore, useStore, type StoreApi } from "zustand";
@@ -15,6 +15,8 @@ type PopoverStoreState = {
   floatingStyles: CSSProperties;
   elRef: Element | null;
   floatingRef: HTMLElement | null;
+
+  triggerClickHandlerEnabled: boolean;
 }
 
 type PopoverStoreActions = {
@@ -24,6 +26,9 @@ type PopoverStoreActions = {
   setFloatingStyles: (floatingStyles: CSSProperties) => void;
   setElRef: (el: Element | null) => void;
   setFloatingRef: (el: HTMLElement | null) => void;
+
+  disableTriggerClickHandler: () => void;
+  enableTriggerClickHandler: () => void;
 }
 
 type PopoverStore = PopoverStoreState & PopoverStoreActions;
@@ -39,6 +44,7 @@ function buildPopoverStore(args: BuildPopoverStoreArgs) {
     floatingStyles: {},
     elRef: null,
     floatingRef: null,
+    triggerClickHandlerEnabled: true,
 
     toggle: () => set((state) => ({ isOpen: !state.isOpen })),
     close: () => set(() => ({ isOpen: false })),
@@ -48,10 +54,15 @@ function buildPopoverStore(args: BuildPopoverStoreArgs) {
       return { elRef: el };
     }),
     setFloatingRef: (el) => set(() => {
-      console.log('setFloatingRef', el);
       args.onSetFloatingRef(el);
       return { floatingRef: el };
     }),
+    disableTriggerClickHandler: () => set(() => ({
+      triggerClickHandlerEnabled: false
+    })),
+    enableTriggerClickHandler: () => set(() => ({
+      triggerClickHandlerEnabled: true
+    })),
   }));
 }
 
@@ -66,7 +77,7 @@ const PopoverContext = createContext<StoreApi<PopoverStore> | null>(null);
 interface PopoverTriggerRenderProps {
   setRef: (el: Element | null) => void;
 
-  onClick: () => void;
+  onClick: MouseEventHandler;
 }
 
 interface PopoverTriggerProps {
@@ -83,13 +94,25 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
 
   const toggle = useStore(context, (state) => state.toggle);
   const setElRef = useStore(context, (state) => state.setElRef);
+  const enableTriggerClickHandler = useStore(context, (state) => state.enableTriggerClickHandler);
+  const triggerClickHandlerEnabled = useStore(context, (state) => state.triggerClickHandlerEnabled);
 
   const PopoverTriggerRender = useMemo(() => memo(render), [render]);
 
   return (
     <PopoverTriggerRender
       setRef={setElRef}
-      onClick={toggle}
+      onClick={() => {
+        if (triggerClickHandlerEnabled) {
+          toggle();
+        } else {
+          // Disable because we clicked outside the portal but click the
+          // trigger.
+          //
+          // Now we need to reset it (by enable the trigger click handler).
+          enableTriggerClickHandler();
+        }
+      }}
     />
   );
 }
@@ -132,22 +155,43 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
 
   const isOpen = useStore(context, (state) => state.isOpen);
   const floatingStyles = useStore(context, (state) => state.floatingStyles);
+  const elRef = useStore(context, (state) => state.elRef);
   const floatingRef = useStore(context, (state) => state.floatingRef);
   const setFloatingRef = useStore(context, (state) => state.setFloatingRef);
   const toggle = useStore(context, (state) => state.toggle);
   const close = useStore(context, (state) => state.close);
+  const disablePortalClickHandler = useStore(context, (state) => state.disableTriggerClickHandler);
 
   useEffect(() => {
-    const ref = floatingRef;
-    if (!ref) return;
+    const floatingRefOriginal = floatingRef;
+    if (!floatingRefOriginal) return;
 
+    /** Check if the click is outside the popover portal */
     function handleClickOutside(event: MouseEvent) {
-      if (!ref || !event.target) return;
+      if (!floatingRefOriginal || !event.target) return;
 
-      if (!ref.contains(event.target as Node)) {
+      if (!floatingRefOriginal.contains(event.target as Node)) {
+        // Call the handle for click outside.
         onClickOutside?.({
           closePortal: close,
         });
+
+        if (elRef) {
+          const elRefOriginal = elRef;
+          function handleMouseUp(event: MouseEvent) {
+            event.preventDefault();
+
+            // If we clicked on the `elRef` (trigger), we need to disable the
+            // trigger click handler (then the trigger will ignore the following
+            // click event & enable the handler for the next click).
+            if (elRefOriginal.contains(event.target as Node)) {
+              disablePortalClickHandler();
+            }
+
+            document.removeEventListener("mouseup", handleMouseUp);
+          }
+          document.addEventListener("mouseup", handleMouseUp);
+        }
       }
     }
 
