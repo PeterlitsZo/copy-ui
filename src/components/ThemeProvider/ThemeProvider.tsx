@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type FC } from "react";
+import { createContext, useContext, useLayoutEffect, useState, type FC } from "react";
 
 import { DEFAULT_THEME } from "./default_theme";
 
@@ -8,6 +8,25 @@ import { DEFAULT_THEME } from "./default_theme";
 export interface Theme {
   colors: {
     [colorName: string]: { [colorNo: string]: string }
+  },
+  tokens: {
+    inputBaseDefaultBorderColor: string,
+
+    inputBaseSmHeight: string,
+    inputBaseMdHeight: string,
+    inputBaseLgHeight: string,
+
+    inputBaseSmFontSize: string,
+    inputBaseMdFontSize: string,
+    inputBaseLgFontSize: string,
+
+    inputBaseSmLineHeight: string,
+    inputBaseMdLineHeight: string,
+    inputBaseLgLineHeight: string,
+
+    inputBaseBorderRadius: string,
+
+    inputBasePlaceholderColor: string,
   }
 }
 
