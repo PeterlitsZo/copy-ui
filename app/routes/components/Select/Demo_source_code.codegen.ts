@@ -1,0 +1,39 @@
+export const demoSourceCode = ''
+  + 'import { useState } from "react";\n'
+  + 'import { Select } from "src/components/Select";\n'
+  + 'import { useToast } from "src/components/Toast";\n'
+  + '\n'
+  + 'export function Demo() {\n'
+  + '  const { addToast } = useToast();\n'
+  + '\n'
+  + '  const [value, setValue] = useState<string | null>(null);\n'
+  + '  const options = [\n'
+  + "    { value: 'option1', label: 'Option 1' },\n"
+  + "    { value: 'option2', label: 'Option 2' },\n"
+  + "    { value: 'option3', label: 'Option 3' },\n"
+  + "    { value: 'option4', label: 'Option 4' },\n"
+  + "    { value: 'option5', label: 'Option 5' },\n"
+  + '  ];\n'
+  + '\n'
+  + '  return (\n'
+  + "    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>\n"
+  + '      <Select\n'
+  + '        value={value}\n'
+  + '        options={options}\n'
+  + '        onChange={(value) => {\n'
+  + '          setValue(value);\n'
+  + '          addToast(`Selected: ${value}`);\n'
+  + '        }}\n'
+  + '      />\n'
+  + '      <Select\n'
+  + '        value={value}\n'
+  + '        options={options}\n'
+  + '        onChange={(value) => {\n'
+  + '          addToast(`Selected: ${value}`);\n'
+  + '        }}\n'
+  + '        disabled\n'
+  + '      />\n'
+  + '    </div>\n'
+  + '  );\n'
+  + '}\n'
+  ;

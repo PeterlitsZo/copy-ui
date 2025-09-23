@@ -10,6 +10,7 @@ export default [
     route("IconButton", "routes/components/IconButton/index.tsx"),
     route("Input", "routes/components/Input/index.tsx"),
     route("Popover", "routes/components/Popover/index.tsx"),
+    route("Select", "routes/components/Select/index.tsx"),
     route("SortIndicator", "routes/components/SortIndicator/index.tsx"),
     route("ThemeProvider", "routes/components/ThemeProvider/index.tsx"),
     route("TimeSelector", "routes/components/TimeSelector/index.tsx"),
