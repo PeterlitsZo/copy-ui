@@ -1,7 +1,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Button from copy-ui @ 2025-09-18\n'
+  + '// Button from copy-ui @ 2025-09-23\n'
   + '\n'
   + "export { Button } from './Button';\n"
   + "export type { ButtonProps } from './Button';\n"
@@ -43,7 +43,7 @@ sourceCode['Button.tsx'] = ''
   + "      '--button-color': theme.colors.gray['800'],\n"
   + "      '--button-border-width': '1px',\n"
   + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.colors.gray['200'],\n"
+  + "      '--button-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
   + "      '--button-bg-hover': theme.colors.gray['100'],\n"
   + '    } as CSSProperties,\n'
   + "    variant === 'filled' && {\n"
@@ -102,6 +102,7 @@ sourceCode['Button.module.scss'] = ''
   + '.button {\n'
   + '  display: flex;\n'
   + '  align-items: center;\n'
+  + '  justify-content: center;\n'
   + '\n'
   + '  height: var(--button-height);\n'
   + '  padding-inline: var(--button-padding-x);\n'

@@ -4,3 +4,5 @@
 - 2025-09-08: Support the prop `ref`.
 - 2025-09-09: Support the prop `variant`.
 - 2025-09-18: Support the prop `size` (`sm`, `md` and `lg`).
+- 2025-09-23: Update the default button's border color. Add `justify-content:
+  center` to the button styles.

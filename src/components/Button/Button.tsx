@@ -33,7 +33,7 @@ export function Button(props: ButtonProps) {
       '--button-color': theme.colors.gray['800'],
       '--button-border-width': '1px',
       '--button-border-style': 'solid',
-      '--button-border-color': theme.colors.gray['200'],
+      '--button-border-color': theme.tokens.inputBaseDefaultBorderColor,
       '--button-bg-hover': theme.colors.gray['100'],
     } as CSSProperties,
     variant === 'filled' && {

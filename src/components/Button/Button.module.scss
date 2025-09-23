@@ -1,6 +1,7 @@
 .button {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   height: var(--button-height);
   padding-inline: var(--button-padding-x);
