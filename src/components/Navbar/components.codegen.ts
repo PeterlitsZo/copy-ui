@@ -1,4 +1,5 @@
 export const components: { name: string, path: string }[] = [
+  {"name": "Avatar", "path": "/components/Avatar"},
   {"name": "Button", "path": "/components/Button"},
   {"name": "ButtonGroup", "path": "/components/ButtonGroup"},
   {"name": "CodeHighlight", "path": "/components/CodeHighlight"},

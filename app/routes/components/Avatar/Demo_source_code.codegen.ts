@@ -1,0 +1,11 @@
+export const demoSourceCode = ''
+  + 'import { Avatar } from "src/components/Avatar";\n'
+  + '\n'
+  + 'export function Demo() {\n'
+  + '  return (\n'
+  + "    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>\n"
+  + '      <Avatar size="3rem">PZ</Avatar>\n'
+  + '    </div>\n'
+  + '  );\n'
+  + '}\n'
+  ;

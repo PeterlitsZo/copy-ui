@@ -1,0 +1,16 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+
+  font-size: calc(var(--avatar-size) / 2.25);
+
+  color: var(--avatar-color);
+  border-radius: 999999px;
+  background-color: var(--avatar-background-color);
+
+  user-select: none;
+}

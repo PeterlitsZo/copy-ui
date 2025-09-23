@@ -4,6 +4,7 @@ export default [
   index("routes/home.tsx"),
 
   ...prefix("components", [
+    route("Avatar", "routes/components/Avatar/index.tsx"),
     route("Button", "routes/components/Button/index.tsx"),
     route("ButtonGroup", "routes/components/ButtonGroup/index.tsx"),
     route("CodeHighlight", "routes/components/CodeHighlight/index.tsx"),
