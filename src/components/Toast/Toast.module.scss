@@ -1,20 +1,26 @@
 .toastContainer {
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
 }
 
 .toastList {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  width: 20rem;
 }
 
 .toast {
-  background-color: var(--toast-bg-color);
   padding: 0.5rem 1rem;
+
   border-radius: 0.25rem;
   border-width: 1px;
   border-style: solid;
   border-color: var(--toast-border-color);
+
+  background-color: var(--toast-bg-color);
+
+  box-shadow: var(--toast-box-shadow);
 }
