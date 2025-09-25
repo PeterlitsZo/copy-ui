@@ -4,3 +4,5 @@
   `@floating-ui/react` to handle the position update automatically. etc.
 - 2025-09-22: Add support for disabling the trigger click handler when clicking
   outside the portal but clicking the trigger as well.
+- 2025-09-25: Add `placement` prop to `Popover` to control the placement of the
+  portal.

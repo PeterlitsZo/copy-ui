@@ -5,4 +5,6 @@ export const changelog = ''
   + '  `@floating-ui/react` to handle the position update automatically. etc.\n'
   + '- 2025-09-22: Add support for disabling the trigger click handler when clicking\n'
   + '  outside the portal but clicking the trigger as well.\n'
+  + '- 2025-09-25: Add `placement` prop to `Popover` to control the placement of the\n'
+  + '  portal.\n'
   ;

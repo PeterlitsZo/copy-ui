@@ -1,3 +1,15 @@
+.popoverTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 12rem;
+  width: 24rem;
+  border: 1px solid #adb5bd;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
 .popoverPortal {
   background-color: #f8f9fa;
   padding: 0.5rem 1rem;

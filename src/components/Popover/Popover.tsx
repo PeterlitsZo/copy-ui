@@ -222,8 +222,16 @@ PopoverPortal.displayName = 'PopoverPortal';
 // =============================================================================
 
 export type PopoverProps = {
+  placement?: Placement;
+
   children: ReactNode
 }
+
+type Side = 'top' | 'right' | 'bottom' | 'left';
+type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+export type Placement = Prettify<Side | `${Side}-start` | `${Side}-end`>;
 
 type PopoverComponent = FC<PopoverProps> & {
   Trigger: typeof PopoverTrigger;
@@ -231,10 +239,13 @@ type PopoverComponent = FC<PopoverProps> & {
 };
 
 export const Popover: PopoverComponent = (props) => {
-  const { children } = props;
+  const {
+    placement = 'bottom-end',
+    children,
+  } = props;
 
   const { refs, floatingStyles } = useFloating({
-    placement: 'bottom-end',
+    placement,
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),
