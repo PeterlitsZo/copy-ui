@@ -16,5 +16,6 @@ export default [
     route("ThemeProvider", "routes/components/ThemeProvider/index.tsx"),
     route("TimeSelector", "routes/components/TimeSelector/index.tsx"),
     route("Toast", "routes/components/Toast/index.tsx"),
+    route("Tooltip", "routes/components/Tooltip/index.tsx"),
   ])
 ] satisfies RouteConfig;

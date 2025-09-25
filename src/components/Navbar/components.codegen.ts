@@ -11,4 +11,5 @@ export const components: { name: string, path: string }[] = [
   {"name": "ThemeProvider", "path": "/components/ThemeProvider"},
   {"name": "TimeSelector", "path": "/components/TimeSelector"},
   {"name": "Toast", "path": "/components/Toast"},
+  {"name": "Tooltip", "path": "/components/Tooltip"},
 ];
