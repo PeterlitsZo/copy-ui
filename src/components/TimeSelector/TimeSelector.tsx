@@ -59,11 +59,11 @@ export const TimeSelector: FC<TimeSelectorProps> = (props) => {
   return (
     <Popover>
       <Popover.Trigger
-        render={({ setRef, onClick }) => (
+        render={({ setRef, onToggle }) => (
           <Button
             ref={(el) => { el && setRef(el); return; }}
             leftSection={<Clock size='1.25rem' />}
-            onClick={onClick}
+            onClick={onToggle}
           >
             <span>{showTitle}</span>
           </Button>

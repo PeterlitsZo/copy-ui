@@ -1,4 +1,6 @@
 export const changelog = ''
   + '- 2025-09-11: Initial version.\n'
   + '- 2025-09-25: Improved TimeSelector styles for better appearance.\n'
+  + "- 2025-09-25: Use `onToggle` instead of `onClick` in `Popover.Trigger`'s render\n"
+  + '  prop.\n'
   ;

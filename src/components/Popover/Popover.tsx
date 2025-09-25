@@ -21,6 +21,7 @@ type PopoverStoreState = {
 
 type PopoverStoreActions = {
   toggle: () => void;
+  open: () => void;
   close: () => void;
 
   setFloatingStyles: (floatingStyles: CSSProperties) => void;
@@ -47,6 +48,7 @@ function buildPopoverStore(args: BuildPopoverStoreArgs) {
     triggerClickHandlerEnabled: true,
 
     toggle: () => set((state) => ({ isOpen: !state.isOpen })),
+    open: () => set(() => ({ isOpen: true })),
     close: () => set(() => ({ isOpen: false })),
     setFloatingStyles: (floatingStyles) => set(() => ({ floatingStyles })),
     setElRef: (el) => set(() => {
@@ -77,7 +79,9 @@ const PopoverContext = createContext<StoreApi<PopoverStore> | null>(null);
 interface PopoverTriggerRenderProps {
   setRef: (el: Element | null) => void;
 
-  onClick: MouseEventHandler;
+  onToggle: () => void;
+  onClose: () => void;
+  onOpen: () => void;
 }
 
 interface PopoverTriggerProps {
@@ -93,6 +97,8 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
   }
 
   const toggle = useStore(context, (state) => state.toggle);
+  const open = useStore(context, (state) => state.open);
+  const close = useStore(context, (state) => state.close);
   const setElRef = useStore(context, (state) => state.setElRef);
   const enableTriggerClickHandler = useStore(context, (state) => state.enableTriggerClickHandler);
   const triggerClickHandlerEnabled = useStore(context, (state) => state.triggerClickHandlerEnabled);
@@ -102,7 +108,10 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
   return (
     <PopoverTriggerRender
       setRef={setElRef}
-      onClick={() => {
+
+      onOpen={open}
+      onClose={close}
+      onToggle={() => {
         if (triggerClickHandlerEnabled) {
           toggle();
         } else {

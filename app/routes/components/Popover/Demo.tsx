@@ -28,9 +28,9 @@ export function Demo() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
       <Popover placement={placement || undefined}>
         <Popover.Trigger
-          render={({ setRef, onClick }) => (
+          render={({ setRef, onToggle }) => (
             <div
-              ref={(el) => setRef(el)} onClick={onClick}
+              ref={(el) => setRef(el)} onClick={onToggle}
               className={styles.popoverTrigger}
             >
               Open Popover Portal

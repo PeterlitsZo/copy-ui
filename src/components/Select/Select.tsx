@@ -76,12 +76,12 @@ const Select = <V extends string>(props: SelectProps<V>) => {
   return (
     <Popover>
       <Popover.Trigger
-        render={({ setRef, onClick }) => (
+        render={({ setRef, onToggle }) => (
           <div
             ref={(el) => { setRef(el); mainRef.current = el; }}
             className={styles.selectMain}
             style={mainStyle as CSSProperties}
-            onClick={(e) => !disabled && onClick(e)}
+            onClick={() => !disabled && onToggle()}
 
             data-value-picked={selectedOptionValue == null ? "false" : "true"}
             data-disabled={disabled ? "true" : "false"}

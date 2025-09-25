@@ -7,4 +7,6 @@ export const changelog = ''
   + '  outside the portal but clicking the trigger as well.\n'
   + '- 2025-09-25: Add `placement` prop to `Popover` to control the placement of the\n'
   + '  portal.\n'
+  + "- 2025-09-25: Support `onOpen` and `onClose` props for `Popover.Trigger`'s\n"
+  + '  render. And rename its `onClick` props to `onToggle`.\n'
   ;

@@ -6,3 +6,5 @@
   outside the portal but clicking the trigger as well.
 - 2025-09-25: Add `placement` prop to `Popover` to control the placement of the
   portal.
+- 2025-09-25: Support `onOpen` and `onClose` props for `Popover.Trigger`'s
+  render. And rename its `onClick` props to `onToggle`.
