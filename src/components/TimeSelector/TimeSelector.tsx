@@ -142,20 +142,35 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
       <div className={styles.detail} ref={detailRef}>
         <div className={styles.inputField}>
           <label>From</label>
-          <Input value={valueFrom} onChange={(e) => setValueFrom(e.target.value)} />
+          <Input
+            value={valueFrom}
+            style={{ width: '18rem' }}
+            onChange={(e) => setValueFrom(e.target.value)}
+            placeholder='The start time, e.g. "now - 15m"'
+          />
         </div>
         <div className={styles.inputField}>
           <label>To</label>
-          <Input value={valueTo} onChange={(e) => setValueTo(e.target.value)} />
+          <Input
+            value={valueTo}
+            style={{ width: '18rem' }}
+            onChange={(e) => setValueTo(e.target.value)}
+            placeholder='The end time, e.g. "now"'
+          />
         </div>
         <div className={styles.detailFooter}>
           <Button
+            size="sm"
             variant="filled"
             onClick={() => onChange?.({ from: valueFrom, to: valueTo })}
           >
             Apply
           </Button>
-          <Button variant="default" onClick={() => togglePortal()}>
+          <Button 
+            size="sm"
+            variant="default"
+            onClick={() => togglePortal()}
+          >
             Cancel
           </Button>
         </div>
