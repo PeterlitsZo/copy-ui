@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function SelectPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Select">
       <Section
         title="Select"
         demoAndCode={[<Demo />, demoSourceCode]}

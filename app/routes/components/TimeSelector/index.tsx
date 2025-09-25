@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function TimeSelectorPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="TimeSelector">
       <Section
         title="TimeSelector"
         demoAndCode={[<Demo />, demoSourceCode]}

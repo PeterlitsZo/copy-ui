@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function ButtonPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Button">
       <Section
         title="Button"
         demoAndCode={[<Demo />, demoSourceCode]}

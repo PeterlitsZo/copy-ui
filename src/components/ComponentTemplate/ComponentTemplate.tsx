@@ -6,12 +6,17 @@ import { Toast } from "../Toast";
 
 import styles from "./ComponentTemplate.module.scss";
 
-export const ComponentTemplate: FC<PropsWithChildren> = (props) => {
+interface ComponentTemplateProps {
+  component: string;
+  children?: React.ReactNode;
+}
+
+export const ComponentTemplate: FC<ComponentTemplateProps> = (props) => {
   return (
     <ThemeProvider>
       <Toast.Context>
         <div className={styles.page}>
-          <Navbar />
+          <Navbar active={props.component} />
           <div className={styles.childrenContainer}>
             <div className={styles.childrenWrapper}>
               {props.children}

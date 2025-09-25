@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function AvatarPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Avatar">
       <Section
         title="Avatar"
         demoAndCode={[<Demo />, demoSourceCode]}

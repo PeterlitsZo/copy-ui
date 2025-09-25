@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function PopoverPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Popover">
       <Section
         title="Popover"
         demoAndCode={[<Demo />, demoSourceCode]}

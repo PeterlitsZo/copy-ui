@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function InputPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Input">
       <Section
         title="Input"
         demoAndCode={[<Demo />, demoSourceCode]}

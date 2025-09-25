@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function ToastPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Toast">
       <Section
         title="Toast"
         demoAndCode={[<Demo />, demoSourceCode]}

@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function ButtonGroupPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="ButtonGroup">
       <Section
         title="ButtonGroup"
         demoAndCode={[<Demo />, demoSourceCode]}

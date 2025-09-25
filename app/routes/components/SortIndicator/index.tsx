@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function SortIndicatorPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="SortIndicator">
       <Section
         title="SortIndicator"
         demoAndCode={[<Demo />, demoSourceCode]}

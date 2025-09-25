@@ -15,7 +15,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function ThemeProviderPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="ThemeProvider">
       <Section
         title="ThemeProvider"
         sourceCode={sourceCode}

@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function TooltipPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="Tooltip">
       <Section
         title="Tooltip"
         demoAndCode={[<Demo />, demoSourceCode]}

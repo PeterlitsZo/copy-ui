@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function CodeHighlightPage() {
   return (
-    <ComponentTemplate>
+    <ComponentTemplate component="CodeHighlight">
       <Section
         title="CodeHighlight"
         demoAndCode={[<Demo />, demoSourceCode]}
