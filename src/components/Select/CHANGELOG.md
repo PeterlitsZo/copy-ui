@@ -1,1 +1,2 @@
 - 2025-09-23: Initial version.
+- 2025-09-25: Allow props to accept generics.

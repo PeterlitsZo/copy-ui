@@ -6,17 +6,17 @@ import { useTheme } from "../ThemeProvider";
 import styles from "./Select.module.scss";
 import { ChevronsUpDown } from "lucide-react";
 
-interface SelectProps {
-  value?: string | null;
+interface SelectProps<V extends string> {
+  value?: V | null;
 
-  options: Array<{ value: string; label: string }>;
+  options: Array<{ value: V; label: string }>;
   placeholder?: string;
   disabled?: boolean;
 
-  onChange?: (value: string) => void;
+  onChange?: (value: V) => void;
 }
 
-const Select: FC<SelectProps> = (props) => {
+const Select = <V extends string>(props: SelectProps<V>) => {
   const {
     value = null,
 
