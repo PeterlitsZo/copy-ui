@@ -12,6 +12,7 @@ export const components: { name: string, path: string }[] = [
   {"name": "Popover", "path": "/v0/components/Popover"},
   {"name": "Select", "path": "/v0/components/Select"},
   {"name": "SortIndicator", "path": "/v0/components/SortIndicator"},
+  {"name": "Tag", "path": "/v0/components/Tag"},
   {"name": "ThemeProvider", "path": "/v0/components/ThemeProvider"},
   {"name": "TimeSelector", "path": "/v0/components/TimeSelector"},
   {"name": "Toast", "path": "/v0/components/Toast"},

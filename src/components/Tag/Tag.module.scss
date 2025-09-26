@@ -1,0 +1,13 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: var(--tag-height);
+  font-size: calc(var(--tag-height) * 0.625);
+  padding-inline: calc(var(--tag-height) * 0.375);
+  border-radius: 999999px;
+
+  background-color: var(--tag-bg-color);
+  color: var(--tag-color);
+}
