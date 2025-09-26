@@ -1,22 +1,11 @@
 import { type RouteConfig, index, prefix, route } from "@react-router/dev/routes";
 
+import { componentsRoutes } from "./components_routes.codegen";
+
 export default [
   index("routes/home.tsx"),
 
-  ...prefix("components", [
-    route("Avatar", "routes/components/Avatar/index.tsx"),
-    route("Button", "routes/components/Button/index.tsx"),
-    route("ButtonGroup", "routes/components/ButtonGroup/index.tsx"),
-    route("DatePicker", "routes/components/DatePicker/index.tsx"),
-    route("CodeHighlight", "routes/components/CodeHighlight/index.tsx"),
-    route("IconButton", "routes/components/IconButton/index.tsx"),
-    route("Input", "routes/components/Input/index.tsx"),
-    route("Popover", "routes/components/Popover/index.tsx"),
-    route("Select", "routes/components/Select/index.tsx"),
-    route("SortIndicator", "routes/components/SortIndicator/index.tsx"),
-    route("ThemeProvider", "routes/components/ThemeProvider/index.tsx"),
-    route("TimeSelector", "routes/components/TimeSelector/index.tsx"),
-    route("Toast", "routes/components/Toast/index.tsx"),
-    route("Tooltip", "routes/components/Tooltip/index.tsx"),
-  ])
+  ...prefix("components", componentsRoutes.map((componentsRoute) => {
+    return route(componentsRoute.name, componentsRoute.path);
+  }))
 ] satisfies RouteConfig;
