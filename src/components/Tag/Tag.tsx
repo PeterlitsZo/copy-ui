@@ -22,6 +22,7 @@ export const Tag: FC<TagProps> = (props) => {
   const computedStyles = {
     '--tag-bg-color': theme.colors[color]['000'],
     '--tag-color': theme.colors[color]['900'],
+    '--tag-border-color': theme.colors[color]['100'],
     '--tag-height': height,
   } as CSSProperties;
 

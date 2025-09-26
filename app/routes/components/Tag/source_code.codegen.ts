@@ -34,6 +34,7 @@ sourceCode['Tag.tsx'] = ''
   + '  const computedStyles = {\n'
   + "    '--tag-bg-color': theme.colors[color]['000'],\n"
   + "    '--tag-color': theme.colors[color]['900'],\n"
+  + "    '--tag-border-color': theme.colors[color]['100'],\n"
   + "    '--tag-height': height,\n"
   + '  } as CSSProperties;\n'
   + '\n'
@@ -58,6 +59,10 @@ sourceCode['Tag.module.scss'] = ''
   + '\n'
   + '  background-color: var(--tag-bg-color);\n'
   + '  color: var(--tag-color);\n'
+  + '\n'
+  + '  border-width: 1px;\n'
+  + '  border-style: solid;\n'
+  + '  border-color: var(--tag-border-color);\n'
   + '}\n'
   ;
 
