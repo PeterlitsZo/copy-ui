@@ -46,7 +46,7 @@ sourceCode['IconButton.tsx'] = ''
   + "      '--button-color': theme.colors.gray['800'],\n"
   + "      '--button-border-width': '1px',\n"
   + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.colors.gray['200'],\n"
+  + "      '--button-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
   + "      '--button-bg-hover': theme.colors.gray['100'],\n"
   + '    } as CSSProperties,\n'
   + "    variant === 'filled' && {\n"
@@ -87,7 +87,7 @@ sourceCode['IconButton.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// IconButton from copy-ui @ 2025-09-19\n'
+  + '// IconButton from copy-ui @ 2025-09-26\n'
   + '\n'
   + "export { IconButton } from './IconButton';\n"
   + "export type { IconButtonProps } from './IconButton';\n"
