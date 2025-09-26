@@ -9,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Navigate to="/components/Button" replace />;
+  return <Navigate to="/v0/components/Button" replace />;
 }

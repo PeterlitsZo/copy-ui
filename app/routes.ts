@@ -5,7 +5,7 @@ import { componentsRoutes } from "./components_routes.codegen";
 export default [
   index("routes/home.tsx"),
 
-  ...prefix("components", componentsRoutes.map((componentsRoute) => {
+  ...prefix("v0/components", componentsRoutes.map((componentsRoute) => {
     return route(componentsRoute.name, componentsRoute.path);
   }))
 ] satisfies RouteConfig;

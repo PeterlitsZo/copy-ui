@@ -84,7 +84,7 @@ def codegen():
         for component_name in components:
             nav_data = {
                 'name': component_name,
-                'path': f"/components/{component_name}"
+                'path': f"/v0/components/{component_name}"
             }
             nav_data_json = json.dumps(nav_data)
             of.write(f"  {nav_data_json},\n")
