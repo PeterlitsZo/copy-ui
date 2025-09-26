@@ -18,7 +18,8 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     '--navbar-link-bg-hover': theme.colors.gray['100'],
     '--navbar-link-bg-active': theme.colors.blue['000'],
     '--navbar-link-color-active': theme.colors.blue['900'],
-    '--navbar-border-color': theme.colors.gray['200'],
+    '--navbar-border-color': theme.colors.gray['300'],
+    '--navbar-link-color': theme.colors.gray['700'],
   };
 
   return (
