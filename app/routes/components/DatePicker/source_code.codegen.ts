@@ -1,0 +1,21 @@
+export const sourceCode: Record<string, string> = {};
+
+sourceCode['DatePicker.tsx'] = ''
+  + 'import type { FC } from "react";\n'
+  + 'import { Input } from "../Input";\n'
+  + '\n'
+  + 'export const DatePicker: FC = () => {\n'
+  + '  return (\n'
+  + '    <Input placeholder="Select date" />\n'
+  + '  )\n'
+  + '};\n'
+  + '\n'
+  + 'DatePicker.displayName = "DatePicker";\n'
+  ;
+
+sourceCode['index.ts'] = ''
+  + '// DatePicker from copy-ui @ 2025-09-26.\n'
+  + '\n'
+  + 'export { DatePicker } from "./DatePicker";\n'
+  ;
+
