@@ -6,6 +6,7 @@ import { ThemeContext } from "../ThemeProvider";
 
 import { components } from "./components.codegen";
 import styles from "./Navbar.module.scss";
+import { Tag } from "../Tag";
 
 interface NavbarProps {
   active: string;
@@ -30,7 +31,8 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
           className={classnames(styles.link, component.name === active && styles.active)}
           to={component.path}
         >
-          {component.name}
+          <span>{component.name}</span>
+          {component.wip && <Tag color="red" height="1.25rem">WIP</Tag>}
         </Link>
       ))}
     </nav>
