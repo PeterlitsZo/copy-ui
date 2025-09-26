@@ -17,25 +17,27 @@ export const Input: FC<InputProps> = (props) => {
 
   const computedStyle = mergeStyles([
     size === 'sm' && {
-      '--input-height': '2rem',
-      '--input-font-size': '0.875rem',
+      '--input-height': theme.tokens.inputBaseSmHeight,
+      '--input-font-size': theme.tokens.inputBaseSmFontSize,
+      '--input-line-height': theme.tokens.inputBaseSmLineHeight,
     } as CSSProperties,
     size === 'md' && {
-      '--input-height': '2.25rem',
-      '--input-font-size': '1rem',
+      '--input-height': theme.tokens.inputBaseMdHeight,
+      '--input-font-size': theme.tokens.inputBaseMdFontSize,
+      '--input-line-height': theme.tokens.inputBaseMdLineHeight,
     } as CSSProperties,
     size === 'lg' && {
-      '--input-height': '2.5rem',
-      '--input-font-size': '1.125rem',
+      '--input-height': theme.tokens.inputBaseLgHeight,
+      '--input-font-size': theme.tokens.inputBaseLgFontSize,
+      '--input-line-height': theme.tokens.inputBaseLgLineHeight,
     } as CSSProperties,
     {
       '--input-min-width': '16rem',
       '--input-padding-inline': '0.5rem',
-      '--input-border-color': theme.colors.gray['200'],
+      '--input-border-color': theme.tokens.inputBaseDefaultBorderColor,
       '--input-border-color-focus': theme.colors.blue['800'],
-      '--input-border-radius': '0.375rem',
-      '--input-line-height': '1.5rem',
-      '--input-placeholder-color': theme.colors.gray['600'],
+      '--input-border-radius': theme.tokens.inputBaseBorderRadius,
+      '--input-placeholder-color': theme.tokens.inputBasePlaceholderColor,
       '--input-caret-color': theme.colors.blue['600'],
     } as CSSProperties,
     style,

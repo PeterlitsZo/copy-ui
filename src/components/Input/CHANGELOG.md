@@ -4,3 +4,4 @@
   `--input-placeholder-color`).
 - 2025-09-22: Support the `size` props (`sm`, `md`, `lg`) for Input component to
   adjust height and font size. Etc.
+- 2025-09-26: Use theme tokens for Input component styles.

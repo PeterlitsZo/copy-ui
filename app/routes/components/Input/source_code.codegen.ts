@@ -1,7 +1,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Input from copy-ui @ 2025-09-22\n'
+  + '// Input from copy-ui @ 2025-09-26\n'
   + '\n'
   + "export { Input } from './Input';\n"
   + "export type { InputProps } from './Input';\n"
@@ -27,25 +27,27 @@ sourceCode['Input.tsx'] = ''
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
   + "    size === 'sm' && {\n"
-  + "      '--input-height': '2rem',\n"
-  + "      '--input-font-size': '0.875rem',\n"
+  + "      '--input-height': theme.tokens.inputBaseSmHeight,\n"
+  + "      '--input-font-size': theme.tokens.inputBaseSmFontSize,\n"
+  + "      '--input-line-height': theme.tokens.inputBaseSmLineHeight,\n"
   + '    } as CSSProperties,\n'
   + "    size === 'md' && {\n"
-  + "      '--input-height': '2.25rem',\n"
-  + "      '--input-font-size': '1rem',\n"
+  + "      '--input-height': theme.tokens.inputBaseMdHeight,\n"
+  + "      '--input-font-size': theme.tokens.inputBaseMdFontSize,\n"
+  + "      '--input-line-height': theme.tokens.inputBaseMdLineHeight,\n"
   + '    } as CSSProperties,\n'
   + "    size === 'lg' && {\n"
-  + "      '--input-height': '2.5rem',\n"
-  + "      '--input-font-size': '1.125rem',\n"
+  + "      '--input-height': theme.tokens.inputBaseLgHeight,\n"
+  + "      '--input-font-size': theme.tokens.inputBaseLgFontSize,\n"
+  + "      '--input-line-height': theme.tokens.inputBaseLgLineHeight,\n"
   + '    } as CSSProperties,\n'
   + '    {\n'
   + "      '--input-min-width': '16rem',\n"
   + "      '--input-padding-inline': '0.5rem',\n"
-  + "      '--input-border-color': theme.colors.gray['200'],\n"
+  + "      '--input-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
   + "      '--input-border-color-focus': theme.colors.blue['800'],\n"
-  + "      '--input-border-radius': '0.375rem',\n"
-  + "      '--input-line-height': '1.5rem',\n"
-  + "      '--input-placeholder-color': theme.colors.gray['600'],\n"
+  + "      '--input-border-radius': theme.tokens.inputBaseBorderRadius,\n"
+  + "      '--input-placeholder-color': theme.tokens.inputBasePlaceholderColor,\n"
   + "      '--input-caret-color': theme.colors.blue['600'],\n"
   + '    } as CSSProperties,\n'
   + '    style,\n'
