@@ -29,6 +29,7 @@ const highlighter = await createHighlighterCore({
   ],
   langs: [
     () => import('@shikijs/langs/typescript'),
+    () => import('@shikijs/langs/tsx'),
     () => import('@shikijs/langs/markdown'),
     () => import('@shikijs/langs/scss'),
   ],

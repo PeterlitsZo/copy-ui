@@ -35,6 +35,7 @@ sourceCode['CodeHighlight.tsx'] = ''
   + '  ],\n'
   + '  langs: [\n'
   + "    () => import('@shikijs/langs/typescript'),\n"
+  + "    () => import('@shikijs/langs/tsx'),\n"
   + "    () => import('@shikijs/langs/markdown'),\n"
   + "    () => import('@shikijs/langs/scss'),\n"
   + '  ],\n'
@@ -43,7 +44,7 @@ sourceCode['CodeHighlight.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// CodeHighlight from copy-ui @ 2025-09-12\n'
+  + '// CodeHighlight from copy-ui @ 2025-09-26\n'
   + '\n'
   + 'export { CodeHighlight } from "./CodeHighlight";\n'
   ;

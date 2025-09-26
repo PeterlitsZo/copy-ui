@@ -24,7 +24,7 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
   const [currentFilename, setCurrentFilename] = useState(Object.keys(files)[0] || '');
   const currentFileType = {
     ts: 'typescript',
-    tsx: 'typescript',
+    tsx: 'tsx',
     md: 'markdown',
     scss: 'scss',
   }[currentFilename.split('.').pop() ?? ''] || 'none';
@@ -44,7 +44,7 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
             {demo}
           </div>
           {demoCode && <div className={styles.demoCode}>
-            <CodeHighlight code={demoCode} lang="typescript" />
+            <CodeHighlight code={demoCode} lang="tsx" />
           </div>}
         </div>
       )}

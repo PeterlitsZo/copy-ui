@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-09-12: Initial version.\n'
+  + '- 2025-09-26: Add support for TSX language in CodeHighlight.\n'
   ;
