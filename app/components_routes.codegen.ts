@@ -12,6 +12,7 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "Popover", "path": "routes/components/Popover/index.tsx"},
   {"name": "Select", "path": "routes/components/Select/index.tsx"},
   {"name": "SortIndicator", "path": "routes/components/SortIndicator/index.tsx"},
+  {"name": "Switch", "path": "routes/components/Switch/index.tsx"},
   {"name": "Tag", "path": "routes/components/Tag/index.tsx"},
   {"name": "ThemeProvider", "path": "routes/components/ThemeProvider/index.tsx"},
   {"name": "TimeSelector", "path": "routes/components/TimeSelector/index.tsx"},

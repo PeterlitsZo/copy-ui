@@ -1,0 +1,33 @@
+.rail {
+  position: relative;
+
+  height: var(--switch-rail-height);
+  width: var(--switch-rail-width);
+  border-radius: 999999px;
+  background-color: var(--switch-rail-bg);
+
+  cursor: pointer;
+
+  transition: background-color 0.15s;
+
+  &[data-checked="true"] {
+    background-color: var(--switch-rail-checked-bg);
+  }
+}
+
+.thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+
+  height: calc(var(--switch-rail-height) - 8px);
+  width: calc(var(--switch-rail-height) - 8px);
+  border-radius: 999999px;
+  background-color: var(--switch-thumb-bg);
+
+  transition: left 0.15s;
+
+  .rail[data-checked="true"] & {
+    left: calc(var(--switch-rail-width) - var(--switch-rail-height) + 4px);
+  }
+}
