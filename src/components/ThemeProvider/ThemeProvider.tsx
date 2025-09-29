@@ -12,17 +12,23 @@ export interface Theme {
   tokens: {
     inputBaseDefaultBorderColor: string,
 
+    inputBaseXsHeight: string,
     inputBaseSmHeight: string,
     inputBaseMdHeight: string,
     inputBaseLgHeight: string,
+    inputBaseXlHeight: string,
 
+    inputBaseXsFontSize: string,
     inputBaseSmFontSize: string,
     inputBaseMdFontSize: string,
     inputBaseLgFontSize: string,
+    inputBaseXlFontSize: string,
 
+    inputBaseXsLineHeight: string,
     inputBaseSmLineHeight: string,
     inputBaseMdLineHeight: string,
     inputBaseLgLineHeight: string,
+    inputBaseXlLineHeight: string,
 
     inputBaseBorderRadius: string,
 

@@ -73,17 +73,23 @@ export const DEFAULT_THEME: Theme = {
   tokens: {
     inputBaseDefaultBorderColor: colors.gray['400'],
 
+    inputBaseXsHeight: '1.75rem',
     inputBaseSmHeight: '2rem',
     inputBaseMdHeight: '2.25rem',
     inputBaseLgHeight: '2.5rem',
+    inputBaseXlHeight: '3rem',
 
+    inputBaseXsFontSize: '0.75rem',
     inputBaseSmFontSize: '0.875rem',
     inputBaseMdFontSize: '1rem',
     inputBaseLgFontSize: '1.125rem',
+    inputBaseXlFontSize: '1.25rem',
 
+    inputBaseXsLineHeight: '1.25rem',
     inputBaseSmLineHeight: '1.375rem',
     inputBaseMdLineHeight: '1.5rem',
     inputBaseLgLineHeight: '1.75rem',
+    inputBaseXlLineHeight: '2rem',
 
     inputBaseBorderRadius: '0.375rem',
 

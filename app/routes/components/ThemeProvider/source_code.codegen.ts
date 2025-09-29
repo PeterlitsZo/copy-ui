@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + '// ThemeProvider from copy-ui @ 2025-09-23\n'
+  + '// ThemeProvider from copy-ui @ 2025-09-29\n'
   + '\n'
   + 'export { ThemeProvider, ThemeContext, useTheme } from "./ThemeProvider";\n'
   ;
@@ -85,17 +85,23 @@ sourceCode['default_theme.ts'] = ''
   + '  tokens: {\n'
   + "    inputBaseDefaultBorderColor: colors.gray['400'],\n"
   + '\n'
+  + "    inputBaseXsHeight: '1.75rem',\n"
   + "    inputBaseSmHeight: '2rem',\n"
   + "    inputBaseMdHeight: '2.25rem',\n"
   + "    inputBaseLgHeight: '2.5rem',\n"
+  + "    inputBaseXlHeight: '3rem',\n"
   + '\n'
+  + "    inputBaseXsFontSize: '0.75rem',\n"
   + "    inputBaseSmFontSize: '0.875rem',\n"
   + "    inputBaseMdFontSize: '1rem',\n"
   + "    inputBaseLgFontSize: '1.125rem',\n"
+  + "    inputBaseXlFontSize: '1.25rem',\n"
   + '\n'
+  + "    inputBaseXsLineHeight: '1.25rem',\n"
   + "    inputBaseSmLineHeight: '1.375rem',\n"
   + "    inputBaseMdLineHeight: '1.5rem',\n"
   + "    inputBaseLgLineHeight: '1.75rem',\n"
+  + "    inputBaseXlLineHeight: '2rem',\n"
   + '\n'
   + "    inputBaseBorderRadius: '0.375rem',\n"
   + '\n'
@@ -119,17 +125,23 @@ sourceCode['ThemeProvider.tsx'] = ''
   + '  tokens: {\n'
   + '    inputBaseDefaultBorderColor: string,\n'
   + '\n'
+  + '    inputBaseXsHeight: string,\n'
   + '    inputBaseSmHeight: string,\n'
   + '    inputBaseMdHeight: string,\n'
   + '    inputBaseLgHeight: string,\n'
+  + '    inputBaseXlHeight: string,\n'
   + '\n'
+  + '    inputBaseXsFontSize: string,\n'
   + '    inputBaseSmFontSize: string,\n'
   + '    inputBaseMdFontSize: string,\n'
   + '    inputBaseLgFontSize: string,\n'
+  + '    inputBaseXlFontSize: string,\n'
   + '\n'
+  + '    inputBaseXsLineHeight: string,\n'
   + '    inputBaseSmLineHeight: string,\n'
   + '    inputBaseMdLineHeight: string,\n'
   + '    inputBaseLgLineHeight: string,\n'
+  + '    inputBaseXlLineHeight: string,\n'
   + '\n'
   + '    inputBaseBorderRadius: string,\n'
   + '\n'

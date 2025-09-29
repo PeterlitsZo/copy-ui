@@ -4,3 +4,5 @@
 - 2025-09-20: Add useTheme hook and refactor ThemeProvider to make it cleaner.
 - 2025-09-23: Add tokens to the theme with prefix `inputBase` for input base
   components.
+- 2025-09-29: Add tokens to the theme with prefix `inputBase` for size `xs` and
+  `xl`.
