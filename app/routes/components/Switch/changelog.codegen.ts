@@ -3,4 +3,6 @@
 
 export const changelog = ''
   + '- 2025-09-28: Initial version.\n'
+  + '- 2024-09-29: Added controlled component support with `value` and `onChange`\n'
+  + "  props. Add `size` prop with 'sm', 'md', 'lg' options.\n"
   ;

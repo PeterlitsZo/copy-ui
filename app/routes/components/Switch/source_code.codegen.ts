@@ -4,33 +4,63 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['Switch.tsx'] = ''
-  + 'import { useState, type CSSProperties, type FC } from "react";\n'
+  + 'import { type CSSProperties, type FC } from "react";\n'
+  + 'import { merge } from "es-toolkit";\n'
   + '\n'
   + 'import { useTheme } from "../ThemeProvider";\n'
   + '\n'
   + 'import styles from "./Switch.module.scss";\n'
   + '\n'
-  + 'export const Switch: FC = () => {\n'
+  + 'export type SwitchProps = {\n'
+  + "  size?: 'sm' | 'md' | 'lg';\n"
+  + '  value: boolean;\n'
+  + '  onChange?: (value: boolean) => void;\n'
+  + '};\n'
+  + '\n'
+  + 'export const Switch: FC<SwitchProps> = (props) => {\n'
+  + "  const { size = 'md', value, onChange } = props;\n"
+  + '\n'
   + '  const theme = useTheme();\n'
   + '\n'
-  + '  const [isChecked, setIsChecked] = useState(false);\n'
-  + '\n'
-  + '  const computedStyle = {\n'
-  + "    '--switch-rail-width': '4rem',\n"
-  + "    '--switch-rail-height': '2.25rem',\n"
-  + "    '--switch-rail-bg': theme.colors.gray['300'],\n"
-  + "    '--switch-rail-checked-bg': theme.colors.blue['600'],\n"
-  + "    '--switch-thumb-bg': 'white',\n"
-  + '  } as CSSProperties;\n'
+  + '  const computedStyle = mergeStyles([\n'
+  + "    size === 'sm' && {\n"
+  + "      '--switch-rail-width': '3.5rem',\n"
+  + "      '--switch-rail-height': theme.tokens.inputBaseSmHeight,\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'md' && {\n"
+  + "      '--switch-rail-width': '4rem',\n"
+  + "      '--switch-rail-height': theme.tokens.inputBaseMdHeight,\n"
+  + '    } as CSSProperties,\n'
+  + "    size === 'lg' && {\n"
+  + "      '--switch-rail-width': '4.5rem',\n"
+  + "      '--switch-rail-height': theme.tokens.inputBaseLgHeight,\n"
+  + '    } as CSSProperties,\n'
+  + '    {\n'
+  + "      '--switch-rail-bg': theme.colors.gray['300'],\n"
+  + "      '--switch-rail-checked-bg': theme.colors.blue['600'],\n"
+  + "      '--switch-thumb-bg': 'white',\n"
+  + '    } as CSSProperties,\n'
+  + '  ]);\n'
   + '\n'
   + '  return (\n'
-  + '    <div style={computedStyle} className={styles.rail} data-checked={isChecked} onClick={() => setIsChecked(!isChecked)}>\n'
+  + '    <div\n'
+  + '      style={computedStyle}\n'
+  + '      className={styles.rail}\n'
+  + '      data-checked={value}\n'
+  + '      onClick={() => onChange?.(!value)}\n'
+  + '    >\n'
   + '      <div className={styles.thumb} />\n'
   + '    </div>\n'
   + '  );\n'
   + '};\n'
   + '\n'
   + "Switch.displayName = 'Switch';\n"
+  + '\n'
+  + 'function mergeStyles(styles: (CSSProperties | false | undefined)[]) {\n'
+  + '  return styles.reduce((prev, next) => {\n'
+  + '    return next ? merge(prev as CSSProperties, next) : prev;\n'
+  + '  }, {}) as CSSProperties;\n'
+  + '}\n'
   ;
 
 sourceCode['Switch.module.scss'] = ''
@@ -70,6 +100,8 @@ sourceCode['Switch.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
+  + '// Switch from copy-ui @ 2025-09-29.\n'
+  + '\n'
   + 'export { Switch } from "./Switch";\n'
   ;
 
