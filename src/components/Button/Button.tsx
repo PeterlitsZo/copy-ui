@@ -8,7 +8,7 @@ import styles from './Button.module.scss';
 
 export type ButtonProps = ComponentProps<'button'> & {
   variant?: 'default' | 'filled';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 };
@@ -44,24 +44,38 @@ export function Button(props: ButtonProps) {
       '--button-border-color': theme.colors.blue['700'],
       '--button-bg-hover': theme.colors.blue['700'],
     } as CSSProperties,
+
+    size === 'xs' && {
+      '--button-height': theme.tokens.inputBaseXsHeight,
+      '--button-padding-x': '0.625rem',
+      '--button-section-gap': '0.375rem',
+      '--button-font-size': '0.75rem',
+    } as CSSProperties,
     size === 'sm' && {
-      '--button-height': '2rem',
+      '--button-height': theme.tokens.inputBaseSmHeight,
       '--button-padding-x': '0.75rem',
       '--button-section-gap': '0.5rem',
       '--button-font-size': '0.875rem',
     } as CSSProperties,
     size === 'md' && {
-      '--button-height': '2.25rem',
+      '--button-height': theme.tokens.inputBaseMdHeight,
       '--button-padding-x': '1rem',
       '--button-section-gap': '0.625rem',
       '--button-font-size': '1rem',
     } as CSSProperties,
     size === 'lg' && {
-      '--button-height': '2.5rem',
+      '--button-height': theme.tokens.inputBaseLgHeight,
       '--button-padding-x': '1.25rem',
       '--button-section-gap': '0.75rem',
       '--button-font-size': '1.125rem',
     } as CSSProperties,
+    size === 'xl' && {
+      '--button-height': theme.tokens.inputBaseXlHeight,
+      '--button-padding-x': '1.5rem',
+      '--button-section-gap': '1rem',
+      '--button-font-size': '1.25rem',
+    } as CSSProperties,
+
     {
       '--button-radius': '0.375rem',
     } as CSSProperties,

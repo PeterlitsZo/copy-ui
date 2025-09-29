@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Button from copy-ui @ 2025-09-23\n'
+  + '// Button from copy-ui @ 2025-09-29\n'
   + '\n'
   + "export { Button } from './Button';\n"
   + "export type { ButtonProps } from './Button';\n"
@@ -21,7 +21,7 @@ sourceCode['Button.tsx'] = ''
   + '\n'
   + "export type ButtonProps = ComponentProps<'button'> & {\n"
   + "  variant?: 'default' | 'filled';\n"
-  + "  size?: 'sm' | 'md' | 'lg';\n"
+  + "  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';\n"
   + '  leftSection?: React.ReactNode;\n'
   + '  rightSection?: React.ReactNode;\n'
   + '};\n'
@@ -57,24 +57,38 @@ sourceCode['Button.tsx'] = ''
   + "      '--button-border-color': theme.colors.blue['700'],\n"
   + "      '--button-bg-hover': theme.colors.blue['700'],\n"
   + '    } as CSSProperties,\n'
+  + '\n'
+  + "    size === 'xs' && {\n"
+  + "      '--button-height': theme.tokens.inputBaseXsHeight,\n"
+  + "      '--button-padding-x': '0.625rem',\n"
+  + "      '--button-section-gap': '0.375rem',\n"
+  + "      '--button-font-size': '0.75rem',\n"
+  + '    } as CSSProperties,\n'
   + "    size === 'sm' && {\n"
-  + "      '--button-height': '2rem',\n"
+  + "      '--button-height': theme.tokens.inputBaseSmHeight,\n"
   + "      '--button-padding-x': '0.75rem',\n"
   + "      '--button-section-gap': '0.5rem',\n"
   + "      '--button-font-size': '0.875rem',\n"
   + '    } as CSSProperties,\n'
   + "    size === 'md' && {\n"
-  + "      '--button-height': '2.25rem',\n"
+  + "      '--button-height': theme.tokens.inputBaseMdHeight,\n"
   + "      '--button-padding-x': '1rem',\n"
   + "      '--button-section-gap': '0.625rem',\n"
   + "      '--button-font-size': '1rem',\n"
   + '    } as CSSProperties,\n'
   + "    size === 'lg' && {\n"
-  + "      '--button-height': '2.5rem',\n"
+  + "      '--button-height': theme.tokens.inputBaseLgHeight,\n"
   + "      '--button-padding-x': '1.25rem',\n"
   + "      '--button-section-gap': '0.75rem',\n"
   + "      '--button-font-size': '1.125rem',\n"
   + '    } as CSSProperties,\n'
+  + "    size === 'xl' && {\n"
+  + "      '--button-height': theme.tokens.inputBaseXlHeight,\n"
+  + "      '--button-padding-x': '1.5rem',\n"
+  + "      '--button-section-gap': '1rem',\n"
+  + "      '--button-font-size': '1.25rem',\n"
+  + '    } as CSSProperties,\n'
+  + '\n'
   + '    {\n'
   + "      '--button-radius': '0.375rem',\n"
   + '    } as CSSProperties,\n'
