@@ -12,6 +12,7 @@
 }
 
 .demo {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,17 +40,20 @@
 }
 
 .sourceCodeTree {
-  display: flex;;
+  display: flex;
+  gap: 0.125rem;
   flex-direction: column;
-  padding: 0.5rem;
-  width: 15rem;
+  padding: 0.375rem;
+  width: 13rem;
   border-right: 1px solid var(--border-color);
 }
 
 .sourceCodeTreeFilename {
-  padding: 0.5rem 0.75rem;
+  padding: 0.375rem 0.5rem;
   text-align: left;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
+  user-select: none;
+  font-size: 0.875rem;
   cursor: pointer;
 
   &:hover {
@@ -64,14 +68,14 @@
 .codeBlock {
   position: relative;
   background-color: var(--background-color);
-  height: 50vh;
+  height: 62.5vh;
   overflow: auto;
   font-size: 0.75rem;
 
-  .copyButton {
+  .floatingToolbar {
     position: absolute;
     top: 0.5rem;
-    right: 0.5rem;
+    right: 1.25rem;
   }
 }
 

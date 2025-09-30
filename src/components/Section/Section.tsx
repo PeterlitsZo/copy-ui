@@ -6,8 +6,11 @@ import { useTheme } from "../ThemeProvider";
 
 import styles from "./Section.module.scss";
 import { IconButton } from "../IconButton";
-import { ClipboardCopy } from "lucide-react";
+import { ClipboardCopy, Maximize } from "lucide-react";
 import { useToast } from "../Toast";
+import { Background } from "../Background";
+import { Tooltip } from "../Tooltip";
+import { ButtonGroup } from "../ButtonGroup";
 
 interface SectionProps {
   title: string;
@@ -41,6 +44,7 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
       {demoAndCode && (
         <div className={styles.demoAndCode} >
           <div className={styles.demo}>
+            <Background kind="dots" />
             <div style={{ position: 'relative' }}>
               {demo}
             </div>
@@ -93,14 +97,45 @@ const CodeBlock: FC<CodeBlockProps> = ({ content, type }) => {
     addToast('Copied to clipboard!');
   }
 
+  const handleFullscreen = () => {
+    addToast('WIP...');
+  }
+
   return (
     <div className={styles.codeBlock}>
       <div className={styles.codeBlockContent}>
         <CodeHighlight code={content} lang={type} />
       </div>
-      <IconButton className={styles.copyButton} onClick={handleCopy}>
-        <ClipboardCopy size={'60%'} color={theme.colors.gray['700']} />
-      </IconButton>
+      <ButtonGroup className={styles.floatingToolbar}>
+        <Tooltip
+          label="Copy to clipboard"
+          placement="top"
+          triggerRender={({ setRef, onClose, onOpen }) => (
+            <IconButton
+              ref={setRef}
+              onClick={handleCopy}
+              onMouseLeave={onClose}
+              onMouseEnter={onOpen}
+            >
+              <ClipboardCopy size={'60%'} color={theme.colors.gray['700']} />
+            </IconButton>
+          )}
+        />
+        <Tooltip
+          label="Fullscreen"
+          placement="top"
+          triggerRender={({ setRef, onClose, onOpen }) => (
+            <IconButton
+              ref={setRef}
+              onClick={handleFullscreen}
+              onMouseLeave={onClose}
+              onMouseEnter={onOpen}
+            >
+              <Maximize size={'60%'} color={theme.colors.gray['700']} />
+            </IconButton>
+          )}
+        />
+      </ButtonGroup>
     </div>
   )
 }
