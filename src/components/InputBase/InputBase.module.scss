@@ -1,0 +1,15 @@
+.inputBase {
+  display: inline-flex;
+  
+  height: var(--input-base-height);
+  min-width: var(--input-base-min-width);
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--input-base-border-color);
+  border-radius: var(--input-base-border-radius);
+
+  background-color: white;
+
+  overflow: hidden;
+}
