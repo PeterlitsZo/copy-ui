@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Input from copy-ui @ 2025-09-26\n'
+  + '// Input from copy-ui @ 2025-09-30.\n'
   + '\n'
   + "export { Input } from './Input';\n"
   + "export type { InputProps } from './Input';\n"
@@ -12,44 +12,39 @@ sourceCode['index.ts'] = ''
 
 sourceCode['Input.tsx'] = ''
   + 'import classNames from "classnames";\n'
-  + 'import { useContext, type ComponentProps, type CSSProperties, type FC } from "react";\n'
+  + 'import { merge } from "es-toolkit";\n'
+  + 'import { type ComponentProps, type CSSProperties, type FC } from "react";\n'
   + '\n'
-  + 'import { ThemeContext } from "../ThemeProvider";\n'
+  + 'import { useTheme } from "../ThemeProvider";\n'
+  + 'import { InputBase } from "../InputBase";\n'
   + '\n'
   + 'import styles from "./Input.module.scss";\n'
-  + 'import { merge } from "es-toolkit";\n'
   + '\n'
   + "export type InputProps = Omit<ComponentProps<'input'>, 'size'> & {\n"
   + "  size?: 'sm' | 'md' | 'lg';\n"
   + '};\n'
   + '\n'
   + 'export const Input: FC<InputProps> = (props) => {\n'
-  + '  const theme = useContext(ThemeContext);\n'
+  + '  const theme = useTheme();\n'
   + '\n'
   + "  const { size = 'md', className, style, ...rest } = props;\n"
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
   + "    size === 'sm' && {\n"
-  + "      '--input-height': theme.tokens.inputBaseSmHeight,\n"
   + "      '--input-font-size': theme.tokens.inputBaseSmFontSize,\n"
   + "      '--input-line-height': theme.tokens.inputBaseSmLineHeight,\n"
   + '    } as CSSProperties,\n'
   + "    size === 'md' && {\n"
-  + "      '--input-height': theme.tokens.inputBaseMdHeight,\n"
   + "      '--input-font-size': theme.tokens.inputBaseMdFontSize,\n"
   + "      '--input-line-height': theme.tokens.inputBaseMdLineHeight,\n"
   + '    } as CSSProperties,\n'
   + "    size === 'lg' && {\n"
-  + "      '--input-height': theme.tokens.inputBaseLgHeight,\n"
   + "      '--input-font-size': theme.tokens.inputBaseLgFontSize,\n"
   + "      '--input-line-height': theme.tokens.inputBaseLgLineHeight,\n"
   + '    } as CSSProperties,\n'
   + '    {\n'
-  + "      '--input-min-width': '16rem',\n"
   + "      '--input-padding-inline': '0.5rem',\n"
-  + "      '--input-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
   + "      '--input-border-color-focus': theme.colors.blue['800'],\n"
-  + "      '--input-border-radius': theme.tokens.inputBaseBorderRadius,\n"
   + "      '--input-placeholder-color': theme.tokens.inputBasePlaceholderColor,\n"
   + "      '--input-caret-color': theme.colors.blue['600'],\n"
   + '    } as CSSProperties,\n'
@@ -57,11 +52,13 @@ sourceCode['Input.tsx'] = ''
   + '  ]);\n'
   + '\n'
   + '  return (\n'
-  + '    <input\n'
-  + '      className={classNames(className, styles.input)}\n'
-  + '      style={computedStyle}\n'
-  + '      {...rest}\n'
-  + '    />\n'
+  + '    <InputBase size={size}>\n'
+  + '      <input\n'
+  + '        className={classNames(className, styles.input)}\n'
+  + '        style={computedStyle}\n'
+  + '        {...rest}\n'
+  + '      />\n'
+  + '    </InputBase>\n'
   + '  );\n'
   + '}\n'
   + '\n'
@@ -76,16 +73,13 @@ sourceCode['Input.tsx'] = ''
 
 sourceCode['Input.module.scss'] = ''
   + '.input {\n'
-  + '  height: var(--input-height);\n'
-  + '  min-width: var(--input-min-width);\n'
+  + '  flex: 1;\n'
+  + '\n'
   + '  padding-inline: var(--input-padding-inline);\n'
-  + '  border-width: 1px;\n'
-  + '  border-style: solid;\n'
-  + '  border-color: var(--input-border-color);;\n'
-  + '  border-radius: var(--input-border-radius);\n'
   + '  font-size: var(--input-font-size);\n'
   + '  line-height: var(--input-line-height);\n'
   + '  caret-color: var(--input-caret-color);\n'
+  + '  background-color: white;\n'
   + '\n'
   + '  &:focus {\n'
   + '    outline: none;\n'

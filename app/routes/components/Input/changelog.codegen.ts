@@ -9,4 +9,5 @@ export const changelog = ''
   + '- 2025-09-22: Support the `size` props (`sm`, `md`, `lg`) for Input component to\n'
   + '  adjust height and font size. Etc.\n'
   + '- 2025-09-26: Use theme tokens for Input component styles.\n'
+  + '- 2025-09-30: Use `InputBase` as a wrapper for the Input component.\n'
   ;
