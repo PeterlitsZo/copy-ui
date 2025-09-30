@@ -3,6 +3,7 @@
 
 export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "Avatar", "path": "routes/components/Avatar/index.tsx"},
+  {"name": "Background", "path": "routes/components/Background/index.tsx"},
   {"name": "Button", "path": "routes/components/Button/index.tsx"},
   {"name": "ButtonGroup", "path": "routes/components/ButtonGroup/index.tsx"},
   {"name": "CodeHighlight", "path": "routes/components/CodeHighlight/index.tsx"},

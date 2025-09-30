@@ -41,7 +41,9 @@ export function Section({ title, demoAndCode, sourceCode: files, changelog }: Se
       {demoAndCode && (
         <div className={styles.demoAndCode} >
           <div className={styles.demo}>
-            {demo}
+            <div style={{ position: 'relative' }}>
+              {demo}
+            </div>
           </div>
           {demoCode && <div className={styles.demoCode}>
             <CodeHighlight code={demoCode} lang="tsx" />
