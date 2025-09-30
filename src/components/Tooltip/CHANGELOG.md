@@ -1,1 +1,2 @@
 - 2025-09-25: Initial version.
+- 2025-09-30: Support `placement` prop for tooltip positioning.

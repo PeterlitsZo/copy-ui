@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-09-25: Initial version.\n'
+  + '- 2025-09-30: Support `placement` prop for tooltip positioning.\n'
   ;

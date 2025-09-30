@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import { Popover } from "../Popover";
+import { Popover, type Placement } from "../Popover";
 import { useTheme } from "../ThemeProvider";
 
 import styles from './Tooltip.module.scss';
@@ -14,11 +14,12 @@ interface TooltipTriggerRenderProps {
 
 interface TooltipProps {
   label: string;
+  placement?: Placement;
   triggerRender: (props: TooltipTriggerRenderProps) => ReactNode;
 }
 
 export const Tooltip: FC<TooltipProps> = (props) => {
-  const { label, triggerRender } = props;
+  const { label, placement = 'top', triggerRender } = props;
 
   const theme = useTheme();
 
@@ -28,7 +29,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
   }
 
   return (
-    <Popover placement="top">
+    <Popover placement={placement}>
       <Popover.Trigger render={triggerRender} />
       <Popover.Portal
         onClickOutside={({ closePortal }) => closePortal()}
