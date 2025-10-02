@@ -17,17 +17,17 @@
 
 .thumb {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: var(--switch-thumb-gap);
+  left: var(--switch-thumb-gap);
 
-  height: calc(var(--switch-rail-height) - 8px);
-  width: calc(var(--switch-rail-height) - 8px);
+  height: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2);
+  width: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2);
   border-radius: 999999px;
   background-color: var(--switch-thumb-bg);
 
   transition: left 0.15s;
 
   .rail[data-checked="true"] & {
-    left: calc(var(--switch-rail-width) - var(--switch-rail-height) + 4px);
+    left: calc(var(--switch-rail-width) - var(--switch-rail-height) + var(--switch-thumb-gap));
   }
 }

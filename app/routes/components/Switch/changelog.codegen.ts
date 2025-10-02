@@ -3,6 +3,10 @@
 
 export const changelog = ''
   + '- 2025-09-28: Initial version.\n'
-  + '- 2024-09-29: Added controlled component support with `value` and `onChange`\n'
+  + '- 2025-09-29: Added controlled component support with `value` and `onChange`\n'
   + "  props. Add `size` prop with 'sm', 'md', 'lg' options.\n"
+  + "- 2025-10-02: Expand size options to include 'text', 'xs', 'xl'. Improve\n"
+  + '  accessibility with proper button semantics, role="switch", and aria-checked.\n'
+  + '  Use CSS custom properties for thumb gap positioning. Update size calculations\n'
+  + '  to use 80% of input base heights for better proportions. \n'
   ;
