@@ -6,7 +6,7 @@ export const demoSourceCode = ''
   + '\n'
   + 'export function Demo() {\n'
   + '  return (\n'
-  + "    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>\n"
+  + '    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>\n'
   + '      <Calendar />\n'
   + '    </div>\n'
   + '  );\n'
