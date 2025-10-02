@@ -21,4 +21,5 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "TimeSelector", "path": "/v0/components/TimeSelector", "wip": false},
   {"name": "Toast", "path": "/v0/components/Toast", "wip": false},
   {"name": "Tooltip", "path": "/v0/components/Tooltip", "wip": false},
+  {"name": "Typography", "path": "/v0/components/Typography", "wip": false},
 ];
