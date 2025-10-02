@@ -5,11 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
-    target: ['chrome107', 'edge107', 'firefox104', 'safari16'],
+    target: ["chrome107", "edge107", "firefox104", "safari16"],
   },
-  plugins: [
-    tailwindcss(),
-    reactRouter(),
-    tsconfigPaths()
-  ],
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
 });
