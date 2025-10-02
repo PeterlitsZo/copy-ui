@@ -1,0 +1,73 @@
+.calendar {
+  background-color: var(--calendar-bg-color);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--calendar-border-color);
+  border-radius: var(--calendar-border-radius);
+  overflow: hidden;
+  user-select: none;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--calendar-padding);
+  padding-bottom: calc(var(--calendar-padding) / 2);
+  background-color: var(--calendar-header-background-color);
+}
+
+.calendarContent {
+  thead {
+    tr {
+      display: flex;
+      padding: var(--calendar-padding);
+
+      th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+      }
+    }
+  }
+
+  tbody {
+    background-color: var(--calendar-main-bg-color);
+
+    tr {
+      display: flex;
+      padding: var(--calendar-padding);
+
+      td {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 1.5rem;
+      }
+
+      td span {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.875rem;
+        height: 1.875rem;
+        border-radius: 999999px;
+        cursor: pointer;
+      }
+
+      td[data-selected='true'] span {
+        background-color: var(--calendar-main-cell-selected-bg-color);
+        color: var(--calendar-main-cell-selected-text-color);
+      }
+
+      td[data-selected='false']:hover span {
+        width: calc(1.875rem + 2px);
+        height: calc(1.875rem + 2px);
+        background-color: var(--calendar-main-cell-hover-bg-color);
+      }
+    }
+  }
+}
