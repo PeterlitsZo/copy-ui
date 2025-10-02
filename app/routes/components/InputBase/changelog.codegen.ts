@@ -3,4 +3,8 @@
 
 export const changelog = ''
   + '- 2025-09-30: Initial version.\n'
+  + '- 2025-10-02: Add `leftSection` and `rightSection` props for flexible input\n'
+  + '  layouts. Add `wrapperClassName` and `style` props for custom styling. Improve\n'
+  + '  component structure with proper wrapper and section styling. Update import\n'
+  + '  paths and code formatting.\n'
   ;

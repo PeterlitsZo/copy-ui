@@ -13,3 +13,18 @@
 
   overflow: hidden;
 }
+
+.wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.leftSection, .rightSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(var(--input-base-height) - 2px);
+  height: calc(var(--input-base-height) - 2px);
+}
