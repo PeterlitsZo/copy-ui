@@ -1,9 +1,10 @@
-import { DatePicker } from "src/components/DatePicker";
+import { DatePicker } from "@/components/DatePicker";
+import { Flex } from "@/components/Flex";
 
 export function Demo() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <Flex dir="row" gap="1rem" alignItems="center">
       <DatePicker />
-    </div>
+    </Flex>
   );
 }
