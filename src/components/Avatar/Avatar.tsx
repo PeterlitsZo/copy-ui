@@ -1,7 +1,27 @@
-import type { CSSProperties, FC } from "react";
-
-import styles from "./Avatar.module.scss";
+import classNames from "classnames";
+import type { ComponentProps, CSSProperties, FC } from "react";
 import { useTheme } from "../ThemeProvider";
+import styles from "./Avatar.module.scss";
+
+// Avatar.Img
+// =============================================================================
+
+type AvatarImgProps = ComponentProps<"img">;
+
+const AvatarImg: FC<AvatarImgProps> = (props) => {
+  const { alt, className, ...rest } = props;
+
+  return (
+    <img
+      className={classNames(styles.avatarImg, className)}
+      alt={alt || "Avatar"}
+      {...rest}
+    />
+  );
+};
+
+// Avatar
+// =============================================================================
 
 interface AvatarProps {
   size: string;
@@ -9,25 +29,29 @@ interface AvatarProps {
   children?: React.ReactNode;
 }
 
-export const Avatar: FC<AvatarProps> = (props) => {
-  const { size, color = 'blue', children } = props;
+type AvatarComponent = FC<AvatarProps> & {
+  Img: typeof AvatarImg;
+};
+
+const Avatar: AvatarComponent = (props) => {
+  const { size, color = "blue", children } = props;
 
   const theme = useTheme();
 
   const style = {
-    '--avatar-size': size,
-    '--avatar-color': theme.colors[color]['600'],
-    '--avatar-background-color': theme.colors[color]['000']
+    "--avatar-size": size,
+    "--avatar-color": theme.colors[color]["700"],
+    "--avatar-background-color": theme.colors[color]["100"],
   } as CSSProperties;
 
   return (
-    <div
-      className={styles.avatar}
-      style={style}
-    >
+    <span className={styles.avatar} style={style}>
       {children}
-    </div>
+    </span>
   );
-}
+};
 
 Avatar.displayName = "Avatar";
+Avatar.Img = AvatarImg;
+
+export { Avatar };
