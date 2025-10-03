@@ -1,10 +1,15 @@
 import { autoUpdate, flip, offset, useFloating } from "@floating-ui/react";
+import type { CSSProperties, FC, ReactNode } from "react";
 import {
-  createContext, memo, useContext, useEffect, useMemo, useState,
-  type CSSProperties, type FC, type MouseEventHandler, type ReactNode,
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { createStore, useStore, type StoreApi } from "zustand";
+import { createStore, type StoreApi, useStore } from "zustand";
 
 // PopoverStore
 // =============================================================================
@@ -17,7 +22,7 @@ type PopoverStoreState = {
   floatingRef: HTMLElement | null;
 
   triggerClickHandlerEnabled: boolean;
-}
+};
 
 type PopoverStoreActions = {
   toggle: () => void;
@@ -30,14 +35,14 @@ type PopoverStoreActions = {
 
   disableTriggerClickHandler: () => void;
   enableTriggerClickHandler: () => void;
-}
+};
 
 type PopoverStore = PopoverStoreState & PopoverStoreActions;
 
 type BuildPopoverStoreArgs = {
   onSetElRef: (el: Element | null) => void;
   onSetFloatingRef: (el: HTMLElement | null) => void;
-}
+};
 
 function buildPopoverStore(args: BuildPopoverStoreArgs) {
   return createStore<PopoverStore>()((set) => ({
@@ -51,20 +56,24 @@ function buildPopoverStore(args: BuildPopoverStoreArgs) {
     open: () => set(() => ({ isOpen: true })),
     close: () => set(() => ({ isOpen: false })),
     setFloatingStyles: (floatingStyles) => set(() => ({ floatingStyles })),
-    setElRef: (el) => set(() => {
-      args.onSetElRef(el);
-      return { elRef: el };
-    }),
-    setFloatingRef: (el) => set(() => {
-      args.onSetFloatingRef(el);
-      return { floatingRef: el };
-    }),
-    disableTriggerClickHandler: () => set(() => ({
-      triggerClickHandlerEnabled: false
-    })),
-    enableTriggerClickHandler: () => set(() => ({
-      triggerClickHandlerEnabled: true
-    })),
+    setElRef: (el) =>
+      set(() => {
+        args.onSetElRef(el);
+        return { elRef: el };
+      }),
+    setFloatingRef: (el) =>
+      set(() => {
+        args.onSetFloatingRef(el);
+        return { floatingRef: el };
+      }),
+    disableTriggerClickHandler: () =>
+      set(() => ({
+        triggerClickHandlerEnabled: false,
+      })),
+    enableTriggerClickHandler: () =>
+      set(() => ({
+        triggerClickHandlerEnabled: true,
+      })),
   }));
 }
 
@@ -85,7 +94,7 @@ interface PopoverTriggerRenderProps {
 }
 
 interface PopoverTriggerProps {
-  render: (props: PopoverTriggerRenderProps) => ReactNode
+  render: (props: PopoverTriggerRenderProps) => ReactNode;
 }
 
 const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
@@ -93,22 +102,27 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
 
   const context = useContext(PopoverContext);
   if (!context) {
-    throw new Error('Popover.Trigger must be used within a Popover');
+    throw new Error("Popover.Trigger must be used within a Popover");
   }
 
   const toggle = useStore(context, (state) => state.toggle);
   const open = useStore(context, (state) => state.open);
   const close = useStore(context, (state) => state.close);
   const setElRef = useStore(context, (state) => state.setElRef);
-  const enableTriggerClickHandler = useStore(context, (state) => state.enableTriggerClickHandler);
-  const triggerClickHandlerEnabled = useStore(context, (state) => state.triggerClickHandlerEnabled);
+  const enableTriggerClickHandler = useStore(
+    context,
+    (state) => state.enableTriggerClickHandler,
+  );
+  const triggerClickHandlerEnabled = useStore(
+    context,
+    (state) => state.triggerClickHandlerEnabled,
+  );
 
   const PopoverTriggerRender = useMemo(() => memo(render), [render]);
 
   return (
     <PopoverTriggerRender
       setRef={setElRef}
-
       onOpen={open}
       onClose={close}
       onToggle={() => {
@@ -124,9 +138,9 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
       }}
     />
   );
-}
+};
 
-PopoverTrigger.displayName = 'PopoverTrigger';
+PopoverTrigger.displayName = "PopoverTrigger";
 
 // PopoverPortal
 // =============================================================================
@@ -146,7 +160,7 @@ interface OnClickOutsideArgs {
 interface PopoverPortalProps {
   onClickOutside?: (args: OnClickOutsideArgs) => void;
 
-  render: (props: PopoverPortalRenderProps) => ReactNode
+  render: (props: PopoverPortalRenderProps) => ReactNode;
 }
 
 const PopoverPortal: FC<PopoverPortalProps> = (props) => {
@@ -159,7 +173,7 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
 
   const context = useContext(PopoverContext);
   if (!context) {
-    throw new Error('Popover.Portal must be used within a Popover');
+    throw new Error("Popover.Portal must be used within a Popover");
   }
 
   const isOpen = useStore(context, (state) => state.isOpen);
@@ -169,7 +183,10 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
   const setFloatingRef = useStore(context, (state) => state.setFloatingRef);
   const toggle = useStore(context, (state) => state.toggle);
   const close = useStore(context, (state) => state.close);
-  const disablePortalClickHandler = useStore(context, (state) => state.disableTriggerClickHandler);
+  const disablePortalClickHandler = useStore(
+    context,
+    (state) => state.disableTriggerClickHandler,
+  );
 
   useEffect(() => {
     const floatingRefOriginal = floatingRef;
@@ -208,7 +225,7 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [floatingRef]);
+  }, [floatingRef, elRef, close, onClickOutside, disablePortalClickHandler]);
 
   const PopoverPortalRender = useMemo(() => memo(render), [render]);
 
@@ -221,11 +238,11 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
       isOpen={isOpen}
       floatingStyles={floatingStyles}
     />,
-    document.body
+    document.body,
   );
-}
+};
 
-PopoverPortal.displayName = 'PopoverPortal';
+PopoverPortal.displayName = "PopoverPortal";
 
 // Popover
 // =============================================================================
@@ -233,10 +250,10 @@ PopoverPortal.displayName = 'PopoverPortal';
 export type PopoverProps = {
   placement?: Placement;
 
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
-type Side = 'top' | 'right' | 'bottom' | 'left';
+type Side = "top" | "right" | "bottom" | "left";
 type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
@@ -248,18 +265,12 @@ type PopoverComponent = FC<PopoverProps> & {
 };
 
 export const Popover: PopoverComponent = (props) => {
-  const {
-    placement = 'bottom-end',
-    children,
-  } = props;
+  const { placement = "bottom-end", children } = props;
 
   const { refs, floatingStyles } = useFloating({
     placement,
     whileElementsMounted: autoUpdate,
-    middleware: [
-      offset(4),
-      flip(),
-    ],
+    middleware: [offset(4), flip()],
   });
 
   const popoverStore = useMemo(() => {
@@ -271,16 +282,12 @@ export const Popover: PopoverComponent = (props) => {
 
   useEffect(() => {
     popoverStore.getState().setFloatingStyles(floatingStyles);
-  }, [floatingStyles]);
+  }, [popoverStore, floatingStyles]);
 
-  return (
-    <PopoverContext value={popoverStore}>
-      {children}
-    </PopoverContext>
-  )
+  return <PopoverContext value={popoverStore}>{children}</PopoverContext>;
 };
 
-Popover.displayName = 'Popover';
+Popover.displayName = "Popover";
 
 Popover.Trigger = PopoverTrigger;
 Popover.Portal = PopoverPortal;

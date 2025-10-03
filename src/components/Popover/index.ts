@@ -1,3 +1,3 @@
-// Popover from copy-ui @ 2025-09-25.
+// Popover from copy-ui @ 2025-10-03.
 
-export { Popover, type Placement } from "./Popover";
+export { type Placement, Popover } from "./Popover";
