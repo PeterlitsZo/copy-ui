@@ -1,1 +1,1 @@
-- 2025-10-01: WIP, not ready yet.
+- 2025-10-03: Initial version.

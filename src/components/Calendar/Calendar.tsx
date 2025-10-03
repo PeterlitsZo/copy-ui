@@ -12,12 +12,18 @@ import { useTheme } from "../ThemeProvider";
 
 import styles from "./Calendar.module.scss";
 
-export const Calendar: FC = () => {
+interface CalendarProps {
+  value?: dayjs.Dayjs | null;
+  onChange?: (date: dayjs.Dayjs) => void;
+}
+
+export const Calendar: FC<CalendarProps> = (props) => {
+  const { value = dayjs(), onChange } = props;
+
   const theme = useTheme();
 
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [currentMonth, setCurrentMonth] = useState(dayjs().month());
-  const [currentYear, setCurrentYear] = useState(dayjs().year());
+  const [viewMonth, setViewMonth] = useState(dayjs().month());
+  const [viewYear, setViewYear] = useState(dayjs().year());
 
   const computedStyle = {
     "--calendar-bg-color": theme.colors.gray["000"],
@@ -32,10 +38,8 @@ export const Calendar: FC = () => {
   } as CSSProperties;
 
   // Calendar header's content.
-  const header = dayjs(selectedDate)
-    .year(currentYear)
-    .month(currentMonth)
-    .format("MMM YYYY");
+  const view = dayjs(value).year(viewYear).month(viewMonth);
+  const header = view.format("MMM YYYY");
 
   // Calendar thead's cells.
   const theadCells: ReactNode[] = [];
@@ -45,18 +49,17 @@ export const Calendar: FC = () => {
   }
 
   // Calendar tbody's rows and cells.
-  const current = dayjs(selectedDate).year(currentYear).month(currentMonth);
-  const monthStart = current.startOf("month");
-  const monthEnd = current.endOf("month");
+  const monthStart = view.startOf("month");
+  const monthEnd = view.endOf("month");
   const weeksInMonth = Math.ceil((monthEnd.date() + monthStart.day()) / 7);
   const tbodyRows: ReactNode[] = [];
   for (let week = 0; week < weeksInMonth; week++) {
     const cells: ReactNode[] = [];
     for (let day = 0; day < 7; day++) {
       const date = week * 7 + day - monthStart.day() + 1;
-      const isSelected = current.date(date).isSame(selectedDate);
+      const isSelected = view.date(date).isSame(value);
       if (date > 0 && date <= monthEnd.date()) {
-        const handleSelectDate = () => setSelectedDate(monthStart.date(date));
+        const handleSelectDate = () => onChange?.(monthStart.date(date));
         const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
           if (e.key === "Enter" || e.key === " ") {
             handleSelectDate();
@@ -82,25 +85,25 @@ export const Calendar: FC = () => {
 
   // Handlers for previous and next year or month buttons.
   const handlePrevYear = () => {
-    setCurrentYear((prev) => prev - 1);
+    setViewYear((prev) => prev - 1);
   };
   const handleNextYear = () => {
-    setCurrentYear((prev) => prev + 1);
+    setViewYear((prev) => prev + 1);
   };
   const handlePrevMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear((prev) => prev - 1);
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear((prev) => prev - 1);
     } else {
-      setCurrentMonth(currentMonth - 1);
+      setViewMonth(viewMonth - 1);
     }
   };
   const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear((prev) => prev + 1);
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear((prev) => prev + 1);
     } else {
-      setCurrentMonth(currentMonth + 1);
+      setViewMonth(viewMonth + 1);
     }
   };
 
