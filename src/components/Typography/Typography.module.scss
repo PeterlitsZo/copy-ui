@@ -1,5 +1,23 @@
 .h1 {
   font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 800;
+  font-weight: 600;
+}
+
+.h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+
+  padding-bottom: 0.5rem;
+
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: var(--typography-h2-border-color);
+}
+
+.h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
 }
