@@ -1,10 +1,11 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type FC } from "react"
-import { Popover } from "../Popover";
+import { ChevronsUpDown } from "lucide-react";
+import type { CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { useTheme } from "../ThemeProvider";
+import { Popover } from "@/components/Popover";
+import { useTheme } from "@/components/ThemeProvider";
 
 import styles from "./Select.module.scss";
-import { ChevronsUpDown } from "lucide-react";
 
 interface SelectProps<V extends string> {
   value?: V | null;
@@ -21,7 +22,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     value = null,
 
     options,
-    placeholder = 'Select an option',
+    placeholder = "Select an option",
     disabled = false,
 
     onChange,
@@ -29,42 +30,46 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 
   const theme = useTheme();
 
-  const mainRef = useRef<HTMLDivElement | null>(null);
+  const mainRef = useRef<HTMLButtonElement | null>(null);
 
-  const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(value);
-  const showLabel = selectedOptionValue ? options.find(o => o.value === selectedOptionValue)?.label : null;
+  const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(
+    value,
+  );
+  const showLabel = selectedOptionValue
+    ? options.find((o) => o.value === selectedOptionValue)?.label
+    : null;
 
   const [mainWidth, setMainWidth] = useState(0);
 
   useEffect(() => {
     if (value === selectedOptionValue) return;
     setSelectedOptionValue(value ?? null);
-  }, [value]);
+  }, [value, selectedOptionValue]);
 
   const mainStyle = {
-    '--select-font-size': theme.tokens.inputBaseMdFontSize,
-    '--select-line-height': theme.tokens.inputBaseMdLineHeight,
+    "--select-font-size": theme.tokens.inputBaseMdFontSize,
+    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
 
-    '--select-main-height': theme.tokens.inputBaseMdHeight,
-    '--select-main-border-color': theme.tokens.inputBaseDefaultBorderColor,
-    '--select-main-border-radius': theme.tokens.inputBaseBorderRadius,
-    '--select-main-placeholder-color': theme.tokens.inputBasePlaceholderColor,
+    "--select-main-height": theme.tokens.inputBaseMdHeight,
+    "--select-main-border-color": theme.tokens.inputBaseDefaultBorderColor,
+    "--select-main-border-radius": theme.tokens.inputBaseBorderRadius,
+    "--select-main-placeholder-color": theme.tokens.inputBasePlaceholderColor,
 
-    '--select-main-disabled-color': theme.colors.gray['600'],
-    '--select-main-disabled-bg-color': theme.colors.gray['000'],
-    '--select-main-disabled-border-color': theme.colors.gray['200'],
-  }
+    "--select-main-disabled-color": theme.colors.gray["600"],
+    "--select-main-disabled-bg-color": theme.colors.gray["000"],
+    "--select-main-disabled-border-color": theme.colors.gray["200"],
+  };
 
   const listStyle = {
-    '--select-font-size': theme.tokens.inputBaseMdFontSize,
-    '--select-line-height': theme.tokens.inputBaseMdLineHeight,
+    "--select-font-size": theme.tokens.inputBaseMdFontSize,
+    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
 
-    '--select-list-width': `${mainWidth}px`,
-    '--select-list-border-color': theme.tokens.inputBaseDefaultBorderColor,
-    '--select-list-border-radius': theme.tokens.inputBaseBorderRadius,
+    "--select-list-width": `${mainWidth}px`,
+    "--select-list-border-color": theme.tokens.inputBaseDefaultBorderColor,
+    "--select-list-border-radius": theme.tokens.inputBaseBorderRadius,
 
-    '--select-item-hover-bg-color': theme.colors.gray['000'],
-  }
+    "--select-item-hover-bg-color": theme.colors.gray["000"],
+  };
 
   useLayoutEffect(() => {
     const main = mainRef.current;
@@ -77,56 +82,74 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     <Popover>
       <Popover.Trigger
         render={({ setRef, onToggle }) => (
-          <div
-            ref={(el) => { setRef(el); mainRef.current = el; }}
+          <button
+            ref={(el) => {
+              setRef(el);
+              mainRef.current = el;
+            }}
             className={styles.selectMain}
             style={mainStyle as CSSProperties}
             onClick={() => !disabled && onToggle()}
-
             data-value-picked={selectedOptionValue == null ? "false" : "true"}
             data-disabled={disabled ? "true" : "false"}
+            type="button"
+            role="combobox"
+            aria-haspopup="listbox"
+            aria-expanded="false"
           >
             <span style={{ flex: 1 }}>
               {showLabel ? showLabel : placeholder}
             </span>
             <span className={styles.selectIcon}>
-              <ChevronsUpDown size='62.5%' />
+              <ChevronsUpDown size="62.5%" />
             </span>
-          </div>
+          </button>
         )}
       />
       <Popover.Portal
         onClickOutside={({ closePortal }) => closePortal()}
-        render={({ setRef, togglePortal, isOpen, floatingStyles }) => (
+        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
           isOpen && (
             <ul
               ref={setRef}
               className={styles.selectList}
               style={{ ...listStyle, ...floatingStyles }}
             >
-              {options.map((option) => (
-                <li
-                  key={option.value}
-                  className={styles.selectItem}
-                  onClick={() => {
-                    togglePortal();
+              {options.map((option) => {
+                const handleClick = () => {
+                  togglePortal();
 
-                    if (!disabled) {
-                      setSelectedOptionValue(option.value);
-                      onChange?.(option.value);
-                    }
-                  }}
-                >
-                  {option.label}
-                </li>
-              ))}
+                  if (!disabled) {
+                    setSelectedOptionValue(option.value);
+                    onChange?.(option.value);
+                  }
+                };
+                return (
+                  <li key={option.value} className={styles.selectItem}>
+                    <button
+                      type="button"
+                      className={styles.selectItemButton}
+                      onClick={handleClick}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleClick();
+                        }
+                      }}
+                      tabIndex={0}
+                    >
+                      {option.label}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )
-        )}
+        }
       />
     </Popover>
-  )
-}
+  );
+};
 
 Select.displayName = "Select";
 

@@ -11,15 +11,15 @@ export const demoSourceCode = ''
   + '\n'
   + '  const [value, setValue] = useState<string | null>(null);\n'
   + '  const options = [\n'
-  + "    { value: 'option1', label: 'Option 1' },\n"
-  + "    { value: 'option2', label: 'Option 2' },\n"
-  + "    { value: 'option3', label: 'Option 3' },\n"
-  + "    { value: 'option4', label: 'Option 4' },\n"
-  + "    { value: 'option5', label: 'Option 5' },\n"
+  + '    { value: "option1", label: "Option 1" },\n'
+  + '    { value: "option2", label: "Option 2" },\n'
+  + '    { value: "option3", label: "Option 3" },\n'
+  + '    { value: "option4", label: "Option 4" },\n'
+  + '    { value: "option5", label: "Option 5" },\n'
   + '  ];\n'
   + '\n'
   + '  return (\n'
-  + "    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>\n"
+  + '    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>\n'
   + '      <Select\n'
   + '        value={value}\n'
   + '        options={options}\n'

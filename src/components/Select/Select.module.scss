@@ -2,8 +2,10 @@
   display: flex;
   align-items: center;
 
-  padding-inline: 0.5rem;
+  text-align: start;
+  font-size: var(--select-font-size);
 
+  padding-inline: 0.5rem;
   height: var(--select-main-height);
   min-width: 16rem;
 
@@ -13,8 +15,6 @@
   border-radius: var(--select-main-border-radius);
 
   background-color: white;
-
-  font-size: var(--select-font-size);
 
   cursor: pointer;
   user-select: none;
@@ -58,7 +58,10 @@
   font-size: var(--select-font-size);
 }
 
-.selectItem {
+.selectItem button {
+  text-align: start;
+
+  width: 100%;
   padding: 0.25rem 0.375rem;
 
   border-radius: calc(var(--select-list-border-radius) * 0.5);
