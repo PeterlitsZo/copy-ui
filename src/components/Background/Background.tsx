@@ -1,11 +1,11 @@
-import { useLayoutEffect, useRef, type FC } from 'react';
-import classNames from 'classnames';
+import classNames from "classnames";
+import { type FC, useLayoutEffect, useRef } from "react";
 
-import styles from './Background.module.scss';
+import styles from "./Background.module.scss";
 
 interface BackgroundProps {
   className?: string;
-  kind: 'dots' | 'lines';
+  kind: "dots" | "lines";
 }
 
 export const Background: FC<BackgroundProps> = ({ className, kind }) => {
@@ -17,23 +17,23 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
     const canvas = canvasRef.current;
     if (!wrapper || !canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const resizeCanvas = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = wrapper.getBoundingClientRect();
-      
+
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-      
+
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+
       ctx.scale(dpr, dpr);
-      
+
       drawBackground();
-    }
+    };
     const drawBackground = () => {
       if (!ctx) return;
       const rect = wrapper.getBoundingClientRect();
@@ -42,7 +42,7 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (kind === 'lines') {
+      if (kind === "lines") {
         for (let x = 0; x < width; x += 40) {
           ctx.beginPath();
           ctx.moveTo(x + 20, 0);
@@ -59,7 +59,7 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
           ctx.lineWidth = 1;
           ctx.stroke();
         }
-      } else if (kind === 'dots') {
+      } else if (kind === "dots") {
         for (let x = 0; x < width; x += 14) {
           for (let y = 0; y < height; y += 14) {
             ctx.beginPath();
@@ -69,7 +69,7 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
           }
         }
       }
-    }
+    };
 
     resizeCanvas();
 
@@ -80,14 +80,17 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
 
     return () => {
       resizeObserver.disconnect();
-    }
+    };
   }, [kind]);
 
   return (
-    <div className={classNames(styles.backgroundWrapper, className)} ref={wrapperRef}>
+    <div
+      className={classNames(styles.backgroundWrapper, className)}
+      ref={wrapperRef}
+    >
       <canvas ref={canvasRef} />
     </div>
   );
-}
+};
 
-Background.displayName = 'Background';
+Background.displayName = "Background";

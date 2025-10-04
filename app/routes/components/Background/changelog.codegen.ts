@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-09-30: Initial version.\n'
+  + '- 2025-10-04: Update code style.\n'
   ;

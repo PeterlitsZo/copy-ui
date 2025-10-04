@@ -8,16 +8,16 @@ export const demoSourceCode = ''
   + '\n'
   + 'export function Demo() {\n'
   + '  const style = {\n'
-  + "    width: '30rem',\n"
-  + "    height: '15rem',\n"
-  + "    padding: '1rem',\n"
-  + "    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',\n"
-  + "    backgroundColor: 'white',\n"
+  + '    width: "30rem",\n'
+  + '    height: "15rem",\n'
+  + '    padding: "1rem",\n'
+  + '    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",\n'
+  + '    backgroundColor: "white",\n'
   + '  };\n'
   + '  return (\n'
   + '    <div style={style}>\n'
   + '      <Background kind="lines" />\n'
-  + "      <div style={{ position: 'relative' }}>{lorem}</div>\n"
+  + '      <div style={{ position: "relative" }}>{lorem}</div>\n'
   + '    </div>\n'
   + '  );\n'
   + '}\n'
