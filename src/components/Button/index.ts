@@ -1,4 +1,4 @@
-// Button from copy-ui @ 2025-09-29
+// Button from copy-ui @ 2025-10-04
 
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
+export type { ButtonProps } from "./Button";
+export { Button } from "./Button";

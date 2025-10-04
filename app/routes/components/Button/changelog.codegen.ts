@@ -12,4 +12,5 @@ export const changelog = ''
   + '  center` to the button styles.\n'
   + '- 2025-09-29: Make the prop `size` support `xs` and `xl` values & use tokens\n'
   + '  from ThemeProvider.\n'
+  + '- 2025-10-04: Add `ghost` variant. Code formatting improvement.\n'
   ;

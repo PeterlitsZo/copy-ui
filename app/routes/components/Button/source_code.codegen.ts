@@ -4,24 +4,24 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Button from copy-ui @ 2025-09-29\n'
+  + '// Button from copy-ui @ 2025-10-04\n'
   + '\n'
-  + "export { Button } from './Button';\n"
-  + "export type { ButtonProps } from './Button';\n"
+  + 'export type { ButtonProps } from "./Button";\n'
+  + 'export { Button } from "./Button";\n'
   ;
 
 sourceCode['Button.tsx'] = ''
-  + "import { useContext, type ComponentProps, type CSSProperties } from 'react';\n"
-  + "import classNames from 'classnames';\n"
-  + "import { merge } from 'es-toolkit';\n"
+  + 'import classNames from "classnames";\n'
+  + 'import { merge } from "es-toolkit";\n'
+  + 'import { type ComponentProps, type CSSProperties, useContext } from "react";\n'
   + '\n'
-  + "import { ThemeContext } from '../ThemeProvider/ThemeProvider';\n"
+  + 'import { ThemeContext } from "../ThemeProvider/ThemeProvider";\n'
   + '\n'
-  + "import styles from './Button.module.scss';\n"
+  + 'import styles from "./Button.module.scss";\n'
   + '\n'
-  + "export type ButtonProps = ComponentProps<'button'> & {\n"
-  + "  variant?: 'default' | 'filled';\n"
-  + "  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';\n"
+  + 'export type ButtonProps = ComponentProps<"button"> & {\n'
+  + '  variant?: "default" | "filled" | "ghost";\n'
+  + '  size?: "xs" | "sm" | "md" | "lg" | "xl";\n'
   + '  leftSection?: React.ReactNode;\n'
   + '  rightSection?: React.ReactNode;\n'
   + '};\n'
@@ -35,62 +35,78 @@ sourceCode['Button.tsx'] = ''
   + '    children,\n'
   + '    leftSection,\n'
   + '    rightSection,\n'
-  + "    variant = 'default',\n"
-  + "    size = 'md',\n"
+  + '    variant = "default",\n'
+  + '    size = "md",\n'
   + '    ...rest\n'
   + '  } = props;\n'
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
-  + "    variant === 'default' && {\n"
-  + "      '--button-bg': 'white',\n"
-  + "      '--button-color': theme.colors.gray['800'],\n"
-  + "      '--button-border-width': '1px',\n"
-  + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
-  + "      '--button-bg-hover': theme.colors.gray['100'],\n"
-  + '    } as CSSProperties,\n'
-  + "    variant === 'filled' && {\n"
-  + "      '--button-bg': theme.colors.blue['600'],\n"
-  + "      '--button-color': 'white',\n"
-  + "      '--button-border-width': '1px',\n"
-  + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.colors.blue['700'],\n"
-  + "      '--button-bg-hover': theme.colors.blue['700'],\n"
-  + '    } as CSSProperties,\n'
+  + '    variant === "default" &&\n'
+  + '      ({\n'
+  + '        "--button-bg": "white",\n'
+  + '        "--button-color": theme.colors.gray["800"],\n'
+  + '        "--button-border-width": "1px",\n'
+  + '        "--button-border-style": "solid",\n'
+  + '        "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,\n'
+  + '        "--button-bg-hover": theme.colors.gray["100"],\n'
+  + '      } as CSSProperties),\n'
+  + '    variant === "filled" &&\n'
+  + '      ({\n'
+  + '        "--button-bg": theme.colors.blue["600"],\n'
+  + '        "--button-color": "white",\n'
+  + '        "--button-border-width": "1px",\n'
+  + '        "--button-border-style": "solid",\n'
+  + '        "--button-border-color": theme.colors.blue["700"],\n'
+  + '        "--button-bg-hover": theme.colors.blue["700"],\n'
+  + '      } as CSSProperties),\n'
+  + '    variant === "ghost" &&\n'
+  + '      ({\n'
+  + '        "--button-bg": "white",\n'
+  + '        "--button-color": theme.colors.blue["800"],\n'
+  + '        "--button-border-width": "1px",\n'
+  + '        "--button-border-style": "solid",\n'
+  + '        "--button-border-color": "transparent",\n'
+  + '        "--button-bg-hover": theme.colors.gray["000"],\n'
+  + '      } as CSSProperties),\n'
   + '\n'
-  + "    size === 'xs' && {\n"
-  + "      '--button-height': theme.tokens.inputBaseXsHeight,\n"
-  + "      '--button-padding-x': '0.625rem',\n"
-  + "      '--button-section-gap': '0.375rem',\n"
-  + "      '--button-font-size': '0.75rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'sm' && {\n"
-  + "      '--button-height': theme.tokens.inputBaseSmHeight,\n"
-  + "      '--button-padding-x': '0.75rem',\n"
-  + "      '--button-section-gap': '0.5rem',\n"
-  + "      '--button-font-size': '0.875rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'md' && {\n"
-  + "      '--button-height': theme.tokens.inputBaseMdHeight,\n"
-  + "      '--button-padding-x': '1rem',\n"
-  + "      '--button-section-gap': '0.625rem',\n"
-  + "      '--button-font-size': '1rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'lg' && {\n"
-  + "      '--button-height': theme.tokens.inputBaseLgHeight,\n"
-  + "      '--button-padding-x': '1.25rem',\n"
-  + "      '--button-section-gap': '0.75rem',\n"
-  + "      '--button-font-size': '1.125rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'xl' && {\n"
-  + "      '--button-height': theme.tokens.inputBaseXlHeight,\n"
-  + "      '--button-padding-x': '1.5rem',\n"
-  + "      '--button-section-gap': '1rem',\n"
-  + "      '--button-font-size': '1.25rem',\n"
-  + '    } as CSSProperties,\n'
+  + '    size === "xs" &&\n'
+  + '      ({\n'
+  + '        "--button-height": theme.tokens.inputBaseXsHeight,\n'
+  + '        "--button-padding-x": "0.625rem",\n'
+  + '        "--button-section-gap": "0.375rem",\n'
+  + '        "--button-font-size": "0.75rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "sm" &&\n'
+  + '      ({\n'
+  + '        "--button-height": theme.tokens.inputBaseSmHeight,\n'
+  + '        "--button-padding-x": "0.75rem",\n'
+  + '        "--button-section-gap": "0.5rem",\n'
+  + '        "--button-font-size": "0.875rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "md" &&\n'
+  + '      ({\n'
+  + '        "--button-height": theme.tokens.inputBaseMdHeight,\n'
+  + '        "--button-padding-x": "1rem",\n'
+  + '        "--button-section-gap": "0.625rem",\n'
+  + '        "--button-font-size": "1rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "lg" &&\n'
+  + '      ({\n'
+  + '        "--button-height": theme.tokens.inputBaseLgHeight,\n'
+  + '        "--button-padding-x": "1.25rem",\n'
+  + '        "--button-section-gap": "0.75rem",\n'
+  + '        "--button-font-size": "1.125rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "xl" &&\n'
+  + '      ({\n'
+  + '        "--button-height": theme.tokens.inputBaseXlHeight,\n'
+  + '        "--button-padding-x": "1.5rem",\n'
+  + '        "--button-section-gap": "1rem",\n'
+  + '        "--button-font-size": "1.25rem",\n'
+  + '      } as CSSProperties),\n'
   + '\n'
   + '    {\n'
-  + "      '--button-radius': '0.375rem',\n"
+  + '      "--button-radius": "0.375rem",\n'
   + '    } as CSSProperties,\n'
   + '    style,\n'
   + '  ]);\n'
@@ -101,11 +117,15 @@ sourceCode['Button.tsx'] = ''
   + '      style={computedStyle}\n'
   + '      {...rest}\n'
   + '    >\n'
-  + '      {leftSection && <span className={styles.buttonLeftSection}>{leftSection}</span>}\n'
+  + '      {leftSection && (\n'
+  + '        <span className={styles.buttonLeftSection}>{leftSection}</span>\n'
+  + '      )}\n'
   + '      <span>{children}</span>\n'
-  + '      {rightSection && <span className={styles.buttonRightSection}>{rightSection}</span>}\n'
+  + '      {rightSection && (\n'
+  + '        <span className={styles.buttonRightSection}>{rightSection}</span>\n'
+  + '      )}\n'
   + '    </button>\n'
-  + '  )\n'
+  + '  );\n'
   + '}\n'
   + '\n'
   + 'function mergeStyles(styles: (CSSProperties | false | undefined)[]) {\n'
