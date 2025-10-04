@@ -1,6 +1,6 @@
-import type { FC } from "react";
+import type { ComponentProps, FC } from "react";
 
-interface FlexProps {
+type FlexProps = ComponentProps<"div"> & {
   dir?: "row" | "column";
   alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
   justifyContent?:
@@ -13,7 +13,7 @@ interface FlexProps {
   gap?: string;
   wrap?: boolean;
   children?: React.ReactNode;
-}
+};
 
 export const Flex: FC<FlexProps> = (props) => {
   const {
@@ -22,7 +22,9 @@ export const Flex: FC<FlexProps> = (props) => {
     justifyContent = "flex-start",
     gap = "0",
     wrap = false,
+    style,
     children,
+    ...rest
   } = props;
 
   return (
@@ -34,7 +36,9 @@ export const Flex: FC<FlexProps> = (props) => {
         justifyContent,
         gap,
         flexWrap: wrap ? "wrap" : "nowrap",
+        ...style,
       }}
+      {...rest}
     >
       {children}
     </div>
