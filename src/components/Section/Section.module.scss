@@ -1,8 +1,28 @@
 .section {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+}
+
+.sectionHeader {
+  border-bottom: 1px solid var(--border-color);
+  padding: 2rem;
+}
+
+.sectionHeaderWrapper {
+  margin: 0 auto;
+  max-width: 64rem;
+}
+
+.sectionBody {
+  padding: 2rem 2rem 4rem 2rem;
+}
+
+.sectionBodyWrapper {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  margin: 0 auto;
+  max-width: 64rem;
 }
 
 .demoAndCode {
@@ -18,18 +38,24 @@
   justify-content: center;
   padding: 4rem;
   border-bottom: 1px solid var(--border-color);
-  min-height: 30vh;
 }
 
 .demoCode {
+  display: flex;
+  position: relative;
+
   background-color: var(--background-color);
-  padding: 0.75rem;
   font-size: 0.75rem;
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
+.demoCodeViewport {
+  position: relative;
+  flex: 1;
+  max-height: 30vh;
+}
+
+.demoCodeContent {
+  padding: 0.75rem;
 }
 
 .sourceCode {
@@ -67,23 +93,25 @@
 
 .codeBlock {
   position: relative;
+  display: flex;
+
   background-color: var(--background-color);
   height: 62.5vh;
-  overflow: auto;
   font-size: 0.75rem;
 
   .floatingToolbar {
     position: absolute;
     top: 0.5rem;
-    right: 1.25rem;
+    right: 1rem;
   }
 }
 
+.codeBlockScrollArea {
+  flex: 1;
+}
+
 .codeBlockContent {
-  position: absolute;
-  inset: 0;
   padding: 0.75rem;
-  overflow: auto;
 }
 
 .changeLogContent {
