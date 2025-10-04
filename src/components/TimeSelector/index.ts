@@ -1,4 +1,4 @@
-// TimeSelector from copy-ui @ 2025-09-25.
+// TimeSelector from copy-ui @ 2025-10-04.
 
-export { TimeSelector } from './TimeSelector';
-export type { TimeRange } from './TimeSelector';
+export type { TimeRange } from "./TimeSelector";
+export { TimeSelector } from "./TimeSelector";

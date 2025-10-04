@@ -4,7 +4,7 @@
 export const demoSourceCode = ''
   + 'import { useState } from "react";\n'
   + '\n'
-  + 'import { TimeSelector, type TimeRange } from "src/components/TimeSelector";\n'
+  + 'import { type TimeRange, TimeSelector } from "src/components/TimeSelector";\n'
   + '\n'
   + 'export function Demo() {\n'
   + '  const [timeRange, setTimeRange] = useState<TimeRange | undefined>(undefined);\n'

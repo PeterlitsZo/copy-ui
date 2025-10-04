@@ -33,19 +33,24 @@
   }
 }
 
+.presetListScrollArea {
+  width: 12rem;
+  height: var(--preset-list-height);
+}
+
 .presetList {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
   padding: 0.5rem;
 
-  width: 12rem;
-  height: var(--preset-list-height);
-
   overflow: auto;
 
-  li {
+  li button {
+    width: 100%;
     padding: 0.25rem 0.5rem;
+    text-align: start;
+
     border-radius: var(--radius);
 
     cursor: pointer;

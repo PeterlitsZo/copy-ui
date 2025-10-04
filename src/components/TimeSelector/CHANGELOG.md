@@ -2,3 +2,6 @@
 - 2025-09-25: Improved TimeSelector styles for better appearance.
 - 2025-09-25: Use `onToggle` instead of `onClick` in `Popover.Trigger`'s render
   prop.
+- 2025-10-04: Replace preset list with ScrollArea component. Add proper form
+  labels with `htmlFor` attributes. Extract preset data to array. Update button
+  styles and cancel button variant. Code formatting improvements.
