@@ -1,3 +1,3 @@
-// ScrollArea from copy-ui @ 2025-10-04.
+// ScrollArea from copy-ui @ 2025-10-05.
 
 export { ScrollArea } from "./ScrollArea";

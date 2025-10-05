@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import type { ComponentProps, FC } from "react";
+import type { ComponentProps, CSSProperties, FC } from "react";
 import {
   createContext,
   useCallback,
@@ -19,12 +19,14 @@ import styles from "./ScrollArea.module.scss";
 // =============================================================================
 
 type ScrollAreaStoreState = {
+  show: boolean;
   contentHeight: number;
   viewportHeight: number;
   scrollTop: number;
 };
 
 type ScrollAreaStoreActions = {
+  setShow: (show: boolean) => void;
   setContentHeight: (height: number) => void;
   setViewportHeight: (height: number) => void;
   setScrollTop: (scrollTop: number) => void;
@@ -34,10 +36,12 @@ type ScrollAreaStore = ScrollAreaStoreState & ScrollAreaStoreActions;
 
 function buildScrollAreaStore() {
   return createStore<ScrollAreaStore>()((set) => ({
+    show: false,
     contentHeight: 0,
     viewportHeight: 0,
     scrollTop: 0,
 
+    setShow: (show) => set(() => ({ show })),
     setContentHeight: (height) => set(() => ({ contentHeight: height })),
     setViewportHeight: (height) => set(() => ({ viewportHeight: height })),
     setScrollTop: (scrollTop) => set(() => ({ scrollTop })),
@@ -69,6 +73,9 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
     (state) => state.setViewportHeight,
   );
   const setScrollTop = useStore(context, (state) => state.setScrollTop);
+  const scrollTop = useStore(context, (state) => state.scrollTop);
+
+  // Handle scroll and resize events.
   useLayoutEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
@@ -95,7 +102,7 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
     };
   }, [setViewportHeight, setScrollTop]);
 
-  const scrollTop = useStore(context, (state) => state.scrollTop);
+  // Sync scrollTop state with actual scroll position.
   useLayoutEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
@@ -166,11 +173,24 @@ const ScrollAreaContent: FC<ScrollAreaContentProps> = (props) => {
 type ScrollAreaScrollbarProps = ComponentProps<"div">;
 
 const ScrollAreaScrollbar: FC<ScrollAreaScrollbarProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, style, ...rest } = props;
+
+  const context = useContext(ScrollAreaContext);
+  if (!context) {
+    throw new Error("ScrollArea.Scrollbar must be used within a ScrollArea");
+  }
+
+  const show = useStore(context, (state) => state.show);
+
+  const computedStyle = {
+    ...(style || {}),
+    visibility: show ? "visible" : "hidden",
+  } as CSSProperties;
 
   return (
     <div
       className={classNames(styles.scrollAreaScrollbar, className)}
+      style={computedStyle}
       {...rest}
     >
       {children}
@@ -294,9 +314,17 @@ const ScrollArea: ScrollAreaComponent = (props) => {
 
   const scrollAreaStore = useMemo(() => buildScrollAreaStore(), []);
 
+  const setShow = useStore(scrollAreaStore, (state) => state.setShow);
+
   return (
     <ScrollAreaContext value={scrollAreaStore}>
-      <div className={classNames(styles.scrollArea, className)} {...rest}>
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: I think it's fine here. */}
+      <div
+        className={classNames(styles.scrollArea, className)}
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        {...rest}
+      >
         {children}
       </div>
     </ScrollAreaContext>

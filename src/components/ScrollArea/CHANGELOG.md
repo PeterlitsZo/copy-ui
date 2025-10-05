@@ -1,1 +1,2 @@
 - 2025-10-04: Initial version.
+- 2025-10-05: Make the scrollbar appear on hover only.
