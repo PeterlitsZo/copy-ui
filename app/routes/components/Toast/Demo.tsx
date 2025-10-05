@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { useToast } from "src/components/Toast";
-import { Button } from "src/components/Button";
+import { Button } from "@/components/Button";
+import { useToast } from "@/components/Toast";
 
 export function Demo() {
   const { addToast } = useToast();
@@ -12,11 +12,5 @@ export function Demo() {
     setCounter(counter + 1);
   };
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Button onClick={handleAddToast}>
-        Add Toast
-      </Button>
-    </div>
-  );
+  return <Button onClick={handleAddToast}>Add Toast</Button>;
 }

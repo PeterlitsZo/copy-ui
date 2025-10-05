@@ -1,10 +1,14 @@
-import { createContext, useContext, type FC, type PropsWithChildren } from "react";
-import { useStore } from "zustand";
-import { createStore, type StoreApi } from "zustand";
-
-import styles from './Toast.module.scss';
-import { useTheme } from "../ThemeProvider";
 import { uniqueId } from "es-toolkit/compat";
+import {
+  createContext,
+  type FC,
+  type PropsWithChildren,
+  useContext,
+} from "react";
+import { createStore, type StoreApi, useStore } from "zustand";
+
+import { useTheme } from "../ThemeProvider";
+import styles from "./Toast.module.scss";
 
 // Types
 // =============================================================================
@@ -13,7 +17,7 @@ type Toast = {
   id: string;
   content: string;
   timeoutHandler: ReturnType<typeof setTimeout> | null;
-}
+};
 
 // ToastStore
 // =============================================================================
@@ -33,15 +37,15 @@ type ToastStore = ToastStoreState & ToastStoreActions;
 function buildToastStore() {
   return createStore<ToastStore>()((set) => ({
     toasts: [],
-    
+
     addToast: (message) => {
       const timeoutHandler = setTimeout(() => {
         set((state) => ({
           toasts: state.toasts.filter((t) => t.id !== toast.id),
-        }))
+        }));
       }, 4000);
 
-      const id = uniqueId('toast-');
+      const id = uniqueId("toast-");
       const toast = {
         id,
         content: message,
@@ -50,7 +54,7 @@ function buildToastStore() {
 
       set((state) => ({
         toasts: [...state.toasts, toast],
-      }))
+      }));
     },
     hoverToast: (id) => {
       set((state) => ({
@@ -61,7 +65,7 @@ function buildToastStore() {
           }
           return t;
         }),
-      }))
+      }));
     },
     unhoverToast: (id) => {
       set((state) => ({
@@ -70,13 +74,13 @@ function buildToastStore() {
             const timeoutHandler = setTimeout(() => {
               set((state) => ({
                 toasts: state.toasts.filter((toast) => toast.id !== id),
-              }))
+              }));
             }, 6000);
             return { ...t, timeoutHandler };
           }
           return t;
         }),
-      }))
+      }));
     },
   }));
 }
@@ -89,14 +93,10 @@ const ToastContext = createContext<StoreApi<ToastStore> | null>(null);
 const ToastContextWrapper: FC<PropsWithChildren> = ({ children }) => {
   const store = buildToastStore();
 
-  return (
-    <ToastContext value={store}>
-      {children}
-    </ToastContext>
-  );
-}
+  return <ToastContext value={store}>{children}</ToastContext>;
+};
 
-ToastContextWrapper.displayName = 'Toast.Context';
+ToastContextWrapper.displayName = "Toast.Context";
 
 // ToastContainer
 // =============================================================================
@@ -106,22 +106,19 @@ const ToastContainer: FC = () => {
 
   const store = useContext(ToastContext);
   if (!store) {
-    throw new Error('Toast.Container must be used within a Toast.Context');
-  };
+    throw new Error("Toast.Container must be used within a Toast.Context");
+  }
 
   const toasts = useStore(store, (state) => state.toasts);
 
   const computedStyle = {
-    '--toast-bg-color': 'white',
-    '--toast-border-color': theme.colors.gray['300'],
-    '--toast-box-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)',
+    "--toast-bg-color": "white",
+    "--toast-border-color": theme.colors.gray["300"],
+    "--toast-box-shadow": "0 2px 4px rgba(0, 0, 0, 0.05)",
   } as React.CSSProperties;
 
   return (
-    <section
-      style={computedStyle}
-      className={styles.toastContainer}
-    >
+    <section style={computedStyle} className={styles.toastContainer}>
       <ul className={styles.toastList}>
         {toasts.map((toast) => (
           <li
@@ -138,7 +135,7 @@ const ToastContainer: FC = () => {
   );
 };
 
-ToastContainer.displayName = 'Toast.Container';
+ToastContainer.displayName = "Toast.Container";
 
 // useToast
 // =============================================================================
@@ -146,8 +143,8 @@ ToastContainer.displayName = 'Toast.Container';
 export function useToast() {
   const store = useContext(ToastContext);
   if (!store) {
-    throw new Error('useToast must be used within a Toast.Context');
-  };
+    throw new Error("useToast must be used within a Toast.Context");
+  }
 
   return {
     addToast: store.getState().addToast,
@@ -160,7 +157,7 @@ export function useToast() {
 type ToastComponent = {
   Container: typeof ToastContainer;
   Context: typeof ToastContextWrapper;
-}
+};
 
 export const Toast: ToastComponent = () => {};
 
