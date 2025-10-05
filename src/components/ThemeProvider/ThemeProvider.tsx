@@ -1,39 +1,60 @@
-import { createContext, useContext, useLayoutEffect, useState, type FC } from "react";
+import { createContext, type FC, useContext, useState } from "react";
 
 import { DEFAULT_THEME } from "./default_theme";
 
 // Theme type
 // =============================================================================
 
+export type ColorName =
+  | "gray"
+  | "red"
+  | "pink"
+  | "grape"
+  | "blue"
+  | "green"
+  | "yellow";
+
+export type ColorNo =
+  | "000"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
+
 export interface Theme {
   colors: {
-    [colorName: string]: { [colorNo: string]: string }
-  },
+    [colorName in ColorName]: { [colorNo in ColorNo]: string };
+  };
   tokens: {
-    inputBaseDefaultBorderColor: string,
+    inputBaseDefaultBorderColor: string;
 
-    inputBaseXsHeight: string,
-    inputBaseSmHeight: string,
-    inputBaseMdHeight: string,
-    inputBaseLgHeight: string,
-    inputBaseXlHeight: string,
+    inputBaseXsHeight: string;
+    inputBaseSmHeight: string;
+    inputBaseMdHeight: string;
+    inputBaseLgHeight: string;
+    inputBaseXlHeight: string;
 
-    inputBaseXsFontSize: string,
-    inputBaseSmFontSize: string,
-    inputBaseMdFontSize: string,
-    inputBaseLgFontSize: string,
-    inputBaseXlFontSize: string,
+    inputBaseXsFontSize: string;
+    inputBaseSmFontSize: string;
+    inputBaseMdFontSize: string;
+    inputBaseLgFontSize: string;
+    inputBaseXlFontSize: string;
 
-    inputBaseXsLineHeight: string,
-    inputBaseSmLineHeight: string,
-    inputBaseMdLineHeight: string,
-    inputBaseLgLineHeight: string,
-    inputBaseXlLineHeight: string,
+    inputBaseXsLineHeight: string;
+    inputBaseSmLineHeight: string;
+    inputBaseMdLineHeight: string;
+    inputBaseLgLineHeight: string;
+    inputBaseXlLineHeight: string;
 
-    inputBaseBorderRadius: string,
+    inputBaseBorderRadius: string;
 
-    inputBasePlaceholderColor: string,
-  }
+    inputBasePlaceholderColor: string;
+  };
 }
 
 // ThemeContext
@@ -47,7 +68,7 @@ export const ThemeContext = createContext<Theme>(DEFAULT_THEME);
 export function useTheme() {
   const theme = useContext(ThemeContext);
   if (!theme) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
 
   return theme;
@@ -63,11 +84,7 @@ export interface ThemeProviderProps {
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
   const [theme, _] = useState<Theme>(DEFAULT_THEME);
 
-  return (
-    <ThemeContext value={theme}>
-      {props.children}
-    </ThemeContext>
-  );
-}
+  return <ThemeContext value={theme}>{props.children}</ThemeContext>;
+};
 
-ThemeProvider.displayName = 'ThemeProvider';
+ThemeProvider.displayName = "ThemeProvider";

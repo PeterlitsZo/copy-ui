@@ -4,149 +4,194 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + '// ThemeProvider from copy-ui @ 2025-09-29\n'
+  + '// ThemeProvider from copy-ui @ 2025-10-05.\n'
   + '\n'
-  + 'export { ThemeProvider, ThemeContext, useTheme } from "./ThemeProvider";\n'
+  + 'export { ThemeContext, ThemeProvider, useTheme } from "./ThemeProvider";\n'
   ;
 
 sourceCode['default_theme.ts'] = ''
   + 'import type { Theme } from "./ThemeProvider";\n'
   + '\n'
-  + "const colors: Theme['colors'] = {\n"
+  + 'const colors: Theme["colors"] = {\n'
   + '  gray: {\n'
-  + "    '000': '#f8f9fa',\n"
-  + "    '100': '#f1f3f5',\n"
-  + "    '200': '#e9ecef',\n"
-  + "    '300': '#dee2e6',\n"
-  + "    '400': '#ced4da',\n"
-  + "    '500': '#adb5bd',\n"
-  + "    '600': '#868e96',\n"
-  + "    '700': '#495057',\n"
-  + "    '800': '#343a40',\n"
-  + "    '900': '#212529',\n"
+  + '    "000": "#f8f9fa",\n'
+  + '    "100": "#f1f3f5",\n'
+  + '    "200": "#e9ecef",\n'
+  + '    "300": "#dee2e6",\n'
+  + '    "400": "#ced4da",\n'
+  + '    "500": "#adb5bd",\n'
+  + '    "600": "#868e96",\n'
+  + '    "700": "#495057",\n'
+  + '    "800": "#343a40",\n'
+  + '    "900": "#212529",\n'
   + '  },\n'
   + '  red: {\n'
-  + "    '000': '#fff5f5',\n"
-  + "    '100': '#ffe3e3',\n"
-  + "    '200': '#ffc9c9',\n"
-  + "    '300': '#ffa8a8',\n"
-  + "    '400': '#ff8787',\n"
-  + "    '500': '#ff6b6b',\n"
-  + "    '600': '#fa5252',\n"
-  + "    '700': '#f03e3e',\n"
-  + "    '800': '#e03131',\n"
-  + "    '900': '#c92a2a',\n"
+  + '    "000": "#fff5f5",\n'
+  + '    "100": "#ffe3e3",\n'
+  + '    "200": "#ffc9c9",\n'
+  + '    "300": "#ffa8a8",\n'
+  + '    "400": "#ff8787",\n'
+  + '    "500": "#ff6b6b",\n'
+  + '    "600": "#fa5252",\n'
+  + '    "700": "#f03e3e",\n'
+  + '    "800": "#e03131",\n'
+  + '    "900": "#c92a2a",\n'
+  + '  },\n'
+  + '  pink: {\n'
+  + '    "000": "#fff0f6",\n'
+  + '    "100": "#ffdeeb",\n'
+  + '    "200": "#fcc2d7",\n'
+  + '    "300": "#faa2c1",\n'
+  + '    "400": "#f783ac",\n'
+  + '    "500": "#f06595",\n'
+  + '    "600": "#e64980",\n'
+  + '    "700": "#d6336c",\n'
+  + '    "800": "#c2255c",\n'
+  + '    "900": "#a61e4d",\n'
+  + '  },\n'
+  + '  grape: {\n'
+  + '    "000": "#f8f0fc",\n'
+  + '    "100": "#f3d9fa",\n'
+  + '    "200": "#eebefa",\n'
+  + '    "300": "#e599f7",\n'
+  + '    "400": "#da77f2",\n'
+  + '    "500": "#cc5de8",\n'
+  + '    "600": "#be4bdb",\n'
+  + '    "700": "#ae3ec9",\n'
+  + '    "800": "#9c36b5",\n'
+  + '    "900": "#862e9c",\n'
   + '  },\n'
   + '  blue: {\n'
-  + "    '000': '#e7f5ff',\n"
-  + "    '100': '#d0ebff',\n"
-  + "    '200': '#a5d8ff',\n"
-  + "    '300': '#74c0fc',\n"
-  + "    '400': '#4dabf7',\n"
-  + "    '500': '#339af0',\n"
-  + "    '600': '#228be6',\n"
-  + "    '700': '#1c7ed6',\n"
-  + "    '800': '#1971c2',\n"
-  + "    '900': '#1864ab',\n"
+  + '    "000": "#e7f5ff",\n'
+  + '    "100": "#d0ebff",\n'
+  + '    "200": "#a5d8ff",\n'
+  + '    "300": "#74c0fc",\n'
+  + '    "400": "#4dabf7",\n'
+  + '    "500": "#339af0",\n'
+  + '    "600": "#228be6",\n'
+  + '    "700": "#1c7ed6",\n'
+  + '    "800": "#1971c2",\n'
+  + '    "900": "#1864ab",\n'
   + '  },\n'
   + '  green: {\n'
-  + "    '000': '#ebfbee',\n"
-  + "    '100': '#d3f9d8',\n"
-  + "    '200': '#b2f2bb',\n"
-  + "    '300': '#8ce99a',\n"
-  + "    '400': '#69db7c',\n"
-  + "    '500': '#51cf66',\n"
-  + "    '600': '#40c057',\n"
-  + "    '700': '#37b24d',\n"
-  + "    '800': '#2f9e44',\n"
-  + "    '900': '#2b8a3e',\n"
+  + '    "000": "#ebfbee",\n'
+  + '    "100": "#d3f9d8",\n'
+  + '    "200": "#b2f2bb",\n'
+  + '    "300": "#8ce99a",\n'
+  + '    "400": "#69db7c",\n'
+  + '    "500": "#51cf66",\n'
+  + '    "600": "#40c057",\n'
+  + '    "700": "#37b24d",\n'
+  + '    "800": "#2f9e44",\n'
+  + '    "900": "#2b8a3e",\n'
   + '  },\n'
   + '  yellow: {\n'
-  + "    '000': '#fff9db',\n"
-  + "    '100': '#fff3bf',\n"
-  + "    '200': '#ffec99',\n"
-  + "    '300': '#ffe066',\n"
-  + "    '400': '#ffd43b',\n"
-  + "    '500': '#fcc419',\n"
-  + "    '600': '#fab005',\n"
-  + "    '700': '#f59f00',\n"
-  + "    '800': '#f08c00',\n"
-  + "    '900': '#e67700',\n"
+  + '    "000": "#fff9db",\n'
+  + '    "100": "#fff3bf",\n'
+  + '    "200": "#ffec99",\n'
+  + '    "300": "#ffe066",\n'
+  + '    "400": "#ffd43b",\n'
+  + '    "500": "#fcc419",\n'
+  + '    "600": "#fab005",\n'
+  + '    "700": "#f59f00",\n'
+  + '    "800": "#f08c00",\n'
+  + '    "900": "#e67700",\n'
   + '  },\n'
-  + '}\n'
+  + '};\n'
   + '\n'
   + '/**\n'
   + ' * The default theme.\n'
-  + ' * \n'
+  + ' *\n'
   + ' * Colors are copied from [open-color](https://yeun.github.io/open-color/).\n'
   + ' */\n'
   + 'export const DEFAULT_THEME: Theme = {\n'
   + '  colors,\n'
   + '  tokens: {\n'
-  + "    inputBaseDefaultBorderColor: colors.gray['400'],\n"
+  + '    inputBaseDefaultBorderColor: colors.gray["400"],\n'
   + '\n'
-  + "    inputBaseXsHeight: '1.75rem',\n"
-  + "    inputBaseSmHeight: '2rem',\n"
-  + "    inputBaseMdHeight: '2.25rem',\n"
-  + "    inputBaseLgHeight: '2.5rem',\n"
-  + "    inputBaseXlHeight: '3rem',\n"
+  + '    inputBaseXsHeight: "1.75rem",\n'
+  + '    inputBaseSmHeight: "2rem",\n'
+  + '    inputBaseMdHeight: "2.25rem",\n'
+  + '    inputBaseLgHeight: "2.5rem",\n'
+  + '    inputBaseXlHeight: "3rem",\n'
   + '\n'
-  + "    inputBaseXsFontSize: '0.75rem',\n"
-  + "    inputBaseSmFontSize: '0.875rem',\n"
-  + "    inputBaseMdFontSize: '1rem',\n"
-  + "    inputBaseLgFontSize: '1.125rem',\n"
-  + "    inputBaseXlFontSize: '1.25rem',\n"
+  + '    inputBaseXsFontSize: "0.75rem",\n'
+  + '    inputBaseSmFontSize: "0.875rem",\n'
+  + '    inputBaseMdFontSize: "1rem",\n'
+  + '    inputBaseLgFontSize: "1.125rem",\n'
+  + '    inputBaseXlFontSize: "1.25rem",\n'
   + '\n'
-  + "    inputBaseXsLineHeight: '1.25rem',\n"
-  + "    inputBaseSmLineHeight: '1.375rem',\n"
-  + "    inputBaseMdLineHeight: '1.5rem',\n"
-  + "    inputBaseLgLineHeight: '1.75rem',\n"
-  + "    inputBaseXlLineHeight: '2rem',\n"
+  + '    inputBaseXsLineHeight: "1.25rem",\n'
+  + '    inputBaseSmLineHeight: "1.375rem",\n'
+  + '    inputBaseMdLineHeight: "1.5rem",\n'
+  + '    inputBaseLgLineHeight: "1.75rem",\n'
+  + '    inputBaseXlLineHeight: "2rem",\n'
   + '\n'
-  + "    inputBaseBorderRadius: '0.375rem',\n"
+  + '    inputBaseBorderRadius: "0.5rem",\n'
   + '\n'
-  + "    inputBasePlaceholderColor: colors.gray['600'],\n"
-  + '  }\n'
+  + '    inputBasePlaceholderColor: colors.gray["600"],\n'
+  + '  },\n'
   + '};\n'
   ;
 
 sourceCode['ThemeProvider.tsx'] = ''
-  + 'import { createContext, useContext, useLayoutEffect, useState, type FC } from "react";\n'
+  + 'import { createContext, type FC, useContext, useState } from "react";\n'
   + '\n'
   + 'import { DEFAULT_THEME } from "./default_theme";\n'
   + '\n'
   + '// Theme type\n'
   + '// =============================================================================\n'
   + '\n'
+  + 'export type ColorName =\n'
+  + '  | "gray"\n'
+  + '  | "red"\n'
+  + '  | "pink"\n'
+  + '  | "grape"\n'
+  + '  | "blue"\n'
+  + '  | "green"\n'
+  + '  | "yellow";\n'
+  + '\n'
+  + 'export type ColorNo =\n'
+  + '  | "000"\n'
+  + '  | "100"\n'
+  + '  | "200"\n'
+  + '  | "300"\n'
+  + '  | "400"\n'
+  + '  | "500"\n'
+  + '  | "600"\n'
+  + '  | "700"\n'
+  + '  | "800"\n'
+  + '  | "900";\n'
+  + '\n'
   + 'export interface Theme {\n'
   + '  colors: {\n'
-  + '    [colorName: string]: { [colorNo: string]: string }\n'
-  + '  },\n'
+  + '    [colorName in ColorName]: { [colorNo in ColorNo]: string };\n'
+  + '  };\n'
   + '  tokens: {\n'
-  + '    inputBaseDefaultBorderColor: string,\n'
+  + '    inputBaseDefaultBorderColor: string;\n'
   + '\n'
-  + '    inputBaseXsHeight: string,\n'
-  + '    inputBaseSmHeight: string,\n'
-  + '    inputBaseMdHeight: string,\n'
-  + '    inputBaseLgHeight: string,\n'
-  + '    inputBaseXlHeight: string,\n'
+  + '    inputBaseXsHeight: string;\n'
+  + '    inputBaseSmHeight: string;\n'
+  + '    inputBaseMdHeight: string;\n'
+  + '    inputBaseLgHeight: string;\n'
+  + '    inputBaseXlHeight: string;\n'
   + '\n'
-  + '    inputBaseXsFontSize: string,\n'
-  + '    inputBaseSmFontSize: string,\n'
-  + '    inputBaseMdFontSize: string,\n'
-  + '    inputBaseLgFontSize: string,\n'
-  + '    inputBaseXlFontSize: string,\n'
+  + '    inputBaseXsFontSize: string;\n'
+  + '    inputBaseSmFontSize: string;\n'
+  + '    inputBaseMdFontSize: string;\n'
+  + '    inputBaseLgFontSize: string;\n'
+  + '    inputBaseXlFontSize: string;\n'
   + '\n'
-  + '    inputBaseXsLineHeight: string,\n'
-  + '    inputBaseSmLineHeight: string,\n'
-  + '    inputBaseMdLineHeight: string,\n'
-  + '    inputBaseLgLineHeight: string,\n'
-  + '    inputBaseXlLineHeight: string,\n'
+  + '    inputBaseXsLineHeight: string;\n'
+  + '    inputBaseSmLineHeight: string;\n'
+  + '    inputBaseMdLineHeight: string;\n'
+  + '    inputBaseLgLineHeight: string;\n'
+  + '    inputBaseXlLineHeight: string;\n'
   + '\n'
-  + '    inputBaseBorderRadius: string,\n'
+  + '    inputBaseBorderRadius: string;\n'
   + '\n'
-  + '    inputBasePlaceholderColor: string,\n'
-  + '  }\n'
+  + '    inputBasePlaceholderColor: string;\n'
+  + '  };\n'
   + '}\n'
   + '\n'
   + '// ThemeContext\n'
@@ -160,7 +205,7 @@ sourceCode['ThemeProvider.tsx'] = ''
   + 'export function useTheme() {\n'
   + '  const theme = useContext(ThemeContext);\n'
   + '  if (!theme) {\n'
-  + "    throw new Error('useTheme must be used within a ThemeProvider');\n"
+  + '    throw new Error("useTheme must be used within a ThemeProvider");\n'
   + '  }\n'
   + '\n'
   + '  return theme;\n'
@@ -176,13 +221,9 @@ sourceCode['ThemeProvider.tsx'] = ''
   + 'export const ThemeProvider: FC<ThemeProviderProps> = (props) => {\n'
   + '  const [theme, _] = useState<Theme>(DEFAULT_THEME);\n'
   + '\n'
-  + '  return (\n'
-  + '    <ThemeContext value={theme}>\n'
-  + '      {props.children}\n'
-  + '    </ThemeContext>\n'
-  + '  );\n'
-  + '}\n'
+  + '  return <ThemeContext value={theme}>{props.children}</ThemeContext>;\n'
+  + '};\n'
   + '\n'
-  + "ThemeProvider.displayName = 'ThemeProvider';\n"
+  + 'ThemeProvider.displayName = "ThemeProvider";\n'
   ;
 

@@ -10,4 +10,7 @@ export const changelog = ''
   + '  components.\n'
   + '- 2025-09-29: Add tokens to the theme with prefix `inputBase` for size `xs` and\n'
   + '  `xl`.\n'
+  + '- 2025-10-05: Extend DEFAULT_THEME with additional color palettes for pink,\n'
+  + '  indigo, and purple. Update the `inputBaseBorderRadius` token. Code formatting\n'
+  + '  improvement.\n'
   ;

@@ -6,3 +6,6 @@
   components.
 - 2025-09-29: Add tokens to the theme with prefix `inputBase` for size `xs` and
   `xl`.
+- 2025-10-05: Extend DEFAULT_THEME with additional color palettes for pink,
+  indigo, and purple. Update the `inputBaseBorderRadius` token. Code formatting
+  improvement.
