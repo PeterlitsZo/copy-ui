@@ -1,7 +1,9 @@
 .input {
+  align-self: stretch;
   flex: 1;
 
-  padding-inline: var(--input-padding-inline);
+  padding-inline-start: var(--input-padding-inline-start);
+  padding-inline-end: var(--input-padding-inline-end);
   font-size: var(--input-font-size);
   line-height: var(--input-line-height);
   caret-color: var(--input-caret-color);

@@ -4,55 +4,71 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Input from copy-ui @ 2025-09-30.\n'
+  + '// Input from copy-ui @ 2025-10-05.\n'
   + '\n'
-  + "export { Input } from './Input';\n"
-  + "export type { InputProps } from './Input';\n"
+  + 'export type { InputProps } from "./Input";\n'
+  + 'export { Input } from "./Input";\n'
   ;
 
 sourceCode['Input.tsx'] = ''
   + 'import classNames from "classnames";\n'
   + 'import { merge } from "es-toolkit";\n'
-  + 'import { type ComponentProps, type CSSProperties, type FC } from "react";\n'
-  + '\n'
-  + 'import { useTheme } from "../ThemeProvider";\n'
+  + 'import type { ComponentProps, CSSProperties, FC } from "react";\n'
   + 'import { InputBase } from "../InputBase";\n'
+  + 'import { useTheme } from "../ThemeProvider";\n'
   + '\n'
   + 'import styles from "./Input.module.scss";\n'
   + '\n'
-  + "export type InputProps = Omit<ComponentProps<'input'>, 'size'> & {\n"
-  + "  size?: 'sm' | 'md' | 'lg';\n"
+  + 'export type InputProps = Omit<ComponentProps<"input">, "size"> & {\n'
+  + '  size?: "sm" | "md" | "lg";\n'
+  + '  leftSection?: React.ReactNode;\n'
+  + '  rightSection?: React.ReactNode;\n'
   + '};\n'
   + '\n'
   + 'export const Input: FC<InputProps> = (props) => {\n'
   + '  const theme = useTheme();\n'
   + '\n'
-  + "  const { size = 'md', className, style, ...rest } = props;\n"
+  + '  const {\n'
+  + '    size = "md",\n'
+  + '    leftSection,\n'
+  + '    rightSection,\n'
+  + '    className,\n'
+  + '    style,\n'
+  + '    ...rest\n'
+  + '  } = props;\n'
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
-  + "    size === 'sm' && {\n"
-  + "      '--input-font-size': theme.tokens.inputBaseSmFontSize,\n"
-  + "      '--input-line-height': theme.tokens.inputBaseSmLineHeight,\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'md' && {\n"
-  + "      '--input-font-size': theme.tokens.inputBaseMdFontSize,\n"
-  + "      '--input-line-height': theme.tokens.inputBaseMdLineHeight,\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'lg' && {\n"
-  + "      '--input-font-size': theme.tokens.inputBaseLgFontSize,\n"
-  + "      '--input-line-height': theme.tokens.inputBaseLgLineHeight,\n"
-  + '    } as CSSProperties,\n'
+  + '    size === "sm" &&\n'
+  + '      ({\n'
+  + '        "--input-font-size": theme.tokens.inputBaseSmFontSize,\n'
+  + '        "--input-line-height": theme.tokens.inputBaseSmLineHeight,\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "md" &&\n'
+  + '      ({\n'
+  + '        "--input-font-size": theme.tokens.inputBaseMdFontSize,\n'
+  + '        "--input-line-height": theme.tokens.inputBaseMdLineHeight,\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "lg" &&\n'
+  + '      ({\n'
+  + '        "--input-font-size": theme.tokens.inputBaseLgFontSize,\n'
+  + '        "--input-line-height": theme.tokens.inputBaseLgLineHeight,\n'
+  + '      } as CSSProperties),\n'
   + '    {\n'
-  + "      '--input-padding-inline': '0.5rem',\n"
-  + "      '--input-border-color-focus': theme.colors.blue['800'],\n"
-  + "      '--input-placeholder-color': theme.tokens.inputBasePlaceholderColor,\n"
-  + "      '--input-caret-color': theme.colors.blue['600'],\n"
+  + '      "--input-padding-inline-start": leftSection ? "0.125rem" : "0.5rem",\n'
+  + '      "--input-padding-inline-end": rightSection ? "0.125rem" : "0.5rem",\n'
+  + '      "--input-border-color-focus": theme.colors.blue["800"],\n'
+  + '      "--input-placeholder-color": theme.tokens.inputBasePlaceholderColor,\n'
+  + '      "--input-caret-color": theme.colors.blue["600"],\n'
   + '    } as CSSProperties,\n'
   + '    style,\n'
   + '  ]);\n'
   + '\n'
   + '  return (\n'
-  + '    <InputBase size={size}>\n'
+  + '    <InputBase\n'
+  + '      size={size}\n'
+  + '      leftSection={leftSection}\n'
+  + '      rightSection={rightSection}\n'
+  + '    >\n'
   + '      <input\n'
   + '        className={classNames(className, styles.input)}\n'
   + '        style={computedStyle}\n'
@@ -60,9 +76,9 @@ sourceCode['Input.tsx'] = ''
   + '      />\n'
   + '    </InputBase>\n'
   + '  );\n'
-  + '}\n'
+  + '};\n'
   + '\n'
-  + "Input.displayName = 'Input';\n"
+  + 'Input.displayName = "Input";\n'
   + '\n'
   + 'function mergeStyles(styles: (CSSProperties | false | undefined)[]) {\n'
   + '  return styles.reduce((prev, next) => {\n'
@@ -73,9 +89,11 @@ sourceCode['Input.tsx'] = ''
 
 sourceCode['Input.module.scss'] = ''
   + '.input {\n'
+  + '  align-self: stretch;\n'
   + '  flex: 1;\n'
   + '\n'
-  + '  padding-inline: var(--input-padding-inline);\n'
+  + '  padding-inline-start: var(--input-padding-inline-start);\n'
+  + '  padding-inline-end: var(--input-padding-inline-end);\n'
   + '  font-size: var(--input-font-size);\n'
   + '  line-height: var(--input-line-height);\n'
   + '  caret-color: var(--input-caret-color);\n'
