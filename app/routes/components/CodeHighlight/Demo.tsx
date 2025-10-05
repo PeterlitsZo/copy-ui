@@ -15,8 +15,15 @@ export function Demo() {
   const theme = useContext(ThemeContext);
 
   return (
-    <div style={{ backgroundColor: theme.colors.gray['000'], padding: '1rem', borderRadius: '0.5rem', width: '40rem' }}>
-      <CodeHighlight code={code} lang="typescript" />
+    <div
+      style={{
+        backgroundColor: theme.colors.gray["000"],
+        padding: "1rem",
+        borderRadius: "0.5rem",
+        width: "40rem",
+      }}
+    >
+      <CodeHighlight code={code} lang="typescript" withLineNumbers />
     </div>
-  )
+  );
 }

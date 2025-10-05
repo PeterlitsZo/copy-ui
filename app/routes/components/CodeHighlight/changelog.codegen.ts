@@ -4,4 +4,5 @@
 export const changelog = ''
   + '- 2025-09-12: Initial version.\n'
   + '- 2025-09-26: Add support for TSX language in CodeHighlight.\n'
+  + '- 2025-10-05: Add `withLineNumbers` prop to CodeHighlight component.\n'
   ;

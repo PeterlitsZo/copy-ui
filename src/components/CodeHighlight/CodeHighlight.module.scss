@@ -1,0 +1,15 @@
+.codeHighlight {
+  line-height: 1.4;
+}
+
+.codeHighlight[data-with-line-number="true"] {
+  display: flex;
+}
+
+.codeHighlightLineNumbers {
+  color: var(--code-highlight-line-numbers-color);
+  margin-right: 1rem;
+  text-align: right;
+  user-select: none;
+  font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}
