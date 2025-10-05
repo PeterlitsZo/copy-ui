@@ -1,9 +1,13 @@
 import classnames from "classnames";
-import { type FC, useContext } from "react";
+import type { FC } from "react";
 import { Link } from "react-router";
-import { Tag } from "../Tag";
-import { ThemeContext } from "../ThemeProvider";
+
+import { ScrollArea } from "@/components/ScrollArea";
+import { Tag } from "@/components/Tag";
+import { useTheme } from "@/components/ThemeProvider";
+
 import { components } from "./components.codegen";
+
 import styles from "./Navbar.module.scss";
 
 interface NavbarProps {
@@ -11,7 +15,7 @@ interface NavbarProps {
 }
 
 export const Navbar: FC<NavbarProps> = ({ active }) => {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme();
 
   const computedStyles = {
     "--navbar-link-bg-hover": theme.colors.gray["100"],
@@ -21,29 +25,62 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     "--navbar-link-color": theme.colors.gray["700"],
   };
 
+  const docs = [{ name: "Get Started", path: "/v0/docs/get-started" }];
+
+  function isActive(kind: "doc" | "component", pathOrComponentName: string) {
+    if (kind === "doc") {
+      return pathOrComponentName === active;
+    } else if (kind === "component") {
+      return `/v0/components/${pathOrComponentName}` === active;
+    }
+  }
+
   return (
-    <nav
-      className={styles.navbar}
-      style={computedStyles as React.CSSProperties}
-    >
-      {components.map((component) => (
-        <Link
-          key={component.name}
-          className={classnames(
-            styles.link,
-            component.name === active && styles.active,
-          )}
-          to={component.path}
-        >
-          <span>{component.name}</span>
-          {component.wip && (
-            <Tag color="red" height="1.25rem">
-              WIP
-            </Tag>
-          )}
-        </Link>
-      ))}
-    </nav>
+    <ScrollArea>
+      <ScrollArea.Viewport>
+        <ScrollArea.Content>
+          <nav
+            className={styles.navbar}
+            style={computedStyles as React.CSSProperties}
+          >
+            <div className={styles.title}>DOCS</div>
+            {docs.map((doc) => (
+              <Link
+                key={doc.name}
+                className={classnames(
+                  styles.link,
+                  isActive("doc", doc.path) && styles.active,
+                )}
+                to={doc.path}
+              >
+                <span>{doc.name}</span>
+              </Link>
+            ))}
+            <div className={styles.title}>COMPONENTS</div>
+            {components.map((component) => (
+              <Link
+                key={component.name}
+                className={classnames(
+                  styles.link,
+                  isActive("component", component.name) && styles.active,
+                )}
+                to={component.path}
+              >
+                <span>{component.name}</span>
+                {component.wip && (
+                  <Tag color="red" height="1.25rem">
+                    WIP
+                  </Tag>
+                )}
+              </Link>
+            ))}
+          </nav>
+        </ScrollArea.Content>
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar>
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+    </ScrollArea>
   );
 };
 

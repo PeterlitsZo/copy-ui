@@ -6,6 +6,7 @@ import { componentsRoutes } from "./components_routes.codegen";
 export default [
   index("routes/home.tsx"),
 
+  ...prefix("v0/docs", [route("get-started", "routes/docs/get-started.tsx")]),
   ...prefix(
     "v0/components",
     componentsRoutes.map((componentsRoute) => {

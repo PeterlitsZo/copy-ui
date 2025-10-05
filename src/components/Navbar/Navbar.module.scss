@@ -8,6 +8,14 @@
   border-right: 1px solid var(--navbar-border-color);
 }
 
+.title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  padding-left: 0.625rem;
+}
+
 .link {
   display: flex;
   align-items: center;
