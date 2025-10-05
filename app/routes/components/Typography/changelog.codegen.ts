@@ -8,4 +8,6 @@ export const changelog = ''
   + '  look better.\n'
   + '- 2025-10-04: Add Typography.H4 component. Support `mb` prop for margin-bottom\n'
   + '  spacing. Increase H1 font size and improve prop handling consistency.\n'
+  + '- 2025-10-05: Add Typography.Ul and Typography.Li components. Also add styles\n'
+  + '  for Typography.P.\n'
   ;

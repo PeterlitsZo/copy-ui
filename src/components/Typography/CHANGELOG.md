@@ -4,3 +4,5 @@
   look better.
 - 2025-10-04: Add Typography.H4 component. Support `mb` prop for margin-bottom
   spacing. Increase H1 font size and improve prop handling consistency.
+- 2025-10-05: Add Typography.Ul and Typography.Li components. Also add styles
+  for Typography.P.

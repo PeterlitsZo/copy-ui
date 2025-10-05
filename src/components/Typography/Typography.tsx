@@ -146,6 +146,62 @@ const TypographyP: FC<TypographyPProps> = (props) => {
   );
 };
 
+// Typography.Ul
+// =============================================================================
+
+type TypographyUlProps = ComponentProps<"ul"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyUl: FC<TypographyUlProps> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const computedStyle = {
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <ul
+      className={classNames(styles.ul, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </ul>
+  );
+};
+
+// Typography.Li
+// =============================================================================
+
+type TypographyLiProps = ComponentProps<"li"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyLi: FC<TypographyLiProps> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const computedStyle = {
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <li
+      className={classNames(styles.li, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </li>
+  );
+};
+
 // Typography
 // =============================================================================
 
@@ -155,6 +211,8 @@ type TypographyType = {
   H3: typeof TypographyH3;
   H4: typeof TypographyH4;
   P: typeof TypographyP;
+  Ul: typeof TypographyUl;
+  Li: typeof TypographyLi;
 };
 
 const Typography: TypographyType = {
@@ -163,6 +221,8 @@ const Typography: TypographyType = {
   H3: TypographyH3,
   H4: TypographyH4,
   P: TypographyP,
+  Ul: TypographyUl,
+  Li: TypographyLi,
 };
 
 export { Typography };
