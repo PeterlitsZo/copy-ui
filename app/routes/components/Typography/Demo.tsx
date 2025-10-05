@@ -4,7 +4,7 @@ export function Demo() {
   return (
     <div
       style={{
-        width: "35rem",
+        width: "40rem",
         padding: "1rem",
         border: "1px solid #ccc",
         borderRadius: "1rem",
