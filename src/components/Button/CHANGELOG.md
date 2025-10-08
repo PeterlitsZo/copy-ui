@@ -9,3 +9,4 @@
 - 2025-09-29: Make the prop `size` support `xs` and `xl` values & use tokens
   from ThemeProvider.
 - 2025-10-04: Add `ghost` variant. Code formatting improvement.
+- 2025-10-08: Add `light` variant, update `ghost` variant styles.

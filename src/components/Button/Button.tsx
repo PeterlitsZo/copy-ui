@@ -1,20 +1,19 @@
 import classNames from "classnames";
 import { merge } from "es-toolkit";
-import { type ComponentProps, type CSSProperties, useContext } from "react";
-
-import { ThemeContext } from "../ThemeProvider/ThemeProvider";
-
+import type { ComponentProps, CSSProperties } from "react";
+import tinycolor from "tinycolor2";
+import { useTheme } from "@/components/ThemeProvider";
 import styles from "./Button.module.scss";
 
 export type ButtonProps = ComponentProps<"button"> & {
-  variant?: "default" | "filled" | "ghost";
+  variant?: "default" | "filled" | "ghost" | "light";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 };
 
 export function Button(props: ButtonProps) {
-  const theme = useContext(ThemeContext);
+  const theme = useTheme();
 
   const {
     className,
@@ -48,12 +47,23 @@ export function Button(props: ButtonProps) {
       } as CSSProperties),
     variant === "ghost" &&
       ({
-        "--button-bg": "white",
+        "--button-bg": "transparent",
         "--button-color": theme.colors.blue["800"],
         "--button-border-width": "1px",
         "--button-border-style": "solid",
         "--button-border-color": "transparent",
-        "--button-bg-hover": theme.colors.gray["000"],
+        "--button-bg-hover": tinycolor(theme.colors.gray["200"])
+          .setAlpha(0.5)
+          .toString(),
+      } as CSSProperties),
+    variant === "light" &&
+      ({
+        "--button-bg": theme.colors.blue["000"],
+        "--button-color": theme.colors.blue["800"],
+        "--button-border-width": "1px",
+        "--button-border-style": "solid",
+        "--button-border-color": "transparent",
+        "--button-bg-hover": theme.colors.blue["100"],
       } as CSSProperties),
 
     size === "xs" &&

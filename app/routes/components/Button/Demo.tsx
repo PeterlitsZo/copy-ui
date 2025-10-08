@@ -40,7 +40,9 @@ export function Demo() {
       <Button size="lg" variant="filled">
         World
       </Button>
-      <Button size="xl">And you</Button>
+      <Button size="xl" variant="light">
+        And you
+      </Button>
     </Flex>
   );
 
