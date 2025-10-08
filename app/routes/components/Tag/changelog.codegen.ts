@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-09-26: Initial version.\n'
+  + '- 2025-10-08: Add alpha transparency, code formatting improvements.\n'
   ;
