@@ -18,6 +18,7 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "Select", "path": "/v0/components/Select", "wip": false},
   {"name": "SortIndicator", "path": "/v0/components/SortIndicator", "wip": false},
   {"name": "Switch", "path": "/v0/components/Switch", "wip": false},
+  {"name": "Tabs", "path": "/v0/components/Tabs", "wip": false},
   {"name": "Tag", "path": "/v0/components/Tag", "wip": false},
   {"name": "ThemeProvider", "path": "/v0/components/ThemeProvider", "wip": false},
   {"name": "TimeSelector", "path": "/v0/components/TimeSelector", "wip": false},
