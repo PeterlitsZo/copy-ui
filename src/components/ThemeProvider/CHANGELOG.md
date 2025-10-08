@@ -9,3 +9,5 @@
 - 2025-10-05: Extend DEFAULT_THEME with additional color palettes for pink,
   indigo, and purple. Update the `inputBaseBorderRadius` token. Code formatting
   improvement.
+- 2025-10-08: Extend DEFAULT_THEME with additional color palettes for violet and
+  indigo. Export the type `ColorNo` and `ColorName`.

@@ -13,4 +13,6 @@ export const changelog = ''
   + '- 2025-10-05: Extend DEFAULT_THEME with additional color palettes for pink,\n'
   + '  indigo, and purple. Update the `inputBaseBorderRadius` token. Code formatting\n'
   + '  improvement.\n'
+  + '- 2025-10-08: Extend DEFAULT_THEME with additional color palettes for violet and\n'
+  + '  indigo. Export the type `ColorNo` and `ColorName`.\n'
   ;

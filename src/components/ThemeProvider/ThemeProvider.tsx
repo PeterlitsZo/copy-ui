@@ -11,6 +11,8 @@ export type ColorName =
   | "pink"
   | "grape"
   | "blue"
+  | "violet"
+  | "indigo"
   | "green"
   | "yellow";
 
