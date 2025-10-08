@@ -27,8 +27,8 @@ export const Calendar: FC<CalendarProps> = (props) => {
 
   const computedStyle = {
     "--calendar-bg-color": theme.colors.gray["000"],
-    "--calendar-border-color": theme.colors.gray["200"],
-    "--calendar-border-radius": "1rem",
+    "--calendar-border-color": theme.tokens.inputBaseDefaultBorderColor,
+    "--calendar-border-radius": theme.tokens.inputBaseBorderRadius,
     "--calendar-padding": "0.75rem",
     "--calendar-header-button-hover-bg-color": theme.colors.gray["200"],
     "--calendar-main-bg-color": "white",

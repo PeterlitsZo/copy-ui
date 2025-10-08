@@ -18,12 +18,11 @@ export function meta(_: Route.MetaArgs) {
 export default function CalendarPage() {
   return (
     <ComponentTemplate component="Calendar">
-      <Section
-        title="Calendar"
-        demoAndCode={[<Demo />, demoSourceCode]}
-        sourceCode={sourceCode}
-        changelog={changelog}
-      />
+      <Section.Root title="Calendar">
+        <Section.Demo node={<Demo />} code={demoSourceCode} />
+        <Section.SourceCode files={sourceCode} />
+        <Section.Changelog changelog={changelog} />
+      </Section.Root>
     </ComponentTemplate>
   );
 }

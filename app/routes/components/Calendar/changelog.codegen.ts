@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-03: Initial version.\n'
+  + '- 2025-10-08: Update its `border-color` and `border-radius` styles.\n'
   ;

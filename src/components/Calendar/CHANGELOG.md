@@ -1,1 +1,2 @@
 - 2025-10-03: Initial version.
+- 2025-10-08: Update its `border-color` and `border-radius` styles.
