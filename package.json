@@ -7,7 +7,6 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "format": "bunx --bun biome format --write ./src ./app",
     "lint": "bunx --bun biome lint --write ./src ./app",
     "check": "bunx --bun biome check --write ./src ./app"
   },

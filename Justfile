@@ -1,3 +1,6 @@
+format:
+    bunx --bun biome format --write
+
 codegen:
     python3 scripts/codegen.py
 
