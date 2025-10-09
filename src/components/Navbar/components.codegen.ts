@@ -7,6 +7,7 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "Button", "path": "/v0/components/Button", "wip": false},
   {"name": "ButtonGroup", "path": "/v0/components/ButtonGroup", "wip": false},
   {"name": "Calendar", "path": "/v0/components/Calendar", "wip": false},
+  {"name": "CodeBlock", "path": "/v0/components/CodeBlock", "wip": false},
   {"name": "CodeHighlight", "path": "/v0/components/CodeHighlight", "wip": false},
   {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": true},
   {"name": "Flex", "path": "/v0/components/Flex", "wip": false},
