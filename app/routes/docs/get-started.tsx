@@ -1,6 +1,5 @@
-import { CodeHighlight } from "@/components/CodeHighlight";
+import { CodeBlock } from "@/components/CodeBlock";
 import { ComponentTemplate } from "@/components/ComponentTemplate";
-import { ScrollArea } from "@/components/ScrollArea";
 import { Section } from "@/components/Section";
 import { useTheme } from "@/components/ThemeProvider";
 import { Typography } from "@/components/Typography";
@@ -64,7 +63,12 @@ export default function GetStartedPage() {
           to copy this CSS file content into your project, name it like
           reset.css, and import it in your root file:
         </Typography.P>
-        <ResetCss />
+        <CodeBlock
+          maxHeight="40rem"
+          code={resetCssCode}
+          lang="css"
+          withLineNumbers
+        />
         <Typography.P>
           It is copied from Tailwind CSS, but I just remove some comments,
           replace some magic functions (its `--theme` function) to make it work.
@@ -87,6 +91,7 @@ const Link = ({
   children: React.ReactNode;
 }) => {
   const theme = useTheme();
+
   return (
     <a href={href} style={{ color: theme.colors.blue["600"] }}>
       {children}
@@ -96,32 +101,9 @@ const Link = ({
 
 Link.displayName = "Link";
 
-const ResetCss = () => {
-  const theme = useTheme();
-
-  return (
-    <ScrollArea>
-      <ScrollArea.Viewport
-        style={{
-          height: "40rem",
-          borderRadius: "0.375rem",
-          backgroundColor: theme.colors.gray["000"],
-        }}
-      >
-        <ScrollArea.Content style={{ padding: "1rem", fontSize: "0.875rem" }}>
-          <CodeHighlight code={resetCssCode} lang="css" withLineNumbers />
-        </ScrollArea.Content>
-      </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar>
-        <ScrollArea.Thumb />
-      </ScrollArea.Scrollbar>
-    </ScrollArea>
-  );
-};
-
-ResetCss.displayName = "ResetCss";
-
 const resetCssCode = `\
+@layer base, components;
+
 @layer base {
   :root {
     --font-sans:

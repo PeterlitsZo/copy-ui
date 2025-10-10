@@ -1,3 +1,5 @@
+@layer base, components;
+
 @layer base {
   :root {
     --font-sans:
