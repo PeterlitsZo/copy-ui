@@ -1,0 +1,18 @@
+@layer components {
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .fieldLabel {
+    font-size: 0.875rem;
+    color: var(--field-label-color);
+  }
+
+  .fieldDescription {
+    font-size: 0.75rem;
+    color: var(--field-description-color);
+  }
+}
