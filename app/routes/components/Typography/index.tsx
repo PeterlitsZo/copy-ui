@@ -1,11 +1,13 @@
 import { ComponentTemplate } from "@/components/ComponentTemplate";
 import { Section } from "@/components/Section";
+import { Typography } from "@/components/Typography";
 
-import { sourceCode } from "./source_code.codegen";
-import { demoSourceCode } from "./Demo_source_code.codegen";
 import { changelog } from "./changelog.codegen";
-
-import { Demo } from "./Demo";
+import Demo01 from "./demos/demo_01";
+import demo01SourceCode from "./demos/demo_01.source_code.codegen";
+import Demo02 from "./demos/demo_02";
+import demo02SourceCode from "./demos/demo_02.source_code.codegen";
+import { sourceCode } from "./source_code.codegen";
 
 export function meta() {
   return [
@@ -17,12 +19,15 @@ export function meta() {
 export default function TypographyPage() {
   return (
     <ComponentTemplate component="Typography">
-      <Section
-        title="Typography"
-        demoAndCode={[<Demo />, demoSourceCode]}
-        sourceCode={sourceCode}
-        changelog={changelog}
-      />
+      <Section.Root title="Typography">
+        <Typography.H2 mt="1.5rem" mb="1rem">
+          Usage
+        </Typography.H2>
+        <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
+        <Section.Demo node={<Demo02 />} code={demo02SourceCode} />
+        <Section.SourceCode files={sourceCode} />
+        <Section.Changelog changelog={changelog} />
+      </Section.Root>
     </ComponentTemplate>
   );
 }

@@ -202,6 +202,33 @@ const TypographyLi: FC<TypographyLiProps> = (props) => {
   );
 };
 
+// Typography.Code
+// =============================================================================
+
+type TypographyCodeProps = ComponentProps<"code">;
+
+const TypographyCode: FC<TypographyCodeProps> = (props) => {
+  const { children, className, style, ...rest } = props;
+
+  const theme = useTheme();
+
+  const computedStyle = {
+    "--typography-code-bg-color": theme.colors.gray["100"],
+    "--typography-code-color": theme.colors.gray["900"],
+    ...style,
+  };
+
+  return (
+    <code
+      className={classNames(styles.code, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </code>
+  );
+};
+
 // Typography
 // =============================================================================
 
@@ -213,6 +240,7 @@ type TypographyType = {
   P: typeof TypographyP;
   Ul: typeof TypographyUl;
   Li: typeof TypographyLi;
+  Code: typeof TypographyCode;
 };
 
 const Typography: TypographyType = {
@@ -223,6 +251,7 @@ const Typography: TypographyType = {
   P: TypographyP,
   Ul: TypographyUl,
   Li: TypographyLi,
+  Code: TypographyCode,
 };
 
 export { Typography };

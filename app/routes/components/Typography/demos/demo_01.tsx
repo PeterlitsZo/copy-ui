@@ -1,12 +1,15 @@
+import { useTheme } from "@/components/ThemeProvider";
 import { Typography } from "@/components/Typography";
 
-export function Demo() {
+export default function Demo() {
+  const theme = useTheme();
+
   return (
     <div
       style={{
         width: "40rem",
         padding: "1rem",
-        border: "1px solid #ccc",
+        border: `1px solid ${theme.colors.gray["300"]}`,
         borderRadius: "1rem",
         backgroundColor: "white",
       }}
