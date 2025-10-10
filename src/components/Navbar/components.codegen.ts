@@ -19,6 +19,7 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "ScrollArea", "path": "/v0/components/ScrollArea", "wip": false},
   {"name": "Select", "path": "/v0/components/Select", "wip": false},
   {"name": "SortIndicator", "path": "/v0/components/SortIndicator", "wip": false},
+  {"name": "Spinner", "path": "/v0/components/Spinner", "wip": false},
   {"name": "Switch", "path": "/v0/components/Switch", "wip": false},
   {"name": "Tabs", "path": "/v0/components/Tabs", "wip": false},
   {"name": "Tag", "path": "/v0/components/Tag", "wip": false},
