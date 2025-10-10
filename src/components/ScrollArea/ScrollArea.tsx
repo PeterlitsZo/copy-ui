@@ -19,14 +19,16 @@ import styles from "./ScrollArea.module.scss";
 // =============================================================================
 
 type ScrollAreaStoreState = {
-  show: boolean;
+  hover: boolean;
+  thumbDragging: boolean;
   contentHeight: number;
   viewportHeight: number;
   scrollTop: number;
 };
 
 type ScrollAreaStoreActions = {
-  setShow: (show: boolean) => void;
+  setHover: (hover: boolean) => void;
+  setThumbDragging: (dragging: boolean) => void;
   setContentHeight: (height: number) => void;
   setViewportHeight: (height: number) => void;
   setScrollTop: (scrollTop: number) => void;
@@ -36,12 +38,14 @@ type ScrollAreaStore = ScrollAreaStoreState & ScrollAreaStoreActions;
 
 function buildScrollAreaStore() {
   return createStore<ScrollAreaStore>()((set) => ({
-    show: false,
+    hover: false,
+    thumbDragging: false,
     contentHeight: 0,
     viewportHeight: 0,
     scrollTop: 0,
 
-    setShow: (show) => set(() => ({ show })),
+    setHover: (hover) => set(() => ({ hover })),
+    setThumbDragging: (dragging) => set(() => ({ thumbDragging: dragging })),
     setContentHeight: (height) => set(() => ({ contentHeight: height })),
     setViewportHeight: (height) => set(() => ({ viewportHeight: height })),
     setScrollTop: (scrollTop) => set(() => ({ scrollTop })),
@@ -180,7 +184,9 @@ const ScrollAreaScrollbar: FC<ScrollAreaScrollbarProps> = (props) => {
     throw new Error("ScrollArea.Scrollbar must be used within a ScrollArea");
   }
 
-  const show = useStore(context, (state) => state.show);
+  const hover = useStore(context, (state) => state.hover);
+  const thumbDragging = useStore(context, (state) => state.thumbDragging);
+  const show = hover || thumbDragging;
 
   const computedStyle = {
     ...(style || {}),
@@ -213,15 +219,21 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
     throw new Error("ScrollArea.Thumb must be used within a ScrollArea");
   }
 
+  const setThumbDragging = useStore(context, (state) => state.setThumbDragging);
+  const setScrollTop = useStore(context, (state) => state.setScrollTop);
+  const contentHeight = useStore(context, (state) => state.contentHeight);
+  const viewportHeight = useStore(context, (state) => state.viewportHeight);
+  const scrollTop = useStore(context, (state) => state.scrollTop);
+
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
       event.stopPropagation();
 
       const startY = event.clientY;
-      const startScrollTop = context.getState().scrollTop;
-      const viewportHeight = context.getState().viewportHeight;
-      const contentHeight = context.getState().contentHeight;
+      const startScrollTop = scrollTop;
+
+      setThumbDragging(true);
 
       const handleMouseMove = (moveEvent: MouseEvent) => {
         moveEvent.preventDefault();
@@ -235,12 +247,14 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
           Math.min(newScrollTop, contentHeight - viewportHeight),
         );
 
-        context.getState().setScrollTop(newScrollTop);
+        setScrollTop(newScrollTop);
       };
 
       const handleMouseUp = (upEvent: MouseEvent) => {
         upEvent.preventDefault();
         upEvent.stopPropagation();
+
+        setThumbDragging(false);
 
         document.removeEventListener("mousemove", handleMouseMove);
         document.removeEventListener("mouseup", handleMouseUp);
@@ -249,12 +263,8 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
     },
-    [context],
+    [scrollTop, viewportHeight, contentHeight, setScrollTop, setThumbDragging],
   );
-
-  const contentHeight = useStore(context, (state) => state.contentHeight);
-  const viewportHeight = useStore(context, (state) => state.viewportHeight);
-  const scrollTop = useStore(context, (state) => state.scrollTop);
 
   if (contentHeight === 0 || viewportHeight === 0) {
     return null;
@@ -272,10 +282,8 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
     return null;
   }
 
-  const thumbBgColor = tinycolor(theme.colors.gray[500]);
-  thumbBgColor.setAlpha(0.5);
-  const thumbHoverBgColor = tinycolor(theme.colors.gray[500]);
-  thumbHoverBgColor.setAlpha(0.7);
+  const thumbBgColor = tinycolor(theme.colors.gray[500]).setAlpha(0.5);
+  const thumbHoverBgColor = tinycolor(theme.colors.gray[500]).setAlpha(0.7);
   const computedStyle = {
     transform: `translateY(${thumbTop}px)`,
 
@@ -314,15 +322,15 @@ const ScrollArea: ScrollAreaComponent = (props) => {
 
   const scrollAreaStore = useMemo(() => buildScrollAreaStore(), []);
 
-  const setShow = useStore(scrollAreaStore, (state) => state.setShow);
+  const setHover = useStore(scrollAreaStore, (state) => state.setHover);
 
   return (
     <ScrollAreaContext value={scrollAreaStore}>
       {/* biome-ignore lint/a11y/noStaticElementInteractions: I think it's fine here. */}
       <div
         className={classNames(styles.scrollArea, className)}
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         {...rest}
       >
         {children}

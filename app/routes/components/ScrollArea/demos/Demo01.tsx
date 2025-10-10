@@ -3,7 +3,7 @@ import { useTheme } from "@/components/ThemeProvider";
 
 import { lorem } from "./lorem";
 
-export function Demo() {
+export default function Demo() {
   const theme = useTheme();
 
   const scrollAreaStyle = {

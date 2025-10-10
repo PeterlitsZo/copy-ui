@@ -4,4 +4,6 @@
 export const changelog = ''
   + '- 2025-10-04: Initial version.\n'
   + '- 2025-10-05: Make the scrollbar appear on hover only.\n'
+  + '- 2025-10-10: Add a dragging state for the scrollbar thumb to prevent it from\n'
+  + '  hiding while being dragged.\n'
   ;
