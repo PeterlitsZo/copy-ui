@@ -1,7 +1,9 @@
-.tooltip {
-  padding: 0.25rem 0.375rem;
-  border-radius: 0.375rem;
-  background-color: var(--tooltip-background-color);
-  color: var(--tooltip-color);
-  font-size: 0.75rem;
+@layer components {
+  .tooltip {
+    padding: 0.25rem 0.375rem;
+    border-radius: 0.375rem;
+    background-color: var(--tooltip-background-color);
+    color: var(--tooltip-color);
+    font-size: 0.75rem;
+  }
 }
