@@ -11,17 +11,15 @@ export const demoSourceCode = ''
   + 'export function Demo() {\n'
   + '  return (\n'
   + '    <ButtonGroup>\n'
-  + "      <Button leftSection={<Send size={'1.25rem'} />}>\n"
-  + '        Send\n'
-  + '      </Button>\n'
+  + '      <Button leftSection={<Send size={"1.25rem"} />}>Send</Button>\n'
   + '      <IconButton>\n'
-  + "        <Save size={'1.25rem'} />\n"
+  + '        <Save size={"1.25rem"} />\n'
   + '      </IconButton>\n'
   + '      <IconButton>\n'
-  + "        <Star size={'1.25rem'} />\n"
+  + '        <Star size={"1.25rem"} />\n'
   + '      </IconButton>\n'
   + '      <IconButton>\n'
-  + "        <Trash size={'1.25rem'} />\n"
+  + '        <Trash size={"1.25rem"} />\n'
   + '      </IconButton>\n'
   + '    </ButtonGroup>\n'
   + '  );\n'

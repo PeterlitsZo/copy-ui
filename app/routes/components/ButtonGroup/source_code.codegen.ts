@@ -4,10 +4,10 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['ButtonGroup.tsx'] = ''
+  + 'import classNames from "classnames";\n'
   + 'import type { FC } from "react";\n'
   + '\n'
   + 'import styles from "./ButtonGroup.module.scss";\n'
-  + 'import classNames from "classnames";\n'
   + '\n'
   + 'export type ButtonGroupProps = {\n'
   + '  className?: string;\n'
@@ -18,11 +18,9 @@ sourceCode['ButtonGroup.tsx'] = ''
   + '  const { className, children } = props;\n'
   + '\n'
   + '  return (\n'
-  + '    <div className={classNames(styles.buttonGroup, className)}>\n'
-  + '      {children}\n'
-  + '    </div>\n'
+  + '    <div className={classNames(styles.buttonGroup, className)}>{children}</div>\n'
   + '  );\n'
-  + '}\n'
+  + '};\n'
   ;
 
 sourceCode['ButtonGroup.module.scss'] = ''
@@ -50,9 +48,9 @@ sourceCode['ButtonGroup.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// ButtonGroup from copy-ui @ 2025-09-30.\n'
+  + '// ButtonGroup from copy-ui @ 2025-10-10.\n'
   + '\n'
-  + "export { ButtonGroup } from './ButtonGroup';\n"
-  + "export type { ButtonGroupProps } from './ButtonGroup';\n"
+  + 'export type { ButtonGroupProps } from "./ButtonGroup";\n'
+  + 'export { ButtonGroup } from "./ButtonGroup";\n'
   ;
 

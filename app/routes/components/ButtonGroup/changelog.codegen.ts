@@ -4,4 +4,5 @@
 export const changelog = ''
   + '- 2025-09-09: Initial version.\n'
   + '- 2025-09-30: Support `className` prop for custom styling.\n'
+  + '- 2025-10-10: Code formatting improvement.\n'
   ;

@@ -1,4 +1,4 @@
-// ButtonGroup from copy-ui @ 2025-09-30.
+// ButtonGroup from copy-ui @ 2025-10-10.
 
-export { ButtonGroup } from './ButtonGroup';
-export type { ButtonGroupProps } from './ButtonGroup';
+export type { ButtonGroupProps } from "./ButtonGroup";
+export { ButtonGroup } from "./ButtonGroup";

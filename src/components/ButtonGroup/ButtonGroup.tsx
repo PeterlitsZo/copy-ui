@@ -1,7 +1,7 @@
+import classNames from "classnames";
 import type { FC } from "react";
 
 import styles from "./ButtonGroup.module.scss";
-import classNames from "classnames";
 
 export type ButtonGroupProps = {
   className?: string;
@@ -12,8 +12,6 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const { className, children } = props;
 
   return (
-    <div className={classNames(styles.buttonGroup, className)}>
-      {children}
-    </div>
+    <div className={classNames(styles.buttonGroup, className)}>{children}</div>
   );
-}
+};

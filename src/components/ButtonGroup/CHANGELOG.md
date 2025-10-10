@@ -1,2 +1,3 @@
 - 2025-09-09: Initial version.
 - 2025-09-30: Support `className` prop for custom styling.
+- 2025-10-10: Code formatting improvement.

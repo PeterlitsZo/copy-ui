@@ -7,17 +7,15 @@ import { IconButton } from "src/components/IconButton";
 export function Demo() {
   return (
     <ButtonGroup>
-      <Button leftSection={<Send size={'1.25rem'} />}>
-        Send
-      </Button>
+      <Button leftSection={<Send size={"1.25rem"} />}>Send</Button>
       <IconButton>
-        <Save size={'1.25rem'} />
+        <Save size={"1.25rem"} />
       </IconButton>
       <IconButton>
-        <Star size={'1.25rem'} />
+        <Star size={"1.25rem"} />
       </IconButton>
       <IconButton>
-        <Trash size={'1.25rem'} />
+        <Trash size={"1.25rem"} />
       </IconButton>
     </ButtonGroup>
   );
