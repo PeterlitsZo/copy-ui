@@ -51,7 +51,7 @@
 .demoCodeViewport {
   position: relative;
   flex: 1;
-  max-height: 30vh;
+  max-height: 40vh;
 }
 
 .demoCodeContent {
@@ -112,12 +112,4 @@
 
 .codeBlockContent {
   padding: 0.75rem;
-}
-
-.changeLogContent {
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  padding: 0.75rem;
-  font-size: 0.75rem;
 }

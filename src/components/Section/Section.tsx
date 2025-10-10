@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { ClipboardCopy, Maximize } from "lucide-react";
 import { type CSSProperties, type FC, useState } from "react";
 
+import { Markdown } from "@/components//Markdown";
 import { Background } from "@/components/Background";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { CodeHighlight } from "@/components/CodeHighlight";
@@ -148,9 +149,7 @@ const SectionChangelog: FC<SectionChangelogProps> = (props) => {
       <Typography.H2 mt="1.5rem" style={{ marginBottom: "1rem" }}>
         Change Log
       </Typography.H2>
-      <div className={styles.changeLogContent}>
-        <CodeHighlight code={changelog} lang="markdown" />
-      </div>
+      <Markdown>{changelog}</Markdown>
     </div>
   );
 };
