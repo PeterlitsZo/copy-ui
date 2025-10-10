@@ -127,11 +127,11 @@ export const DEFAULT_THEME: Theme = {
     inputBaseLgHeight: "2.5rem",
     inputBaseXlHeight: "3rem",
 
-    inputBaseXsFontSize: "0.75rem",
-    inputBaseSmFontSize: "0.875rem",
-    inputBaseMdFontSize: "1rem",
-    inputBaseLgFontSize: "1.125rem",
-    inputBaseXlFontSize: "1.25rem",
+    inputBaseXsFontSize: "0.625rem",
+    inputBaseSmFontSize: "0.75rem",
+    inputBaseMdFontSize: "0.875rem",
+    inputBaseLgFontSize: "1rem",
+    inputBaseXlFontSize: "1.125rem",
 
     inputBaseXsLineHeight: "1.25rem",
     inputBaseSmLineHeight: "1.375rem",

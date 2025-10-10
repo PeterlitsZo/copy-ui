@@ -11,3 +11,5 @@
   improvement.
 - 2025-10-08: Extend DEFAULT_THEME with additional color palettes for violet and
   indigo. Export the type `ColorNo` and `ColorName`.
+- 2025-10-10: Update `inputBase{Xs,Sm,Md,Lg,Xl}FontSize` tokens to make them
+  smaller.

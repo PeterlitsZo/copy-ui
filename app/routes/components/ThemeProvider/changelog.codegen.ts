@@ -15,4 +15,6 @@ export const changelog = ''
   + '  improvement.\n'
   + '- 2025-10-08: Extend DEFAULT_THEME with additional color palettes for violet and\n'
   + '  indigo. Export the type `ColorNo` and `ColorName`.\n'
+  + '- 2025-10-10: Update `inputBase{Xs,Sm,Md,Lg,Xl}FontSize` tokens to make them\n'
+  + '  smaller.\n'
   ;
