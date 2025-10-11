@@ -25,62 +25,71 @@ sourceCode['IconButton.module.scss'] = ''
   ;
 
 sourceCode['IconButton.tsx'] = ''
-  + 'import { useContext, type ComponentProps, type CSSProperties, type FC} from "react";\n'
   + 'import classNames from "classnames";\n'
-  + "import { merge } from 'es-toolkit';\n"
+  + 'import { merge } from "es-toolkit";\n'
+  + 'import type { ComponentProps, CSSProperties, FC } from "react";\n'
   + '\n'
-  + 'import { ThemeContext } from "../ThemeProvider";\n'
+  + 'import { useTheme } from "@/components/ThemeProvider";\n'
   + '\n'
   + 'import styles from "./IconButton.module.scss";\n'
   + '\n'
-  + "export type IconButtonProps = ComponentProps<'button'> & {\n"
-  + "  variant?: 'default' | 'filled';\n"
-  + "  size?: 'sm' | 'md' | 'lg';\n"
+  + 'export type IconButtonProps = ComponentProps<"button"> & {\n'
+  + '  variant?: "default" | "filled";\n'
+  + '  size?: "sm" | "md" | "lg";\n'
   + '};\n'
   + '\n'
   + 'export const IconButton: FC<IconButtonProps> = (props) => {\n'
-  + '  const theme = useContext(ThemeContext);\n'
+  + '  const theme = useTheme();\n'
   + '\n'
-  + "  const { className, style, variant = 'default', size = 'md', ...rest } = props;\n"
+  + '  const { className, style, variant = "default", size = "md", ...rest } = props;\n'
   + '\n'
   + '  const computedStyle = mergeStyles([\n'
-  + "    variant === 'default' && {\n"
-  + "      '--button-bg': 'white',\n"
-  + "      '--button-color': theme.colors.gray['800'],\n"
-  + "      '--button-border-width': '1px',\n"
-  + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.tokens.inputBaseDefaultBorderColor,\n"
-  + "      '--button-bg-hover': theme.colors.gray['100'],\n"
-  + '    } as CSSProperties,\n'
-  + "    variant === 'filled' && {\n"
-  + "      '--button-bg': theme.colors.blue['600'],\n"
-  + "      '--button-color': 'white',\n"
-  + "      '--button-border-width': '1px',\n"
-  + "      '--button-border-style': 'solid',\n"
-  + "      '--button-border-color': theme.colors.blue['700'],\n"
-  + "      '--button-bg-hover': theme.colors.blue['700'],\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'sm' && {\n"
-  + "      '--button-size': '2rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'md' && {\n"
-  + "      '--button-size': '2.25rem',\n"
-  + '    } as CSSProperties,\n'
-  + "    size === 'lg' && {\n"
-  + "      '--button-size': '2.5rem',\n"
-  + '    } as CSSProperties,\n'
+  + '    variant === "default" &&\n'
+  + '      ({\n'
+  + '        "--button-bg": "white",\n'
+  + '        "--button-color": theme.colors.gray["800"],\n'
+  + '        "--button-border-width": "1px",\n'
+  + '        "--button-border-style": "solid",\n'
+  + '        "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,\n'
+  + '        "--button-bg-hover": theme.colors.gray["100"],\n'
+  + '      } as CSSProperties),\n'
+  + '    variant === "filled" &&\n'
+  + '      ({\n'
+  + '        "--button-bg": theme.colors.blue["600"],\n'
+  + '        "--button-color": "white",\n'
+  + '        "--button-border-width": "1px",\n'
+  + '        "--button-border-style": "solid",\n'
+  + '        "--button-border-color": theme.colors.blue["700"],\n'
+  + '        "--button-bg-hover": theme.colors.blue["700"],\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "sm" &&\n'
+  + '      ({\n'
+  + '        "--button-size": "2rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "md" &&\n'
+  + '      ({\n'
+  + '        "--button-size": "2.25rem",\n'
+  + '      } as CSSProperties),\n'
+  + '    size === "lg" &&\n'
+  + '      ({\n'
+  + '        "--button-size": "2.5rem",\n'
+  + '      } as CSSProperties),\n'
   + '    {\n'
-  + "      '--button-radius': '0.375rem',\n"
+  + '      "--button-radius": "0.375rem",\n'
   + '    } as CSSProperties,\n'
   + '    style,\n'
   + '  ]);\n'
   + '\n'
   + '  return (\n'
-  + '    <button className={classNames(styles.iconButton, className)} style={computedStyle} {...rest}>\n'
+  + '    <button\n'
+  + '      className={classNames(styles.iconButton, className)}\n'
+  + '      style={computedStyle}\n'
+  + '      {...rest}\n'
+  + '    >\n'
   + '      {props.children}\n'
   + '    </button>\n'
   + '  );\n'
-  + '}\n'
+  + '};\n'
   + '\n'
   + 'function mergeStyles(styles: (CSSProperties | false | undefined)[]) {\n'
   + '  return styles.reduce((prev, next) => {\n'
@@ -92,7 +101,7 @@ sourceCode['IconButton.tsx'] = ''
 sourceCode['index.ts'] = ''
   + '// IconButton from copy-ui @ 2025-09-26\n'
   + '\n'
-  + "export { IconButton } from './IconButton';\n"
-  + "export type { IconButtonProps } from './IconButton';\n"
+  + 'export type { IconButtonProps } from "./IconButton";\n'
+  + 'export { IconButton } from "./IconButton";\n'
   ;
 

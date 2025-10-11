@@ -1,3 +1,4 @@
 - 2025-09-09: Initial version.
 - 2025-09-19: Support the prop `size` (`sm`, `md` and `lg`).
 - 2025-09-26: Use theme tokens for styling.
+- 2025-10-11: Code formatting improvements.
