@@ -8,7 +8,9 @@ import { useTheme } from "@/components/ThemeProvider";
 import styles from "./Select.module.scss";
 
 interface SelectProps<V extends string> {
+  id?: string;
   value?: V | null;
+  defaultValue?: V | null;
 
   options: Array<{ value: V; label: string }>;
   placeholder?: string;
@@ -19,7 +21,9 @@ interface SelectProps<V extends string> {
 
 const Select = <V extends string>(props: SelectProps<V>) => {
   const {
+    id,
     value = null,
+    defaultValue = null,
 
     options,
     placeholder = "Select an option",
@@ -32,19 +36,25 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 
   const mainRef = useRef<HTMLButtonElement | null>(null);
 
-  const [selectedOptionValue, setSelectedOptionValue] = useState<string | null>(
-    value,
-  );
-  const showLabel = selectedOptionValue
-    ? options.find((o) => o.value === selectedOptionValue)?.label
-    : null;
-
+  const [internalValue, setInternalValue] = useState<V | null>(defaultValue);
   const [mainWidth, setMainWidth] = useState(0);
 
+  // Update internal value when `value` prop changes.
   useEffect(() => {
-    if (value === selectedOptionValue) return;
-    setSelectedOptionValue(value ?? null);
-  }, [value, selectedOptionValue]);
+    setInternalValue(value ?? null);
+  }, [value]);
+
+  // Update main width on mount.
+  useLayoutEffect(() => {
+    const main = mainRef.current;
+    if (main) {
+      setMainWidth(main.offsetWidth);
+    }
+  }, []);
+
+  const showLabel = internalValue
+    ? options.find((o) => o.value === internalValue)?.label
+    : null;
 
   const mainStyle = {
     "--select-font-size": theme.tokens.inputBaseMdFontSize,
@@ -71,18 +81,12 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     "--select-item-hover-bg-color": theme.colors.gray["000"],
   };
 
-  useLayoutEffect(() => {
-    const main = mainRef.current;
-    if (main) {
-      setMainWidth(main.offsetWidth);
-    }
-  }, []);
-
   return (
     <Popover>
       <Popover.Trigger
         render={({ setRef, onToggle }) => (
           <button
+            id={id}
             ref={(el) => {
               setRef(el);
               mainRef.current = el;
@@ -90,7 +94,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
             className={styles.selectMain}
             style={mainStyle as CSSProperties}
             onClick={() => !disabled && onToggle()}
-            data-value-picked={selectedOptionValue == null ? "false" : "true"}
+            data-value-picked={internalValue == null ? "false" : "true"}
             data-disabled={disabled ? "true" : "false"}
             type="button"
             role="combobox"
@@ -120,7 +124,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
                   togglePortal();
 
                   if (!disabled) {
-                    setSelectedOptionValue(option.value);
+                    setInternalValue(option.value);
                     onChange?.(option.value);
                   }
                 };

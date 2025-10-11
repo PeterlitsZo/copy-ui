@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Select } from "src/components/Select";
 import { useToast } from "src/components/Toast";
 
-export function Demo() {
+export default function Demo() {
   const { addToast } = useToast();
 
   const [value, setValue] = useState<string | null>(null);

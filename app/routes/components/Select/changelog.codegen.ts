@@ -7,4 +7,6 @@ export const changelog = ''
   + "- 2025-09-25: Use `onToggle` instead of `onClick` in `Popover.Trigger`'s render\n"
   + '  prop.\n'
   + '- 2025-10-03: Fix missing dependencies in useEffect hooks, etc.\n'
+  + '- 2025-10-11: Support `id` prop for better form integration. Make it be able to\n'
+  + '  uncontrolled. Support `defaultValue` prop. Code formatting improvements.\n'
   ;
