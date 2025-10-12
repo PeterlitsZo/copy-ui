@@ -3,21 +3,23 @@ import {
   ArrowDownWideNarrow,
   ArrowUpWideNarrow,
 } from "lucide-react";
-import { useState, type SVGAttributes } from "react";
+import { type SVGAttributes, useState } from "react";
 
-export type SortIndicatorDirection = 'asc' | 'desc' | 'none';
+export type SortIndicatorDirection = "asc" | "desc" | "none";
 
 export function useSortIndicatorState(
-  defaultDirection: SortIndicatorDirection = 'none'
+  defaultDirection: SortIndicatorDirection = "none",
 ) {
   const [direction, setDirection] = useState(defaultDirection);
 
   const handleClick = () => {
-    const nextDirection = ({
-      asc: 'desc',
-      desc: 'none',
-      none: 'asc'
-    } as const)[direction];
+    const nextDirection = (
+      {
+        asc: "desc",
+        desc: "none",
+        none: "asc",
+      } as const
+    )[direction];
     setDirection(nextDirection);
   };
 
@@ -27,7 +29,7 @@ export function useSortIndicatorState(
 export type SortIndicatorProps = SVGAttributes<SVGElement> & {
   direction: SortIndicatorDirection;
   size?: string | number;
-}
+};
 
 export function SortIndicator(props: SortIndicatorProps) {
   const { direction, size, ...rest } = props;
@@ -35,13 +37,8 @@ export function SortIndicator(props: SortIndicatorProps) {
   const Icon = {
     asc: ArrowUpWideNarrow,
     desc: ArrowDownWideNarrow,
-    none: ArrowDownUp
-  }[props.direction];
+    none: ArrowDownUp,
+  }[direction];
 
-  return (
-    <Icon
-      size={size}
-      {...rest}
-    />
-  );
+  return <Icon size={size} {...rest} />;
 }

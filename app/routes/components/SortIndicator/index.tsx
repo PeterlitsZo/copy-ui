@@ -1,30 +1,31 @@
+import { ComponentTemplate } from "@/components/ComponentTemplate";
+import { Section } from "@/components/Section";
+
 import type { Route } from "./+types/index";
 
-import { ComponentTemplate } from "src/components/ComponentTemplate";
-import { Section } from "src/components/Section";
-
-import { sourceCode } from "./source_code.codegen";
-import { demoSourceCode } from "./Demo_source_code.codegen";
 import { changelog } from "./changelog.codegen";
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import { sourceCode } from "./source_code.codegen";
 
-import { Demo } from "./Demo";
-
-export function meta({}: Route.MetaArgs) {
+export function meta(_: Route.MetaArgs) {
   return [
     { title: "SortIndicator | Copy UI" },
-    { name: "description", content: "The SortIndicator component from Copy UI." },
+    {
+      name: "description",
+      content: "The SortIndicator component from Copy UI.",
+    },
   ];
 }
 
 export default function SortIndicatorPage() {
   return (
     <ComponentTemplate component="SortIndicator">
-      <Section
-        title="SortIndicator"
-        demoAndCode={[<Demo />, demoSourceCode]}
-        sourceCode={sourceCode}
-        changelog={changelog}
-      />
+      <Section.Root title="SortIndicator">
+        <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
+        <Section.SourceCode files={sourceCode} />
+        <Section.Changelog changelog={changelog} />
+      </Section.Root>
     </ComponentTemplate>
   );
 }

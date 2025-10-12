@@ -1,7 +1,7 @@
-// SortIndicator from copy-ui @ 2025-09-04
+// SortIndicator from copy-ui @ 2025-10-12.
 
-export { SortIndicator, useSortIndicatorState } from './SortIndicator';
 export type {
   SortIndicatorDirection,
-  SortIndicatorProps
-} from './SortIndicator';
+  SortIndicatorProps,
+} from "./SortIndicator";
+export { SortIndicator, useSortIndicatorState } from "./SortIndicator";
