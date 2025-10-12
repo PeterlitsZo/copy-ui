@@ -3,6 +3,21 @@ import type { ComponentProps, FC } from "react";
 import { useTheme } from "../ThemeProvider";
 import styles from "./Typography.module.scss";
 
+// Typography.Root
+// =============================================================================
+
+type TypographyRootProps = ComponentProps<"div">;
+
+export const TypographyRoot: FC<TypographyRootProps> = (props) => {
+  const { children, className, ...rest } = props;
+
+  return (
+    <div className={classNames(styles.typographyRoot, className)} {...rest}>
+      {children}
+    </div>
+  );
+};
+
 // Typography.H1
 // =============================================================================
 
@@ -233,6 +248,7 @@ const TypographyCode: FC<TypographyCodeProps> = (props) => {
 // =============================================================================
 
 type TypographyType = {
+  Root: typeof TypographyRoot;
   H1: typeof TypographyH1;
   H2: typeof TypographyH2;
   H3: typeof TypographyH3;
@@ -244,6 +260,7 @@ type TypographyType = {
 };
 
 const Typography: TypographyType = {
+  Root: TypographyRoot,
   H1: TypographyH1,
   H2: TypographyH2,
   H3: TypographyH3,

@@ -5,7 +5,7 @@ export default function Demo() {
   const theme = useTheme();
 
   return (
-    <div
+    <Typography.Root
       style={{
         width: "50rem",
         padding: "1rem",
@@ -33,6 +33,6 @@ export default function Demo() {
           font size and improve prop handling consistency.
         </Typography.Li>
       </Typography.Ul>
-    </div>
+    </Typography.Root>
   );
 }

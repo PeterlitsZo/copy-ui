@@ -11,4 +11,7 @@ export const changelog = ''
   + '- 2025-10-05: Add `Typography.Ul` and `Typography.Li` components. Also add\n'
   + '  default styles for `Typography.P`.\n'
   + '- 2025-10-10: Add `Typography.Code` component for inline code.\n'
+  + '- 2025-10-12: Add `Typography.Root` component as a wrapper for all typography\n'
+  + '  elements. Improve overall styles and spacing. Put styles into `components` CSS\n'
+  + '  layer.\n'
   ;
