@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-09: Initial version.\n'
+  + '- 2025-10-12: Support the `className` prop.\n'
   ;

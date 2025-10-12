@@ -1,10 +1,12 @@
 import type { FC } from "react";
 
-import { CodeHighlight } from "../CodeHighlight";
-import { ScrollArea } from "../ScrollArea";
-import { useTheme } from "../ThemeProvider";
+import { CodeHighlight } from "@/components/CodeHighlight";
+import { ScrollArea } from "@/components/ScrollArea";
+import { useTheme } from "@/components/ThemeProvider";
 
 type CodeBlockProp = {
+  className?: string;
+
   code: string;
   lang: string;
   withLineNumbers?: boolean;
@@ -14,12 +16,12 @@ type CodeBlockProp = {
 };
 
 const CodeBlock: FC<CodeBlockProp> = (props) => {
-  const { code, lang, withLineNumbers, height, maxHeight } = props;
+  const { className, code, lang, withLineNumbers, height, maxHeight } = props;
 
   const theme = useTheme();
 
   return (
-    <ScrollArea>
+    <ScrollArea className={className}>
       <ScrollArea.Viewport
         style={{
           height: height,
