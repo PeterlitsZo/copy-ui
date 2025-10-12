@@ -23,6 +23,18 @@ export default function Demo() {
         <Field.Input id={emailId} type="email" placeholder="Enter your email" />
         <Field.Description>We'll never share your email.</Field.Description>
       </Field>
+
+      <Field>
+        <Field.Label>Country</Field.Label>
+        <Field.Select
+          options={[
+            { value: "ca", label: "Canada" },
+            { value: "cn", label: "China" },
+            { value: "uk", label: "United Kingdom" },
+            { value: "us", label: "United States" },
+          ]}
+        />
+      </Field>
     </Flex>
   );
 }

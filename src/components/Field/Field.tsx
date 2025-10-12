@@ -3,7 +3,9 @@ import type { ComponentProps, CSSProperties, FC } from "react";
 import { createContext, useContext, useId } from "react";
 
 import { Input } from "@/components/Input";
-import { useTheme } from "../ThemeProvider";
+import { Select } from "@/components/Select";
+import { useTheme } from "@/components/ThemeProvider";
+
 import styles from "./Field.module.scss";
 
 // FieldContext
@@ -99,6 +101,24 @@ const FieldInput: FC<FieldInputProps> = (props) => {
 
 FieldInput.displayName = "Field.Input";
 
+// Field.Select
+// =============================================================================
+
+type FieldSelectProps = ComponentProps<typeof Select>;
+
+const FieldSelect: FC<FieldSelectProps> = (props) => {
+  const { ...rest } = props;
+
+  const context = useContext(FieldContext);
+  if (!context) {
+    throw new Error("Field.Select must be used within a Field component");
+  }
+
+  const { id } = context;
+
+  return <Select id={id} {...rest} />;
+};
+
 // Field
 // =============================================================================
 
@@ -106,8 +126,9 @@ type FieldProps = ComponentProps<"div">;
 
 type FieldComponent = FC<FieldProps> & {
   Label: typeof FieldLabel;
-  Input: typeof FieldInput;
   Description: typeof FieldDescription;
+  Input: typeof FieldInput;
+  Select: typeof FieldSelect;
 };
 
 const Field: FieldComponent = (props) => {
@@ -130,8 +151,9 @@ const Field: FieldComponent = (props) => {
 };
 
 Field.Label = FieldLabel;
-Field.Input = FieldInput;
 Field.Description = FieldDescription;
+Field.Input = FieldInput;
+Field.Select = FieldSelect;
 
 Field.displayName = "Field";
 

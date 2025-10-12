@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-10: Initial version.\n'
+  + '- 2025-10-12: Add `Field.Select` component.\n'
   ;
