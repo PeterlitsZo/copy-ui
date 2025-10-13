@@ -1,4 +1,3 @@
-import { CodeBlock } from "@/components/CodeBlock";
 import { ComponentTemplate } from "@/components/ComponentTemplate";
 import { Section } from "@/components/Section";
 import { useTheme } from "@/components/ThemeProvider";
@@ -24,7 +23,7 @@ export default function GetStartedPage() {
           Copy UI's Avatar component document, copy its code and paste it into
           your own project. That's it.
         </Typography.P>
-        <Typography.H2 mt="1rem">Why Copy UI?</Typography.H2>
+        <Typography.H2>Why Copy UI?</Typography.H2>
         <Typography.P>
           Code in Copy UI is stupid enough, so I think it is easy to read and
           change by yourself. I try to build it without any headless UI library,
@@ -57,13 +56,13 @@ export default function GetStartedPage() {
           just because it looks really good. Those projects are under MIT
           License - so this project does the same thing.
         </Typography.P>
-        <Typography.H2 mt="1rem">Reset CSS</Typography.H2>
+        <Typography.H2>Reset CSS</Typography.H2>
         <Typography.P>
           Copy UI use Tailwind CSS's preflight files. To use Copy UI, you need
           to copy this CSS file content into your project, name it like
           reset.css, and import it in your root file:
         </Typography.P>
-        <CodeBlock
+        <Typography.CodeBlock
           maxHeight="40rem"
           code={resetCssCode}
           lang="css"
