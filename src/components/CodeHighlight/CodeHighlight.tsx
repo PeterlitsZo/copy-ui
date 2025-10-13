@@ -26,7 +26,7 @@ export const CodeHighlight: FC<CodeHighlightProps> = (props) => {
   }, [code, lang]);
 
   const computedStyle = {
-    "--code-highlight-line-numbers-color": theme.colors.gray["600"],
+    "--code-highlight-line-numbers-color": theme.colors.gray["500"],
   } as CSSProperties;
 
   if (!withLineNumbers) {

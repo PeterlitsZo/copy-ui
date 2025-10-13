@@ -1,10 +1,12 @@
-import { ComponentTemplate } from "src/components/ComponentTemplate";
-import { Section } from "src/components/Section";
+import { ComponentTemplate } from "@/components/ComponentTemplate";
+import { Section } from "@/components/Section";
 import { Typography } from "@/components/Typography";
+
 import type { Route } from "./+types/index";
+
 import { changelog } from "./changelog.codegen";
-import { Demo } from "./Demo";
-import { demoSourceCode } from "./Demo_source_code.codegen";
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -21,8 +23,8 @@ export default function CodeHighlightPage() {
   return (
     <ComponentTemplate component="CodeHighlight">
       <Section.Root title="CodeHighlight">
-        <Section.Demo node={<Demo />} code={demoSourceCode} />
-        <Typography.H2 mt="1.5rem">See Also</Typography.H2>
+        <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
+        <Typography.H2>See Also</Typography.H2>
         <Typography.Ul>
           <Typography.Li>CodeBlock.</Typography.Li>
         </Typography.Ul>

@@ -17,7 +17,8 @@ sourceCode['CodeHighlight.module.scss'] = ''
   + '  margin-right: 1rem;\n'
   + '  text-align: right;\n'
   + '  user-select: none;\n'
-  + '  font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);\n'
+  + '  min-width: 1.5rem;\n'
+  + '  font-family: var(--font-mono);\n'
   + '}\n'
   ;
 
@@ -50,7 +51,7 @@ sourceCode['CodeHighlight.tsx'] = ''
   + '  }, [code, lang]);\n'
   + '\n'
   + '  const computedStyle = {\n'
-  + '    "--code-highlight-line-numbers-color": theme.colors.gray["600"],\n'
+  + '    "--code-highlight-line-numbers-color": theme.colors.gray["500"],\n'
   + '  } as CSSProperties;\n'
   + '\n'
   + '  if (!withLineNumbers) {\n'
@@ -110,7 +111,7 @@ sourceCode['CodeHighlight.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// CodeHighlight from copy-ui @ 2025-10-05.\n'
+  + '// CodeHighlight from copy-ui @ 2025-10-13.\n'
   + '\n'
   + 'export { CodeHighlight } from "./CodeHighlight";\n'
   ;
