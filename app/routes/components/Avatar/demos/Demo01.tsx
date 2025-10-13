@@ -1,7 +1,7 @@
 import { Avatar } from "src/components/Avatar";
 import { Flex } from "@/components/Flex";
 
-export function Demo() {
+export default function Demo() {
   return (
     <Flex dir="column" alignItems="center" gap="1rem">
       <Flex dir="row" alignItems="center" gap="1rem">

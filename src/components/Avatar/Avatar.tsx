@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
-import { useTheme } from "../ThemeProvider";
+
+import { type ColorName, useTheme } from "@/components/ThemeProvider";
+
 import styles from "./Avatar.module.scss";
 
 // Avatar.Img
@@ -25,7 +27,7 @@ const AvatarImg: FC<AvatarImgProps> = (props) => {
 
 interface AvatarProps {
   size: string;
-  color?: string;
+  color?: ColorName;
   children?: React.ReactNode;
 }
 
@@ -33,7 +35,7 @@ type AvatarComponent = FC<AvatarProps> & {
   Img: typeof AvatarImg;
 };
 
-const Avatar: AvatarComponent = (props) => {
+const Avatar: AvatarComponent = (props: AvatarProps) => {
   const { size, color = "blue", children } = props;
 
   const theme = useTheme();
@@ -51,7 +53,8 @@ const Avatar: AvatarComponent = (props) => {
   );
 };
 
-Avatar.displayName = "Avatar";
 Avatar.Img = AvatarImg;
+
+Avatar.displayName = "Avatar";
 
 export { Avatar };
