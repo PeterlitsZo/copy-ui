@@ -1,6 +1,9 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
-import { useTheme } from "../ThemeProvider";
+
+import { CodeBlock } from "@/components/CodeBlock";
+import { useTheme } from "@/components/ThemeProvider";
+
 import styles from "./Typography.module.scss";
 
 // Typography.Root
@@ -244,6 +247,19 @@ const TypographyCode: FC<TypographyCodeProps> = (props) => {
   );
 };
 
+// Typography.CodeBlock
+// =============================================================================
+
+type TypographyCodeBlockProps = ComponentProps<typeof CodeBlock>;
+
+export const TypographyCodeBlock: FC<TypographyCodeBlockProps> = (props) => {
+  const { className, ...rest } = props;
+
+  return (
+    <CodeBlock className={classNames(styles.codeBlock, className)} {...rest} />
+  );
+};
+
 // Typography
 // =============================================================================
 
@@ -257,6 +273,7 @@ type TypographyType = {
   Ul: typeof TypographyUl;
   Li: typeof TypographyLi;
   Code: typeof TypographyCode;
+  CodeBlock: typeof TypographyCodeBlock;
 };
 
 const Typography: TypographyType = {
@@ -269,6 +286,7 @@ const Typography: TypographyType = {
   Ul: TypographyUl,
   Li: TypographyLi,
   Code: TypographyCode,
+  CodeBlock: TypographyCodeBlock,
 };
 
 export { Typography };

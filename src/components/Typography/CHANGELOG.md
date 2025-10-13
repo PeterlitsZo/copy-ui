@@ -10,3 +10,4 @@
 - 2025-10-12: Add `Typography.Root` component as a wrapper for all typography
   elements. Improve overall styles and spacing. Put styles into `components` CSS
   layer.
+- 2025-10-13: Add `Typography.CodeBlock` component.
