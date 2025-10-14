@@ -5,3 +5,5 @@
   accessibility with proper button semantics, role="switch", and aria-checked.
   Use CSS custom properties for thumb gap positioning. Update size calculations
   to use 80% of input base heights for better proportions. 
+- 2025-10-14: Add border styles, use ratio-based width calculation, adjust thumb
+  gap values. 

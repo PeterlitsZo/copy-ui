@@ -1,13 +1,14 @@
 import { useState } from "react";
-
+import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
+import { Input } from "@/components/Input";
 import { Switch } from "@/components/Switch";
 
-export function Demo() {
+export default function Demo() {
   const [checked, setChecked] = useState(false);
 
   return (
-    <Flex dir="column" alignItems="center" gap="1rem">
+    <Flex dir="column" alignItems="center" gap="2rem">
       <Flex alignItems="center" gap="0.25rem">
         <span>Yes, you can switch me →</span>
         <Switch size="text" value={checked} onChange={setChecked} />
@@ -19,6 +20,11 @@ export function Demo() {
         <Switch size="md" value={checked} onChange={setChecked} />
         <Switch size="lg" value={checked} onChange={setChecked} />
         <Switch size="xl" value={checked} onChange={setChecked} />
+      </Flex>
+      <Flex alignItems="center" gap="1rem">
+        <Input size="md" placeholder="Type something..." />
+        <Switch size="md" value={checked} onChange={setChecked} />
+        <Button size="md">Submit</Button>
       </Flex>
     </Flex>
   );

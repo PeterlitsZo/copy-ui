@@ -19,44 +19,42 @@ export const Switch: FC<SwitchProps> = (props) => {
   const computedStyle = mergeStyles([
     size === "text" &&
       ({
-        "--switch-rail-width": "1.75rem",
-        "--switch-rail-height": "1rem",
-        "--switch-thumb-gap": "2.5px",
+        "--switch-rail-height": "0.875rem",
+        "--switch-thumb-gap": "-0.5px",
       } as CSSProperties),
     size === "xs" &&
       ({
-        "--switch-rail-width": "2.5rem",
-        "--switch-rail-height": `calc(${theme.tokens.inputBaseXsHeight} * 0.8)`,
-        "--switch-thumb-gap": "2.5px",
+        "--switch-rail-height": `calc(${theme.tokens.inputBaseXsHeight} * 0.75)`,
+        "--switch-thumb-gap": "0.5px",
       } as CSSProperties),
     size === "sm" &&
       ({
-        "--switch-rail-width": "2.875rem",
         "--switch-rail-height": `calc(${theme.tokens.inputBaseSmHeight} * 0.8)`,
-        "--switch-thumb-gap": "3px",
+        "--switch-thumb-gap": "0.5px",
       } as CSSProperties),
     size === "md" &&
       ({
-        "--switch-rail-width": "3.25rem",
         "--switch-rail-height": `calc(${theme.tokens.inputBaseMdHeight} * 0.8)`,
-        "--switch-thumb-gap": "3px",
+        "--switch-thumb-gap": "1px",
       } as CSSProperties),
     size === "lg" &&
       ({
-        "--switch-rail-width": "3.625rem",
         "--switch-rail-height": `calc(${theme.tokens.inputBaseLgHeight} * 0.8)`,
-        "--switch-thumb-gap": "3.5px",
+        "--switch-thumb-gap": "1px",
       } as CSSProperties),
     size === "xl" &&
       ({
-        "--switch-rail-width": "4.25rem",
         "--switch-rail-height": `calc(${theme.tokens.inputBaseXlHeight} * 0.8)`,
-        "--switch-thumb-gap": "3.5px",
+        "--switch-thumb-gap": "1px",
       } as CSSProperties),
     {
       "--switch-rail-bg": theme.colors.gray["300"],
       "--switch-rail-checked-bg": theme.colors.blue["600"],
+      "--switch-rail-border-color": theme.colors.gray["400"],
+      "--switch-rail-checked-border-color": theme.colors.blue["700"],
       "--switch-thumb-bg": "white",
+      "--switch-thumb-border-color": theme.colors.gray["400"],
+      "--switch-thumb-checked-border-color": theme.colors.blue["700"],
     } as CSSProperties,
   ]);
 
