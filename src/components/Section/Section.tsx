@@ -7,13 +7,24 @@ import { Background } from "@/components/Background";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { CodeHighlight } from "@/components/CodeHighlight";
 import { IconButton } from "@/components/IconButton";
+import { Modal } from "@/components/Modal";
 import { ScrollArea } from "@/components/ScrollArea";
+import type { Theme } from "@/components/ThemeProvider";
 import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/Toast";
 import { Tooltip } from "@/components/Tooltip";
 import { Typography } from "@/components/Typography";
 
 import styles from "./Section.module.scss";
+
+// rootStyle
+// =============================================================================
+
+const rootStyle = (theme: Theme) =>
+  ({
+    "--border-color": theme.colors.gray["200"],
+    "--background-color": theme.colors.gray["000"],
+  }) as CSSProperties;
 
 // Section.Root
 // =============================================================================
@@ -28,10 +39,7 @@ const SectionRoot: FC<SectionRootProps> = (props) => {
 
   const theme = useTheme();
 
-  const computedStyle = {
-    "--border-color": theme.colors.gray["200"],
-    "--background-color": theme.colors.gray["000"],
-  } as CSSProperties;
+  const computedStyle = rootStyle(theme);
 
   return (
     <div className={styles.section} style={computedStyle}>
@@ -92,9 +100,13 @@ interface SectionSourceCodeProps {
 const SectionSourceCode: FC<SectionSourceCodeProps> = (props) => {
   const { files } = props;
 
+  const theme = useTheme();
+
   const [currentFilename, setCurrentFilename] = useState(
     Object.keys(files)[0] || "",
   );
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const currentFileType =
     {
       ts: "typescript",
@@ -107,31 +119,62 @@ const SectionSourceCode: FC<SectionSourceCodeProps> = (props) => {
       ([filename]) => filename === currentFilename,
     )?.[1] || "";
 
+  const sourceCodeTree = (
+    <div className={styles.sourceCodeTree}>
+      {Object.keys(files).map((filename) => (
+        <button
+          key={filename}
+          className={classNames(
+            styles.sourceCodeTreeFilename,
+            filename === currentFilename && styles.active,
+          )}
+          onClick={() => setCurrentFilename(filename)}
+          type="button"
+        >
+          {filename}
+        </button>
+      ))}
+    </div>
+  );
+
+  const sourceCodeBlock = (
+    showFullscreenButton: boolean,
+    codeBlockHeight: string,
+  ) => (
+    <div style={{ flex: 1 }}>
+      <CodeBlock
+        content={fileContentToShow}
+        type={currentFileType}
+        showFullscreenButton={showFullscreenButton}
+        onFullscreen={() => setModalOpen(true)}
+        height={codeBlockHeight}
+      />
+    </div>
+  );
+
   return (
     <div>
       <Typography.H2 mt="1.5rem" style={{ marginBottom: "1rem" }}>
         Source Code
       </Typography.H2>
       <div className={styles.sourceCode}>
-        <div className={styles.sourceCodeTree}>
-          {Object.keys(files).map((filename) => (
-            <button
-              key={filename}
-              className={classNames(
-                styles.sourceCodeTreeFilename,
-                filename === currentFilename && styles.active,
-              )}
-              onClick={() => setCurrentFilename(filename)}
-              type="button"
-            >
-              {filename}
-            </button>
-          ))}
-        </div>
-        <div style={{ flex: 1 }}>
-          <CodeBlock content={fileContentToShow} type={currentFileType} />
-        </div>
+        {sourceCodeTree}
+        {sourceCodeBlock(true, "62.5vh")}
       </div>
+      <Modal isOpen={isModalOpen} style={rootStyle(theme)}>
+        <Modal.Overlay onClick={() => setModalOpen(false)} />
+        <Modal.Content
+          center
+          shadow
+          className={classNames(
+            styles.sourceCodeModalContent,
+            styles.sourceCode,
+          )}
+        >
+          {sourceCodeTree}
+          {sourceCodeBlock(false, "100%")}
+        </Modal.Content>
+      </Modal>
     </div>
   );
 };
@@ -194,14 +237,21 @@ Section.Demo = SectionDemo;
 Section.SourceCode = SectionSourceCode;
 Section.Changelog = SectionChangelog;
 
-export { Section };
+// CodeBlock
+// =============================================================================
 
 interface CodeBlockProps {
   content: string;
   type: string;
+
+  height: string;
+  showFullscreenButton: boolean;
+  onFullscreen?: () => void;
 }
 
-const CodeBlock: FC<CodeBlockProps> = ({ content, type }) => {
+const CodeBlock: FC<CodeBlockProps> = (props) => {
+  const { content, type, height, showFullscreenButton, onFullscreen } = props;
+
   const theme = useTheme();
   const { addToast } = useToast();
 
@@ -211,11 +261,14 @@ const CodeBlock: FC<CodeBlockProps> = ({ content, type }) => {
   };
 
   const handleFullscreen = () => {
-    addToast("WIP...");
+    onFullscreen?.();
   };
 
   return (
-    <div className={styles.codeBlock}>
+    <div
+      className={styles.codeBlock}
+      style={{ "--code-block-height": height } as CSSProperties}
+    >
       <ScrollArea className={styles.codeBlockScrollArea}>
         <ScrollArea.Viewport>
           <ScrollArea.Content className={styles.codeBlockContent}>
@@ -241,21 +294,28 @@ const CodeBlock: FC<CodeBlockProps> = ({ content, type }) => {
             </IconButton>
           )}
         />
-        <Tooltip
-          label="Fullscreen"
-          placement="top"
-          triggerRender={({ setRef, onClose, onOpen }) => (
-            <IconButton
-              ref={setRef}
-              onClick={handleFullscreen}
-              onMouseLeave={onClose}
-              onMouseEnter={onOpen}
-            >
-              <Maximize size={"60%"} color={theme.colors.gray["700"]} />
-            </IconButton>
-          )}
-        />
+        {showFullscreenButton && (
+          <Tooltip
+            label="Fullscreen"
+            placement="top"
+            triggerRender={({ setRef, onClose, onOpen }) => (
+              <IconButton
+                ref={setRef}
+                onClick={handleFullscreen}
+                onMouseLeave={onClose}
+                onMouseEnter={onOpen}
+              >
+                <Maximize size={"60%"} color={theme.colors.gray["700"]} />
+              </IconButton>
+            )}
+          />
+        )}
       </ButtonGroup>
     </div>
   );
 };
+
+// Export
+// =============================================================================
+
+export { Section };

@@ -89,12 +89,19 @@
   }
 }
 
+.sourceCodeModalContent {
+  background-color: white;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 0.5rem;
+}
+
 .codeBlock {
   position: relative;
   display: flex;
 
   background-color: var(--background-color);
-  height: 62.5vh;
+  height: var(--code-block-height);
   font-size: 0.75rem;
 
   .floatingToolbar {
