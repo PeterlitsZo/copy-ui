@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import type { ComponentProps, FC } from "react";
+import type { ComponentProps, CSSProperties, FC } from "react";
 import { createPortal } from "react-dom";
-
+import tinycolor from "tinycolor2";
+import { useTheme } from "../ThemeProvider";
 import styles from "./Modal.module.scss";
 
 // Modal.Overlay
@@ -20,13 +21,21 @@ const ModalOverlay: FC<ModalOverlayProps> = (props) => {
 // Modal.Content
 // =============================================================================
 
-type ModalContentProps = ComponentProps<"div">;
+type ModalContentProps = ComponentProps<"div"> & {
+  center?: boolean;
+  shadow?: boolean;
+};
 
 const ModalContent: FC<ModalContentProps> = (props) => {
-  const { className, ...rest } = props;
+  const { className, center, shadow, ...rest } = props;
 
   return (
-    <div className={classNames(styles.modalContent, className)} {...rest} />
+    <div
+      className={classNames(styles.modalContent, className)}
+      data-center={center}
+      data-shadow={shadow}
+      {...rest}
+    />
   );
 };
 
@@ -35,6 +44,8 @@ const ModalContent: FC<ModalContentProps> = (props) => {
 
 type ModalProps = {
   isOpen?: boolean;
+  style?: CSSProperties;
+  className?: string;
   children?: React.ReactNode;
 };
 
@@ -44,11 +55,26 @@ type ModalComponent = FC<ModalProps> & {
 };
 
 const Modal: ModalComponent = (props: ModalProps) => {
-  const { isOpen = true, children } = props;
+  const { isOpen = true, style, className, children } = props;
+
+  const theme = useTheme();
+
+  const computedStyle = {
+    "--modal-overlay-bg": tinycolor(theme.colors.gray["900"])
+      .setAlpha(0.4)
+      .toHex8String(),
+    "--modal-content-shadow": theme.shadow.md,
+    ...style,
+  } as CSSProperties;
 
   if (!isOpen) return null;
 
-  return createPortal(<div>{children}</div>, getModalRoot());
+  return createPortal(
+    <div style={computedStyle} className={className}>
+      {children}
+    </div>,
+    getModalRoot(),
+  );
 };
 
 Modal.displayName = "Modal";
