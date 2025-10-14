@@ -7,6 +7,7 @@ import {
   useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import tinycolor from "tinycolor2";
 import { createStore, type StoreApi, useStore } from "zustand";
@@ -224,6 +225,9 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
   const contentHeight = useStore(context, (state) => state.contentHeight);
   const viewportHeight = useStore(context, (state) => state.viewportHeight);
   const scrollTop = useStore(context, (state) => state.scrollTop);
+  const thumbDragging = useStore(context, (state) => state.thumbDragging);
+
+  const [hover, setHover] = useState(false);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -282,14 +286,13 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
     return null;
   }
 
-  const thumbBgColor = tinycolor(theme.colors.gray[500]).setAlpha(0.5);
-  const thumbHoverBgColor = tinycolor(theme.colors.gray[500]).setAlpha(0.7);
+  const alpha = hover || thumbDragging ? 0.5 : 0.3;
+  const thumbBgColor = tinycolor(theme.colors.gray[500]).setAlpha(alpha);
   const computedStyle = {
     transform: `translateY(${thumbTop}px)`,
 
     "--scroll-area-thumb-height": `${thumbHeight}px`,
     "--scroll-area-thumb-bg-color": thumbBgColor.toString(),
-    "--scroll-area-thumb-hover-bg-color": thumbHoverBgColor.toString(),
   };
 
   return (
@@ -298,6 +301,8 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
       className={classNames(styles.scrollAreaThumb, className)}
       style={computedStyle}
       onMouseDown={handleMouseDown}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       {...rest}
     />
   );
