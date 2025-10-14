@@ -1,5 +1,8 @@
 import type { Theme } from "./ThemeProvider";
 
+/**
+ * Colors. They are copied from [open-color](https://yeun.github.io/open-color/).
+ */
 const colors: Theme["colors"] = {
   gray: {
     "000": "#f8f9fa",
@@ -112,35 +115,49 @@ const colors: Theme["colors"] = {
 };
 
 /**
+ * Shadows. They are copied from tailwindcss.
+ */
+const shadow: Theme["shadow"] = {
+  xxs: "0 1px rgb(0 0 0 / 0.05)",
+  xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+  sm: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+  md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+  lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+  xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+  xxl: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+};
+
+const tokens: Theme["tokens"] = {
+  inputBaseDefaultBorderColor: colors.gray["400"],
+
+  inputBaseXsHeight: "1.75rem",
+  inputBaseSmHeight: "2rem",
+  inputBaseMdHeight: "2.25rem",
+  inputBaseLgHeight: "2.5rem",
+  inputBaseXlHeight: "3rem",
+
+  inputBaseXsFontSize: "0.625rem",
+  inputBaseSmFontSize: "0.75rem",
+  inputBaseMdFontSize: "0.875rem",
+  inputBaseLgFontSize: "1rem",
+  inputBaseXlFontSize: "1.125rem",
+
+  inputBaseXsLineHeight: "1.25rem",
+  inputBaseSmLineHeight: "1.375rem",
+  inputBaseMdLineHeight: "1.5rem",
+  inputBaseLgLineHeight: "1.75rem",
+  inputBaseXlLineHeight: "2rem",
+
+  inputBaseBorderRadius: "0.5rem",
+
+  inputBasePlaceholderColor: colors.gray["600"],
+};
+
+/**
  * The default theme.
- *
- * Colors are copied from [open-color](https://yeun.github.io/open-color/).
  */
 export const DEFAULT_THEME: Theme = {
   colors,
-  tokens: {
-    inputBaseDefaultBorderColor: colors.gray["400"],
-
-    inputBaseXsHeight: "1.75rem",
-    inputBaseSmHeight: "2rem",
-    inputBaseMdHeight: "2.25rem",
-    inputBaseLgHeight: "2.5rem",
-    inputBaseXlHeight: "3rem",
-
-    inputBaseXsFontSize: "0.625rem",
-    inputBaseSmFontSize: "0.75rem",
-    inputBaseMdFontSize: "0.875rem",
-    inputBaseLgFontSize: "1rem",
-    inputBaseXlFontSize: "1.125rem",
-
-    inputBaseXsLineHeight: "1.25rem",
-    inputBaseSmLineHeight: "1.375rem",
-    inputBaseMdLineHeight: "1.5rem",
-    inputBaseLgLineHeight: "1.75rem",
-    inputBaseXlLineHeight: "2rem",
-
-    inputBaseBorderRadius: "0.5rem",
-
-    inputBasePlaceholderColor: colors.gray["600"],
-  },
+  shadow,
+  tokens,
 };

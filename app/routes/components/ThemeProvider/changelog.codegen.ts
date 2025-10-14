@@ -17,4 +17,5 @@ export const changelog = ''
   + '  indigo. Export the type `ColorNo` and `ColorName`.\n'
   + '- 2025-10-10: Update `inputBase{Xs,Sm,Md,Lg,Xl}FontSize` tokens to make them\n'
   + '  smaller.\n'
+  + '- 2025-10-14: Add `shadow` for `Theme`. Export the type `Theme`.\n'
   ;

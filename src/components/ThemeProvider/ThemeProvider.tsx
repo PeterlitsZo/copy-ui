@@ -32,6 +32,15 @@ export interface Theme {
   colors: {
     [colorName in ColorName]: { [colorNo in ColorNo]: string };
   };
+  shadow: {
+    xxs: string;
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xxl: string;
+  };
   tokens: {
     inputBaseDefaultBorderColor: string;
 
