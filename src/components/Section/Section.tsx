@@ -36,12 +36,14 @@ const SectionRoot: FC<SectionRootProps> = (props) => {
   return (
     <div className={styles.section} style={computedStyle}>
       <div className={styles.sectionHeader}>
-        <div className={styles.sectionHeaderWrapper}>
+        <Typography.Root className={styles.sectionHeaderWrapper}>
           <Typography.H1 mt="3rem">{title}</Typography.H1>
-        </div>
+        </Typography.Root>
       </div>
       <div className={styles.sectionBody}>
-        <div className={styles.sectionBodyWrapper}>{children}</div>
+        <Typography.Root className={styles.sectionBodyWrapper}>
+          {children}
+        </Typography.Root>
       </div>
     </div>
   );
