@@ -21,6 +21,7 @@ export function Button(props: ButtonProps) {
     children,
     leftSection,
     rightSection,
+    disabled,
     variant = "default",
     size = "md",
     ...rest
@@ -36,6 +37,14 @@ export function Button(props: ButtonProps) {
         "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
         "--button-bg-hover": theme.colors.gray["100"],
       } as CSSProperties),
+    variant === "default" &&
+      disabled &&
+      ({
+        "--button-bg": theme.colors.gray["100"],
+        "--button-bg-hover": theme.colors.gray["100"],
+        "--button-color": theme.colors.gray["500"],
+        cursor: "not-allowed",
+      } as CSSProperties),
     variant === "filled" &&
       ({
         "--button-bg": theme.colors.blue["600"],
@@ -44,6 +53,15 @@ export function Button(props: ButtonProps) {
         "--button-border-style": "solid",
         "--button-border-color": theme.colors.blue["700"],
         "--button-bg-hover": theme.colors.blue["700"],
+      } as CSSProperties),
+    variant === "filled" &&
+      disabled &&
+      ({
+        "--button-bg": theme.colors.gray["300"],
+        "--button-bg-hover": theme.colors.gray["300"],
+        "--button-color": theme.colors.gray["500"],
+        "--button-border-color": theme.colors.gray["300"],
+        cursor: "not-allowed",
       } as CSSProperties),
     variant === "ghost" &&
       ({
@@ -56,6 +74,12 @@ export function Button(props: ButtonProps) {
           .setAlpha(0.5)
           .toString(),
       } as CSSProperties),
+    variant === "ghost" &&
+      disabled &&
+      ({
+        "--button-color": theme.colors.gray["500"],
+        "--button-bg-hover": "transparent",
+      } as CSSProperties),
     variant === "light" &&
       ({
         "--button-bg": theme.colors.blue["000"],
@@ -64,6 +88,14 @@ export function Button(props: ButtonProps) {
         "--button-border-style": "solid",
         "--button-border-color": "transparent",
         "--button-bg-hover": theme.colors.blue["100"],
+      } as CSSProperties),
+    variant === "light" &&
+      disabled &&
+      ({
+        "--button-bg": theme.colors.gray["100"],
+        "--button-bg-hover": theme.colors.gray["100"],
+        "--button-color": theme.colors.gray["500"],
+        cursor: "not-allowed",
       } as CSSProperties),
 
     size === "xs" &&
@@ -112,6 +144,8 @@ export function Button(props: ButtonProps) {
     <button
       className={classNames(styles.button, className)}
       style={computedStyle}
+      disabled={disabled}
+      data-disabled={disabled ? true : undefined}
       {...rest}
     >
       {leftSection && (

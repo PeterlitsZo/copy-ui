@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
 import { useTheme } from "@/components/ThemeProvider";
 
-export function Demo() {
+export default function Demo() {
   const theme = useTheme();
 
   const cardStyle = {
@@ -37,7 +37,7 @@ export function Demo() {
         I mean
       </Button>
       <Button>Hello</Button>
-      <Button size="lg" variant="filled">
+      <Button size="lg" variant="filled" disabled>
         World
       </Button>
       <Button size="xl" variant="light">

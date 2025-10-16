@@ -14,4 +14,5 @@ export const changelog = ''
   + '  from ThemeProvider.\n'
   + '- 2025-10-04: Add `ghost` variant. Code formatting improvement.\n'
   + '- 2025-10-08: Add `light` variant, update `ghost` variant styles.\n'
+  + '- 2025-10-15: Support change styles when `disabled`.\n'
   ;
