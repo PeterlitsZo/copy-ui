@@ -1,6 +1,5 @@
-import { CodeHighlight } from "src/components/CodeHighlight/CodeHighlight";
-import { useTheme } from "src/components/ThemeProvider";
-import { Flex } from "@/components/Flex";
+import { CodeHighlight } from "@/components/CodeHighlight";
+import { useTheme } from "@/components/ThemeProvider";
 
 const code = `\
 /**
@@ -16,14 +15,19 @@ export default function Demo() {
 
   const style = {
     backgroundColor: theme.colors.gray["000"],
-    padding: "1rem",
     borderRadius: "0.5rem",
     width: "40rem",
   };
 
   return (
-    <Flex style={style}>
-      <CodeHighlight code={code} lang="typescript" withLineNumbers />
-    </Flex>
+    <CodeHighlight
+      code={code}
+      lang="typescript"
+      withLineNumbers
+      lineHighlight={{ ge: 4, lt: 7 }}
+      style={style}
+      px="1.5rem"
+      py="0.75rem"
+    />
   );
 }
