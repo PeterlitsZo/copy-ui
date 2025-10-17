@@ -1,0 +1,11 @@
+@layer components {
+  .paper {
+    padding: 1rem;
+    background-color: var(--paper-bg);
+    border-radius: var(--paper-border-radius);
+
+    &[data-with-border='true'] {
+      border: 1px solid var(--paper-border-color);
+    }
+  }
+}
