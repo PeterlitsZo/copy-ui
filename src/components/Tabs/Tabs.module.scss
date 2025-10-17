@@ -1,6 +1,5 @@
 .tabs {
   display: flex;
-  gap: 0.25rem;
 }
 
 .tab {
@@ -11,7 +10,7 @@
   padding-left: var(--tab-padding-x);
   padding-right: var(--tab-padding-x);
   padding-top: var(--tab-padding-y);
-  padding-bottom: var(--tab-padding-y);
+  padding-bottom: calc(var(--tab-padding-y) + 0.125rem / 2);
 
   border-bottom: 0.125rem solid var(--tab-border-color);
 
@@ -21,4 +20,16 @@
   font-size: var(--tab-font-size);
   
   cursor: pointer;
+
+  &:hover .wrapper {
+    background-color: var(--tab-hover-wrapper-bg);
+  }
+
+  .wrapper {
+    padding-left: var(--tab-wrapper-padding-x);
+    padding-right: var(--tab-wrapper-padding-x);
+    padding-top: var(--tab-wrapper-padding-y);
+    padding-bottom: var(--tab-wrapper-padding-y);
+    border-radius: 0.25rem;
+  }
 }

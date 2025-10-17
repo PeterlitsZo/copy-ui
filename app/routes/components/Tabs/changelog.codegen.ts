@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-05: Initial version.\n'
+  + '- 2025-10-16: Adjust its styles - improve spacing and hover states.\n'
   ;

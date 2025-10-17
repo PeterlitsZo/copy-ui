@@ -2,9 +2,8 @@ import classNames from "classnames";
 import { merge } from "es-toolkit";
 import type { ComponentProps, CSSProperties, FC } from "react";
 import { createContext, useContext, useState } from "react";
-
+import tinycolor from "tinycolor2";
 import { useTheme } from "@/components/ThemeProvider";
-
 import styles from "./Tabs.module.scss";
 
 // Context
@@ -45,16 +44,21 @@ const Tab: FC<TabProps> = (props) => {
       ({
         "--tab-bg": "transparent",
         "--tab-color": isActive
-          ? theme.colors.blue["600"]
+          ? theme.colors.blue["800"]
           : theme.colors.gray["600"],
       } as CSSProperties),
 
     {
-      "--tab-padding-x": "1rem",
+      "--tab-padding-x": "0.375rem",
       "--tab-padding-y": "0.375rem",
       "--tab-radius": "0.375rem",
-      "--tab-border-color": isActive ? theme.colors.blue["600"] : "transparent",
+      "--tab-border-color": isActive ? theme.colors.blue["800"] : "transparent",
       "--tab-font-size": "1.25rem",
+      "--tab-hover-wrapper-bg": tinycolor(theme.colors.gray["100"])
+        .setAlpha(0.7)
+        .toRgbString(),
+      "--tab-wrapper-padding-x": "0.75rem",
+      "--tab-wrapper-padding-y": "0.125rem",
     } as CSSProperties,
     style,
   ]);
@@ -73,7 +77,7 @@ const Tab: FC<TabProps> = (props) => {
       aria-selected={isActive}
       {...rest}
     >
-      {children}
+      <span className={styles.wrapper}>{children}</span>
     </button>
   );
 };
