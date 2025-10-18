@@ -1,0 +1,15 @@
+@layer components {
+  .breadcrumb {
+    display: flex;
+  }
+
+  .breadcrumbItem {
+    color: var(--breadcrumb-item-color);
+  }
+
+  .breadcrumbSep {
+    margin: 0 8px;
+    color: var(--breadcrumb-sep-color);
+    user-select: none;
+  }
+}
