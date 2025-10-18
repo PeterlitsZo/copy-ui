@@ -2,7 +2,7 @@ import { Background } from "src/components/Background";
 
 import { lorem } from "./lorem";
 
-export function Demo() {
+export default function Demo() {
   const style = {
     width: "30rem",
     height: "15rem",
