@@ -1,10 +1,47 @@
 import { CalendarDays } from "lucide-react";
 import type { FC } from "react";
 
+import { Calendar } from "@/components/Calendar";
 import { InputBase } from "@/components/InputBase";
+import { Popover } from "@/components/Popover";
 import { useTheme } from "@/components/ThemeProvider";
 
 import styles from "./DatePicker.module.scss";
+
+// CalendarOpener
+// =============================================================================
+
+const CalendarOpener: FC = () => {
+  return (
+    <Popover>
+      <Popover.Trigger
+        render={({ setRef, onToggle }) => (
+          <button
+            type="button"
+            className={styles.calendarOpener}
+            ref={setRef}
+            onClick={onToggle}
+          >
+            <CalendarDays size={"60%"} />
+          </button>
+        )}
+      />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, isOpen, floatingStyles }) =>
+          isOpen && (
+            <div ref={(el) => setRef(el)} style={floatingStyles}>
+              <Calendar />
+            </div>
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+// DatePicker
+// =============================================================================
 
 export const DatePicker: FC = () => {
   const theme = useTheme();
@@ -18,16 +55,10 @@ export const DatePicker: FC = () => {
     "--data-picker-input-decorator-color": theme.colors.gray["500"],
   } as React.CSSProperties;
 
-  const rightSection = (
-    <button type="button" className={styles.dataPickerButton}>
-      <CalendarDays size={"65%"} />
-    </button>
-  );
-
   return (
     <InputBase
       wrapperClassName={styles.dataPickerInput}
-      rightSection={rightSection}
+      rightSection={<CalendarOpener />}
       style={computedStyle}
     >
       <span className={styles.part}>YYYY</span>

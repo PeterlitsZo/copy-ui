@@ -1,36 +1,38 @@
-.dataPickerButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-  height: 90%;
-  color: var(--data-picker-button-color);
-  border-radius: 999999px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--data-picker-button-hover-bg-color);
-  }
-}
-
-.dataPickerInput {
-  padding-inline: var(--data-picker-input-padding-inline);
-  user-select: none;
-
-  .part {
+@layer components {
+  .calendarOpener {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 90%;
+    color: var(--data-picker-button-color);
+    border-radius: 999999px;
     cursor: pointer;
-    color: var(--data-picker-input-part-color);
-    padding: 0 0.25rem;
-    margin: -0.25rem;
 
     &:hover {
-      background-color: var(--data-picker-input-part-hover-bg-color);
-      border-radius: 0.25rem;
+      background-color: var(--data-picker-button-hover-bg-color);
     }
   }
 
-  .decorator {
-    position: relative;
-    color: var(--data-picker-input-decorator-color);
+  .dataPickerInput {
+    padding-inline: var(--data-picker-input-padding-inline);
+    user-select: none;
+
+    .part {
+      cursor: pointer;
+      color: var(--data-picker-input-part-color);
+      padding: 0 0.25rem;
+      margin: -0.25rem;
+
+      &:hover {
+        background-color: var(--data-picker-input-part-hover-bg-color);
+        border-radius: 0.25rem;
+      }
+    }
+
+    .decorator {
+      position: relative;
+      color: var(--data-picker-input-decorator-color);
+    }
   }
 }
