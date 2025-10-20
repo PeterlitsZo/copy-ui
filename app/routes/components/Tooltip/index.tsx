@@ -1,4 +1,3 @@
-import { ComponentTemplate } from "src/components/ComponentTemplate";
 import { Section } from "src/components/Section";
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
@@ -15,12 +14,10 @@ export function meta(_: Route.MetaArgs) {
 
 export default function TooltipPage() {
   return (
-    <ComponentTemplate component="Tooltip">
-      <Section.Root title="Tooltip">
-        <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
-        <Section.SourceCode files={sourceCode} />
-        <Section.Changelog changelog={changelog} />
-      </Section.Root>
-    </ComponentTemplate>
+    <Section.Root title="Tooltip">
+      <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
+      <Section.SourceCode files={sourceCode} />
+      <Section.Changelog changelog={changelog} />
+    </Section.Root>
   );
 }

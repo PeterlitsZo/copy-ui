@@ -1,5 +1,5 @@
 import type { RouteConfig } from "@react-router/dev/routes";
-import { index, prefix, route } from "@react-router/dev/routes";
+import { index, layout, prefix, route } from "@react-router/dev/routes";
 
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
@@ -16,8 +16,30 @@ export default [
   ),
   ...prefix(
     "v0/components",
-    componentsRoutes.map((componentsRoute) => {
-      return route(componentsRoute.name, componentsRoute.path);
-    }),
+    componentsRoutes
+      .filter(
+        (componentsRoute) =>
+          componentsRoute.name !== "Typography" &&
+          componentsRoute.name !== "Tooltip",
+      )
+      .map((componentsRoute) => {
+        return route(componentsRoute.name, componentsRoute.path);
+      }),
+  ),
+
+  layout(
+    "./layouts/page-layout.tsx",
+    prefix(
+      "v0/components",
+      componentsRoutes
+        .filter(
+          (componentsRoute) =>
+            componentsRoute.name === "Typography" ||
+            componentsRoute.name === "Tooltip",
+        )
+        .map((componentsRoute) => {
+          return route(componentsRoute.name, componentsRoute.path);
+        }),
+    ),
   ),
 ] satisfies RouteConfig;

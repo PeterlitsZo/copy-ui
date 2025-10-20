@@ -1,4 +1,3 @@
-import { ComponentTemplate } from "@/components/ComponentTemplate";
 import { Section } from "@/components/Section";
 import { Typography } from "@/components/Typography";
 
@@ -18,16 +17,14 @@ export function meta() {
 
 export default function TypographyPage() {
   return (
-    <ComponentTemplate component="Typography">
-      <Section.Root title="Typography">
-        <Typography.H2 mt="1.5rem" mb="1rem">
-          Usage
-        </Typography.H2>
-        <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
-        <Section.Demo node={<Demo02 />} code={demo02SourceCode} />
-        <Section.SourceCode files={sourceCode} />
-        <Section.Changelog changelog={changelog} />
-      </Section.Root>
-    </ComponentTemplate>
+    <Section title="Typography">
+      <Typography.H2 mt="1.5rem" mb="1rem">
+        Usage
+      </Typography.H2>
+      <Section.Demo node={<Demo01 />} code={demo01SourceCode} />
+      <Section.Demo node={<Demo02 />} code={demo02SourceCode} />
+      <Section.SourceCode files={sourceCode} />
+      <Section.Changelog changelog={changelog} />
+    </Section>
   );
 }
