@@ -81,6 +81,32 @@ const FieldDescription: FC<FieldDescriptionProps> = (props) => {
 
 FieldDescription.displayName = "Field.Description";
 
+// Field.Error
+// =============================================================================
+
+type FieldErrorProps = ComponentProps<"p">;
+
+const FieldError: FC<FieldErrorProps> = (props) => {
+  const { className, children, style, ...rest } = props;
+
+  const theme = useTheme();
+
+  const computedStyle = {
+    "--field-error-color": theme.colors.red["700"],
+    ...style,
+  } as CSSProperties;
+
+  return (
+    <p
+      className={classNames(styles.fieldError, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </p>
+  );
+};
+
 // Field.Input
 // =============================================================================
 
@@ -127,6 +153,7 @@ type FieldProps = ComponentProps<"div">;
 type FieldComponent = FC<FieldProps> & {
   Label: typeof FieldLabel;
   Description: typeof FieldDescription;
+  Error: typeof FieldError;
   Input: typeof FieldInput;
   Select: typeof FieldSelect;
 };
@@ -152,6 +179,7 @@ const Field: FieldComponent = (props) => {
 
 Field.Label = FieldLabel;
 Field.Description = FieldDescription;
+Field.Error = FieldError;
 Field.Input = FieldInput;
 Field.Select = FieldSelect;
 
