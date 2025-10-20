@@ -13,4 +13,5 @@ export const changelog = ''
   + '- 2025-10-05: Support the `leftSection` and `rightSection` props for Input\n'
   + '  component to add elements inside the input field on the left or right side.\n'
   + '  Adjust padding based on presence of these sections.\n'
+  + '- 2025-10-20: Support `disabled` prop.\n'
   ;

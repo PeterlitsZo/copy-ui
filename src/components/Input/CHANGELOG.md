@@ -9,3 +9,4 @@
 - 2025-10-05: Support the `leftSection` and `rightSection` props for Input
   component to add elements inside the input field on the left or right side.
   Adjust padding based on presence of these sections.
+- 2025-10-20: Support `disabled` prop.
