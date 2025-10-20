@@ -2,10 +2,12 @@ import classNames from "classnames";
 import { merge } from "es-toolkit";
 import type { CSSProperties, FC } from "react";
 import { useTheme } from "@/components/ThemeProvider";
+import { resolveStyle } from "@/utils/resolve-style";
 import styles from "./InputBase.module.scss";
 
 interface InputBaseProps {
   size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 
   wrapperClassName?: string;
   style?: CSSProperties;
@@ -18,6 +20,7 @@ interface InputBaseProps {
 export const InputBase: FC<InputBaseProps> = (props) => {
   const {
     size = "md",
+    disabled = false,
     wrapperClassName,
     style,
     leftSection,
@@ -27,29 +30,38 @@ export const InputBase: FC<InputBaseProps> = (props) => {
 
   const theme = useTheme();
 
-  const computedStyle = mergeStyles([
-    size === "sm" &&
-      ({
-        "--input-base-height": theme.tokens.inputBaseSmHeight,
-      } as CSSProperties),
-    size === "md" &&
-      ({
-        "--input-base-height": theme.tokens.inputBaseMdHeight,
-      } as CSSProperties),
-    size === "lg" &&
-      ({
-        "--input-base-height": theme.tokens.inputBaseLgHeight,
-      } as CSSProperties),
-    {
+  const stx = resolveStyle({
+    base: {
       "--input-base-min-width": "16rem",
       "--input-base-border-color": theme.tokens.inputBaseDefaultBorderColor,
       "--input-base-border-radius": theme.tokens.inputBaseBorderRadius,
-    } as CSSProperties,
-    style,
-  ]);
+      "--input-base-disabled-bg-color": theme.colors.gray["100"],
+      ...style,
+    },
+    variants: {
+      size: {
+        sm: {
+          "--input-base-height": theme.tokens.inputBaseSmHeight,
+        },
+        md: {
+          "--input-base-height": theme.tokens.inputBaseMdHeight,
+        },
+        lg: {
+          "--input-base-height": theme.tokens.inputBaseLgHeight,
+        },
+      },
+    },
+    cls: {
+      size,
+    },
+  });
 
   return (
-    <div style={computedStyle} className={styles.inputBase}>
+    <div
+      style={stx}
+      className={styles.inputBase}
+      data-disabled={disabled || undefined}
+    >
       {leftSection && <div className={styles.leftSection}>{leftSection}</div>}
       <div className={classNames(styles.wrapper, wrapperClassName)}>
         {children}

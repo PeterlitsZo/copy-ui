@@ -12,6 +12,12 @@
   background-color: white;
 
   overflow: hidden;
+
+  &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--input-base-disabled-bg-color);
+  }
 }
 
 .wrapper {

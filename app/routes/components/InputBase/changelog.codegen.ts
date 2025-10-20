@@ -7,4 +7,5 @@ export const changelog = ''
   + '  layouts. Add `wrapperClassName` and `style` props for custom styling. Improve\n'
   + '  component structure with proper wrapper and section styling. Update import\n'
   + '  paths and code formatting.\n'
+  + '- 2025-10-20: Support `disabled` prop.\n'
   ;
