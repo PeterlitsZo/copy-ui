@@ -7,8 +7,8 @@ import { Tag } from "@/components/Tag";
 import { useTheme } from "@/components/ThemeProvider";
 
 import { components } from "./components.codegen";
-
 import styles from "./Navbar.module.scss";
+import { utils } from "./utils.codegen";
 
 interface NavbarProps {
   active: string;
@@ -27,11 +27,16 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
 
   const docs = [{ name: "Get Started", path: "/v0/docs/get-started" }];
 
-  function isActive(kind: "doc" | "component", pathOrComponentName: string) {
+  function isActive(
+    kind: "doc" | "component" | "utils",
+    pathOrComponentName: string,
+  ) {
     if (kind === "doc") {
       return pathOrComponentName === active;
     } else if (kind === "component") {
       return `/v0/components/${pathOrComponentName}` === active;
+    } else if (kind === "utils") {
+      return `/v0/utils/${pathOrComponentName}` === active;
     }
   }
 
@@ -72,6 +77,19 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
                     WIP
                   </Tag>
                 )}
+              </Link>
+            ))}
+            <div className={styles.title}>UTILS</div>
+            {utils.map((util) => (
+              <Link
+                key={util.name}
+                className={classnames(
+                  styles.link,
+                  isActive("utils", util.name) && styles.active,
+                )}
+                to={util.path}
+              >
+                <span>{util.name}</span>
               </Link>
             ))}
           </nav>

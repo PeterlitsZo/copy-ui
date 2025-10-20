@@ -2,11 +2,18 @@ import type { RouteConfig } from "@react-router/dev/routes";
 import { index, prefix, route } from "@react-router/dev/routes";
 
 import { componentsRoutes } from "./components_routes.codegen";
+import { utilsRoutes } from "./utils-routes.codegen";
 
 export default [
   index("routes/home.tsx"),
 
   ...prefix("v0/docs", [route("get-started", "routes/docs/get-started.tsx")]),
+  ...prefix(
+    "v0/utils",
+    utilsRoutes.map((utilsRoute) => {
+      return route(utilsRoute.name, utilsRoute.path);
+    }),
+  ),
   ...prefix(
     "v0/components",
     componentsRoutes.map((componentsRoute) => {
