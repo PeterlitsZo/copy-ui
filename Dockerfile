@@ -2,12 +2,12 @@ FROM oven/bun:1.2.22-alpine AS build-base
 RUN apk update && apk add nodejs
 
 FROM build-base AS dev-dep-env
-COPY ./package.json bun.lockb /app/
+COPY ./package.json bun.lock /app/
 WORKDIR /app
 RUN bun install --frozen-lockfile
 
 FROM build-base AS prod-dep-env
-COPY ./package.json bun.lockb /app/
+COPY ./package.json bun.lock /app/
 WORKDIR /app
 RUN bun install --production
 
