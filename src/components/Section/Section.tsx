@@ -78,7 +78,7 @@ const SectionDemo: FC<SectionDemoProps> = (props) => {
         <ScrollArea className={styles.demoCode}>
           <ScrollArea.Viewport className={styles.demoCodeViewport}>
             <ScrollArea.Content className={styles.demoCodeContent}>
-              <CodeHighlight code={code} lang="tsx" />
+              <CodeHighlight code={code} lang="tsx" withLineNumbers />
             </ScrollArea.Content>
           </ScrollArea.Viewport>
           <ScrollArea.Scrollbar>
