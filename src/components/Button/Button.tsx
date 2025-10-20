@@ -1,18 +1,22 @@
 import classNames from "classnames";
-import { merge } from "es-toolkit";
-import type { ComponentProps, CSSProperties } from "react";
+import type { ComponentProps, FC } from "react";
 import tinycolor from "tinycolor2";
-import { useTheme } from "@/components/ThemeProvider";
+
+import { type ColorName, useTheme } from "@/components/ThemeProvider";
+import { resolveStyle } from "@/utils/resolve-style";
+
 import styles from "./Button.module.scss";
 
 export type ButtonProps = ComponentProps<"button"> & {
   variant?: "default" | "filled" | "ghost" | "light";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+  color?: ColorName;
+
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 };
 
-export function Button(props: ButtonProps) {
+const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme();
 
   const {
@@ -24,126 +28,112 @@ export function Button(props: ButtonProps) {
     disabled,
     variant = "default",
     size = "md",
+    color = "blue",
     ...rest
   } = props;
 
-  const computedStyle = mergeStyles([
-    variant === "default" &&
-      ({
-        "--button-bg": "white",
-        "--button-color": theme.colors.gray["800"],
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
-        "--button-bg-hover": theme.colors.gray["100"],
-      } as CSSProperties),
-    variant === "default" &&
-      disabled &&
-      ({
-        "--button-bg": theme.colors.gray["100"],
-        "--button-bg-hover": theme.colors.gray["100"],
-        "--button-color": theme.colors.gray["500"],
-        cursor: "not-allowed",
-      } as CSSProperties),
-    variant === "filled" &&
-      ({
-        "--button-bg": theme.colors.blue["600"],
-        "--button-color": "white",
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": theme.colors.blue["700"],
-        "--button-bg-hover": theme.colors.blue["700"],
-      } as CSSProperties),
-    variant === "filled" &&
-      disabled &&
-      ({
-        "--button-bg": theme.colors.gray["300"],
-        "--button-bg-hover": theme.colors.gray["300"],
-        "--button-color": theme.colors.gray["500"],
-        "--button-border-color": theme.colors.gray["300"],
-        cursor: "not-allowed",
-      } as CSSProperties),
-    variant === "ghost" &&
-      ({
-        "--button-bg": "transparent",
-        "--button-color": theme.colors.blue["800"],
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": "transparent",
-        "--button-bg-hover": tinycolor(theme.colors.gray["200"])
-          .setAlpha(0.5)
-          .toString(),
-      } as CSSProperties),
-    variant === "ghost" &&
-      disabled &&
-      ({
-        "--button-color": theme.colors.gray["500"],
-        "--button-bg-hover": "transparent",
-      } as CSSProperties),
-    variant === "light" &&
-      ({
-        "--button-bg": theme.colors.blue["000"],
-        "--button-color": theme.colors.blue["800"],
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": "transparent",
-        "--button-bg-hover": theme.colors.blue["100"],
-      } as CSSProperties),
-    variant === "light" &&
-      disabled &&
-      ({
-        "--button-bg": theme.colors.gray["100"],
-        "--button-bg-hover": theme.colors.gray["100"],
-        "--button-color": theme.colors.gray["500"],
-        cursor: "not-allowed",
-      } as CSSProperties),
-
-    size === "xs" &&
-      ({
-        "--button-height": theme.tokens.inputBaseXsHeight,
-        "--button-padding-x": "0.625rem",
-        "--button-section-gap": "0.375rem",
-        "--button-font-size": "0.75rem",
-      } as CSSProperties),
-    size === "sm" &&
-      ({
-        "--button-height": theme.tokens.inputBaseSmHeight,
-        "--button-padding-x": "0.75rem",
-        "--button-section-gap": "0.5rem",
-        "--button-font-size": "0.875rem",
-      } as CSSProperties),
-    size === "md" &&
-      ({
-        "--button-height": theme.tokens.inputBaseMdHeight,
-        "--button-padding-x": "1rem",
-        "--button-section-gap": "0.625rem",
-        "--button-font-size": "1rem",
-      } as CSSProperties),
-    size === "lg" &&
-      ({
-        "--button-height": theme.tokens.inputBaseLgHeight,
-        "--button-padding-x": "1.25rem",
-        "--button-section-gap": "0.75rem",
-        "--button-font-size": "1.125rem",
-      } as CSSProperties),
-    size === "xl" &&
-      ({
-        "--button-height": theme.tokens.inputBaseXlHeight,
-        "--button-padding-x": "1.5rem",
-        "--button-section-gap": "1rem",
-        "--button-font-size": "1.25rem",
-      } as CSSProperties),
-
-    {
+  const stx = resolveStyle({
+    base: {
       "--button-radius": "0.375rem",
-    } as CSSProperties,
-    style,
-  ]);
+      ...style,
+    },
+    variants: {
+      variant: {
+        default: {
+          "--button-bg": "white",
+          "--button-color": theme.colors.gray["800"],
+          "--button-border-width": "1px",
+          "--button-border-style": "solid",
+          "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
+          "--button-bg-hover": theme.colors.gray["100"],
+          "--button-disabled-bg-color": theme.colors.gray["100"],
+          "--button-disabled-color": theme.colors.gray["500"],
+          "--button-disabled-border-color":
+            theme.tokens.inputBaseDefaultBorderColor,
+          "--button-disabled-hover-bg-color": theme.colors.gray["100"],
+        },
+        filled: {
+          "--button-bg": theme.colors[color]["600"],
+          "--button-color": "white",
+          "--button-border-width": "1px",
+          "--button-border-style": "solid",
+          "--button-border-color": theme.colors[color]["700"],
+          "--button-bg-hover": theme.colors[color]["700"],
+          "--button-disabled-bg-color": theme.colors.gray["300"],
+          "--button-disabled-color": theme.colors.gray["500"],
+          "--button-disabled-border-color": theme.colors.gray["300"],
+          "--button-disabled-hover-bg-color": theme.colors.gray["300"],
+        },
+        ghost: {
+          "--button-bg": "transparent",
+          "--button-color": theme.colors[color]["800"],
+          "--button-border-width": "1px",
+          "--button-border-style": "solid",
+          "--button-border-color": "transparent",
+          "--button-bg-hover": tinycolor(theme.colors.gray["200"])
+            .setAlpha(0.5)
+            .toString(),
+          "--button-disabled-color": theme.colors.gray["500"],
+          "--button-disabled-bg-color": "transparent",
+          "--button-disabled-hover-bg-color": "transparent",
+          "--button-disabled-border-color": "transparent",
+        },
+        light: {
+          "--button-bg": theme.colors[color]["000"],
+          "--button-color": theme.colors[color]["800"],
+          "--button-border-width": "1px",
+          "--button-border-style": "solid",
+          "--button-border-color": "transparent",
+          "--button-bg-hover": theme.colors[color]["100"],
+          "--button-disabled-color": theme.colors.gray["500"],
+          "--button-disabled-bg-color": theme.colors.gray["100"],
+          "--button-disabled-hover-bg-color": theme.colors.gray["100"],
+          "--button-disabled-border-color": "transparent",
+        },
+      },
+      size: {
+        xs: {
+          "--button-height": theme.tokens.inputBaseXsHeight,
+          "--button-padding-x": "0.625rem",
+          "--button-section-gap": "0.375rem",
+          "--button-font-size": "0.75rem",
+        },
+        sm: {
+          "--button-height": theme.tokens.inputBaseSmHeight,
+          "--button-padding-x": "0.75rem",
+          "--button-section-gap": "0.5rem",
+          "--button-font-size": "0.875rem",
+        },
+        md: {
+          "--button-height": theme.tokens.inputBaseMdHeight,
+          "--button-padding-x": "1rem",
+          "--button-section-gap": "0.625rem",
+          "--button-font-size": "1rem",
+        },
+        lg: {
+          "--button-height": theme.tokens.inputBaseLgHeight,
+          "--button-padding-x": "1.25rem",
+          "--button-section-gap": "0.75rem",
+          "--button-font-size": "1.125rem",
+        },
+        xl: {
+          "--button-height": theme.tokens.inputBaseXlHeight,
+          "--button-padding-x": "1.5rem",
+          "--button-section-gap": "1rem",
+          "--button-font-size": "1.25rem",
+        },
+      },
+    },
+    cls: {
+      variant,
+      size,
+    },
+  });
 
   return (
     <button
       className={classNames(styles.button, className)}
-      style={computedStyle}
+      style={stx}
       disabled={disabled}
       data-disabled={disabled ? true : undefined}
       {...rest}
@@ -157,10 +147,8 @@ export function Button(props: ButtonProps) {
       )}
     </button>
   );
-}
+};
 
-function mergeStyles(styles: (CSSProperties | false | undefined)[]) {
-  return styles.reduce((prev, next) => {
-    return next ? merge(prev as CSSProperties, next) : prev;
-  }, {}) as CSSProperties;
-}
+Button.displayName = "Button";
+
+export { Button };

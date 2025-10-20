@@ -1,10 +1,13 @@
-import { ComponentTemplate } from "src/components/ComponentTemplate";
-import { Section } from "src/components/Section";
+import { ComponentTemplate } from "@/components/ComponentTemplate";
+import { Section } from "@/components/Section";
 import { Typography } from "@/components/Typography";
+
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
 import Demo01 from "./demos/Demo01";
 import demo01sourceCode from "./demos/Demo01.source_code.codegen";
+import Example01 from "./demos/Example01";
+import example01SourceCode from "./demos/Example01.source_code.codegen";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -19,9 +22,10 @@ export default function ButtonPage() {
     <ComponentTemplate component="Button">
       <Section.Root title="Button">
         <Section.Demo node={<Demo01 />} code={demo01sourceCode} />
-        <Typography.H2 mt="1.5rem" mb="1rem">
-          Usage
-        </Typography.H2>
+        <Typography.H2>Example</Typography.H2>
+        <Typography.H3>With different colors</Typography.H3>
+        <Section.Demo node={<Example01 />} code={example01SourceCode} />
+        <Typography.H2>Usage</Typography.H2>
         <Typography.P>
           The Button component is a sample button component. It has several
           variants:
