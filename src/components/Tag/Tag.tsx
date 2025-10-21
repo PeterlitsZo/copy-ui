@@ -1,19 +1,41 @@
 import type { CSSProperties, FC } from "react";
 import tinycolor from "tinycolor2";
-import { type ColorName, useTheme } from "../ThemeProvider";
+
+import { type ColorName, useTheme } from "@/components/ThemeProvider";
+
 import styles from "./Tag.module.scss";
 
 interface TagProps {
-  children: React.ReactNode;
-
   color?: ColorName;
+  /** @deprecated Use `size` prop instead */
   height?: string;
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  withDot?: boolean;
+
+  children: React.ReactNode;
 }
 
-export const Tag: FC<TagProps> = (props) => {
-  const { children, color = "blue", height = "1.5rem" } = props;
+const Tag: FC<TagProps> = (props) => {
+  const {
+    color = "blue",
+    height,
+    size = "md",
+    withDot = false,
+    children,
+  } = props;
 
   const theme = useTheme();
+
+  let calcedHeight = {
+    xs: "1rem",
+    sm: "1.25rem",
+    md: "1.5rem",
+    lg: "1.75rem",
+    xl: "2rem",
+  }[size];
+  if (height) {
+    calcedHeight = height;
+  }
 
   const computedStyles = {
     "--tag-bg-color": tinycolor(theme.colors[color]["000"])
@@ -23,12 +45,15 @@ export const Tag: FC<TagProps> = (props) => {
     "--tag-border-color": tinycolor(theme.colors[color]["200"])
       .setAlpha(0.8)
       .toString(),
-    "--tag-height": height,
+    "--tag-height": calcedHeight,
   } as CSSProperties;
 
   return (
     <div className={styles.tag} style={computedStyles}>
-      {children}
+      {withDot && <span className={styles.tagDot} />}
+      <span>{children}</span>
     </div>
   );
 };
+
+export { Tag };

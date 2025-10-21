@@ -4,6 +4,8 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
+const nextComponentNames = ["Typography", "Tooltip", "Tag"];
+
 export default [
   index("routes/home.tsx"),
 
@@ -19,8 +21,7 @@ export default [
     componentsRoutes
       .filter(
         (componentsRoute) =>
-          componentsRoute.name !== "Typography" &&
-          componentsRoute.name !== "Tooltip",
+          nextComponentNames.indexOf(componentsRoute.name) === -1,
       )
       .map((componentsRoute) => {
         return route(componentsRoute.name, componentsRoute.path);
@@ -34,8 +35,7 @@ export default [
       componentsRoutes
         .filter(
           (componentsRoute) =>
-            componentsRoute.name === "Typography" ||
-            componentsRoute.name === "Tooltip",
+            nextComponentNames.indexOf(componentsRoute.name) !== -1,
         )
         .map((componentsRoute) => {
           return route(componentsRoute.name, componentsRoute.path);

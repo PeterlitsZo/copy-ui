@@ -15,3 +15,12 @@
   border-style: solid;
   border-color: var(--tag-border-color);
 }
+
+.tagDot {
+  width: calc(var(--tag-height) * 0.45);
+  height: calc(var(--tag-height) * 0.45);
+  margin-right: calc(var(--tag-height) * 0.2);
+  margin-left: calc(var(--tag-height) * -0.1);
+  border-radius: 50%;
+  background-color: currentColor;
+}

@@ -1,2 +1,3 @@
 - 2025-09-26: Initial version.
 - 2025-10-08: Add alpha transparency, code formatting improvements.
+- 2025-10-21: Support `withDot` and `size` props.
