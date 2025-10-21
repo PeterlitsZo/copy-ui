@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useOutletContext } from "react-router";
-import { ComponentTemplate } from "@/components/ComponentTemplate";
+import { PageLayout as PurePageLayout } from "@/layouts/PageLayout";
 
 const PageLayout = () => {
   const location = useLocation();
@@ -14,9 +14,9 @@ const PageLayout = () => {
   }
 
   return (
-    <ComponentTemplate component={componentRoute.name}>
+    <PurePageLayout kind="components" name={componentRoute.name}>
       <Outlet />
-    </ComponentTemplate>
+    </PurePageLayout>
   );
 };
 

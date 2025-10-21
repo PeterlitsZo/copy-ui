@@ -1,0 +1,34 @@
+.docLayoutLive {
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--doc-layout-live-border-color);
+  overflow: hidden;
+}
+
+.docLayoutLiveNode {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  border-bottom: 1px solid var(--doc-layout-live-border-color);
+}
+
+.docLayoutLiveCode {
+  display: flex;
+  position: relative;
+
+  background-color: var(--doc-layout-live-background-color);
+  font-size: 0.75rem;
+}
+
+
+.docLayoutLiveCodeViewport {
+  position: relative;
+  flex: 1;
+  max-height: 40vh;
+}
+
+.docLayoutLiveCodeContent {
+  padding: 0.75rem;
+}
