@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
-
+import tinycolor from "tinycolor2";
 import { type ColorName, useTheme } from "@/components/ThemeProvider";
-
 import styles from "./Avatar.module.scss";
 
 // Avatar.Img
@@ -43,7 +42,13 @@ const Avatar: AvatarComponent = (props: AvatarProps) => {
   const style = {
     "--avatar-size": size,
     "--avatar-color": theme.colors[color]["700"],
-    "--avatar-background-color": theme.colors[color]["100"],
+    "--avatar-background-color": tinycolor(theme.colors[color]["100"])
+      .brighten(5)
+      .desaturate(20)
+      .toHexString(),
+    "--avatar-border-color": tinycolor(theme.colors[color]["100"])
+      .desaturate(20)
+      .toHexString(),
   } as CSSProperties;
 
   return (

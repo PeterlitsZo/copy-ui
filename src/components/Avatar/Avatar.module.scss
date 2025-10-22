@@ -6,15 +6,23 @@
   width: var(--avatar-size);
   height: var(--avatar-size);
 
-  font-size: calc(var(--avatar-size) / 2.25);
+  font-size: calc(var(--avatar-size) / 2.5);
+  font-weight: 500;
 
   color: var(--avatar-color);
   border-radius: 999999px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--avatar-border-color);
   background-color: var(--avatar-background-color);
 
   user-select: none;
 
   overflow: hidden;
+
+  &:has(.avatarImg) {
+    border-width: 0;
+  }
 }
 
 .avatarImg {
