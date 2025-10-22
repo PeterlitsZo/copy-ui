@@ -5,11 +5,7 @@ const demoSourceCode = ''
   + 'import { Paper } from "@/components/Paper";\n'
   + '\n'
   + 'export default function Demo() {\n'
-  + '  return (\n'
-  + '    <Paper radius="md" withBorder withPadding>\n'
-  + '      This is a Paper component.\n'
-  + '    </Paper>\n'
-  + '  );\n'
+  + '  return <Paper>This is a Paper component.</Paper>;\n'
   + '}\n'
   ;
 

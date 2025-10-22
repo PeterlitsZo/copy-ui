@@ -8,6 +8,7 @@ import styles from "./Paper.module.scss";
 type PaperProps = ComponentProps<"div"> & {
   radius?: "none" | "sm" | "md" | "lg";
   withBorder?: boolean;
+  withPadding?: boolean;
 };
 
 const Paper: FC<PaperProps> = (props) => {
@@ -16,6 +17,7 @@ const Paper: FC<PaperProps> = (props) => {
     style,
     radius = "none",
     withBorder = false,
+    withPadding = false,
     ...rest
   } = props;
 
@@ -38,6 +40,7 @@ const Paper: FC<PaperProps> = (props) => {
       className={classNames(className, styles.paper)}
       style={computedStyle}
       data-with-border={withBorder}
+      data-with-padding={withPadding}
       {...rest}
     />
   );

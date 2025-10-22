@@ -4,7 +4,7 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
-const nextComponentNames = ["Typography", "Tooltip", "Tag"];
+const nextComponentNames = ["Paper", "Typography", "Tooltip", "Tag"];
 
 export default [
   index("routes/home.tsx"),

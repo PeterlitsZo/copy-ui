@@ -2,7 +2,7 @@ import { Paper } from "@/components/Paper";
 
 export default function Demo() {
   return (
-    <Paper radius="md" withBorder>
+    <Paper radius="md" withBorder withPadding>
       This is a Paper component.
     </Paper>
   );
