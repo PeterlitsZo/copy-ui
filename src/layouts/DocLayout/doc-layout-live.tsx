@@ -8,10 +8,11 @@ import styles from "./doc-layout-live.module.scss";
 type DocLayoutLiveProps = {
   code: string;
   node: ReactNode;
+  nodeBgKind?: "none" | "dots";
 };
 
 const DocLayoutLive: FC<DocLayoutLiveProps> = (props) => {
-  const { code, node } = props;
+  const { code, node, nodeBgKind = "dots" } = props;
 
   const theme = useTheme();
 
@@ -23,7 +24,7 @@ const DocLayoutLive: FC<DocLayoutLiveProps> = (props) => {
   return (
     <div className={styles.docLayoutLive} style={stx}>
       <div className={styles.docLayoutLiveNode}>
-        <Background kind="dots" />
+        {nodeBgKind !== "none" && <Background kind={nodeBgKind} />}
         <div style={{ position: "relative" }}>{node}</div>
       </div>
       <ScrollArea className={styles.docLayoutLiveCode}>
