@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { CopyUiProvider } from "@/components/CopyUiProvider";
 import { Navbar } from "@/components/Navbar";
 import { ScrollArea } from "@/components/ScrollArea";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -26,21 +27,23 @@ export const ComponentTemplate: FC<ComponentTemplateProps> = (props) => {
   }
 
   return (
-    <ThemeProvider>
-      <Toast.Context>
-        <div className={styles.page}>
-          <Navbar active={computedIdx} />
-          <ScrollArea className={styles.childrenContainer}>
-            <ScrollArea.Viewport>
-              <ScrollArea.Content>{children}</ScrollArea.Content>
-            </ScrollArea.Viewport>
-            <ScrollArea.Scrollbar>
-              <ScrollArea.Thumb />
-            </ScrollArea.Scrollbar>
-          </ScrollArea>
-        </div>
-        <Toast.Container />
-      </Toast.Context>
-    </ThemeProvider>
+    <CopyUiProvider>
+      <ThemeProvider>
+        <Toast.Context>
+          <div className={styles.page}>
+            <Navbar active={computedIdx} />
+            <ScrollArea className={styles.childrenContainer}>
+              <ScrollArea.Viewport>
+                <ScrollArea.Content>{children}</ScrollArea.Content>
+              </ScrollArea.Viewport>
+              <ScrollArea.Scrollbar>
+                <ScrollArea.Thumb />
+              </ScrollArea.Scrollbar>
+            </ScrollArea>
+          </div>
+          <Toast.Container />
+        </Toast.Context>
+      </ThemeProvider>
+    </CopyUiProvider>
   );
 };

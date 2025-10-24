@@ -11,6 +11,7 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "Card", "path": "/v0/components/Card", "wip": false},
   {"name": "CodeBlock", "path": "/v0/components/CodeBlock", "wip": false},
   {"name": "CodeHighlight", "path": "/v0/components/CodeHighlight", "wip": false},
+  {"name": "CopyUiProvider", "path": "/v0/components/CopyUiProvider", "wip": false},
   {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": true},
   {"name": "Field", "path": "/v0/components/Field", "wip": false},
   {"name": "Flex", "path": "/v0/components/Flex", "wip": false},
