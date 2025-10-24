@@ -3,4 +3,6 @@
 
 export const changelog = ''
   + '- 2025-10-10: Initial version.\n'
+  + '- 2025-10-24: Support render code blocks (using internal rehype plugins). Wrap\n'
+  + '  its children in `Typography.Root`.\n'
   ;
