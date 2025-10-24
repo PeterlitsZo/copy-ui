@@ -4,3 +4,4 @@
   component structure with proper wrapper and section styling. Update import
   paths and code formatting.
 - 2025-10-20: Support `disabled` prop.
+- 2025-10-24: Support the `className` prop.

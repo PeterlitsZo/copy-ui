@@ -1,3 +1,3 @@
-// InputBase from copy-ui @ 2025-10-20.
+// InputBase from copy-ui @ 2025-10-24.
 
-export { InputBase } from "./InputBase";
+export { InputBase } from "./input-base";
