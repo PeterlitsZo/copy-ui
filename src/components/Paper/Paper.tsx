@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
 
+import { useJss } from "@/components/CopyUiProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
-import styles from "./Paper.module.scss";
+import styles from "./paper.module.scss";
 
 type PaperProps = ComponentProps<"div"> & {
   radius?: "none" | "sm" | "md" | "lg";
@@ -14,7 +15,6 @@ type PaperProps = ComponentProps<"div"> & {
 const Paper: FC<PaperProps> = (props) => {
   const {
     className,
-    style,
     radius = "none",
     withBorder = false,
     withPadding = false,
@@ -22,9 +22,9 @@ const Paper: FC<PaperProps> = (props) => {
   } = props;
 
   const theme = useTheme();
+  const jss = useJss();
 
-  const computedStyle = {
-    ...style,
+  const stx = jss.hash({
     "--paper-bg": "white",
     "--paper-border-color": theme.colors.gray["300"],
     "--paper-border-radius": {
@@ -33,12 +33,11 @@ const Paper: FC<PaperProps> = (props) => {
       md: "0.5rem",
       lg: "1rem",
     }[radius],
-  } as CSSProperties;
+  }) as CSSProperties;
 
   return (
     <div
-      className={classNames(className, styles.paper)}
-      style={computedStyle}
+      className={classNames(className, styles.paper, stx)}
       data-with-border={withBorder}
       data-with-padding={withPadding}
       {...rest}

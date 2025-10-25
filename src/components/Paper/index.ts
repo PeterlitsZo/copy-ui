@@ -1,3 +1,3 @@
-// Paper from copy-ui @ 2025-10-22.
+// Paper from copy-ui @ 2025-10-25.
 
-export { Paper } from "./Paper";
+export { Paper } from "./paper";

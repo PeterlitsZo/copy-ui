@@ -1,2 +1,3 @@
 - 2025-10-17: Initial version.
 - 2025-10-22: Add `withPadding` prop to control internal padding.
+- 2025-10-25: Use `useJss` for styles.
