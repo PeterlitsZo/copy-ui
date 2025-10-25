@@ -61,6 +61,7 @@ sourceCode['paper.module.scss'] = ''
   + '  .paper {\n'
   + '    background-color: var(--paper-bg);\n'
   + '    border-radius: var(--paper-border-radius);\n'
+  + '    overflow: hidden;\n'
   + '\n'
   + "    &[data-with-border='true'] {\n"
   + '      border: 1px solid var(--paper-border-color);\n'

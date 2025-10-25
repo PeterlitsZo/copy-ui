@@ -2,6 +2,7 @@
   .paper {
     background-color: var(--paper-bg);
     border-radius: var(--paper-border-radius);
+    overflow: hidden;
 
     &[data-with-border='true'] {
       border: 1px solid var(--paper-border-color);
