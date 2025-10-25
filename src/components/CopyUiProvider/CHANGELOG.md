@@ -1,1 +1,2 @@
 - 2025-10-24: Initial version.
+- 2025-10-25: Use `useRef` to avoid re-creating zustand store on each render.
