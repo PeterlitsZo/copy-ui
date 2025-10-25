@@ -1,3 +1,3 @@
-// DatePicker from copy-ui @ 2025-09-26.
+// DatePicker from copy-ui @ 2025-10-25.
 
-export { DatePicker } from "./DatePicker";
+export { DatePicker } from "./date-picker";

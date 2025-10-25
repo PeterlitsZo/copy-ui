@@ -12,7 +12,7 @@ export const components: { name: string, path: string, wip: boolean }[] = [
   {"name": "CodeBlock", "path": "/v0/components/CodeBlock", "wip": false},
   {"name": "CodeHighlight", "path": "/v0/components/CodeHighlight", "wip": false},
   {"name": "CopyUiProvider", "path": "/v0/components/CopyUiProvider", "wip": false},
-  {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": true},
+  {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": false},
   {"name": "Field", "path": "/v0/components/Field", "wip": false},
   {"name": "Flex", "path": "/v0/components/Flex", "wip": false},
   {"name": "IconButton", "path": "/v0/components/IconButton", "wip": false},

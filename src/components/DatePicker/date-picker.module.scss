@@ -1,0 +1,36 @@
+@layer components {
+  .datePickerInput {
+    padding-inline: var(--data-picker-input-padding-inline);
+    user-select: none;
+  }
+
+  .datePickerInputPart {
+    cursor: pointer;
+    padding: 0 calc(0.125rem + 1px);
+    margin: calc(-0.125rem - 1px);
+    border-radius: 0.25rem;
+    caret-color: transparent;
+
+    &:hover {
+      background-color: var(--data-picker-input-part-hover-bg-color);
+    }
+
+    &:focus {
+      background-color: var(--data-picker-input-part-focus-bg-color);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &.noValue {
+      color: var(--data-picker-input-part-no-value-color);
+    }
+  }
+
+  .datePickerInputDecorator {
+    position: relative;
+    color: var(--data-picker-input-decorator-color);
+    padding: 0 0.5px;
+  }
+}

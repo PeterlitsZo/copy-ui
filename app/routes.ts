@@ -8,6 +8,7 @@ const nextComponentNames = [
   "Avatar",
   "Card",
   "CopyUiProvider",
+  "DatePicker",
   "InputBase",
   "Flex",
   "Markdown",
