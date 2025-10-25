@@ -1,2 +1,3 @@
 - 2025-09-30: Initial version.
 - 2025-10-04: Update code style.
+- 2025-10-25: Support `style` prop and add `Background.Container` sub-component.

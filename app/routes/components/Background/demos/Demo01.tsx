@@ -1,19 +1,19 @@
 import { Background } from "src/components/Background";
-
+import { Paper } from "@/components/Paper";
 import { lorem } from "./lorem";
 
 export default function Demo() {
   const style = {
     width: "30rem",
     height: "15rem",
-    padding: "1rem",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
-    backgroundColor: "white",
   };
+
   return (
-    <div style={style}>
-      <Background kind="lines" />
-      <div style={{ position: "relative" }}>{lorem}</div>
-    </div>
+    <Paper style={style} withBorder radius="md">
+      <Background.Container style={{ padding: "1rem" }}>
+        <Background kind="dots" />
+        <div style={{ position: "relative" }}>{lorem}</div>
+      </Background.Container>
+    </Paper>
   );
 }

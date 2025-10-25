@@ -6,6 +6,7 @@ import { utilsRoutes } from "./utils-routes.codegen";
 
 const nextComponentNames = [
   "Avatar",
+  "Background",
   "Card",
   "Checkbox",
   "CopyUiProvider",

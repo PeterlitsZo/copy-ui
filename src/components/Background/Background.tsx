@@ -1,14 +1,22 @@
 import classNames from "classnames";
-import { type FC, useLayoutEffect, useRef } from "react";
+import { type CSSProperties, type FC, useLayoutEffect, useRef } from "react";
 
-import styles from "./Background.module.scss";
+import styles from "./background.module.scss";
+import { BackgroundContainer } from "./background-container";
 
-interface BackgroundProps {
+type BackgroundProps = {
   className?: string;
+  style?: CSSProperties;
   kind: "dots" | "lines";
-}
+};
 
-export const Background: FC<BackgroundProps> = ({ className, kind }) => {
+type BackgroundComponent = FC<BackgroundProps> & {
+  Container: typeof BackgroundContainer;
+};
+
+const Background: BackgroundComponent = (props: BackgroundProps) => {
+  const { className, style, kind } = props;
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -86,6 +94,7 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
   return (
     <div
       className={classNames(styles.backgroundWrapper, className)}
+      style={style}
       ref={wrapperRef}
     >
       <canvas ref={canvasRef} />
@@ -94,3 +103,7 @@ export const Background: FC<BackgroundProps> = ({ className, kind }) => {
 };
 
 Background.displayName = "Background";
+
+Background.Container = BackgroundContainer;
+
+export { Background };

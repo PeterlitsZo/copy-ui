@@ -1,3 +1,3 @@
-// Background from copy-ui @ 2025-09-30
+// Background from copy-ui @ 2025-10-25.
 
-export { Background } from "./Background";
+export { Background } from "./background";
