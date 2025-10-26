@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-18: Initial version.\n'
+  + '- 2025-10-26: Support `size` prop and custom separator content.\n'
   ;

@@ -1,57 +1,12 @@
-import type { CSSProperties, FC } from "react";
-
-import { useTheme } from "@/components/ThemeProvider";
-
-import styles from "./Breadcrumb.module.scss";
-
-// Breadcrumb.Item
-// =============================================================================
-
-type BreadcrumbItemProps = {
-  children: React.ReactNode;
-  current?: boolean;
-};
-
-const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
-  const { children, current = false } = props;
-
-  const theme = useTheme();
-
-  const color = current ? theme.colors.gray["900"] : theme.colors.gray["600"];
-  const computedStyle = {
-    "--breadcrumb-item-color": color,
-  } as CSSProperties;
-
-  return (
-    <li className={styles.breadcrumbItem} style={computedStyle}>
-      {children}
-    </li>
-  );
-};
-
-// Breadcrumb.Sep
-// =============================================================================
-
-type BreadcrumbSepProps = object;
-
-const BreadcrumbSep: FC<BreadcrumbSepProps> = () => {
-  const theme = useTheme();
-
-  const computedStyle = {
-    "--breadcrumb-sep-color": theme.colors.gray["500"],
-  } as CSSProperties;
-
-  return (
-    <li className={styles.breadcrumbSep} style={computedStyle}>
-      /
-    </li>
-  );
-};
-
-// Breadcrumb
-// =============================================================================
+import classNames from "classnames";
+import type { FC } from "react";
+import { useJss } from "../CopyUiProvider";
+import styles from "./breadcrumb.module.scss";
+import { BreadcrumbItem } from "./breadcrumb-item";
+import { BreadcrumbSep } from "./breadcrumb-sep";
 
 type BreadcrumbProps = {
+  size?: "sm" | "md" | "lg";
   children?: React.ReactNode;
 };
 
@@ -61,17 +16,24 @@ type BreadcrumbComponent = FC<BreadcrumbProps> & {
 };
 
 const Breadcrumb: BreadcrumbComponent = (props: BreadcrumbProps) => {
-  const { children } = props;
+  const { size = "md", children } = props;
 
-  return <ol className={styles.breadcrumb}>{children}</ol>;
+  const jss = useJss();
+
+  const stx = jss.hash({
+    "--breadcrumb-font-size": {
+      sm: "0.875rem",
+      md: "1rem",
+      lg: "1.125rem",
+    }[size],
+  });
+
+  return <ol className={classNames(styles.breadcrumb, stx)}>{children}</ol>;
 };
 
 Breadcrumb.displayName = "Breadcrumb";
 
 Breadcrumb.Item = BreadcrumbItem;
 Breadcrumb.Sep = BreadcrumbSep;
-
-// Exports
-// =============================================================================
 
 export { Breadcrumb };
