@@ -5,3 +5,4 @@
 - 2025-10-03: Fix missing dependencies in useEffect hooks, etc.
 - 2025-10-11: Support `id` prop for better form integration. Make it be able to
   uncontrolled. Support `defaultValue` prop. Code formatting improvements.
+- 2025-10-26: Update styles (padding) to make it look better.

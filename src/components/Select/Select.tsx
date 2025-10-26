@@ -1,11 +1,11 @@
+import classNames from "classnames";
 import { ChevronsUpDown } from "lucide-react";
-import type { CSSProperties } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import { useJss } from "@/components/CopyUiProvider";
 import { Popover } from "@/components/Popover";
 import { useTheme } from "@/components/ThemeProvider";
-
-import styles from "./Select.module.scss";
+import styles from "./select.module.scss";
 
 interface SelectProps<V extends string> {
   id?: string;
@@ -33,6 +33,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
   } = props;
 
   const theme = useTheme();
+  const jss = useJss();
 
   const mainRef = useRef<HTMLButtonElement | null>(null);
 
@@ -56,7 +57,16 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     ? options.find((o) => o.value === internalValue)?.label
     : null;
 
-  const mainStyle = {
+  const baseStyle = {
+    "--select-list-padding": "0.25rem",
+    "--select-list-item-padding-inline": "0.5rem",
+    "--select-main-padding-inline":
+      "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
+  };
+
+  const mainStx = jss.hash({
+    ...baseStyle,
+
     "--select-font-size": theme.tokens.inputBaseMdFontSize,
     "--select-line-height": theme.tokens.inputBaseMdLineHeight,
 
@@ -68,9 +78,11 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     "--select-main-disabled-color": theme.colors.gray["600"],
     "--select-main-disabled-bg-color": theme.colors.gray["000"],
     "--select-main-disabled-border-color": theme.colors.gray["200"],
-  };
+  });
 
-  const listStyle = {
+  const listStx = jss.hash({
+    ...baseStyle,
+
     "--select-font-size": theme.tokens.inputBaseMdFontSize,
     "--select-line-height": theme.tokens.inputBaseMdLineHeight,
 
@@ -79,7 +91,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     "--select-list-border-radius": theme.tokens.inputBaseBorderRadius,
 
     "--select-item-hover-bg-color": theme.colors.gray["000"],
-  };
+  });
 
   return (
     <Popover>
@@ -91,8 +103,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
               setRef(el);
               mainRef.current = el;
             }}
-            className={styles.selectMain}
-            style={mainStyle as CSSProperties}
+            className={classNames(styles.selectMain, mainStx)}
             onClick={() => !disabled && onToggle()}
             data-value-picked={internalValue == null ? "false" : "true"}
             data-disabled={disabled ? "true" : "false"}
@@ -116,8 +127,8 @@ const Select = <V extends string>(props: SelectProps<V>) => {
           isOpen && (
             <ul
               ref={setRef}
-              className={styles.selectList}
-              style={{ ...listStyle, ...floatingStyles }}
+              className={classNames(styles.selectList, listStx)}
+              style={floatingStyles}
             >
               {options.map((option) => {
                 const handleClick = () => {

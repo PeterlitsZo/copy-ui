@@ -17,6 +17,8 @@ const nextComponentNames = [
   "Flex",
   "Markdown",
   "Paper",
+  "Popover",
+  "Select",
   "Typography",
   "Tooltip",
   "Tag",
