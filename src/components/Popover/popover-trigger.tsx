@@ -1,0 +1,59 @@
+import { type FC, memo, type ReactNode, useMemo } from "react";
+import { useStore } from "zustand";
+import { usePopoverStore } from "./popover-context";
+
+interface PopoverTriggerRenderProps {
+  setRef: (el: Element | null) => void;
+
+  onToggle: () => void;
+  onClose: () => void;
+  onOpen: () => void;
+}
+
+interface PopoverTriggerProps {
+  render: (props: PopoverTriggerRenderProps) => ReactNode;
+}
+
+const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
+  const { render } = props;
+
+  const popoverStore = usePopoverStore();
+
+  const toggle = useStore(popoverStore, (state) => state.toggle);
+  const open = useStore(popoverStore, (state) => state.open);
+  const close = useStore(popoverStore, (state) => state.close);
+  const setElRef = useStore(popoverStore, (state) => state.setElRef);
+  const enableTriggerClickHandler = useStore(
+    popoverStore,
+    (state) => state.enableTriggerClickHandler,
+  );
+  const triggerClickHandlerEnabled = useStore(
+    popoverStore,
+    (state) => state.triggerClickHandlerEnabled,
+  );
+
+  const PopoverTriggerRender = useMemo(() => memo(render), [render]);
+
+  return (
+    <PopoverTriggerRender
+      setRef={setElRef}
+      onOpen={open}
+      onClose={close}
+      onToggle={() => {
+        if (triggerClickHandlerEnabled) {
+          toggle();
+        } else {
+          // Disable because we clicked outside the portal but click the
+          // trigger.
+          //
+          // Now we need to reset it (by enable the trigger click handler).
+          enableTriggerClickHandler();
+        }
+      }}
+    />
+  );
+};
+
+PopoverTrigger.displayName = "Popover.Trigger";
+
+export { PopoverTrigger };

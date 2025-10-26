@@ -13,4 +13,6 @@ export const changelog = ''
   + "- 2025-09-25: Support `onOpen` and `onClose` props for `Popover.Trigger`'s\n"
   + '  render. And rename its `onClick` props to `onToggle`.\n'
   + '- 2025-10-03: Fix missing dependencies in useEffect hooks.\n'
+  + '- 2025-10-26: Using `Modal` component in `Popover.Portal` to handle the portal\n'
+  + '  rendering.\n'
   ;

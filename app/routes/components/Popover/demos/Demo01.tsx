@@ -3,9 +3,9 @@ import { useState } from "react";
 import { type Placement, Popover } from "src/components/Popover";
 import { Select } from "src/components/Select";
 
-import styles from "./Demo.module.scss";
+import styles from "./Demo01.module.scss";
 
-export function Demo() {
+export default function Demo() {
   const [placement, setPlacement] = useState(null as Placement | null);
 
   const placementOptions: Array<{ label: string; value: Placement }> = [
