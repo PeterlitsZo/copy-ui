@@ -1,3 +1,3 @@
-// Flex from copy-ui @ 2025-10-04.
+// Flex from copy-ui @ 2025-10-26.
 
-export { Flex } from "./Flex";
+export { Flex } from "./flex";

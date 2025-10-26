@@ -1,4 +1,5 @@
 import type { ComponentProps, FC } from "react";
+import { useJss } from "../CopyUiProvider";
 
 type FlexProps = ComponentProps<"div"> & {
   dir?: "row" | "column";
@@ -22,24 +23,23 @@ export const Flex: FC<FlexProps> = (props) => {
     justifyContent = "flex-start",
     gap = "0",
     wrap = false,
-    style,
     children,
     ...rest
   } = props;
 
+  const jss = useJss();
+
+  const stx = jss.hash({
+    display: "flex",
+    flexDirection: direction,
+    alignItems,
+    justifyContent,
+    gap,
+    flexWrap: wrap ? "wrap" : "nowrap",
+  });
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: direction,
-        alignItems,
-        justifyContent,
-        gap,
-        flexWrap: wrap ? "wrap" : "nowrap",
-        ...style,
-      }}
-      {...rest}
-    >
+    <div className={stx} {...rest}>
       {children}
     </div>
   );

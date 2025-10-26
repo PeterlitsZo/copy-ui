@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-10-02: Initial version.\n'
   + '- 2025-10-04: Support custom `style` prop and spread additional props. Extend\n'
   + '  from `ComponentProps<"div">` for better TypeScript support.\n'
+  + '- 2025-10-26: Refactor to use `useJss` for styling.\n'
   ;
