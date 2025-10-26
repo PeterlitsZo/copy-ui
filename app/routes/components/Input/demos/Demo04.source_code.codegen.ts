@@ -5,7 +5,7 @@ const demoSourceCode = ''
   + 'import { Input } from "@/components/Input";\n'
   + '\n'
   + 'export default function Demo() {\n'
-  + '  return <Input placeholder="Type something..." />;\n'
+  + '  return <Input disabled placeholder="Disabled input" />;\n'
   + '}\n'
   ;
 

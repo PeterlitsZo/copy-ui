@@ -1,24 +1,35 @@
-.input {
-  align-self: stretch;
-  flex: 1;
+@layer components {
+  .inputBase {
+    background-color: var(--input-bg-color);
+  }
 
-  padding-inline-start: var(--input-padding-inline-start);
-  padding-inline-end: var(--input-padding-inline-end);
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
-  caret-color: var(--input-caret-color);
+  .input {
+    align-self: stretch;
+    flex: 1;
 
-  &:focus {
+    padding-inline-start: var(--input-padding-inline-start);
+    padding-inline-end: var(--input-padding-inline-end);
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
+    caret-color: var(--input-caret-color);
+
     outline: none;
-    border-color: var(--input-border-color-focus);
-  }
+    border: none;
 
-  &::placeholder {
-    color: var(--input-placeholder-color);
-  }
+    .inputBase:has(&:focus) {
+      outline: none;
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--input-focus-border-color);
+    }
 
-  [data-disabled="true"] & {
-    pointer-events: none;
-    cursor: inherit;
+    &::placeholder {
+      color: var(--input-placeholder-color);
+    }
+
+    [data-disabled="true"] & {
+      pointer-events: none;
+      cursor: inherit;
+    }
   }
 }

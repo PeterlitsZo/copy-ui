@@ -12,6 +12,7 @@ const nextComponentNames = [
   "Checkbox",
   "CopyUiProvider",
   "DatePicker",
+  "Input",
   "InputBase",
   "Flex",
   "Markdown",

@@ -14,4 +14,5 @@ export const changelog = ''
   + '  component to add elements inside the input field on the left or right side.\n'
   + '  Adjust padding based on presence of these sections.\n'
   + '- 2025-10-20: Support `disabled` prop.\n'
+  + '- 2025-10-26: Support `variant` prop. Update styles to make it look better.\n'
   ;
