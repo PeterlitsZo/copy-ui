@@ -35,6 +35,11 @@ export default function Demo() {
           ]}
         />
       </Field>
+
+      <Field>
+        <Field.Label>About You</Field.Label>
+        <Field.Textarea placeholder="Tell us about yourself" />
+      </Field>
     </Flex>
   );
 }

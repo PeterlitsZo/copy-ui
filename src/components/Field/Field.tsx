@@ -4,6 +4,7 @@ import { createContext, useContext, useId } from "react";
 
 import { Input } from "@/components/Input";
 import { Select } from "@/components/Select";
+import { Textarea } from "@/components/Textarea";
 import { useTheme } from "@/components/ThemeProvider";
 
 import styles from "./Field.module.scss";
@@ -127,6 +128,26 @@ const FieldInput: FC<FieldInputProps> = (props) => {
 
 FieldInput.displayName = "Field.Input";
 
+// Field.Textarea
+// =============================================================================
+
+type FieldTextareaProps = ComponentProps<"textarea">;
+
+const FieldTextarea: FC<FieldTextareaProps> = (props) => {
+  const { ...rest } = props;
+
+  const context = useContext(FieldContext);
+  if (!context) {
+    throw new Error("Field.Textarea must be used within a Field component");
+  }
+
+  const { id } = context;
+
+  return <Textarea id={id} {...rest} />;
+};
+
+FieldTextarea.displayName = "Field.Textarea";
+
 // Field.Select
 // =============================================================================
 
@@ -154,6 +175,7 @@ type FieldComponent = FC<FieldProps> & {
   Label: typeof FieldLabel;
   Description: typeof FieldDescription;
   Error: typeof FieldError;
+  Textarea: typeof FieldTextarea;
   Input: typeof FieldInput;
   Select: typeof FieldSelect;
 };
@@ -180,6 +202,7 @@ const Field: FieldComponent = (props) => {
 Field.Label = FieldLabel;
 Field.Description = FieldDescription;
 Field.Error = FieldError;
+Field.Textarea = FieldTextarea;
 Field.Input = FieldInput;
 Field.Select = FieldSelect;
 
