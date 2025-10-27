@@ -5,6 +5,8 @@ import { usePopoverStore } from "./popover-context";
 interface PopoverTriggerRenderProps {
   setRef: (el: Element | null) => void;
 
+  isOpen: boolean;
+
   onToggle: () => void;
   onClose: () => void;
   onOpen: () => void;
@@ -19,6 +21,7 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
 
   const popoverStore = usePopoverStore();
 
+  const isOpen = useStore(popoverStore, (state) => state.isOpen);
   const toggle = useStore(popoverStore, (state) => state.toggle);
   const open = useStore(popoverStore, (state) => state.open);
   const close = useStore(popoverStore, (state) => state.close);
@@ -37,6 +40,7 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
   return (
     <PopoverTriggerRender
       setRef={setElRef}
+      isOpen={isOpen}
       onOpen={open}
       onClose={close}
       onToggle={() => {

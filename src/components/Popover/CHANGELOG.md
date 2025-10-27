@@ -11,3 +11,4 @@
 - 2025-10-03: Fix missing dependencies in useEffect hooks.
 - 2025-10-26: Using `Modal` component in `Popover.Portal` to handle the portal
   rendering.
+- 2025-10-27: Make `Popover.Trigger`'s render can have prop `isOpen`.
