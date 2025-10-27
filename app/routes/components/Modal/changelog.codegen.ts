@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-10-13: Initial version.\n'
   + '- 2025-10-14: Make `Modal.Content` support `center` and `shadow` props. Update\n'
   + '  `Modal.Content` styles.\n'
+  + '- 2025-10-27: Add `Modal.Raw` component.\n'
   ;

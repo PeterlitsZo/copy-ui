@@ -16,6 +16,7 @@ const nextComponentNames = [
   "InputBase",
   "Flex",
   "Markdown",
+  "Modal",
   "Paper",
   "Popover",
   "Select",

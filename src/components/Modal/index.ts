@@ -1,3 +1,3 @@
-// Modal from copy-ui @ 2025-10-14.
+// Modal from copy-ui @ 2025-10-27.
 
-export { Modal } from "./Modal";
+export { Modal } from "./modal";
