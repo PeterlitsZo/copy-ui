@@ -1,2 +1,3 @@
 - 2025-10-24: Initial version.
 - 2025-10-25: Use `useRef` to avoid re-creating zustand store on each render.
+- 2025-10-27: Wrap children with `Toast.Context`.

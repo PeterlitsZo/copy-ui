@@ -1,6 +1,8 @@
 import { createContext, type FC, useEffect, useRef } from "react";
 import { createStore, type StoreApi } from "zustand";
+import { Toast } from "@/components/Toast";
 import { createJssState, type JssState } from "@/utils/jss";
+
 import { useJss } from "./use-jss";
 
 type CopyUiStoreState = {
@@ -27,7 +29,10 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
 
   return (
     <CopyUiContext.Provider value={storeRef.current}>
-      {children}
+      <Toast.Context>
+        {children}
+        <Toast.Container />
+      </Toast.Context>
       <JssSsrCss />
     </CopyUiContext.Provider>
   );
