@@ -74,10 +74,10 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     "--select-main-border-color": theme.tokens.inputBaseDefaultBorderColor,
     "--select-main-border-radius": theme.tokens.inputBaseBorderRadius,
     "--select-main-placeholder-color": theme.tokens.inputBasePlaceholderColor,
-
     "--select-main-disabled-color": theme.colors.gray["600"],
     "--select-main-disabled-bg-color": theme.colors.gray["000"],
     "--select-main-disabled-border-color": theme.colors.gray["200"],
+    "--select-main-focus-border-color": theme.colors.blue["800"],
   });
 
   const listStx = jss.hash({
@@ -96,7 +96,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
   return (
     <Popover>
       <Popover.Trigger
-        render={({ setRef, onToggle }) => (
+        render={({ setRef, isOpen, onToggle }) => (
           <button
             id={id}
             ref={(el) => {
@@ -105,8 +105,9 @@ const Select = <V extends string>(props: SelectProps<V>) => {
             }}
             className={classNames(styles.selectMain, mainStx)}
             onClick={() => !disabled && onToggle()}
-            data-value-picked={internalValue == null ? "false" : "true"}
-            data-disabled={disabled ? "true" : "false"}
+            data-value-picked={internalValue == null ? undefined : "true"}
+            data-disabled={disabled ? "true" : undefined}
+            data-opened={isOpen ? "true" : undefined}
             type="button"
             role="combobox"
             aria-haspopup="listbox"

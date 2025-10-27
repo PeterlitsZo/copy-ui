@@ -10,4 +10,6 @@ export const changelog = ''
   + '- 2025-10-11: Support `id` prop for better form integration. Make it be able to\n'
   + '  uncontrolled. Support `defaultValue` prop. Code formatting improvements.\n'
   + '- 2025-10-26: Update styles (padding) to make it look better.\n'
+  + '- 2025-10-27: Update styles when Select is opened or focused. Make its\n'
+  + '  `min-width` be `8rem` now (rather than `16rem`).\n'
   ;

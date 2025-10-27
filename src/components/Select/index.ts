@@ -1,3 +1,3 @@
-// Select from copy-ui @ 2025-10-26.
+// Select from copy-ui @ 2025-10-27.
 
 export { Select } from "./select";

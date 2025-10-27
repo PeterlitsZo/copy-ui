@@ -7,7 +7,7 @@
 
   padding-inline: var(--select-main-padding-inline);
   height: var(--select-main-height);
-  min-width: 16rem;
+  min-width: 8rem;
 
   border-width: 1px;
   border-style: solid;
@@ -19,7 +19,7 @@
   cursor: pointer;
   user-select: none;
 
-  &[data-value-picked="false"] {
+  &:not([data-value-picked="true"]) {
     color: var(--select-main-placeholder-color);
   }
   &[data-disabled="true"] {
@@ -27,6 +27,13 @@
     border-color: var(--select-main-disabled-border-color);
     color: var(--select-main-disabled-color);
     cursor: not-allowed;
+  }
+  &:focus {
+    border-color: var(--select-main-focus-border-color);
+    outline: none;
+  }
+  &[data-opened="true"] {
+    border-color: var(--select-main-focus-border-color);
   }
 }
 
