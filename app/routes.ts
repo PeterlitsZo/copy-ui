@@ -20,9 +20,10 @@ const nextComponentNames = [
   "Paper",
   "Popover",
   "Select",
-  "Typography",
-  "Tooltip",
   "Tag",
+  "Textarea",
+  "Tooltip",
+  "Typography",
 ];
 
 export default [

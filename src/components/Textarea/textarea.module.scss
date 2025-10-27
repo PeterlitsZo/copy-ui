@@ -1,0 +1,21 @@
+@layer components {
+  .textarea {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--textarea-border-color);
+    border-radius: 0.5rem;
+    font-size: var(--textarea-font-size);
+    font-family: inherit;
+    resize: vertical;
+    background-color: var(--textarea-bg-color);
+
+    &:focus {
+      border-color: var(--textarea-focus-border-color);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--textarea-placeholder-color);
+    }
+  }
+}
