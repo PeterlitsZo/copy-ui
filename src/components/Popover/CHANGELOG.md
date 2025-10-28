@@ -12,3 +12,5 @@
 - 2025-10-26: Using `Modal` component in `Popover.Portal` to handle the portal
   rendering.
 - 2025-10-27: Make `Popover.Trigger`'s render can have prop `isOpen`.
+- 2025-10-28: Using `Modal.Raw` rather than `Modal`. Export the type
+  `PopoverTriggerRender`.

@@ -101,15 +101,14 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
   if (!mounted) return null;
 
   return (
-    // TODO (PeterlitsZo): Should I add a `Modal.Raw` and use it at here?
-    <Modal>
+    <Modal.Raw>
       <PopoverPortalRender
         setRef={setFloatingRef}
         togglePortal={toggle}
         isOpen={isOpen}
         floatingStyles={floatingStyles}
       />
-    </Modal>
+    </Modal.Raw>
   );
 };
 

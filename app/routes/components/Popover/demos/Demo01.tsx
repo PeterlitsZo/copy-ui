@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-import { type Placement, Popover } from "src/components/Popover";
-import { Select } from "src/components/Select";
+import { Flex } from "@/components/Flex/flex";
+import { Paper } from "@/components/Paper";
+import { type Placement, Popover } from "@/components/Popover";
+import { Select } from "@/components/Select";
 
 import styles from "./Demo01.module.scss";
 
@@ -24,31 +26,33 @@ export default function Demo() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "5rem" }}>
+    <Flex dir="column" gap="5rem">
       <Popover placement={placement || undefined}>
         <Popover.Trigger
           render={({ setRef, onToggle }) => (
-            <button
-              type="button"
+            <Paper
               ref={(el) => setRef(el)}
               onClick={onToggle}
-              className={styles.popoverTrigger}
+              className={styles.popoverTriggerCard}
+              withBorder
+              withPadding
             >
               Open Popover Portal
-            </button>
+            </Paper>
           )}
         />
         <Popover.Portal
           onClickOutside={({ closePortal: close }) => close()}
           render={({ setRef, isOpen, floatingStyles }) =>
             isOpen && (
-              <div
+              <Paper
                 ref={(el) => setRef(el)}
                 style={floatingStyles}
                 className={styles.popoverPortal}
+                withBorder
               >
                 You click to open me!
-              </div>
+              </Paper>
             )
           }
         />
@@ -59,6 +63,6 @@ export default function Demo() {
         onChange={(value) => setPlacement(value)}
         options={placementOptions}
       />
-    </div>
+    </Flex>
   );
 }

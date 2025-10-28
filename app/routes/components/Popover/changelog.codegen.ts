@@ -16,4 +16,6 @@ export const changelog = ''
   + '- 2025-10-26: Using `Modal` component in `Popover.Portal` to handle the portal\n'
   + '  rendering.\n'
   + "- 2025-10-27: Make `Popover.Trigger`'s render can have prop `isOpen`.\n"
+  + '- 2025-10-28: Using `Modal.Raw` rather than `Modal`. Export the type\n'
+  + '  `PopoverTriggerRender`.\n'
   ;

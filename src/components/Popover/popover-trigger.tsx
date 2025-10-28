@@ -1,4 +1,4 @@
-import { type FC, memo, type ReactNode, useMemo } from "react";
+import { type FC, memo, useMemo } from "react";
 import { useStore } from "zustand";
 import { usePopoverStore } from "./popover-context";
 
@@ -12,8 +12,10 @@ interface PopoverTriggerRenderProps {
   onOpen: () => void;
 }
 
+type PopoverTriggerRender = FC<PopoverTriggerRenderProps>;
+
 interface PopoverTriggerProps {
-  render: (props: PopoverTriggerRenderProps) => ReactNode;
+  render: PopoverTriggerRender;
 }
 
 const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
@@ -61,3 +63,4 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
 PopoverTrigger.displayName = "Popover.Trigger";
 
 export { PopoverTrigger };
+export type { PopoverTriggerRender };

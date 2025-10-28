@@ -1,3 +1,5 @@
-// Popover from copy-ui @ 2025-10-27.
+// Popover from copy-ui @ 2025-10-28.
 
-export { type Placement, Popover } from "./popover";
+export type { Placement } from "./popover";
+export { Popover } from "./popover";
+export type { PopoverTriggerRender } from "./popover-trigger";
