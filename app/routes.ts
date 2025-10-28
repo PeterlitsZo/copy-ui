@@ -8,6 +8,7 @@ const nextComponentNames = [
   "Avatar",
   "Background",
   "Breadcrumb",
+  "Button",
   "Card",
   "Checkbox",
   "CopyUiProvider",

@@ -12,3 +12,4 @@
 - 2025-10-08: Add `light` variant, update `ghost` variant styles.
 - 2025-10-15: Support change styles when `disabled`.
 - 2025-10-20: Support the prop `color`.
+- 2025-10-28: Add `secondary` variant.
