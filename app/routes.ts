@@ -23,6 +23,7 @@ const nextComponentNames = [
   "Select",
   "Tag",
   "Textarea",
+  "Toast",
   "Tooltip",
   "Typography",
 ];
