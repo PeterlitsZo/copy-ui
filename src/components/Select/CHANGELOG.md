@@ -8,3 +8,4 @@
 - 2025-10-26: Update styles (padding) to make it look better.
 - 2025-10-27: Update styles when Select is opened or focused. Make its
   `min-width` be `8rem` now (rather than `16rem`).
+- 2025-10-28: Refactor code to make code cleaner. Add a small gap in trigger.
