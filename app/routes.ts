@@ -21,6 +21,7 @@ const nextComponentNames = [
   "Modal",
   "Paper",
   "Popover",
+  "ScrollArea",
   "Select",
   "Tag",
   "Textarea",

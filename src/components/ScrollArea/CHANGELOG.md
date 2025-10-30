@@ -4,3 +4,5 @@
   hiding while being dragged.
 - 2025-10-14: Update the style of the scrollbar thumb - make sure it has more
   alpha when dragging.
+- 2025-10-30: Add the variant `absolute` (it uses absolute positioning to make
+  viewport just fill the container).

@@ -4,54 +4,21 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useLayoutEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import tinycolor from "tinycolor2";
-import { createStore, type StoreApi, useStore } from "zustand";
+import { type StoreApi, useStore } from "zustand";
 
 import { useTheme } from "@/components/ThemeProvider";
 
-import styles from "./ScrollArea.module.scss";
-
-// ScrollAreaStore
-// =============================================================================
-
-type ScrollAreaStoreState = {
-  hover: boolean;
-  thumbDragging: boolean;
-  contentHeight: number;
-  viewportHeight: number;
-  scrollTop: number;
-};
-
-type ScrollAreaStoreActions = {
-  setHover: (hover: boolean) => void;
-  setThumbDragging: (dragging: boolean) => void;
-  setContentHeight: (height: number) => void;
-  setViewportHeight: (height: number) => void;
-  setScrollTop: (scrollTop: number) => void;
-};
-
-type ScrollAreaStore = ScrollAreaStoreState & ScrollAreaStoreActions;
-
-function buildScrollAreaStore() {
-  return createStore<ScrollAreaStore>()((set) => ({
-    hover: false,
-    thumbDragging: false,
-    contentHeight: 0,
-    viewportHeight: 0,
-    scrollTop: 0,
-
-    setHover: (hover) => set(() => ({ hover })),
-    setThumbDragging: (dragging) => set(() => ({ thumbDragging: dragging })),
-    setContentHeight: (height) => set(() => ({ contentHeight: height })),
-    setViewportHeight: (height) => set(() => ({ viewportHeight: height })),
-    setScrollTop: (scrollTop) => set(() => ({ scrollTop })),
-  }));
-}
+import styles from "./scroll-area.module.scss";
+import {
+  buildScrollAreaStore,
+  type ScrollAreaStore,
+} from "./scroll-area-store";
 
 // ScrollAreaContext
 // =============================================================================
@@ -79,6 +46,7 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
   );
   const setScrollTop = useStore(context, (state) => state.setScrollTop);
   const scrollTop = useStore(context, (state) => state.scrollTop);
+  const variant = useStore(context, (state) => state.variant);
 
   // Handle scroll and resize events.
   useLayoutEffect(() => {
@@ -120,6 +88,7 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
     <div
       ref={viewportRef}
       className={classNames(className, styles.scrollAreaViewport)}
+      data-variant={variant}
       {...rest}
     >
       {children}
@@ -312,6 +281,7 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
 // =============================================================================
 
 type ScrollAreaProps = ComponentProps<"div"> & {
+  variant?: "default" | "absolute";
   children: React.ReactNode;
 };
 
@@ -322,15 +292,28 @@ type ScrollAreaComponent = FC<ScrollAreaProps> & {
   Thumb: typeof ScrollAreaThumb;
 };
 
-const ScrollArea: ScrollAreaComponent = (props) => {
-  const { children, className, ...rest } = props;
+const ScrollArea: ScrollAreaComponent = (props: ScrollAreaProps) => {
+  const { variant = "default", children, className, ...rest } = props;
 
-  const scrollAreaStore = useMemo(() => buildScrollAreaStore(), []);
+  const scrollAreaStoreRef = useRef<StoreApi<ScrollAreaStore> | null>(null);
+  if (scrollAreaStoreRef.current === null) {
+    scrollAreaStoreRef.current = buildScrollAreaStore();
+  }
 
-  const setHover = useStore(scrollAreaStore, (state) => state.setHover);
+  useEffect(() => {
+    const store = scrollAreaStoreRef.current;
+    if (store) {
+      store.getState().setVariant(variant);
+    }
+  }, [variant]);
+
+  const setHover = useStore(
+    scrollAreaStoreRef.current,
+    (state) => state.setHover,
+  );
 
   return (
-    <ScrollAreaContext value={scrollAreaStore}>
+    <ScrollAreaContext value={scrollAreaStoreRef.current}>
       {/* biome-ignore lint/a11y/noStaticElementInteractions: I think it's fine here. */}
       <div
         className={classNames(styles.scrollArea, className)}

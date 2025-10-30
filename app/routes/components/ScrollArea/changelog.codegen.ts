@@ -8,4 +8,6 @@ export const changelog = ''
   + '  hiding while being dragged.\n'
   + '- 2025-10-14: Update the style of the scrollbar thumb - make sure it has more\n'
   + '  alpha when dragging.\n'
+  + '- 2025-10-30: Add the variant `absolute` (it uses absolute positioning to make\n'
+  + '  viewport just fill the container).\n'
   ;
