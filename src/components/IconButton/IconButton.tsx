@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { merge } from "es-toolkit";
-import type { ComponentProps, CSSProperties, FC } from "react";
+import type { ComponentProps, FC } from "react";
 
+import { useJss } from "@/components/CopyUiProvider";
 import { useTheme } from "@/components/ThemeProvider";
+import { resolveStyle } from "@/utils/resolve-style";
 
 import styles from "./IconButton.module.scss";
 
@@ -14,58 +15,59 @@ export type IconButtonProps = ComponentProps<"button"> & {
 export const IconButton: FC<IconButtonProps> = (props) => {
   const theme = useTheme();
 
-  const { className, style, variant = "default", size = "md", ...rest } = props;
+  const { variant = "default", size = "md", className, ...rest } = props;
 
-  const computedStyle = mergeStyles([
-    variant === "default" &&
-      ({
-        "--button-bg": "white",
-        "--button-color": theme.colors.gray["800"],
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
-        "--button-bg-hover": theme.colors.gray["100"],
-      } as CSSProperties),
-    variant === "filled" &&
-      ({
-        "--button-bg": theme.colors.blue["600"],
-        "--button-color": "white",
-        "--button-border-width": "1px",
-        "--button-border-style": "solid",
-        "--button-border-color": theme.colors.blue["700"],
-        "--button-bg-hover": theme.colors.blue["700"],
-      } as CSSProperties),
-    size === "sm" &&
-      ({
-        "--button-size": "2rem",
-      } as CSSProperties),
-    size === "md" &&
-      ({
-        "--button-size": "2.25rem",
-      } as CSSProperties),
-    size === "lg" &&
-      ({
-        "--button-size": "2.5rem",
-      } as CSSProperties),
-    {
-      "--button-radius": "0.375rem",
-    } as CSSProperties,
-    style,
-  ]);
+  const jss = useJss();
+
+  const stx = jss.hash(
+    resolveStyle({
+      base: {
+        "--button-radius": "0.375rem",
+      },
+      variants: {
+        variant: {
+          default: {
+            "--button-bg": "white",
+            "--button-color": theme.colors.gray["800"],
+            "--button-border-width": "1px",
+            "--button-border-style": "solid",
+            "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
+            "--button-bg-hover": theme.colors.gray["100"],
+          },
+          filled: {
+            "--button-bg": theme.colors.blue["600"],
+            "--button-color": "white",
+            "--button-border-width": "1px",
+            "--button-border-style": "solid",
+            "--button-border-color": theme.colors.blue["700"],
+            "--button-bg-hover": theme.colors.blue["700"],
+          },
+        },
+        size: {
+          sm: {
+            "--button-size": "2rem",
+            "--icon-size": "1rem",
+          },
+          md: {
+            "--button-size": "2.25rem",
+            "--icon-size": "1.125rem",
+          },
+          lg: {
+            "--button-size": "2.5rem",
+            "--icon-size": "1.25rem",
+          },
+        },
+      },
+      cls: {
+        variant,
+        size,
+      },
+    }),
+  );
 
   return (
-    <button
-      className={classNames(styles.iconButton, className)}
-      style={computedStyle}
-      {...rest}
-    >
+    <button className={classNames(styles.iconButton, stx, className)} {...rest}>
       {props.children}
     </button>
   );
 };
-
-function mergeStyles(styles: (CSSProperties | false | undefined)[]) {
-  return styles.reduce((prev, next) => {
-    return next ? merge(prev as CSSProperties, next) : prev;
-  }, {}) as CSSProperties;
-}

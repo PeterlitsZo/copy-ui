@@ -14,6 +14,7 @@ const nextComponentNames = [
   "CopyUiProvider",
   "DatePicker",
   "Field",
+  "IconButton",
   "Input",
   "InputBase",
   "Flex",

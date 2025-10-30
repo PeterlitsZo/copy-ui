@@ -7,13 +7,13 @@ export default function Demo() {
   return (
     <Flex gap="1rem" alignItems="center">
       <IconButton size="sm">
-        <Trash size={"60%"} />
+        <Trash />
       </IconButton>
       <IconButton>
-        <Trash size={"60%"} />
+        <Trash />
       </IconButton>
       <IconButton size="lg" variant="filled">
-        <Trash size={"60%"} />
+        <Trash />
       </IconButton>
     </Flex>
   );
