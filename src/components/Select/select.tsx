@@ -1,7 +1,7 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
-import { Popover } from "@/components/Popover";
+import { Popover, type PopoverTriggerRender } from "@/components/Popover";
 
 import { SelectList } from "./select-list";
 import { SelectTrigger } from "./select-trigger";
@@ -33,10 +33,10 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 
   const jss = useJss();
 
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const [triggerEl, setTriggerEl] = useState<HTMLButtonElement | null>(null);
 
   const [internalValue, setInternalValue] = useState<V | null>(defaultValue);
-  const [mainWidth, setMainWidth] = useState(0);
+  const [triggerWidth, setTriggerWidth] = useState(0);
 
   // Update internal value when `value` prop changes.
   useEffect(() => {
@@ -45,11 +45,23 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 
   // Update main width on mount.
   useLayoutEffect(() => {
-    const main = triggerRef.current;
-    if (main) {
-      setMainWidth(main.offsetWidth);
+    if (triggerEl) {
+      setTriggerWidth(triggerEl.offsetWidth);
+
+      const ro = new ResizeObserver(() => {
+        const width = triggerEl.offsetWidth;
+        console.log("Trigger width changed:", width);
+        if (width) {
+          setTriggerWidth(triggerEl.offsetWidth);
+        }
+      });
+      ro.observe(triggerEl);
+
+      return () => {
+        ro.disconnect();
+      };
     }
-  }, []);
+  }, [triggerEl]);
 
   const showLabel = internalValue
     ? (options.find((o) => o.value === internalValue)?.label ?? null)
@@ -62,25 +74,28 @@ const Select = <V extends string>(props: SelectProps<V>) => {
       "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
   });
 
+  const popoverTriggerRender: PopoverTriggerRender = useCallback(
+    ({ setRef, isOpen, onToggle }) => (
+      <SelectTrigger
+        id={id}
+        ref={(el) => {
+          setRef(el);
+          setTriggerEl(el);
+        }}
+        placeholder={placeholder}
+        className={baseStx}
+        disabled={disabled}
+        isOpen={isOpen}
+        onToggle={onToggle}
+        showLabel={showLabel}
+      />
+    ),
+    [id, placeholder, baseStx, disabled, showLabel],
+  );
+
   return (
     <Popover>
-      <Popover.Trigger
-        render={({ setRef, isOpen, onToggle }) => (
-          <SelectTrigger
-            id={id}
-            ref={(el) => {
-              setRef(el);
-              triggerRef.current = el;
-            }}
-            placeholder={placeholder}
-            className={baseStx}
-            disabled={disabled}
-            isOpen={isOpen}
-            onToggle={onToggle}
-            showLabel={showLabel}
-          />
-        )}
-      />
+      <Popover.Trigger render={popoverTriggerRender} />
       <Popover.Portal
         onClickOutside={({ closePortal }) => closePortal()}
         render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
@@ -90,7 +105,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
               className={baseStx}
               style={floatingStyles}
               options={options}
-              width={mainWidth}
+              width={triggerWidth}
               onItemClicked={(v) => {
                 togglePortal();
 
