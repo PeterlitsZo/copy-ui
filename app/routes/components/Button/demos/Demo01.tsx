@@ -18,11 +18,7 @@ export default function Demo() {
             </Typography.P>
           </Typography.Root>
           <Flex gap="0.5rem">
-            <Button
-              variant="filled"
-              size="sm"
-              leftSection={<Star size="1rem" />}
-            >
+            <Button variant="filled" size="sm" leftSection={<Star />}>
               Add to favorites
             </Button>
             <Button variant="light" size="sm" color="red">

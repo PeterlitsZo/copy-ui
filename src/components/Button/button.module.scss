@@ -34,9 +34,19 @@
 
   .buttonLeftSection {
     margin-right: var(--button-section-gap);
+
+    & > svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
   }
 
   .buttonRightSection {
     margin-left: var(--button-section-gap);
+
+    & > svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
   }
 }
