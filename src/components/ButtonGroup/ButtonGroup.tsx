@@ -12,6 +12,11 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const { className, children } = props;
 
   return (
-    <div className={classNames(styles.buttonGroup, className)}>{children}</div>
+    <div
+      data-component="button-group"
+      className={classNames(styles.buttonGroup, className)}
+    >
+      {children}
+    </div>
   );
 };

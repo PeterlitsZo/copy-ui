@@ -9,6 +9,7 @@ const nextComponentNames = [
   "Background",
   "Breadcrumb",
   "Button",
+  "ButtonGroup",
   "Card",
   "Checkbox",
   "CopyUiProvider",

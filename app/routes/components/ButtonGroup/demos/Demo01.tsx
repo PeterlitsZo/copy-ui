@@ -4,18 +4,18 @@ import { Button } from "src/components/Button";
 import { ButtonGroup } from "src/components/ButtonGroup";
 import { IconButton } from "src/components/IconButton";
 
-export function Demo() {
+export default function Demo() {
   return (
     <ButtonGroup>
-      <Button leftSection={<Send size={"1.25rem"} />}>Send</Button>
+      <Button leftSection={<Send size={"1.125rem"} />}>Send</Button>
       <IconButton>
-        <Save size={"1.25rem"} />
+        <Save size={"1.125rem"} />
       </IconButton>
       <IconButton>
-        <Star size={"1.25rem"} />
+        <Star size={"1.125rem"} />
       </IconButton>
       <IconButton>
-        <Trash size={"1.25rem"} />
+        <Trash size={"1.125rem"} />
       </IconButton>
     </ButtonGroup>
   );
