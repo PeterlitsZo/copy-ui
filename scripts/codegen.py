@@ -64,7 +64,7 @@ def codegen_component():
                 codegen_source_code_for_component(component_dir_path, of)
 
         # Code generation for `Demo_source_code.codegen.ts`.
-        codegen_demo_for_component(component_route_dir_path)
+        codegen_demo_for_component(component_name, component_route_dir_path)
 
         # Code generation for `CHANGELOG.md`.
         changelog_codegen_filename = 'changelog.codegen.ts'
@@ -140,7 +140,7 @@ def codegen_source_code_for_component(component_dir_path: str, of: TextIO):
             except Exception as e:
                 print(f"Error reading file {file_path}: {e}")
 
-def codegen_demo_for_component(component_route_dir_path: str):
+def codegen_demo_for_component(component_name: str, component_route_dir_path: str):
     """
     Generates the demo codegen file for a specific component.
 
@@ -166,6 +166,7 @@ def codegen_demo_for_component(component_route_dir_path: str):
     demo_file_path = os.path.join(component_route_dir_path, 'Demo.tsx')
     of_path = os.path.join(component_route_dir_path, 'Demo_source_code.codegen.ts')
     if os.path.isfile(demo_file_path):
+        print(f"WARN Find component {component_name} has Demo.tsx to codegen -- which is deprecated, please use `demos/` folder instead.")
         with open(of_path, 'w', encoding='utf-8') as of:
             with open(demo_file_path, 'r', encoding='utf-8') as df:
                 demo_content = df.read()
