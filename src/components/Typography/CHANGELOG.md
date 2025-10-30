@@ -11,3 +11,5 @@
   elements. Improve overall styles and spacing. Put styles into `components` CSS
   layer.
 - 2025-10-13: Add `Typography.CodeBlock` component.
+- 2025-10-30: Support just use `Typography` as the root component. Add margin
+  between list items in `Typography.Li`.

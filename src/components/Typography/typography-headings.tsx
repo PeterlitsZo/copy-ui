@@ -1,0 +1,111 @@
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import styles from "./typography-headings.module.scss";
+
+type TypographyH1Props = ComponentProps<"h1"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyH1: FC<TypographyH1Props> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const computedStyle = {
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <h1
+      className={classNames(styles.h1, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </h1>
+  );
+};
+
+type TypographyH2Props = ComponentProps<"h2"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyH2: FC<TypographyH2Props> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const theme = useTheme();
+
+  const computedStyle = {
+    "--typography-h2-border-color": theme.colors.gray["200"],
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <h2
+      className={classNames(styles.h2, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </h2>
+  );
+};
+
+type TypographyH3Props = ComponentProps<"h3"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyH3: FC<TypographyH3Props> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const computedStyle = {
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <h3
+      className={classNames(styles.h3, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </h3>
+  );
+};
+
+type TypographyH4Props = ComponentProps<"h4"> & {
+  mt?: string;
+  mb?: string;
+};
+
+const TypographyH4: FC<TypographyH4Props> = (props) => {
+  const { children, className, style, mt, mb, ...rest } = props;
+
+  const computedStyle = {
+    marginTop: mt,
+    marginBottom: mb,
+    ...style,
+  };
+
+  return (
+    <h4
+      className={classNames(styles.h4, className)}
+      style={computedStyle}
+      {...rest}
+    >
+      {children}
+    </h4>
+  );
+};
+
+export { TypographyH1, TypographyH2, TypographyH3, TypographyH4 };

@@ -15,4 +15,6 @@ export const changelog = ''
   + '  elements. Improve overall styles and spacing. Put styles into `components` CSS\n'
   + '  layer.\n'
   + '- 2025-10-13: Add `Typography.CodeBlock` component.\n'
+  + '- 2025-10-30: Support just use `Typography` as the root component. Add margin\n'
+  + '  between list items in `Typography.Li`.\n'
   ;

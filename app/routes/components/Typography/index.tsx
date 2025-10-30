@@ -4,10 +4,10 @@ import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout";
 
 import { changelog } from "./changelog.codegen";
-import Demo01 from "./demos/demo_01";
-import demo01SourceCode from "./demos/demo_01.source_code.codegen";
-import Demo02 from "./demos/demo_02";
-import demo02SourceCode from "./demos/demo_02.source_code.codegen";
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta() {
