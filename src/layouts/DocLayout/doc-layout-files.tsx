@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ClipboardCopy, Maximize } from "lucide-react";
-import { type CSSProperties, type FC, useState } from "react";
+import { type CSSProperties, type FC, useRef, useState } from "react";
 
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { CodeHighlight } from "@/components/CodeHighlight";
@@ -48,19 +48,16 @@ const DocLayoutFiles: FC<DocLayoutFilesProps> = (props) => {
 
   const sourceCodeTree = (
     <div className={styles.sourceCodeTree}>
-      {Object.keys(files).map((filename) => (
-        <button
-          key={filename}
-          className={classNames(
-            styles.sourceCodeTreeFilename,
-            filename === currentFilename && styles.active,
-          )}
-          onClick={() => setCurrentFilename(filename)}
-          type="button"
-        >
-          {filename}
-        </button>
-      ))}
+      {Object.keys(files)
+        .sort()
+        .map((filename) => (
+          <FilesTreeItem
+            key={filename}
+            filename={filename}
+            active={filename === currentFilename}
+            onClick={() => setCurrentFilename(filename)}
+          />
+        ))}
     </div>
   );
 
@@ -111,6 +108,62 @@ interface CodeBlockProps {
   showFullscreenButton: boolean;
   onFullscreen?: () => void;
 }
+
+type FilesTreeItemProps = {
+  filename: string;
+  active: boolean;
+  onClick: () => void;
+};
+
+const FilesTreeItem: FC<FilesTreeItemProps> = (props) => {
+  const { filename, active, onClick } = props;
+
+  const openTooltipRef = useRef<null | (() => void)>(null);
+  const closeTooltipRef = useRef<null | (() => void)>(null);
+  const timeoutIdRef = useRef<null | ReturnType<typeof setTimeout>>(null);
+
+  const handleMouseEnter = () => {
+    timeoutIdRef.current = setTimeout(() => {
+      openTooltipRef.current?.();
+    }, 500);
+  };
+
+  const handleMouseLeave = () => {
+    closeTooltipRef.current?.();
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+    }
+  };
+
+  return (
+    <Tooltip
+      label={filename}
+      placement="right"
+      triggerRender={({ setRef, onOpen, onClose }) => {
+        openTooltipRef.current = onOpen;
+        closeTooltipRef.current = onClose;
+
+        return (
+          <button
+            ref={setRef}
+            key={filename}
+            className={classNames(
+              styles.sourceCodeTreeFilename,
+              active && styles.active,
+            )}
+            onClick={() => onClick()}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            type="button"
+          >
+            {filename}
+          </button>
+        );
+      }}
+    />
+  );
+};
 
 const CodeBlock: FC<CodeBlockProps> = (props) => {
   const { content, type, height, showFullscreenButton, onFullscreen } = props;
