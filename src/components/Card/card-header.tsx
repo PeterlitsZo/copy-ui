@@ -1,15 +1,18 @@
-import type { FC } from "react";
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
 
 import styles from "./card-header.module.scss";
 
-type CardHeaderProps = {
-  children: React.ReactNode;
-};
+type CardHeaderProps = ComponentProps<"div">;
 
 const CardHeader: FC<CardHeaderProps> = (props) => {
-  const { children } = props;
+  const { children, className, ...rest } = props;
 
-  return <div className={styles.cardHeader}>{children}</div>;
+  return (
+    <div className={classNames(styles.cardHeader, className)} {...rest}>
+      {children}
+    </div>
+  );
 };
 
 CardHeader.displayName = "Card.Header";

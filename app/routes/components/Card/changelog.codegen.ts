@@ -3,4 +3,6 @@
 
 export const changelog = ''
   + '- 2025-10-21: Initial version.\n'
+  + '- 2025-10-31: Add the sub-component `Card.Footer`, update styles to make it\n'
+  + '  looks better, etc.\n'
   ;

@@ -1,15 +1,18 @@
-import type { FC } from "react";
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
 
 import styles from "./card-content.module.scss";
 
-type CardContentProps = {
-  children: React.ReactNode;
-};
+type CardContentProps = ComponentProps<"div">;
 
 const CardContent: FC<CardContentProps> = (props) => {
-  const { children } = props;
+  const { children, className, ...rest } = props;
 
-  return <div className={styles.cardContent}>{children}</div>;
+  return (
+    <div className={classNames(styles.cardContent, className)} {...rest}>
+      {children}
+    </div>
+  );
 };
 
 CardContent.displayName = "Card.Content";
