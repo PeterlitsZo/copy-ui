@@ -6,4 +6,5 @@ export const changelog = ''
   + '- 2025-09-30: Support `placement` prop for tooltip positioning.\n'
   + '- 2025-10-10: Move styles into `components` CSS layer. Code formatting\n'
   + '  improvement.\n'
+  + '- 2025-10-31: Code formatting improvement.\n'
   ;

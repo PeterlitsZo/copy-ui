@@ -1,9 +1,9 @@
 import type { FC, ReactNode } from "react";
 
-import { type Placement, Popover } from "../Popover";
-import { useTheme } from "../ThemeProvider";
+import { type Placement, Popover } from "@/components/Popover";
+import { useTheme } from "@/components/ThemeProvider";
 
-import styles from "./Tooltip.module.scss";
+import styles from "./tooltip.module.scss";
 
 interface TooltipTriggerRenderProps {
   setRef: (el: Element | null) => void;

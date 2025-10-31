@@ -3,7 +3,7 @@
 
 export const sourceCode: Record<string, string> = {};
 
-sourceCode['Tooltip.module.scss'] = ''
+sourceCode['tooltip.module.scss'] = ''
   + '@layer components {\n'
   + '  .tooltip {\n'
   + '    padding: 0.25rem 0.375rem;\n'
@@ -15,13 +15,13 @@ sourceCode['Tooltip.module.scss'] = ''
   + '}\n'
   ;
 
-sourceCode['Tooltip.tsx'] = ''
+sourceCode['tooltip.tsx'] = ''
   + 'import type { FC, ReactNode } from "react";\n'
   + '\n'
-  + 'import { type Placement, Popover } from "../Popover";\n'
-  + 'import { useTheme } from "../ThemeProvider";\n'
+  + 'import { type Placement, Popover } from "@/components/Popover";\n'
+  + 'import { useTheme } from "@/components/ThemeProvider";\n'
   + '\n'
-  + 'import styles from "./Tooltip.module.scss";\n'
+  + 'import styles from "./tooltip.module.scss";\n'
   + '\n'
   + 'interface TooltipTriggerRenderProps {\n'
   + '  setRef: (el: Element | null) => void;\n'
@@ -71,8 +71,8 @@ sourceCode['Tooltip.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Tooltip from copy-ui @ 2025-10-10.\n'
+  + '// Tooltip from copy-ui @ 2025-10-31.\n'
   + '\n'
-  + 'export { Tooltip } from "./Tooltip";\n'
+  + 'export { Tooltip } from "./tooltip";\n'
   ;
 
