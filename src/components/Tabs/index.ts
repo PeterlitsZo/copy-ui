@@ -1,3 +1,3 @@
-// Tabs from copy-ui @ 2025-10-16.
+// Tabs from copy-ui @ 2025-10-31.
 
-export { Tabs } from "./Tabs";
+export { Tabs } from "./tabs";
