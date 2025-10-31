@@ -15,4 +15,5 @@ export const changelog = ''
   + '- 2025-10-28: Refactor code to make code cleaner. Add a small gap in trigger.\n'
   + '- 2025-10-30: Add a `ResizeObserver` to the `Select.Trigger` to update the\n'
   + "  `Select.List`'s width when the trigger size changes.\n"
+  + '- 2025-10-31: Add the check mark for the selected item in the list.\n'
   ;

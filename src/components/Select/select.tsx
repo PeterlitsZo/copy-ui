@@ -43,7 +43,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     setInternalValue(value ?? null);
   }, [value]);
 
-  // Update main width on mount.
+  // Update trigger width on mount and resize.
   useLayoutEffect(() => {
     if (triggerEl) {
       setTriggerWidth(triggerEl.offsetWidth);
@@ -105,6 +105,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
               className={baseStx}
               style={floatingStyles}
               options={options}
+              internalValue={internalValue}
               width={triggerWidth}
               onItemClicked={(v) => {
                 togglePortal();
