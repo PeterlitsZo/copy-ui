@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import dayjs from "dayjs";
 import {
   ChevronLeft,
@@ -5,12 +6,13 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import type { CSSProperties, FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import { useState } from "react";
 
-import { useTheme } from "../ThemeProvider";
+import { useJss } from "@/components/CopyUiProvider";
+import { useTheme } from "@/components/ThemeProvider";
 
-import styles from "./Calendar.module.scss";
+import styles from "./calendar.module.scss";
 
 interface CalendarProps {
   value?: dayjs.Dayjs | null;
@@ -21,11 +23,12 @@ export const Calendar: FC<CalendarProps> = (props) => {
   const { value = dayjs(), onChange } = props;
 
   const theme = useTheme();
+  const jss = useJss();
 
   const [viewMonth, setViewMonth] = useState(dayjs().month());
   const [viewYear, setViewYear] = useState(dayjs().year());
 
-  const computedStyle = {
+  const stx = jss.hash({
     "--calendar-bg-color": theme.colors.gray["000"],
     "--calendar-border-color": theme.tokens.inputBaseDefaultBorderColor,
     "--calendar-border-radius": theme.tokens.inputBaseBorderRadius,
@@ -35,7 +38,7 @@ export const Calendar: FC<CalendarProps> = (props) => {
     "--calendar-main-cell-selected-bg-color": theme.colors.blue["600"],
     "--calendar-main-cell-selected-text-color": "white",
     "--calendar-main-cell-hover-bg-color": theme.colors.gray["100"],
-  } as CSSProperties;
+  });
 
   // Calendar header's content.
   const view = dayjs(value).year(viewYear).month(viewMonth);
@@ -108,7 +111,7 @@ export const Calendar: FC<CalendarProps> = (props) => {
   };
 
   return (
-    <div className={styles.calendar} style={computedStyle}>
+    <div className={classNames(styles.calendar, stx)}>
       <div className={styles.calendarHeader}>
         <button
           type="button"

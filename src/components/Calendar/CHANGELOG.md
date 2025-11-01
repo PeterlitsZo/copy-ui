@@ -1,2 +1,3 @@
 - 2025-10-03: Initial version.
 - 2025-10-08: Update its `border-color` and `border-radius` styles.
+- 2025-11-01: Make it use `utils/jss` and put its styles in CSS layer, etc.

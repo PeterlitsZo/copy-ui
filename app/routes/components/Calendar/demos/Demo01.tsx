@@ -5,7 +5,7 @@ import { Calendar } from "@/components/Calendar";
 import { Flex } from "@/components/Flex";
 import { useToast } from "@/components/Toast";
 
-export function Demo() {
+export default function Demo() {
   const { addToast } = useToast();
 
   const [value, setValue] = useState(dayjs());

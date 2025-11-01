@@ -1,0 +1,103 @@
+@layer components {
+  .calendar {
+    background-color: var(--calendar-bg-color);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--calendar-border-color);
+    border-radius: var(--calendar-border-radius);
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .calendarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+
+    padding: var(--calendar-padding);
+    padding-bottom: calc(var(--calendar-padding) / 4 * 3);
+    background-color: var(--calendar-header-background-color);
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 2rem;
+      height: 2rem;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--calendar-header-button-hover-bg-color);
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .calendarHeaderTitle {
+    flex: 1 0 auto;
+    text-align: center;
+    padding-inline: 0.5rem;
+  }
+
+  .calendarContent thead tr {
+    display: flex;
+    padding: calc(var(--calendar-padding) / 4 * 3) var(--calendar-padding);
+
+    th {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+    }
+  }
+
+  .calendarContent tbody {
+    background-color: var(--calendar-main-bg-color);
+  }
+
+  .calendarContent tbody tr {
+    display: flex;
+    padding: 0 var(--calendar-padding);
+
+    &:first-child {
+      padding-top: calc(var(--calendar-padding) / 4 * 3);
+    }
+
+    &:last-child {
+      padding-bottom: var(--calendar-padding);
+    }
+
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    td button {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999999px;
+      cursor: pointer;
+    }
+
+    td[data-selected='true'] button {
+      background-color: var(--calendar-main-cell-selected-bg-color);
+      color: var(--calendar-main-cell-selected-text-color);
+    }
+
+    td:not([data-selected='true']):hover button {
+      width: calc(2rem + 2px);
+      height: calc(2rem + 2px);
+      background-color: var(--calendar-main-cell-hover-bg-color);
+    }
+  }
+}
