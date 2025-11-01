@@ -4,3 +4,4 @@
 - 2025-10-11: Update line-numbers' style.
 - 2025-10-16: Refactor code to use hast to build the HTML. That make the
   `CodeHighlight` component support `lineHighlight` prop, etc.
+- 2025-10-22: Refactor code. And use JSS for styling.

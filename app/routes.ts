@@ -13,6 +13,7 @@ const nextComponentNames = [
   "Calendar",
   "Card",
   "Checkbox",
+  "CodeHighlight",
   "CopyUiProvider",
   "DatePicker",
   "Field",

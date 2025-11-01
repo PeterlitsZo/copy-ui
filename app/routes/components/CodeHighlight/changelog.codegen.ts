@@ -8,4 +8,5 @@ export const changelog = ''
   + "- 2025-10-11: Update line-numbers' style.\n"
   + '- 2025-10-16: Refactor code to use hast to build the HTML. That make the\n'
   + '  `CodeHighlight` component support `lineHighlight` prop, etc.\n'
+  + '- 2025-10-22: Refactor code. And use JSS for styling.\n'
   ;
