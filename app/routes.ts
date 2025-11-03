@@ -7,7 +7,6 @@ import { utilsRoutes } from "./utils-routes.codegen";
 const prevComponentNames = [
   "SortIndicator",
   "Spinner",
-  "Switch",
   "ThemeProvider",
   "TimeSelector",
 ];

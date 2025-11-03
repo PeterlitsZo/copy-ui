@@ -1,0 +1,43 @@
+@layer components {
+  .rail {
+    position: relative;
+
+    height: var(--switch-rail-height);
+    width: calc(var(--switch-rail-height) * 1.75);
+
+    border-radius: 999999px;
+    border: 1px solid var(--switch-rail-border-color);
+
+    background-color: var(--switch-rail-bg);
+
+    cursor: pointer;
+
+    transition: background-color 0.15s, border-color 0.15s;
+
+    &[data-checked="true"] {
+      background-color: var(--switch-rail-checked-bg);
+      border: 1px solid var(--switch-rail-checked-border-color);
+    }
+  }
+
+  .thumb {
+    position: absolute;
+    top: var(--switch-thumb-gap);
+    left: var(--switch-thumb-gap);
+
+    height: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2 - 2px);
+    width: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2 - 2px);
+
+    border-radius: 999999px;
+    border: 1px solid var(--switch-thumb-border-color);
+
+    background-color: var(--switch-thumb-bg);
+
+    transition: left 0.15s, border-color 0.15s;
+
+    .rail[data-checked="true"] & {
+      left: calc(var(--switch-rail-height) * 1.75 - var(--switch-rail-height) + var(--switch-thumb-gap));
+      border: 1px solid var(--switch-thumb-checked-border-color);
+    }
+  }
+}

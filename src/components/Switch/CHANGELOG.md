@@ -7,3 +7,4 @@
   to use 80% of input base heights for better proportions. 
 - 2025-10-14: Add border styles, use ratio-based width calculation, adjust thumb
   gap values. 
+- 2025-11-03: Use JSS & resolve-style for styles.

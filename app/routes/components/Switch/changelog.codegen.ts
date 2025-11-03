@@ -11,4 +11,5 @@ export const changelog = ''
   + '  to use 80% of input base heights for better proportions. \n'
   + '- 2025-10-14: Add border styles, use ratio-based width calculation, adjust thumb\n'
   + '  gap values. \n'
+  + '- 2025-11-03: Use JSS & resolve-style for styles.\n'
   ;

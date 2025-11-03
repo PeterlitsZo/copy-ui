@@ -1,3 +1,4 @@
-// Switch from copy-ui @ 2025-10-14.
+// Switch from copy-ui @ 2025-11-03.
 
-export { Switch } from "./Switch";
+export type { SwitchProps } from "./switch";
+export { Switch } from "./switch";
