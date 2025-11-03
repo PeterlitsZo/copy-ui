@@ -63,7 +63,8 @@ export default function GetStartedPage() {
           reset.css, and import it in your root file:
         </Typography.P>
         <Typography.CodeBlock
-          maxHeight="40rem"
+          title="reset.css"
+          scrollAreaMaxHeight="35rem"
           code={resetCssCode}
           lang="css"
           withLineNumbers

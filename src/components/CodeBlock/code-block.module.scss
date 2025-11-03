@@ -1,0 +1,22 @@
+@layer components {
+  .codeBlock {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--code-block-border-radius);
+    background-color: var(--code-block-bg-color);
+  }
+
+  .codeBlockTitle {
+    font-size: 1rem;
+    color: var(--code-block-title-color);
+    padding: var(--code-block-title-py) var(--code-block-title-px);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--code-block-title-border-bottom-color);
+  }
+
+  .codeBlockScrollAreaContent {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+}

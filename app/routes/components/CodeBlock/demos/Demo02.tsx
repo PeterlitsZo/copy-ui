@@ -1,4 +1,4 @@
-import { CodeBlock } from "src/components/CodeBlock/CodeBlock";
+import { CodeBlock } from "@/components/CodeBlock/code-block";
 
 const code = `\
 import { Loader2Icon } from "lucide-react"
@@ -19,12 +19,13 @@ function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
 export { Spinner }
 `;
 
-export function Demo() {
+export default function Demo() {
   return (
     <CodeBlock
       code={code}
       lang="typescript"
-      maxHeight="15rem"
+      scrollAreaMaxHeight="15rem"
+      title="foobar.tsx"
       withLineNumbers
     />
   );

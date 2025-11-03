@@ -4,4 +4,6 @@
 export const changelog = ''
   + '- 2025-10-09: Initial version.\n'
   + '- 2025-10-12: Support the `className` prop.\n'
+  + '- 2025-11-03: Support the `title` prop. Rename the `height` prop to\n'
+  + '  `scrollAreaHeight`, and rename the `maxHeight` prop to `scrollAreaMaxHeight`.\n'
   ;

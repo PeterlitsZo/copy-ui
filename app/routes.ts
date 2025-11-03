@@ -4,35 +4,12 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
-const nextComponentNames = [
-  "Avatar",
-  "Background",
-  "Breadcrumb",
-  "Button",
-  "ButtonGroup",
-  "Calendar",
-  "Card",
-  "Checkbox",
-  "CodeHighlight",
-  "CopyUiProvider",
-  "DatePicker",
-  "Field",
-  "IconButton",
-  "Input",
-  "InputBase",
-  "Flex",
-  "Markdown",
-  "Modal",
-  "Paper",
-  "Popover",
-  "ScrollArea",
-  "Select",
-  "Tabs",
-  "Tag",
-  "Textarea",
-  "Toast",
-  "Tooltip",
-  "Typography",
+const prevComponentNames = [
+  "SortIndicator",
+  "Spinner",
+  "Switch",
+  "ThemeProvider",
+  "TimeSelector",
 ];
 
 export default [
@@ -50,7 +27,7 @@ export default [
     componentsRoutes
       .filter(
         (componentsRoute) =>
-          nextComponentNames.indexOf(componentsRoute.name) === -1,
+          prevComponentNames.indexOf(componentsRoute.name) !== -1,
       )
       .map((componentsRoute) => {
         return route(componentsRoute.name, componentsRoute.path);
@@ -64,7 +41,7 @@ export default [
       componentsRoutes
         .filter(
           (componentsRoute) =>
-            nextComponentNames.indexOf(componentsRoute.name) !== -1,
+            prevComponentNames.indexOf(componentsRoute.name) === -1,
         )
         .map((componentsRoute) => {
           return route(componentsRoute.name, componentsRoute.path);
