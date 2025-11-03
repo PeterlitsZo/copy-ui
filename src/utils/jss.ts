@@ -8,11 +8,25 @@ import type { CSSProperties } from "react";
 
 type Style = CSSProperties | Partial<Record<`--${string}`, string>>;
 
+function toBase62(n: number): string {
+  if (n === 0) {
+    return "0";
+  }
+  var digits = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var result = "";
+  while (n > 0) {
+    result = digits[n % digits.length] + result;
+    n = parseInt((n / digits.length).toString(), 10);
+  }
+
+  return result;
+}
+
 function toHash(str: string): string {
   let i = 0,
     out = 11;
   while (i < str.length) out = (101 * out + str.charCodeAt(i++)) >>> 0;
-  return out.toString();
+  return toBase62(out);
 }
 
 type JssState = {
@@ -53,7 +67,7 @@ function createJssState(): JssState {
       if (this.cache[str]) {
         className = this.cache[str];
       } else {
-        className = `copy-ui-${toHash(str)}`;
+        className = `cu-${toHash(str)}`;
         this.cache[str] = className;
       }
 
@@ -61,13 +75,17 @@ function createJssState(): JssState {
       if (!this.cache[className]) {
         let css = `.${className} {`;
         for (const key in style) {
+          const value = style[key as keyof Style];
+          if (value === undefined) {
+            continue;
+          }
           const normalizeKey = key.replace(
             /[A-Z]/g,
             (match) => `-${match.toLowerCase()}`,
           );
-          css += `${normalizeKey}:${style[key as keyof Style]};`;
+          css += `${normalizeKey}:${value};`;
         }
-        css += "}";
+        css += "} ";
 
         this.cache[className] = css;
 
