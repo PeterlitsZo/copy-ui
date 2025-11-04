@@ -73,8 +73,13 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
               >
                 <span>{component.name}</span>
                 {component.wip && (
-                  <Tag color="red" height="1.25rem">
+                  <Tag color="red" size="sm">
                     WIP
+                  </Tag>
+                )}
+                {component.deprecated && (
+                  <Tag color="red" size="sm">
+                    Deprecated
                   </Tag>
                 )}
               </Link>

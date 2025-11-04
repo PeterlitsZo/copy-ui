@@ -1,6 +1,9 @@
 format:
     bunx --bun biome format --write
 
+lint:
+    python3 scripts/lint.py
+
 codegen:
     python3 scripts/codegen.py
 

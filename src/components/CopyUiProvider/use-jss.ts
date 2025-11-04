@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useStore } from "zustand";
 
 import { CopyUiContext } from "./copy-ui-provider";
 
@@ -7,7 +8,8 @@ const useJss = () => {
   if (!copyUiContext) {
     throw new Error("useJss must be used within a CopyUiProvider");
   }
-  return copyUiContext.getState().jssState;
+
+  return useStore(copyUiContext, (state) => state.jssState);
 };
 
 export { useJss };

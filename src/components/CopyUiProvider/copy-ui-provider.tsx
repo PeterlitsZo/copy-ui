@@ -1,12 +1,15 @@
 import { createContext, type FC, useEffect, useRef } from "react";
 import { createStore, type StoreApi } from "zustand";
+
 import { Toast } from "@/components/Toast";
 import { createJssState, type JssState } from "@/utils/jss";
-
+import { DEFAULT_THEME } from "./default-theme";
+import type { Theme } from "./theme";
 import { useJss } from "./use-jss";
 
 type CopyUiStoreState = {
   jssState: JssState;
+  theme: Theme;
 };
 
 type CopyUiStore = CopyUiStoreState;
@@ -24,6 +27,7 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
   if (storeRef.current === null) {
     storeRef.current = createStore<CopyUiStore>()(() => ({
       jssState: createJssState(),
+      theme: DEFAULT_THEME,
     }));
   }
 
