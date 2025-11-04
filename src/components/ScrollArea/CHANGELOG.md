@@ -6,3 +6,4 @@
   alpha when dragging.
 - 2025-10-30: Add the variant `absolute` (it uses absolute positioning to make
   viewport just fill the container).
+- 2025-11-04: Support the `ScrollArea.ScrollbarWithThumb`.

@@ -1,9 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -15,15 +13,11 @@ import { type StoreApi, useStore } from "zustand";
 import { useTheme } from "@/components/ThemeProvider";
 
 import styles from "./scroll-area.module.scss";
+import { ScrollAreaContext, useScrollAreaContext } from "./scroll-area-context";
 import {
   buildScrollAreaStore,
   type ScrollAreaStore,
 } from "./scroll-area-store";
-
-// ScrollAreaContext
-// =============================================================================
-
-const ScrollAreaContext = createContext<StoreApi<ScrollAreaStore> | null>(null);
 
 // ScrollArea.Viewport
 // =============================================================================
@@ -35,10 +29,7 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
 
   const viewportRef = useRef<HTMLDivElement>(null);
 
-  const context = useContext(ScrollAreaContext);
-  if (!context) {
-    throw new Error("ScrollArea.Viewport must be used within a ScrollArea");
-  }
+  const context = useScrollAreaContext();
 
   const setViewportHeight = useStore(
     context,
@@ -106,14 +97,11 @@ type ScrollAreaContentProps = ComponentProps<"div"> & {
 };
 
 const ScrollAreaContent: FC<ScrollAreaContentProps> = (props) => {
-  const { children, ...rest } = props;
+  const { ref, children, ...rest } = props;
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const context = useContext(ScrollAreaContext);
-  if (!context) {
-    throw new Error("ScrollArea.Content must be used within a ScrollArea");
-  }
+  const context = useScrollAreaContext();
 
   const setContentHeight = useStore(context, (state) => state.setContentHeight);
   useLayoutEffect(() => {
@@ -134,8 +122,20 @@ const ScrollAreaContent: FC<ScrollAreaContentProps> = (props) => {
     };
   }, [setContentHeight]);
 
+  const setRef = useCallback(
+    (el: HTMLDivElement) => {
+      contentRef.current = el;
+      if (typeof ref === "function") {
+        ref(el);
+      } else if (ref) {
+        ref.current = el;
+      }
+    },
+    [ref],
+  );
+
   return (
-    <div ref={contentRef} {...rest}>
+    <div ref={setRef} {...rest}>
       {children}
     </div>
   );
@@ -149,10 +149,7 @@ type ScrollAreaScrollbarProps = ComponentProps<"div">;
 const ScrollAreaScrollbar: FC<ScrollAreaScrollbarProps> = (props) => {
   const { children, className, style, ...rest } = props;
 
-  const context = useContext(ScrollAreaContext);
-  if (!context) {
-    throw new Error("ScrollArea.Scrollbar must be used within a ScrollArea");
-  }
+  const context = useScrollAreaContext();
 
   const hover = useStore(context, (state) => state.hover);
   const thumbDragging = useStore(context, (state) => state.thumbDragging);
@@ -184,10 +181,7 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
 
   const theme = useTheme();
 
-  const context = useContext(ScrollAreaContext);
-  if (!context) {
-    throw new Error("ScrollArea.Thumb must be used within a ScrollArea");
-  }
+  const context = useScrollAreaContext();
 
   const setThumbDragging = useStore(context, (state) => state.setThumbDragging);
   const setScrollTop = useStore(context, (state) => state.setScrollTop);
@@ -277,6 +271,19 @@ const ScrollAreaThumb: FC<ScrollAreaThumbProps> = (props) => {
   );
 };
 
+// ScrollArea.ScrollbarWithThumb
+// =============================================================================
+
+const ScrollAreaScrollbarWithThumb: FC = () => {
+  return (
+    <ScrollAreaScrollbar>
+      <ScrollAreaThumb />
+    </ScrollAreaScrollbar>
+  );
+};
+
+ScrollAreaScrollbarWithThumb.displayName = "ScrollArea.ScrollbarWithThumb";
+
 // ScrollArea
 // =============================================================================
 
@@ -290,6 +297,7 @@ type ScrollAreaComponent = FC<ScrollAreaProps> & {
   Content: typeof ScrollAreaContent;
   Scrollbar: typeof ScrollAreaScrollbar;
   Thumb: typeof ScrollAreaThumb;
+  ScrollbarWithThumb: typeof ScrollAreaScrollbarWithThumb;
 };
 
 const ScrollArea: ScrollAreaComponent = (props: ScrollAreaProps) => {
@@ -333,5 +341,6 @@ ScrollArea.Viewport = ScrollAreaViewport;
 ScrollArea.Content = ScrollAreaContent;
 ScrollArea.Scrollbar = ScrollAreaScrollbar;
 ScrollArea.Thumb = ScrollAreaThumb;
+ScrollArea.ScrollbarWithThumb = ScrollAreaScrollbarWithThumb;
 
 export { ScrollArea };
