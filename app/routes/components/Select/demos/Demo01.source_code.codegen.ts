@@ -3,8 +3,9 @@
 
 const demoSourceCode = ''
   + 'import { useState } from "react";\n'
-  + 'import { Select } from "src/components/Select";\n'
-  + 'import { useToast } from "src/components/Toast";\n'
+  + '\n'
+  + 'import { Select } from "@/components/Select";\n'
+  + 'import { useToast } from "@/components/Toast";\n'
   + '\n'
   + 'export default function Demo() {\n'
   + '  const { addToast } = useToast();\n'

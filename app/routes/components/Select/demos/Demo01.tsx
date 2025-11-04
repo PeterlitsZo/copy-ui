@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Select } from "src/components/Select";
-import { useToast } from "src/components/Toast";
+
+import { Select } from "@/components/Select";
+import { useToast } from "@/components/Toast";
 
 export default function Demo() {
   const { addToast } = useToast();

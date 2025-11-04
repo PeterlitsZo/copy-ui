@@ -1,20 +1,18 @@
 @layer components {
-  .selectList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-
+  .selectListContainer {
     width: var(--select-list-width);
-
-    padding: var(--select-list-padding);
-
     border-width: 1px;
     border-style: solid;
     border-color: var(--select-list-border-color);
     border-radius: var(--select-list-border-radius);
-
     background-color: white;
+  }
 
+  .selectList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: var(--select-list-padding);
     font-size: var(--select-font-size);
   }
 

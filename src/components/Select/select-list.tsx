@@ -3,10 +3,11 @@ import { Check } from "lucide-react";
 import type { CSSProperties, FC, Ref } from "react";
 import { useJss } from "@/components/CopyUiProvider";
 import { useTheme } from "@/components/ThemeProvider";
+import { ScrollArea } from "../ScrollArea";
 import styles from "./select-list.module.scss";
 
 type SelectListProps<V extends string> = {
-  ref?: Ref<HTMLUListElement>;
+  ref?: Ref<HTMLDivElement>;
   className?: string;
   style: CSSProperties;
 
@@ -45,28 +46,39 @@ const SelectList = <V extends string>(props: SelectListProps<V>) => {
     "--select-list-width": `${width}px`,
   });
 
+  const viewStx = jss.hash({
+    maxHeight: "15rem",
+  });
+
   return (
-    <ul
+    <ScrollArea
       ref={ref}
+      style={style}
       className={classNames(
-        styles.selectList,
+        styles.selectListContainer,
         listStx,
         listWidthStx,
         className,
       )}
-      style={style}
     >
-      {options.map((option) => {
-        return (
-          <SelectItem
-            key={option.value}
-            marked={option.value === internalValue}
-            label={option.label}
-            onChoose={() => onItemClicked(option.value)}
-          />
-        );
-      })}
-    </ul>
+      <ScrollArea.Viewport className={viewStx}>
+        <ScrollArea.Content>
+          <ul className={classNames(styles.selectList)}>
+            {options.map((option) => {
+              return (
+                <SelectItem
+                  key={option.value}
+                  marked={option.value === internalValue}
+                  label={option.label}
+                  onChoose={() => onItemClicked(option.value)}
+                />
+              );
+            })}
+          </ul>
+        </ScrollArea.Content>
+      </ScrollArea.Viewport>
+      <ScrollArea.ScrollbarWithThumb />
+    </ScrollArea>
   );
 };
 

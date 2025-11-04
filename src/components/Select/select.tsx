@@ -50,7 +50,6 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 
       const ro = new ResizeObserver(() => {
         const width = triggerEl.offsetWidth;
-        console.log("Trigger width changed:", width);
         if (width) {
           setTriggerWidth(triggerEl.offsetWidth);
         }

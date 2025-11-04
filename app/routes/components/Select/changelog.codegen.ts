@@ -16,4 +16,6 @@ export const changelog = ''
   + '- 2025-10-30: Add a `ResizeObserver` to the `Select.Trigger` to update the\n'
   + "  `Select.List`'s width when the trigger size changes.\n"
   + '- 2025-10-31: Add the check mark for the selected item in the list.\n'
+  + '- 2025-11-04: Wrap the list with `ScrollArea` to make it scrollable when there\n'
+  + '  are many options.\n'
   ;

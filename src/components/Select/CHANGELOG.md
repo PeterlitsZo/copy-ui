@@ -12,3 +12,5 @@
 - 2025-10-30: Add a `ResizeObserver` to the `Select.Trigger` to update the
   `Select.List`'s width when the trigger size changes.
 - 2025-10-31: Add the check mark for the selected item in the list.
+- 2025-11-04: Wrap the list with `ScrollArea` to make it scrollable when there
+  are many options.
