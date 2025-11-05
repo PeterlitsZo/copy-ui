@@ -4,12 +4,7 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
-const prevComponentNames = [
-  "SortIndicator",
-  "Spinner",
-  "ThemeProvider",
-  "TimeSelector",
-];
+const prevComponentNames = ["SortIndicator", "ThemeProvider", "TimeSelector"];
 
 export default [
   index("routes/home.tsx"),
