@@ -1,15 +1,18 @@
-import { Background } from "src/components/Background";
+import { Background } from "@/components/Background";
+import { useJss } from "@/components/CopyUiProvider";
 import { Paper } from "@/components/Paper";
 import { lorem } from "./lorem";
 
 export default function Demo() {
-  const style = {
+  const jss = useJss();
+
+  const stx = jss.hash({
     width: "30rem",
     height: "15rem",
-  };
+  });
 
   return (
-    <Paper style={style} withBorder radius="md">
+    <Paper className={stx} withBorder radius="md">
       <Background.Container style={{ padding: "1rem" }}>
         <Background kind="dots" />
         <div style={{ position: "relative" }}>{lorem}</div>

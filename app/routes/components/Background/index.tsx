@@ -1,11 +1,14 @@
 import { useState } from "react";
 
+import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
 import Demo01 from "./demos/Demo01";
 import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -39,6 +42,13 @@ export default function BackgroundPage() {
             nodeBgKind="none"
             node={<Demo01 />}
             code={demo01SourceCode}
+          />
+          <Typography.H2>Examples</Typography.H2>
+          <Typography.H3>With different kind of background</Typography.H3>
+          <DocLayout.Live
+            nodeBgKind="none"
+            node={<Demo02 />}
+            code={demo02SourceCode}
           />
         </DocLayout.Content>
       )}

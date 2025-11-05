@@ -3,11 +3,12 @@ import { type CSSProperties, type FC, useLayoutEffect, useRef } from "react";
 
 import styles from "./background.module.scss";
 import { BackgroundContainer } from "./background-container";
+import { drawChessboard, drawDots, drawLines } from "./draw";
 
 type BackgroundProps = {
   className?: string;
   style?: CSSProperties;
-  kind: "dots" | "lines";
+  kind: "dots" | "lines" | "chessboard";
 };
 
 type BackgroundComponent = FC<BackgroundProps> & {
@@ -51,31 +52,13 @@ const Background: BackgroundComponent = (props: BackgroundProps) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (kind === "lines") {
-        for (let x = 0; x < width; x += 40) {
-          ctx.beginPath();
-          ctx.moveTo(x + 20, 0);
-          ctx.lineTo(x + 20, height);
-          ctx.strokeStyle = `rgba(0, 0, 0, 0.05)`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-        for (let y = 0; y < height; y += 40) {
-          ctx.beginPath();
-          ctx.moveTo(0, y + 20);
-          ctx.lineTo(width, y + 20);
-          ctx.strokeStyle = `rgba(0, 0, 0, 0.05)`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
+        drawLines(ctx, width, height, { lineColor: `rgba(0, 0, 0, 0.05)` });
       } else if (kind === "dots") {
-        for (let x = 0; x < width; x += 14) {
-          for (let y = 0; y < height; y += 14) {
-            ctx.beginPath();
-            ctx.arc(x + 7, y + 7, 1, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0, 0, 0, 0.15)`;
-            ctx.fill();
-          }
-        }
+        drawDots(ctx, width, height, { dotColor: `rgba(0, 0, 0, 0.15)` });
+      } else if (kind === "chessboard") {
+        drawChessboard(ctx, width, height, {
+          chessboardColor: `rgba(0, 0, 0, 0.02)`,
+        });
       }
     };
 
