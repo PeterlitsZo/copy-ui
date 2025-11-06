@@ -1,4 +1,4 @@
-import { createContext, type FC, useEffect, useRef } from "react";
+import { createContext, type FC, useEffect, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand";
 
 import { Toast } from "@/components/Toast";
@@ -45,21 +45,18 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
 const JssSsrCss = () => {
   const jss = useJss();
   const css = jss.extractSsrCss();
-  const jssSsrId = "copy-ui-jss-ssr";
+  const [jssSsr, setJssSsr] = useState(true);
 
   useEffect(() => {
     // Remove the style tag after hydration.
-    const styleEl = document.getElementById(jssSsrId);
-    if (styleEl) {
-      styleEl.innerHTML = "";
-    }
+    setJssSsr(false);
   }, []);
 
-  return (
-    <style id={jssSsrId} suppressHydrationWarning={true}>
-      {css}
-    </style>
-  );
+  if (!jssSsr) {
+    return null;
+  } else {
+    return <style suppressHydrationWarning={true}>{css}</style>;
+  }
 };
 
 CopyUiProvider.displayName = "CopyUiProvider";

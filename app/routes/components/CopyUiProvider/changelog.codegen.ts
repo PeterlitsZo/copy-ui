@@ -7,4 +7,6 @@ export const changelog = ''
   + '- 2025-10-27: Wrap children with `Toast.Context`.\n'
   + '- 2025-11-04: Move the original `ThemeProvider` into `CopyUiProvider` and\n'
   + '  support the `useTheme`, etc. The `ThemeProvider` now is deprecated.\n'
+  + '- 2025-11-06: Export the `useTheme` hook. And remove the `style` tag built for\n'
+  + '  SSR after hydration in `CopyUiProvider`.\n'
   ;
