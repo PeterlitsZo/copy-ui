@@ -1,0 +1,54 @@
+@layer components {
+  .portal {
+    display: flex;
+    flex-direction: row;
+
+    background-color: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    padding: 0.75rem;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .detailFooter {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .presetListScrollArea {
+    width: 12rem;
+    height: var(--preset-list-height);
+  }
+
+  .presetList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.5rem;
+
+    overflow: auto;
+
+    li button {
+      width: 100%;
+      padding: 0.25rem 0.5rem;
+      text-align: start;
+
+      border-radius: var(--radius);
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-hover);
+      }
+    }
+  }
+}

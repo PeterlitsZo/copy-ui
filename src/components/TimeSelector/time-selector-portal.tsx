@@ -1,98 +1,19 @@
-import { Clock } from "lucide-react";
-import type { CSSProperties, FC } from "react";
-import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type FC,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
-import { Popover } from "@/components/Popover";
+import { useTheme } from "@/components/CopyUiProvider";
+import { Field } from "@/components/Field";
 import { ScrollArea } from "@/components/ScrollArea";
-import { useTheme } from "@/components/ThemeProvider";
 
-import styles from "./TimeSelector.module.scss";
-
-export type TimeRange = {
-  from: string;
-  to: string;
-};
-
-export type TimeSelectorProps = {
-  value?: TimeRange;
-  onChange?: (value: TimeRange) => void;
-};
-
-export const TimeSelector: FC<TimeSelectorProps> = (props) => {
-  const { value, onChange } = props;
-
-  const showTitle = useMemo(() => {
-    if (value) {
-      if (value.to === "now" && /now - \d+(m|h|d|y)/.test(value.from)) {
-        const regex = /now - (\d+)(m|h|d|y)/;
-        const match = value.from.match(regex);
-        if (match) {
-          const amount = match[1];
-          const unit = match[2];
-          let unitFull = "";
-          switch (unit) {
-            case "m":
-              unitFull = amount === "1" ? "minute" : "minutes";
-              break;
-            case "h":
-              unitFull = amount === "1" ? "hour" : "hours";
-              break;
-            case "d":
-              unitFull = amount === "1" ? "day" : "days";
-              break;
-            case "y":
-              unitFull = amount === "1" ? "year" : "years";
-              break;
-          }
-          return `Last ${amount} ${unitFull}`;
-        } else {
-          throw new Error("Invalid time range format");
-        }
-      }
-    }
-    return "Select Time";
-  }, [value]);
-
-  return (
-    <Popover>
-      <Popover.Trigger
-        render={({ setRef, onToggle }) => (
-          <Button
-            ref={(el) => {
-              el && setRef(el);
-              return;
-            }}
-            leftSection={<Clock size="1.25rem" />}
-            onClick={onToggle}
-          >
-            <span>{showTitle}</span>
-          </Button>
-        )}
-      />
-      <Popover.Portal
-        onClickOutside={({ closePortal }) => closePortal()}
-        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
-          isOpen && (
-            <TimeSelectorPortal
-              setRef={setRef}
-              togglePortal={togglePortal}
-              floatingStyles={floatingStyles}
-              value={value}
-              onChange={(v) => {
-                onChange?.(v);
-                togglePortal();
-              }}
-            />
-          )
-        }
-      />
-    </Popover>
-  );
-};
-
-TimeSelector.displayName = "TimeSelector";
+import type { TimeRange } from "./time-selector";
+import styles from "./time-selector-portal.module.scss";
 
 interface TimeSelectorPortalProps {
   setRef: (el: HTMLElement) => void;
@@ -165,26 +86,30 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
       }}
     >
       <div className={styles.detail} ref={detailRef}>
-        <div className={styles.inputField}>
-          <label htmlFor={fromInputId}>From</label>
-          <Input
+        <Field>
+          <Field.Label htmlFor={fromInputId}>From</Field.Label>
+          <Field.Input
             id={fromInputId}
             value={valueFrom}
-            style={{ width: "18rem" }}
+            style={{ width: "16rem" }}
             onChange={(e) => setValueFrom(e.target.value)}
-            placeholder='The start time, e.g. "now - 15m"'
+            placeholder="Enter the start time"
           />
-        </div>
-        <div className={styles.inputField}>
-          <label htmlFor={toInputId}>To</label>
-          <Input
+          <Field.Description>
+            E.g. "now - 15m", "now - 1h", etc.
+          </Field.Description>
+        </Field>
+        <Field>
+          <Field.Label htmlFor={toInputId}>To</Field.Label>
+          <Field.Input
             id={toInputId}
             value={valueTo}
-            style={{ width: "18rem" }}
+            style={{ width: "16rem" }}
             onChange={(e) => setValueTo(e.target.value)}
-            placeholder='The end time, e.g. "now"'
+            placeholder="Enter the end time"
           />
-        </div>
+          <Field.Description>E.g. "now"</Field.Description>
+        </Field>
         <div className={styles.detailFooter}>
           <Button
             size="sm"
@@ -226,3 +151,5 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
 };
 
 TimeSelectorPortal.displayName = "TimeSelector.Portal";
+
+export { TimeSelectorPortal };

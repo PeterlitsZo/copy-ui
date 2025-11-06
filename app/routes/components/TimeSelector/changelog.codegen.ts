@@ -9,4 +9,6 @@ export const changelog = ''
   + '- 2025-10-04: Replace preset list with ScrollArea component. Add proper form\n'
   + '  labels with `htmlFor` attributes. Extract preset data to array. Update button\n'
   + '  styles and cancel button variant. Code formatting improvements.\n'
+  + '- 2025-11-06: Refactor code and use `Field` component for input fields. Adjust\n'
+  + '  input widths and spacing, etc.\n'
   ;
