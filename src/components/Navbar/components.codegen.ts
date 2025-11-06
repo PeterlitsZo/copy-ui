@@ -23,6 +23,7 @@ export const components: Component[] = [
   {"name": "InputBase", "path": "/v0/components/InputBase", "wip": false, "deprecated": false},
   {"name": "Markdown", "path": "/v0/components/Markdown", "wip": false, "deprecated": false},
   {"name": "Modal", "path": "/v0/components/Modal", "wip": false, "deprecated": false},
+  {"name": "MultiSelect", "path": "/v0/components/MultiSelect", "wip": false, "deprecated": false},
   {"name": "Paper", "path": "/v0/components/Paper", "wip": false, "deprecated": false},
   {"name": "Popover", "path": "/v0/components/Popover", "wip": false, "deprecated": false},
   {"name": "ScrollArea", "path": "/v0/components/ScrollArea", "wip": false, "deprecated": false},

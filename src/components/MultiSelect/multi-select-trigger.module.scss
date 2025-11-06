@@ -1,0 +1,65 @@
+@layer components {
+  .selectTrigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    text-align: start;
+    font-size: var(--select-font-size);
+
+    padding-left: var(--select-trigger-padding-left);
+    padding-right: var(--select-trigger-padding-right);
+    height: var(--select-main-height);
+    min-width: 8rem;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--select-main-border-color);
+    border-radius: var(--select-main-border-radius);
+
+    background-color: white;
+
+    cursor: pointer;
+    user-select: none;
+
+    &:not([data-value-picked="true"]) {
+      color: var(--select-main-placeholder-color);
+    }
+    &[data-disabled="true"] {
+      background-color: var(--select-main-disabled-bg-color);
+      border-color: var(--select-main-disabled-border-color);
+      color: var(--select-main-disabled-color);
+      cursor: not-allowed;
+    }
+    &:focus {
+      border-color: var(--select-main-focus-border-color);
+      outline: none;
+    }
+    &[data-opened="true"] {
+      border-color: var(--select-main-focus-border-color);
+    }
+  }
+
+  .selectIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--select-line-height);
+    height: var(--select-line-height);
+  }
+
+  .selectLabelsContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .selectLabel {
+    padding: var(--select-label-padding);
+    background-color: var(--select-label-bg-color);
+    border-radius: 0.25rem;
+  }
+}

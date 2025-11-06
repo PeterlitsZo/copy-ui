@@ -1,0 +1,47 @@
+@layer components {
+  .selectListContainer {
+    width: var(--select-list-width);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--select-list-border-color);
+    border-radius: var(--select-list-border-radius);
+    background-color: white;
+  }
+
+  .selectList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: var(--select-list-padding);
+    font-size: var(--select-font-size);
+  }
+
+  .selectItem button {
+    display: flex;
+    align-items: center;
+
+    text-align: start;
+
+    width: 100%;
+    padding: 0.25rem var(--select-list-item-padding-inline);
+
+    border-radius: calc(var(--select-list-border-radius) * 0.5);
+
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--select-item-hover-bg-color);
+    }
+
+    > span {
+      flex: 1;
+    }
+
+    > svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--select-item-mark-color);
+    }
+  }
+}
