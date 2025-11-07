@@ -1,26 +1,13 @@
-import { useContext } from "react";
-
 import { Button } from "@/components/Button";
-import {
-  SortIndicator,
-  useSortIndicatorState,
-} from "@/components/SortIndicator";
-import { ThemeContext } from "@/components/ThemeProvider";
+import { SortIndicator, useDirection } from "@/components/SortIndicator";
 
 export default function Demo() {
-  const theme = useContext(ThemeContext);
-  const { direction, handleClick } = useSortIndicatorState("asc");
+  const [direction, setDirection] = useDirection("asc");
 
   return (
     <Button
-      rightSection={
-        <SortIndicator
-          style={{ color: theme.colors.gray["600"] }}
-          size="1rem"
-          direction={direction}
-        />
-      }
-      onClick={handleClick}
+      rightSection={<SortIndicator direction={direction} />}
+      onClick={() => setDirection()}
     >
       <span>Volume</span>
     </Button>

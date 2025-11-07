@@ -1,0 +1,13 @@
+@layer components {
+  .sortIndicator {
+    &[data-direction="asc"] {
+      color: var(--sort-indicator-asc-color);
+    }
+    &[data-direction="desc"] {
+      color: var(--sort-indicator-desc-color);
+    }
+    &[data-direction="none"] {
+      color: var(--sort-indicator-none-color);
+    }
+  }
+}
