@@ -8,11 +8,11 @@ import styles from "./doc-layout-live.module.scss";
 type DocLayoutLiveProps = {
   code: string;
   node: ReactNode;
-  nodeBgKind?: "none" | "dots";
+  nodeBgKind?: "none" | "chessboard" | "dots";
 };
 
 const DocLayoutLive: FC<DocLayoutLiveProps> = (props) => {
-  const { code, node, nodeBgKind = "dots" } = props;
+  const { code, node, nodeBgKind = "chessboard" } = props;
 
   const theme = useTheme();
 
