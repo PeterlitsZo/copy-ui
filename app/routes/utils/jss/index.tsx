@@ -1,7 +1,5 @@
-import { ComponentTemplate } from "@/components/ComponentTemplate";
-import { Section } from "@/components/Section";
 import { Typography } from "@/components/Typography";
-
+import { DocLayout } from "@/layouts/DocLayout";
 import sourceCode from "./source-code.codegen";
 
 export function meta() {
@@ -16,16 +14,18 @@ export function meta() {
 
 export default function JssPage() {
   return (
-    <ComponentTemplate idx="/v0/utils/jss">
-      <Section.Root title="jss">
-        <Typography.P>
-          <Typography.CodeBlock
-            withLineNumbers
-            code={sourceCode}
-            lang="typescript"
-          />
-        </Typography.P>
-      </Section.Root>
-    </ComponentTemplate>
+    <DocLayout>
+      <DocLayout.TitleWithoutTabs
+        title="jss"
+        desc="A simple CSS-in-JS solution."
+      />
+      <DocLayout.Content>
+        <Typography.CodeBlock
+          withLineNumbers
+          code={sourceCode}
+          lang="typescript"
+        />
+      </DocLayout.Content>
+    </DocLayout>
   );
 }
