@@ -9,4 +9,5 @@ export const changelog = ''
   + '  support the `useTheme`, etc. The `ThemeProvider` now is deprecated.\n'
   + '- 2025-11-06: Export the `useTheme` hook. And remove the `style` tag built for\n'
   + '  SSR after hydration in `CopyUiProvider`.\n'
+  + '- 2025-11-08: Add simple MDX support for `CopyUiProvider`.\n'
   ;

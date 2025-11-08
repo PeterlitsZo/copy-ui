@@ -5,3 +5,4 @@
   support the `useTheme`, etc. The `ThemeProvider` now is deprecated.
 - 2025-11-06: Export the `useTheme` hook. And remove the `style` tag built for
   SSR after hydration in `CopyUiProvider`.
+- 2025-11-08: Add simple MDX support for `CopyUiProvider`.
