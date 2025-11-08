@@ -1,0 +1,5 @@
+id: find-typography-root
+language: TSX
+rule:
+  kind: jsx_opening_element
+  pattern: <Typography.Root $$$PROPS>

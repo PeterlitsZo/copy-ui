@@ -1,4 +1,4 @@
-id: no-theme-provider
+id: find-theme-provider
 language: TSX
 rule:
   kind: import_statement
