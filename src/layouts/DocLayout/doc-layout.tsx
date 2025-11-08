@@ -6,6 +6,7 @@ import { DocLayoutContent } from "./doc-layout-content";
 import { DocLayoutFiles } from "./doc-layout-files";
 import { DocLayoutLive } from "./doc-layout-live";
 import { DocLayoutTitle } from "./doc-layout-title";
+import { DocLayoutTitleWithoutTabs } from "./doc-layout-title-without-tabs";
 
 type DocLayoutProps = {
   children?: React.ReactNode;
@@ -13,6 +14,7 @@ type DocLayoutProps = {
 
 type DocLayoutComponent = FC<DocLayoutProps> & {
   Title: typeof DocLayoutTitle;
+  TitleWithoutTabs: typeof DocLayoutTitleWithoutTabs;
   Content: typeof DocLayoutContent;
   Live: typeof DocLayoutLive;
   Files: typeof DocLayoutFiles;
@@ -27,6 +29,7 @@ const DocLayout: DocLayoutComponent = (props) => {
 
 DocLayout.Title = DocLayoutTitle;
 DocLayout.Content = DocLayoutContent;
+DocLayout.TitleWithoutTabs = DocLayoutTitleWithoutTabs;
 DocLayout.Live = DocLayoutLive;
 DocLayout.Files = DocLayoutFiles;
 DocLayout.Changelog = DocLayoutChangelog;

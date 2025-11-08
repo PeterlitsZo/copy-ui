@@ -3,6 +3,7 @@ import type { CSSProperties, FC } from "react";
 import { Tabs } from "@/components/Tabs";
 import { useTheme } from "@/components/ThemeProvider";
 import { Typography } from "@/components/Typography";
+
 import styles from "./doc-layout-title.module.scss";
 
 type DocLayoutTitleProps = {
@@ -45,5 +46,7 @@ const DocLayoutTitle: FC<DocLayoutTitleProps> = (props) => {
     </div>
   );
 };
+
+DocLayoutTitle.displayName = "DocLayout.Title";
 
 export { DocLayoutTitle };
