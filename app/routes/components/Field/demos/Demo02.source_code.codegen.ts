@@ -4,7 +4,7 @@
 const demoSourceCode = ''
   + 'import { Field } from "@/components/Field";\n'
   + '\n'
-  + 'export default function Example01() {\n'
+  + 'export default function Demo() {\n'
   + '  return (\n'
   + '    <Field>\n'
   + '      <Field.Label>My Favorite Fruit</Field.Label>\n'

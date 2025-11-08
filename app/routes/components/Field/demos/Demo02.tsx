@@ -1,6 +1,6 @@
 import { Field } from "@/components/Field";
 
-export default function Example01() {
+export default function Demo() {
   return (
     <Field>
       <Field.Label>My Favorite Fruit</Field.Label>
