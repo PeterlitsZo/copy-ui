@@ -1,7 +1,6 @@
-import { ComponentTemplate } from "@/components/ComponentTemplate";
-import { Section } from "@/components/Section";
 import { useTheme } from "@/components/ThemeProvider";
 import { Typography } from "@/components/Typography";
+import { DocLayout } from "@/layouts/DocLayout";
 
 export function meta() {
   return [
@@ -12,8 +11,12 @@ export function meta() {
 
 export default function GetStartedPage() {
   return (
-    <ComponentTemplate idx="/v0/docs/get-started">
-      <Section.Root title="Get Started">
+    <DocLayout>
+      <DocLayout.TitleWithoutTabs
+        title="Get Started"
+        desc="Get started with Copy UI."
+      />
+      <DocLayout.Content>
         <Typography.P>
           Copy UI is a simple and stupid collection of code - help you build
           your UI faster.
@@ -78,8 +81,8 @@ export default function GetStartedPage() {
           </Link>{" "}
           to know more about it.
         </Typography.P>
-      </Section.Root>
-    </ComponentTemplate>
+      </DocLayout.Content>
+    </DocLayout>
   );
 }
 

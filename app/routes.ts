@@ -4,42 +4,23 @@ import { index, layout, prefix, route } from "@react-router/dev/routes";
 import { componentsRoutes } from "./components_routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
-const prevComponentNames = [] as string[];
-
 export default [
   index("routes/home.tsx"),
 
-  ...prefix("v0/docs", [route("get-started", "routes/docs/get-started.tsx")]),
   ...prefix(
     "v0/utils",
     utilsRoutes.map((utilsRoute) => {
       return route(utilsRoute.name, utilsRoute.path);
     }),
   ),
-  ...prefix(
-    "v0/components",
-    componentsRoutes
-      .filter(
-        (componentsRoute) =>
-          prevComponentNames.indexOf(componentsRoute.name) !== -1,
-      )
-      .map((componentsRoute) => {
+
+  layout("./layouts/page-layout.tsx", [
+    ...prefix("v0/docs", [route("get-started", "routes/docs/get-started.tsx")]),
+    ...prefix(
+      "v0/components",
+      componentsRoutes.map((componentsRoute) => {
         return route(componentsRoute.name, componentsRoute.path);
       }),
-  ),
-
-  layout(
-    "./layouts/page-layout.tsx",
-    prefix(
-      "v0/components",
-      componentsRoutes
-        .filter(
-          (componentsRoute) =>
-            prevComponentNames.indexOf(componentsRoute.name) === -1,
-        )
-        .map((componentsRoute) => {
-          return route(componentsRoute.name, componentsRoute.path);
-        }),
     ),
-  ),
+  ]),
 ] satisfies RouteConfig;
