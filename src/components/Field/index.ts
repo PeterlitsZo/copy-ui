@@ -1,3 +1,3 @@
-// Field from copy-ui @ 2025-10-27.
+// Field from copy-ui @ 2025-11-08.
 
-export { Field } from "./Field";
+export { Field } from "./field";
