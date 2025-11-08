@@ -1,8 +1,8 @@
-import { CodeHighlight } from "@/components/CodeHighlight";
-import { ComponentTemplate } from "@/components/ComponentTemplate";
-import { Section } from "@/components/Section";
-import { useTheme } from "@/components/ThemeProvider";
+import { useState } from "react";
+
 import { Typography } from "@/components/Typography";
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
 import { sourceCode } from "./source_code.codegen";
@@ -18,34 +18,48 @@ export function meta(_: Route.MetaArgs) {
 }
 
 export default function ThemeProviderPage() {
-  const theme = useTheme();
+  const [tabsValue, setTabsValue] = useState("doc");
+
+  const tabs = [
+    { name: "doc", label: "Document" },
+    { name: "source", label: "Source Code" },
+    { name: "changelog", label: "Changelog" },
+  ];
 
   return (
-    <ComponentTemplate component="ThemeProvider">
-      <Section.Root title="ThemeProvider">
-        <Typography.H2>Usage</Typography.H2>
-        <Typography.P>
-          The ThemeProvider component is used to provide a theme to all Copy UI
-          components in your application. It uses React Context to pass down the
-          theme values.
-        </Typography.P>
-        <Typography.P>
-          You can use the function useTheme to access the current theme values
-          in your components. Like this:
-        </Typography.P>
-        <div
-          style={{
-            padding: "1rem",
-            backgroundColor: theme.colors.gray["000"],
-            borderRadius: "0.5rem",
-          }}
-        >
-          <CodeHighlight lang="tsx" code={usageCode} withLineNumbers />
-        </div>
-        <Section.SourceCode files={sourceCode} />
-        <Section.Changelog changelog={changelog} />
-      </Section.Root>
-    </ComponentTemplate>
+    <DocLayout>
+      <DocLayout.Title
+        title="ThemeProvider"
+        desc="Provide a theme to your application."
+        tabsValue={tabsValue}
+        tabs={tabs}
+        onTabsValueChange={setTabsValue}
+      />
+      {tabsValue === "doc" && (
+        <DocLayout.Content>
+          <Typography.P>
+            The ThemeProvider component is used to provide a theme to all Copy
+            UI components in your application. It uses React Context to pass
+            down the theme values.
+          </Typography.P>
+          <Typography.P>
+            You can use the function useTheme to access the current theme values
+            in your components. Like this:
+          </Typography.P>
+          <Typography.CodeBlock lang="tsx" code={usageCode} withLineNumbers />
+        </DocLayout.Content>
+      )}
+      {tabsValue === "source" && (
+        <DocLayout.Content>
+          <DocLayout.Files files={sourceCode} />
+        </DocLayout.Content>
+      )}
+      {tabsValue === "changelog" && (
+        <DocLayout.Content>
+          <DocLayout.Changelog changelog={changelog} />
+        </DocLayout.Content>
+      )}
+    </DocLayout>
   );
 }
 
