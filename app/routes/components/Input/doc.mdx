@@ -1,0 +1,32 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+import Demo04 from "./demos/Demo04";
+import demo04SourceCode from "./demos/Demo04.source_code.codegen";
+import Demo05 from "./demos/Demo05";
+import demo05SourceCode from "./demos/Demo05.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Examples
+
+### Different variants
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### Left & right sections
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
+
+### Disabled state
+
+<DocLayout.Live node={<Demo04 />} code={demo04SourceCode} />
+
+### Different sizes
+
+<DocLayout.Live node={<Demo05 />} code={demo05SourceCode} />
