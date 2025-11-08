@@ -4,7 +4,7 @@
 const demoSourceCode = ''
   + 'import { useState } from "react";\n'
   + '\n'
-  + 'import { Flex } from "@/components/Flex/flex";\n'
+  + 'import { Flex } from "@/components/Flex";\n'
   + 'import { Paper } from "@/components/Paper";\n'
   + 'import { type Placement, Popover } from "@/components/Popover";\n'
   + 'import { Select } from "@/components/Select";\n'

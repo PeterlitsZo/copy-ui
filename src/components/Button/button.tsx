@@ -5,7 +5,8 @@ import tinycolor from "tinycolor2";
 import { type ColorName, useTheme } from "@/components/ThemeProvider";
 import { resolveStyle } from "@/utils/resolve-style";
 import { useJss } from "../CopyUiProvider";
-import styles from "./Button.module.scss";
+
+import styles from "./button.module.scss";
 
 export type ButtonProps = ComponentProps<"button"> & {
   variant?: "default" | "filled" | "light" | "secondary" | "ghost";

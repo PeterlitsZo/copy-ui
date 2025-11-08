@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
 import tinycolor from "tinycolor2";
+
 import { type ColorName, useTheme } from "@/components/ThemeProvider";
-import styles from "./Avatar.module.scss";
+
+import styles from "./avatar.module.scss";
 
 // Avatar.Img
 // =============================================================================

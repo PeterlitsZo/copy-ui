@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useJss } from "@/components/CopyUiProvider";
 import { resolveStyle } from "@/utils/resolve-style";
 import { useTheme } from "../ThemeProvider";
-import styles from "./Tabs.module.scss";
+import styles from "./tabs.module.scss";
 import { TabsContext, type TabsContextValue } from "./tab-context";
 import { TabsTab } from "./tabs-tab";
 

@@ -3,7 +3,7 @@
 
 export const sourceCode: Record<string, string> = {};
 
-sourceCode['Markdown.tsx'] = ''
+sourceCode['markdown.tsx'] = ''
   + 'import type { FC } from "react";\n'
   + 'import ReactMarkdown from "react-markdown";\n'
   + '\n'

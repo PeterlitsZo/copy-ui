@@ -408,6 +408,6 @@ sourceCode['typography-headings.module.scss'] = ''
 sourceCode['index.ts'] = ''
   + '// Typography from copy-ui @ 2025-10-30.\n'
   + '\n'
-  + 'export { Typography } from "./Typography";\n'
+  + 'export { Typography } from "./typography";\n'
   ;
 

@@ -3,12 +3,14 @@
 
 export const sourceCode: Record<string, string> = {};
 
-sourceCode['Avatar.tsx'] = ''
+sourceCode['avatar.tsx'] = ''
   + 'import classNames from "classnames";\n'
   + 'import type { ComponentProps, CSSProperties, FC } from "react";\n'
   + 'import tinycolor from "tinycolor2";\n'
+  + '\n'
   + 'import { type ColorName, useTheme } from "@/components/ThemeProvider";\n'
-  + 'import styles from "./Avatar.module.scss";\n'
+  + '\n'
+  + 'import styles from "./avatar.module.scss";\n'
   + '\n'
   + '// Avatar.Img\n'
   + '// =============================================================================\n'
@@ -71,7 +73,7 @@ sourceCode['Avatar.tsx'] = ''
   + 'export { Avatar };\n'
   ;
 
-sourceCode['Avatar.module.scss'] = ''
+sourceCode['avatar.module.scss'] = ''
   + '.avatar {\n'
   + '  display: inline-flex;\n'
   + '  align-items: center;\n'

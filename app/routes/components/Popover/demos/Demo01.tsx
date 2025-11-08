@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Flex } from "@/components/Flex/flex";
+import { Flex } from "@/components/Flex";
 import { Paper } from "@/components/Paper";
 import { type Placement, Popover } from "@/components/Popover";
 import { Select } from "@/components/Select";
