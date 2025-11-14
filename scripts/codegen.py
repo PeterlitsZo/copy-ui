@@ -34,20 +34,31 @@ def codegen_component():
         component_dir_path = os.path.join(components_dir, component_name)
         component_route_dir_path = os.path.join(components_route_dir, component_name)
 
+        # Default config's flags.
         wip = False
         deprecated = False
+        private = False
 
-        # Make sure the component is not private.
-        config_path = os.path.join(component_dir_path, '.copy_ui_config.toml')
-        if os.path.isfile(config_path):
-            with open(config_path, 'r', encoding='utf-8') as cf:
-                config_content = cf.read()
-                if 'private = true' in config_content:
-                    continue
-                if 'wip = true' in config_content:
-                    wip = True
-                if 'deprecated = true' in config_content:
-                    deprecated = True
+        # Read the component config file, if exists.
+        config_paths = [
+            os.path.join(component_dir_path, '.copy_ui_config.toml'),
+            os.path.join(component_dir_path, '.copy-ui-config.toml'),
+        ]
+        for config_path in config_paths:
+            if os.path.isfile(config_path):
+                with open(config_path, 'r', encoding='utf-8') as cf:
+                    config_content = cf.read()
+                    if 'private = true' in config_content:
+                        private = True
+                    if 'wip = true' in config_content:
+                        wip = True
+                    if 'deprecated = true' in config_content:
+                        deprecated = True
+                break
+            
+        # Skip private components.
+        if private:
+            continue
 
         # Add to the list of components.
         components.append({
@@ -128,8 +139,9 @@ def codegen_source_code_for_component(component_dir_path: str, of: TextIO):
     of.write("export const sourceCode: Record<string, string> = {};\n\n")
 
     # Load all files and write into the `components_data` dictionary.
+    ignored_files = {".copy_ui_config.toml", ".copy-ui-config.toml", "CHANGELOG.md"}
     for filename in os.listdir(component_dir_path):
-        if filename == ".copy_ui_config.toml" or filename == "CHANGELOG.md":
+        if filename in ignored_files:
             continue
 
         file_path = os.path.join(component_dir_path, filename)
