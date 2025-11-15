@@ -10,4 +10,6 @@ export const changelog = ''
   + '- 2025-11-06: Export the `useTheme` hook. And remove the `style` tag built for\n'
   + '  SSR after hydration in `CopyUiProvider`.\n'
   + '- 2025-11-08: Add simple MDX support for `CopyUiProvider`.\n'
+  + '- 2025-11-15: Export the `ColorName` and `ColorNo` types. Add colors cyan, teal,\n'
+  + '  lime and orange to the theme.\n'
   ;

@@ -6,3 +6,5 @@
 - 2025-11-06: Export the `useTheme` hook. And remove the `style` tag built for
   SSR after hydration in `CopyUiProvider`.
 - 2025-11-08: Add simple MDX support for `CopyUiProvider`.
+- 2025-11-15: Export the `ColorName` and `ColorNo` types. Add colors cyan, teal,
+  lime and orange to the theme.

@@ -3,11 +3,15 @@ export type ColorName =
   | "red"
   | "pink"
   | "grape"
-  | "blue"
   | "violet"
   | "indigo"
+  | "blue"
+  | "cyan"
+  | "teal"
   | "green"
-  | "yellow";
+  | "lime"
+  | "yellow"
+  | "orange";
 
 export type ColorNo =
   | "000"
