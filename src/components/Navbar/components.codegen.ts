@@ -32,6 +32,7 @@ export const components: Component[] = [
   {"name": "SortIndicator", "path": "/v0/components/SortIndicator", "wip": false, "deprecated": false},
   {"name": "Spinner", "path": "/v0/components/Spinner", "wip": false, "deprecated": false},
   {"name": "Switch", "path": "/v0/components/Switch", "wip": false, "deprecated": false},
+  {"name": "Table", "path": "/v0/components/Table", "wip": false, "deprecated": false},
   {"name": "Tabs", "path": "/v0/components/Tabs", "wip": false, "deprecated": false},
   {"name": "Tag", "path": "/v0/components/Tag", "wip": false, "deprecated": false},
   {"name": "Textarea", "path": "/v0/components/Textarea", "wip": false, "deprecated": false},

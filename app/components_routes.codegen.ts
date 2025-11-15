@@ -30,6 +30,7 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "SortIndicator", "path": "routes/components/SortIndicator/index.tsx"},
   {"name": "Spinner", "path": "routes/components/Spinner/index.tsx"},
   {"name": "Switch", "path": "routes/components/Switch/index.tsx"},
+  {"name": "Table", "path": "routes/components/Table/index.tsx"},
   {"name": "Tabs", "path": "routes/components/Tabs/index.tsx"},
   {"name": "Tag", "path": "routes/components/Tag/index.tsx"},
   {"name": "Textarea", "path": "routes/components/Textarea/index.tsx"},
