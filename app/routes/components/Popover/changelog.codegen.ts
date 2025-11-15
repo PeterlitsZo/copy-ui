@@ -18,4 +18,6 @@ export const changelog = ''
   + "- 2025-10-27: Make `Popover.Trigger`'s render can have prop `isOpen`.\n"
   + '- 2025-10-28: Using `Modal.Raw` rather than `Modal`. Export the type\n'
   + '  `PopoverTriggerRender`.\n'
+  + '- 2025-11-15: Add `offset` prop to `Popover` to control the distance between the\n'
+  + '  trigger and the portal.\n'
   ;

@@ -1,4 +1,5 @@
-import { autoUpdate, flip, offset, useFloating } from "@floating-ui/react";
+import * as fui from "@floating-ui/react";
+import { autoUpdate, useFloating } from "@floating-ui/react";
 import type { FC, ReactNode } from "react";
 import { useEffect, useMemo } from "react";
 
@@ -9,6 +10,7 @@ import { PopoverTrigger } from "./popover-trigger";
 
 export type PopoverProps = {
   placement?: Placement;
+  offset?: number;
 
   children: ReactNode;
 };
@@ -25,12 +27,23 @@ type PopoverComponent = FC<PopoverProps> & {
 };
 
 const Popover: PopoverComponent = (props) => {
-  const { placement = "bottom-end", children } = props;
+  const { placement = "bottom-end", offset = 4, children } = props;
+
+  const middleware = useMemo(() => {
+    const result = [];
+
+    if (offset !== 0) {
+      result.push(fui.offset(offset));
+    }
+    result.push(fui.flip());
+
+    return result;
+  }, [offset]);
 
   const { refs, floatingStyles } = useFloating({
     placement,
     whileElementsMounted: autoUpdate,
-    middleware: [offset(4), flip()],
+    middleware,
   });
 
   const popoverStore = useMemo(() => {

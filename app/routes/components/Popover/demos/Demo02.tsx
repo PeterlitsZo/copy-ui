@@ -1,33 +1,26 @@
 import { useState } from "react";
-
 import { Flex } from "@/components/Flex";
 import { Paper } from "@/components/Paper";
-import { type Placement, Popover } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 import { Select } from "@/components/Select";
-
 import styles from "./Demo01.module.scss";
 
 export default function Demo() {
-  const [placement, setPlacement] = useState(null as Placement | null);
+  const [offset, setOffset] = useState("8");
 
-  const placementOptions: Array<{ label: string; value: Placement }> = [
-    { label: "Top Start", value: "top-start" },
-    { label: "Top", value: "top" },
-    { label: "Top End", value: "top-end" },
-    { label: "Right Start", value: "right-start" },
-    { label: "Right", value: "right" },
-    { label: "Right End", value: "right-end" },
-    { label: "Bottom Start", value: "bottom-start" },
-    { label: "Bottom", value: "bottom" },
-    { label: "Bottom End", value: "bottom-end" },
-    { label: "Left Start", value: "left-start" },
-    { label: "Left", value: "left" },
-    { label: "Left End", value: "left-end" },
+  const offsetOptions: Array<{ label: string; value: string }> = [
+    { label: "0 px", value: "0" },
+    { label: "4 px", value: "4" },
+    { label: "8 px", value: "8" },
+    { label: "12 px", value: "12" },
+    { label: "16 px", value: "16" },
+    { label: "24 px", value: "24" },
+    { label: "32 px", value: "32" },
   ];
 
   return (
     <Flex dir="column" gap="4rem">
-      <Popover placement={placement || undefined}>
+      <Popover placement="bottom-end" offset={Number.parseInt(offset, 10)}>
         <Popover.Trigger
           render={({ setRef, onToggle }) => (
             <Paper
@@ -58,10 +51,10 @@ export default function Demo() {
         />
       </Popover>
       <Select
-        value={placement}
+        value={offset}
         placeholder="Select placement"
-        onChange={(value) => setPlacement(value)}
-        options={placementOptions}
+        onChange={(value) => setOffset(value)}
+        options={offsetOptions}
       />
     </Flex>
   );

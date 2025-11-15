@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { ComponentTemplate } from "@/components/ComponentTemplate";
-import { Section } from "@/components/Section";
-import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -36,7 +32,7 @@ export default function PopoverPage() {
       />
       {tabsValue === "doc" && (
         <DocLayout.Content>
-          <DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+          <Doc />
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
