@@ -1,4 +1,4 @@
-// SortIndicator from copy-ui @ 2025-11-07.
+// SortIndicator from copy-ui @ 2025-11-15.
 
 export type {
   SortIndicatorDirection,

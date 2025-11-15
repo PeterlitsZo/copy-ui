@@ -1,0 +1,5 @@
+@layer components {
+  .compactSortIndicator {
+    width: calc(var(--icon-size) / 2) !important;
+  }
+}

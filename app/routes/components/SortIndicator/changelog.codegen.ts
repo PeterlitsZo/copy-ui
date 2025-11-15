@@ -7,4 +7,6 @@ export const changelog = ''
   + '- 2025-10-12: Code formatting improvement.\n'
   + '- 2025-11-07: Support the new hook `useDirection` and remove the old hook. Let\n'
   + '  the `SortIndicator` has its style.\n'
+  + '- 2025-11-15: Add the variant `compact`. The `size` prop is removed -- user\n'
+  + '  should use CSS to set its size.\n'
   ;
