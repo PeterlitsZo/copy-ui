@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useJss } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { Paper } from "@/components/Paper";
 import { Tabs } from "@/components/Tabs";
-import { useTheme } from "@/components/ThemeProvider";
 
 export default function Demo() {
   const theme = useTheme();

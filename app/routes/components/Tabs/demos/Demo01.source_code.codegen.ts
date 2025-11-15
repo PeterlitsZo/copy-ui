@@ -3,12 +3,11 @@
 
 const demoSourceCode = ''
   + 'import { useState } from "react";\n'
-  + 'import { useJss } from "@/components/CopyUiProvider";\n'
+  + 'import { useJss, useTheme } from "@/components/CopyUiProvider";\n'
   + 'import { Flex } from "@/components/Flex";\n'
   + 'import { Markdown } from "@/components/Markdown";\n'
   + 'import { Paper } from "@/components/Paper";\n'
   + 'import { Tabs } from "@/components/Tabs";\n'
-  + 'import { useTheme } from "@/components/ThemeProvider";\n'
   + '\n'
   + 'export default function Demo() {\n'
   + '  const theme = useTheme();\n'

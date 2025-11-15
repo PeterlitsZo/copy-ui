@@ -2,8 +2,7 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 import tinycolor from "tinycolor2";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
 import { useTabsContext } from "./tab-context";
 import styles from "./tabs-tab.module.scss";
@@ -26,9 +25,9 @@ const TabsTabDefault: FC<TabsTabProps> = (props) => {
     "--tab-radius": "0.375rem",
     "--tab-font-size": "1.25rem",
     "--tab-hover-wrapper-bg": tinycolor(theme.colors.gray["100"])
-      .setAlpha(0.7)
+      .setAlpha(0.5)
       .toRgbString(),
-    "--tab-wrapper-padding-x": "0.75rem",
+    "--tab-wrapper-padding-x": "0.5rem",
     "--tab-wrapper-padding-y": "0.125rem",
     "--tab-bg": "transparent",
     "--tab-color": theme.colors.gray["600"],
@@ -37,7 +36,7 @@ const TabsTabDefault: FC<TabsTabProps> = (props) => {
     "--tab-border-bottom-style": "solid",
     "--tab-border-bottom-color": "transparent",
     "--tab-active-border-bottom-color": theme.colors.blue["800"],
-    "--tab-padding-x": "0.375rem",
+    "--tab-padding-x": "0",
     "--tab-padding-y": "0.375rem",
   });
 

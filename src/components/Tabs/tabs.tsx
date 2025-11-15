@@ -2,11 +2,11 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 import { useState } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { resolveStyle } from "@/utils/resolve-style";
-import { useTheme } from "../ThemeProvider";
-import styles from "./tabs.module.scss";
+
 import { TabsContext, type TabsContextValue } from "./tab-context";
+import styles from "./tabs.module.scss";
 import { TabsTab } from "./tabs-tab";
 
 export type TabsProps = ComponentProps<"div"> & {
@@ -60,12 +60,14 @@ const Tabs: TabsComponent = (props: TabsProps) => {
             "--tabs-bg-color": "transparent",
             "--tabs-width": "auto",
             "--tabs-border-radius": "auto",
+            "--tabs-gap": "0.75rem",
           },
           enclosed: {
             "--tabs-bg-color": theme.colors.gray["100"],
             "--tabs-width": "fit-content",
             "--tabs-border-radius": "0.75rem",
             "--tabs-padding": "0.25rem",
+            "--tabs-gap": "0.125rem",
           },
         },
       },

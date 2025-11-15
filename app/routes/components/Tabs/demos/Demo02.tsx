@@ -4,7 +4,6 @@ import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { Paper } from "@/components/Paper";
 import { Tabs } from "@/components/Tabs";
-import { useTheme } from "@/components/ThemeProvider";
 
 export default function Demo() {
   const jss = useJss();
