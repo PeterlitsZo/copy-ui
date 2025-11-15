@@ -19,4 +19,6 @@ export const changelog = ''
   + '- 2025-10-28: Add `secondary` variant.\n'
   + '- 2025-10-30: Add `--button-border-separator-color` CSS variable and add the\n'
   + '  default icon size for SVG children in left or right section.\n'
+  + '- 2025-11-15: Update icon size to make it smaller, remove the dependency on\n'
+  + '  deprecated ThemeProvider.\n'
   ;

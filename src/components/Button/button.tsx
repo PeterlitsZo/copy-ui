@@ -1,10 +1,8 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 import tinycolor from "tinycolor2";
-
-import { type ColorName, useTheme } from "@/components/ThemeProvider";
+import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
 import { resolveStyle } from "@/utils/resolve-style";
-import { useJss } from "../CopyUiProvider";
 
 import styles from "./button.module.scss";
 
@@ -109,35 +107,35 @@ const Button: FC<ButtonProps> = (props) => {
         size: {
           xs: {
             "--button-height": theme.tokens.inputBaseXsHeight,
-            "--icon-size": `calc(var(--button-height) / 2)`,
+            "--icon-size": `calc(var(--button-height) / 2.125)`,
             "--button-padding-x": "0.625rem",
             "--button-section-gap": "0.375rem",
             "--button-font-size": "0.75rem",
           },
           sm: {
             "--button-height": theme.tokens.inputBaseSmHeight,
-            "--icon-size": `calc(var(--button-height) / 2)`,
+            "--icon-size": `calc(var(--button-height) / 2.125)`,
             "--button-padding-x": "0.75rem",
             "--button-section-gap": "0.5rem",
             "--button-font-size": "0.875rem",
           },
           md: {
             "--button-height": theme.tokens.inputBaseMdHeight,
-            "--icon-size": `calc(var(--button-height) / 2)`,
+            "--icon-size": `calc(var(--button-height) / 2.125)`,
             "--button-padding-x": "1rem",
             "--button-section-gap": "0.625rem",
             "--button-font-size": "1rem",
           },
           lg: {
             "--button-height": theme.tokens.inputBaseLgHeight,
-            "--icon-size": `calc(var(--button-height) / 2)`,
+            "--icon-size": `calc(var(--button-height) / 2.125)`,
             "--button-padding-x": "1.25rem",
             "--button-section-gap": "0.75rem",
             "--button-font-size": "1.125rem",
           },
           xl: {
             "--button-height": theme.tokens.inputBaseXlHeight,
-            "--icon-size": `calc(var(--button-height) / 2)`,
+            "--icon-size": `calc(var(--button-height) / 2.125)`,
             "--button-padding-x": "1.5rem",
             "--button-section-gap": "1rem",
             "--button-font-size": "1.25rem",

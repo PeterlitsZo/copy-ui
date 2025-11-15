@@ -11,12 +11,12 @@ export default function Demo() {
       <Card.Header>Designing Data-Intensive Application</Card.Header>
       <Card.Content>
         <Flex dir="column" gap="1rem">
-          <Typography.Root>
+          <Typography>
             <Typography.P>
               Designing Data-Intensive Applications is a book about the
               architecture of scalable and maintainable data systems.
             </Typography.P>
-          </Typography.Root>
+          </Typography>
           <Flex gap="0.5rem">
             <Button variant="filled" size="sm" leftSection={<Star />}>
               Add to favorites

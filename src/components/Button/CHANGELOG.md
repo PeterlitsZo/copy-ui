@@ -15,3 +15,5 @@
 - 2025-10-28: Add `secondary` variant.
 - 2025-10-30: Add `--button-border-separator-color` CSS variable and add the
   default icon size for SVG children in left or right section.
+- 2025-11-15: Update icon size to make it smaller, remove the dependency on
+  deprecated ThemeProvider.
