@@ -1,7 +1,7 @@
 import type { CSSProperties, FC } from "react";
 
+import { useTheme } from "@/components/CopyUiProvider";
 import { Tabs } from "@/components/Tabs";
-import { useTheme } from "@/components/ThemeProvider";
 import { Typography } from "@/components/Typography";
 
 import styles from "./doc-layout-title.module.scss";
@@ -26,12 +26,12 @@ const DocLayoutTitle: FC<DocLayoutTitleProps> = (props) => {
 
   return (
     <div className={styles.docLayoutTitle} style={stx}>
-      <Typography.Root className={styles.docLayoutTitleWrapper}>
+      <Typography className={styles.docLayoutTitleWrapper}>
         <Typography.H1>{title}</Typography.H1>
         <Typography.P className={styles.docLayoutTitleDesc}>
           {desc}
         </Typography.P>
-      </Typography.Root>
+      </Typography>
       <Tabs
         value={tabsValue}
         onValueChange={onTabsValueChange}

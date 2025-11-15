@@ -4,21 +4,14 @@ import { type CSSProperties, type FC, useRef, useState } from "react";
 
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { CodeHighlight } from "@/components/CodeHighlight";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { IconButton } from "@/components/IconButton";
 import { Modal } from "@/components/Modal";
 import { ScrollArea } from "@/components/ScrollArea";
-import type { Theme } from "@/components/ThemeProvider";
-import { useTheme } from "@/components/ThemeProvider";
 import { useToast } from "@/components/Toast";
 import { Tooltip } from "@/components/Tooltip";
 
 import styles from "./doc-layout-files.module.scss";
-
-const rootStyle = (theme: Theme) =>
-  ({
-    "--border-color": theme.colors.gray["200"],
-    "--background-color": theme.colors.gray["000"],
-  }) as CSSProperties;
 
 interface DocLayoutFilesProps {
   files: Record<string, string>;
@@ -28,6 +21,7 @@ const DocLayoutFiles: FC<DocLayoutFilesProps> = (props) => {
   const { files } = props;
 
   const theme = useTheme();
+  const jss = useJss();
 
   const [currentFilename, setCurrentFilename] = useState(
     Object.keys(files)[0] || "",
@@ -76,13 +70,18 @@ const DocLayoutFiles: FC<DocLayoutFilesProps> = (props) => {
     </div>
   );
 
+  const stx = jss.hash({
+    "--border-color": theme.colors.gray["200"],
+    "--background-color": theme.colors.gray["000"],
+  });
+
   return (
     <>
-      <div className={styles.sourceCode} style={rootStyle(theme)}>
+      <div className={classNames(styles.sourceCode, stx)}>
         {sourceCodeTree}
         {sourceCodeBlock(true, "80vh")}
       </div>
-      <Modal isOpen={isModalOpen} style={rootStyle(theme)}>
+      <Modal isOpen={isModalOpen} className={stx}>
         <Modal.Overlay onClick={() => setModalOpen(false)} />
         <Modal.Content
           center

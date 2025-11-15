@@ -13,9 +13,11 @@ const DocLayoutContent: FC<DocLayoutContentProps> = (props) => {
 
   return (
     <div className={styles.docLayoutContent}>
-      <Typography.Root className={styles.docLayoutContentWrapper}>
-        {children}
-      </Typography.Root>
+      <div className={styles.docLayoutContentWrapper}>
+        <Typography className={styles.docLayoutContentText}>
+          {children}
+        </Typography>
+      </div>
     </div>
   );
 };
