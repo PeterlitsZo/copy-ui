@@ -18,7 +18,7 @@ export const components: Component[] = [
   {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": false, "deprecated": false},
   {"name": "Field", "path": "/v0/components/Field", "wip": false, "deprecated": false},
   {"name": "Flex", "path": "/v0/components/Flex", "wip": false, "deprecated": false},
-  {"name": "Graph", "path": "/v0/components/Graph", "wip": true, "deprecated": false},
+  {"name": "Graph", "path": "/v0/components/Graph", "wip": false, "deprecated": false},
   {"name": "IconButton", "path": "/v0/components/IconButton", "wip": false, "deprecated": false},
   {"name": "Input", "path": "/v0/components/Input", "wip": false, "deprecated": false},
   {"name": "InputBase", "path": "/v0/components/InputBase", "wip": false, "deprecated": false},
