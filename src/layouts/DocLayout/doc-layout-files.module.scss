@@ -37,8 +37,8 @@
 
   .sourceCodeModalContent {
     background-color: white;
-    width: 90vw;
-    height: 90vh;
+    width: calc(100vw - 4rem); 
+    height: calc(100vh - 4rem);
     border-radius: 0.5rem;
   }
 

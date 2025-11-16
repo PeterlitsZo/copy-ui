@@ -1,12 +1,18 @@
-.docLayoutContent {
-  padding: 2rem 2rem 4rem 2rem;
-}
+@layer components {
+  .docLayoutContent {
+    padding: 2rem 2rem 4rem 2rem;
+  }
 
-.docLayoutContentWrapper {
-  margin: 0 auto;
-  max-width: 64rem;
-}
+  .docLayoutContentVariantFiles {
+    padding: 1rem;
+  }
 
-.docLayoutContentText {
-  max-width: 56rem;
+  .docLayoutContentWrapper {
+    margin: 0 auto;
+    max-width: 64rem;
+  }
+
+  .docLayoutContentText {
+    max-width: 56rem;
+  }
 }
