@@ -1,0 +1,30 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import { Graph } from "@/components/Graph";
+import { Paper } from "@/components/Paper";
+import { Flex } from "@/components/Flex";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<Paper radius="md" withBorder withPadding>
+  <Flex justifyContent="center">
+    <Graph
+      nodes={[
+        { id: "markdown", label: "Markdown" },
+        { id: "typography", label: "Typography" },
+        { id: "react-markdown", label: "react-markdown", color: "green" },
+        { id: "unist", label: "unist", color: "green" },
+      ]}
+      edges={[
+        { from: "markdown", to: "typography" },
+        { from: "markdown", to: "react-markdown" },
+        { from: "markdown", to: "unist" },
+      ]}
+    />
+  </Flex>
+</Paper>

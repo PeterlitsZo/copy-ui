@@ -13,7 +13,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const { children } = props;
 
   return (
-    <Typography.Root>
+    <Typography>
       <ReactMarkdown
         rehypePlugins={[rehypeCodeblock]}
         components={{
@@ -23,8 +23,12 @@ export const Markdown: FC<MarkdownProps> = (props) => {
           h4: Typography.H4,
           p: Typography.P,
           ul: Typography.Ul,
+          ol: Typography.Ol,
           li: Typography.Li,
+          strong: Typography.Strong,
+          em: Typography.Em,
           code: Typography.Code,
+
           // @ts-expect-error Oh, well. It is a hack.
           "copy-ui-hack-codeblock": (props: { lang: string; code: string }) => {
             const { lang, code } = props;
@@ -36,6 +40,6 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       >
         {children}
       </ReactMarkdown>
-    </Typography.Root>
+    </Typography>
   );
 };

@@ -1,3 +1,3 @@
-// Markdown from copy-ui @ 2025-10-24.
+// Markdown from copy-ui @ 2025-11-16.
 
 export { Markdown } from "./markdown";

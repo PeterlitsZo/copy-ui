@@ -1,26 +1,16 @@
-import { Card } from "@/components/Card";
+import { CodeBlock } from "@/components/CodeBlock";
+import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
-
-const content = `\
-# Hello World
-
-This is a simple Markdown component demo.
-
-- Item 1
-- Item 2
-- Item 3
-
-\`\`\`tsx
-"use Copy UI";
-\`\`\`
-`;
+import { Paper } from "@/components/Paper";
+import content from "./content01.md?raw";
 
 export default function Demo() {
   return (
-    <Card>
-      <Card.Content>
+    <Paper radius="md" withBorder withPadding>
+      <Flex dir="row" gap="1rem">
         <Markdown>{content}</Markdown>
-      </Card.Content>
-    </Card>
+        <CodeBlock code={content} lang="markdown" />
+      </Flex>
+    </Paper>
   );
 }
