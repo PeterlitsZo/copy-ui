@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./typography-headings.module.scss";
 

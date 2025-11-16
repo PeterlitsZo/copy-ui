@@ -3,7 +3,7 @@ import { Typography } from "@/components/Typography";
 
 export default function Demo() {
   return (
-    <Paper withBorder withPadding radius="md" style={{ width: "50rem" }}>
+    <Paper withBorder withPadding radius="md" style={{ width: "40rem" }}>
       <Typography>
         <Typography.Ul>
           <Typography.Li>

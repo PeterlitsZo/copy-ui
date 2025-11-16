@@ -1,0 +1,44 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import { Graph } from "@/components/Graph";
+import { Paper } from "@/components/Paper";
+import { Flex } from "@/components/Flex";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<Paper radius="md" withBorder withPadding>
+  <Flex justifyContent="center">
+    <Graph
+      nodes={[
+        { id: "typography", label: "Typography" },
+        { id: "copy-ui-provider", label: "CopyUiProvider" },
+        { id: "code-block", label: "CodeBlock" },
+        { id: "classnames", label: "classnames", color: "green" },
+      ]}
+      edges={[
+        { from: "typography", to: "classnames" },
+        { from: "typography", to: "copy-ui-provider" },
+        { from: "typography", to: "code-block" },
+      ]}
+    />
+  </Flex>
+</Paper>
+
+## Examples
+
+### Changelog List
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### README Document
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />

@@ -13,3 +13,5 @@
 - 2025-10-13: Add `Typography.CodeBlock` component.
 - 2025-10-30: Support just use `Typography` as the root component. Add margin
   between list items in `Typography.Li`.
+- 2025-11-16: Add `Typography.Ol`, `Typography.Strong` and `Typography.Em`
+  component.

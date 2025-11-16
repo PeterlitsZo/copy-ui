@@ -17,4 +17,6 @@ export const changelog = ''
   + '- 2025-10-13: Add `Typography.CodeBlock` component.\n'
   + '- 2025-10-30: Support just use `Typography` as the root component. Add margin\n'
   + '  between list items in `Typography.Li`.\n'
+  + '- 2025-11-16: Add `Typography.Ol`, `Typography.Strong` and `Typography.Em`\n'
+  + '  component.\n'
   ;

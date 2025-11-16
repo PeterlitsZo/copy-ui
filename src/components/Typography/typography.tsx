@@ -2,15 +2,17 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
 import { CodeBlock } from "@/components/CodeBlock";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./typography.module.scss";
+import { TypographyEm, TypographyStrong } from "./typography-common";
 import {
   TypographyH1,
   TypographyH2,
   TypographyH3,
   TypographyH4,
 } from "./typography-headings";
+import { TypographyLi, TypographyOl, TypographyUl } from "./typography-list";
 
 // Typography.Root
 // =============================================================================
@@ -52,62 +54,6 @@ const TypographyP: FC<TypographyPProps> = (props) => {
     >
       {children}
     </p>
-  );
-};
-
-// Typography.Ul
-// =============================================================================
-
-type TypographyUlProps = ComponentProps<"ul"> & {
-  mt?: string;
-  mb?: string;
-};
-
-const TypographyUl: FC<TypographyUlProps> = (props) => {
-  const { children, className, style, mt, mb, ...rest } = props;
-
-  const computedStyle = {
-    marginTop: mt,
-    marginBottom: mb,
-    ...style,
-  };
-
-  return (
-    <ul
-      className={classNames(styles.ul, className)}
-      style={computedStyle}
-      {...rest}
-    >
-      {children}
-    </ul>
-  );
-};
-
-// Typography.Li
-// =============================================================================
-
-type TypographyLiProps = ComponentProps<"li"> & {
-  mt?: string;
-  mb?: string;
-};
-
-const TypographyLi: FC<TypographyLiProps> = (props) => {
-  const { children, className, style, mt, mb, ...rest } = props;
-
-  const computedStyle = {
-    marginTop: mt,
-    marginBottom: mb,
-    ...style,
-  };
-
-  return (
-    <li
-      className={classNames(styles.li, className)}
-      style={computedStyle}
-      {...rest}
-    >
-      {children}
-    </li>
   );
 };
 
@@ -162,7 +108,10 @@ type ComponentTypography = FC<TypographyRootProps> & {
   H4: typeof TypographyH4;
   P: typeof TypographyP;
   Ul: typeof TypographyUl;
+  Ol: typeof TypographyOl;
   Li: typeof TypographyLi;
+  Strong: typeof TypographyStrong;
+  Em: typeof TypographyEm;
   Code: typeof TypographyCode;
   CodeBlock: typeof TypographyCodeBlock;
 };
@@ -178,7 +127,10 @@ Typography.H3 = TypographyH3;
 Typography.H4 = TypographyH4;
 Typography.P = TypographyP;
 Typography.Ul = TypographyUl;
+Typography.Ol = TypographyOl;
 Typography.Li = TypographyLi;
+Typography.Strong = TypographyStrong;
+Typography.Em = TypographyEm;
 Typography.Code = TypographyCode;
 Typography.CodeBlock = TypographyCodeBlock;
 
