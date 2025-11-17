@@ -14,21 +14,6 @@ import {
 } from "./typography-headings";
 import { TypographyLi, TypographyOl, TypographyUl } from "./typography-list";
 
-// Typography.Root
-// =============================================================================
-
-type TypographyRootProps = ComponentProps<"div">;
-
-export const TypographyRoot: FC<TypographyRootProps> = (props) => {
-  const { children, className, ...rest } = props;
-
-  return (
-    <div className={classNames(styles.typographyRoot, className)} {...rest}>
-      {children}
-    </div>
-  );
-};
-
 // Typography.P
 // =============================================================================
 
@@ -93,15 +78,20 @@ export const TypographyCodeBlock: FC<TypographyCodeBlockProps> = (props) => {
   const { className, ...rest } = props;
 
   return (
-    <CodeBlock className={classNames(styles.codeBlock, className)} {...rest} />
+    <CodeBlock
+      scrollAreaMaxHeight="calc(50vh + 10rem)"
+      className={classNames(styles.codeBlock, className)}
+      {...rest}
+    />
   );
 };
 
 // Typography
 // =============================================================================
 
-type ComponentTypography = FC<TypographyRootProps> & {
-  Root: typeof TypographyRoot;
+type TypographyProps = ComponentProps<"div">;
+
+type ComponentTypography = FC<TypographyProps> & {
   H1: typeof TypographyH1;
   H2: typeof TypographyH2;
   H3: typeof TypographyH3;
@@ -116,11 +106,16 @@ type ComponentTypography = FC<TypographyRootProps> & {
   CodeBlock: typeof TypographyCodeBlock;
 };
 
-const Typography: ComponentTypography = (props: TypographyRootProps) => {
-  return <TypographyRoot {...props} />;
+const Typography: ComponentTypography = (props: TypographyProps) => {
+  const { children, className, ...rest } = props;
+
+  return (
+    <div className={classNames(styles.typography, className)} {...rest}>
+      {children}
+    </div>
+  );
 };
 
-Typography.Root = TypographyRoot;
 Typography.H1 = TypographyH1;
 Typography.H2 = TypographyH2;
 Typography.H3 = TypographyH3;

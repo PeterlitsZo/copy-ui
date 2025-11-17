@@ -1,9 +1,9 @@
 @layer components {
-  .typographyRoot > *:first-child {
+  .typography > *:first-child {
     margin-top: 0;
   }
 
-  .typographyRoot > *:last-child {
+  .typography > *:last-child {
     margin-bottom: 0;
   }
 

@@ -19,4 +19,6 @@ export const changelog = ''
   + '  between list items in `Typography.Li`.\n'
   + '- 2025-11-16: Add `Typography.Ol`, `Typography.Strong` and `Typography.Em`\n'
   + '  component.\n'
+  + '- 2025-11-17: Remove `Typography.Root` component. Just use `Typography` as the\n'
+  + '  root component. Some minor styles are updated.\n'
   ;

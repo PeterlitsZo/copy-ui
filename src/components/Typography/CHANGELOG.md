@@ -15,3 +15,5 @@
   between list items in `Typography.Li`.
 - 2025-11-16: Add `Typography.Ol`, `Typography.Strong` and `Typography.Em`
   component.
+- 2025-11-17: Remove `Typography.Root` component. Just use `Typography` as the
+  root component. Some minor styles are updated.
