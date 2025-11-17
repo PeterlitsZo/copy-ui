@@ -1,0 +1,218 @@
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "toast", label: "Toast" },
+    { id: "typography", label: "Typography" },
+    { id: "jss", label: "jss" },
+    { id: "zustand", label: "zustand", color: "green" },
+    { id: "mdx-js-react", label: "@mdx-js/react", color: "green" },
+  ]}
+  edges={[
+    { from: "copy-ui-provider", to: "toast" },
+    { from: "copy-ui-provider", to: "typography" },
+    { from: "copy-ui-provider", to: "jss" },
+    { from: "copy-ui-provider", to: "zustand" },
+    { from: "copy-ui-provider", to: "mdx-js-react" },
+  ]}
+/>
+
+## Usage
+
+`CopyUiProvider` is a context provider for Copy UI components. You should wrap
+your application with it to ensure that all Copy UI components function correctly.
+
+```tsx
+const App = () => {
+  return (
+    <CopyUiProvider>
+      {children}
+    </CopyUiProvider>
+  )
+}
+```
+
+It also provides some hooks to access the context values.
+
+To use `CopyUiProvider`, you should add a file like `rehype-codeblock.ts`:
+
+```ts
+import type { Node } from "unist";
+
+function rehypeCodeblock() {
+  type NodeWithChildren = Node & {
+    children?: Node[];
+    value?: string;
+  };
+
+  return (ast: NodeWithChildren) => {
+    flatMap(ast, (node) => {
+      if (
+        node.type === "element" &&
+        "tagName" in node &&
+        node.tagName === "pre"
+      ) {
+        // Get the code text & the language.
+        let codeText = "";
+        let language = "";
+        if (
+          "children" in node &&
+          Array.isArray(node.children) &&
+          node.children.length > 0
+        ) {
+          for (const child of node.children) {
+            if (
+              child.type === "element" &&
+              "tagName" in child &&
+              child.tagName === "code"
+            ) {
+              if (
+                "properties" in child &&
+                child.properties &&
+                "className" in child.properties
+              ) {
+                const classNames = child.properties.className as string[];
+                for (const className of classNames) {
+                  if (
+                    typeof className === "string" &&
+                    className.startsWith("language-")
+                  ) {
+                    language = className.replace("language-", "");
+                  }
+                }
+              }
+
+              if ("children" in child && Array.isArray(child.children)) {
+                for (const codeChild of child.children) {
+                  if (codeChild.type === "text" && "value" in codeChild) {
+                    codeText += codeChild.value;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return [
+          {
+            type: "element",
+            tagName: "copy-ui-hack-codeblock",
+            properties: {
+              lang: language,
+              code: codeText,
+            },
+            children: [],
+          },
+        ];
+      }
+      return [node];
+    });
+    return ast;
+  };
+}
+
+/**
+ * Walks through a AST and maps a function over each node.
+ *
+ * Inspired by unist-util-flatmap.
+ */
+function flatMap(node: Node, fn: (node: Node) => Node[]) {
+  return transform(node);
+
+  function transform(node: Node): Node | Node[] {
+    if ("children" in node && Array.isArray(node.children)) {
+      const out = [];
+      for (let i = 0; i < node.children.length; i++) {
+        const result = transform(node.children[i]);
+        if (Array.isArray(result)) {
+          out.push(...result);
+        } else {
+          out.push(result);
+        }
+      }
+      node.children = out;
+    }
+    return fn(node);
+  }
+}
+
+export { rehypeCodeblock };
+```
+
+And then update your `vite.config.ts` with `@mdx-js/rollup` plugin:
+
+```ts
+import mdx from '@mdx-js/rollup';
+import { rehypeCodeblock } from "./src/plugins/rehype-codeblock";
+
+export default defineConfig({
+  // ...
+  plugins: [
+    {
+      enforce: 'pre',
+      ...mdx({
+        rehypePlugins: [rehypeCodeblock],
+        providerImportSource: '@mdx-js/react',
+        include: /.*\.mdx$/,
+      }),
+    }
+  ]
+  // ...
+})
+```
+
+## Hooks
+
+### useJss
+
+You can use the hook `useJss` for CSS-in-JS styling solution.
+
+```tsx
+import { useJss } from '@/components/CopyUiProvider'
+
+const MyComponent = () => {
+  const jss = useJss();
+  const stx = jss.hash({
+    padding: '16px',
+    border: '1px solid black',
+  })
+
+  return <div className={stx}>Hello, world!</div>
+}
+```
+
+The `useJss` will return a generated class name based on the object. Like
+`"cu-36xkWk"`. A CSS string will be generated as well and injected into the DOM,
+like:
+
+```css
+.cu-36xkWk {
+  padding: 16px;
+  border: 1px solid black;
+}
+```
+
+The reason to use `useJss` is just to avoid too long style definitions in the
+`style` prop. So it is a very simple CSS-in-JS solution.
+
+### useTheme
+
+You can use the hook `useTheme` to access the theme object provided by
+`CopyUiProvider`. Like:
+
+```tsx
+import { useTheme } from '@/components/CopyUiProvider'
+
+const MyComponent = () => {
+  const theme = useTheme();
+
+  return (
+    <div style={{ color: theme.colors.red['600'] }}>
+      Hello, themed world!
+    </div>
+  )
+}
+```

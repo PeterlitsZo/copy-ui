@@ -1,12 +1,11 @@
-import { MDXProvider } from "@mdx-js/react";
 import { createContext, type FC, useEffect, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand";
 
 import { Toast } from "@/components/Toast";
-import { Typography } from "@/components/Typography";
 import { createJssState, type JssState } from "@/utils/jss";
 
 import { DEFAULT_THEME } from "./default-theme";
+import { MdxProvider } from "./mdx-provider";
 import type { Theme } from "./theme";
 import { useJss } from "./use-jss";
 
@@ -34,17 +33,10 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
     }));
   }
 
-  const mdxComponents = {
-    h1: Typography.H1,
-    h2: Typography.H2,
-    h3: Typography.H3,
-    h4: Typography.H4,
-  };
-
   return (
     <CopyUiContext.Provider value={storeRef.current}>
       <Toast.Context>
-        <MDXProvider components={mdxComponents}>{children}</MDXProvider>
+        <MdxProvider>{children}</MdxProvider>
         <Toast.Container />
       </Toast.Context>
       <JssSsrCss />

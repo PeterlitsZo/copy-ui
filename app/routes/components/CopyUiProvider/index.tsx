@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-import { Markdown } from "@/components/Markdown";
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 
 import { changelog } from "./changelog.codegen";
-import doc from "./doc.md?raw";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta() {
@@ -37,11 +36,11 @@ export default function AvatarPage() {
       />
       {tabsValue === "doc" && (
         <DocLayout.Content>
-          <Markdown>{doc}</Markdown>
+          <Doc />
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}

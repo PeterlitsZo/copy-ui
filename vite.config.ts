@@ -1,8 +1,11 @@
+import path from "node:path";
+
 import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import mdx from '@mdx-js/rollup';
-import path from "node:path";
+
+import { rehypeCodeblock } from "./src/plugins/rehype-codeblock";
 
 export default defineConfig({
   build: {
@@ -11,7 +14,11 @@ export default defineConfig({
   plugins: [
     {
       enforce: 'pre',
-      ...mdx({ providerImportSource: '@mdx-js/react', include: /.*\.mdx$/ }),
+      ...mdx({
+        rehypePlugins: [rehypeCodeblock],
+        providerImportSource: '@mdx-js/react',
+        include: /.*\.mdx$/,
+      }),
     },
     reactRouter(),
     tsconfigPaths(),
