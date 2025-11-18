@@ -8,4 +8,6 @@ export const changelog = ''
   + '- 2025-10-11: Using type `ColorName` for color prop.\n'
   + '- 2025-10-21: Update avatar background color calculation for better contrast.\n'
   + '  And add a border.\n'
+  + '- 2025-11-18: Add `Avatar.Fallback` sub-component and support to show it when\n'
+  + '  `Avatar.Img` not loaded.\n'
   ;

@@ -1,0 +1,37 @@
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "avatar", label: "Avatar" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "tinycolor2", label: "tinycolor2", color: "green" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "zustand", label: "zustand", color: "green" },
+  ]}
+  edges={[
+    { from: "avatar", to: "copy-ui-provider" },
+    { from: "avatar", to: "tinycolor2" },
+    { from: "avatar", to: "classnames" },
+    { from: "avatar", to: "zustand" },
+  ]}
+/>
+
+## Examples
+
+### With or Without Avatar Image
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+## Acknowledgements
+
+- The `Avatar.Fallback` logic is modeled after Radix Primitives.
+

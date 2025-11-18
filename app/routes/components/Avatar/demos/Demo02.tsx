@@ -21,9 +21,11 @@ export default function Demo() {
             src="https://github.com/peterlitszo.png"
             alt="Peterlits Zo"
           />
+          <Avatar.Fallback>PZ</Avatar.Fallback>
         </Avatar>
         <Avatar size="2.5rem">
           <Avatar.Img src="https://github.com/shadcn.png" alt="Shadcn" />
+          <Avatar.Fallback>S</Avatar.Fallback>
         </Avatar>
       </Flex>
     </Flex>

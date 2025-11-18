@@ -1,30 +1,15 @@
 import classNames from "classnames";
-import type { ComponentProps, CSSProperties, FC } from "react";
+import type { FC } from "react";
 import tinycolor from "tinycolor2";
+import { useStore } from "zustand";
 
-import { type ColorName, useTheme } from "@/components/ThemeProvider";
+import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./avatar.module.scss";
-
-// Avatar.Img
-// =============================================================================
-
-type AvatarImgProps = ComponentProps<"img">;
-
-const AvatarImg: FC<AvatarImgProps> = (props) => {
-  const { alt, className, ...rest } = props;
-
-  return (
-    <img
-      className={classNames(styles.avatarImg, className)}
-      alt={alt || "Avatar"}
-      {...rest}
-    />
-  );
-};
-
-// Avatar
-// =============================================================================
+import { AvatarContext, useAvatarStore } from "./avatar-context";
+import { AvatarFallback } from "./avatar-fallback";
+import { AvatarImg } from "./avatar-img";
+import { buildAvatarStore } from "./avatar-store";
 
 interface AvatarProps {
   size: string;
@@ -34,14 +19,34 @@ interface AvatarProps {
 
 type AvatarComponent = FC<AvatarProps> & {
   Img: typeof AvatarImg;
+  Fallback: typeof AvatarFallback;
 };
 
 const Avatar: AvatarComponent = (props: AvatarProps) => {
-  const { size, color = "blue", children } = props;
+  const avatarStore = buildAvatarStore();
+
+  return (
+    <AvatarContext value={avatarStore}>
+      <AvatarInternal {...props} />
+    </AvatarContext>
+  );
+};
+
+Avatar.displayName = "Avatar";
+
+Avatar.Img = AvatarImg;
+Avatar.Fallback = AvatarFallback;
+
+const AvatarInternal: FC<AvatarProps> = (props) => {
+  const { size, color = "gray", children } = props;
 
   const theme = useTheme();
+  const jss = useJss();
 
-  const style = {
+  const avatarStore = useAvatarStore();
+  const imgState = useStore(avatarStore, (state) => state.imgState);
+
+  const stx = jss.hash({
     "--avatar-size": size,
     "--avatar-color": theme.colors[color]["700"],
     "--avatar-background-color": tinycolor(theme.colors[color]["100"])
@@ -51,17 +56,16 @@ const Avatar: AvatarComponent = (props: AvatarProps) => {
     "--avatar-border-color": tinycolor(theme.colors[color]["100"])
       .desaturate(20)
       .toHexString(),
-  } as CSSProperties;
+  });
 
   return (
-    <span className={styles.avatar} style={style}>
+    <span
+      className={classNames(styles.avatar, stx)}
+      data-avatar-img-loaded={imgState === "loaded" ? true : undefined}
+    >
       {children}
     </span>
   );
 };
-
-Avatar.Img = AvatarImg;
-
-Avatar.displayName = "Avatar";
 
 export { Avatar };

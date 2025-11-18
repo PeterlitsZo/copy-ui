@@ -1,12 +1,9 @@
 import { useState } from "react";
 
-import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+
 import { changelog } from "./changelog.codegen";
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta() {
@@ -36,14 +33,11 @@ export default function AvatarPage() {
       />
       {tabsValue === "doc" && (
         <DocLayout.Content>
-          <DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
-          <Typography.H2>Examples</Typography.H2>
-          <Typography.H3>With or without avatar image</Typography.H3>
-          <DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+          <Doc />
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}
