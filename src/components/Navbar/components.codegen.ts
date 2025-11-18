@@ -40,5 +40,6 @@ export const components: Component[] = [
   {"name": "TimeSelector", "path": "/v0/components/TimeSelector", "wip": false, "deprecated": false},
   {"name": "Toast", "path": "/v0/components/Toast", "wip": false, "deprecated": false},
   {"name": "Tooltip", "path": "/v0/components/Tooltip", "wip": false, "deprecated": false},
+  {"name": "TreeSelect", "path": "/v0/components/TreeSelect", "wip": false, "deprecated": false},
   {"name": "Typography", "path": "/v0/components/Typography", "wip": false, "deprecated": false},
 ];
