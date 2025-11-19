@@ -2,9 +2,8 @@ import classNames from "classnames";
 import type { FC } from "react";
 import { useStore } from "zustand";
 
-import { useJss } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { Modal } from "@/components/Modal";
-import { useTheme } from "@/components/ThemeProvider";
 
 import styles from "./toast.module.scss";
 import { ToastContext, useToastStore } from "./toast-context";

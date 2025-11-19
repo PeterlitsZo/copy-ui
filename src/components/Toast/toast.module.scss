@@ -1,26 +1,28 @@
-.toastContainer {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-}
+@layer components {
+  .toastContainer {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
 
-.toastList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  .toastList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 
-  width: 20rem;
-}
+    width: 20rem;
+  }
 
-.toast {
-  padding: 0.5rem 1rem;
+  .toast {
+    padding: 0.5rem 1rem;
 
-  border-radius: 0.25rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--toast-border-color);
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--toast-border-color);
 
-  background-color: var(--toast-bg-color);
+    background-color: var(--toast-bg-color);
 
-  box-shadow: var(--toast-box-shadow);
+    box-shadow: var(--toast-box-shadow);
+  }
 }
