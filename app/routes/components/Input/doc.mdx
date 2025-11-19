@@ -13,20 +13,38 @@ import demo05SourceCode from "./demos/Demo05.source_code.codegen";
 
 <DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
 
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "input", label: "Input" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "input-base", label: "InputBase" },
+    { id: "resolve-style", label: "resolve-style" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "input", to: "copy-ui-provider" },
+    { from: "input", to: "input-base" },
+    { from: "input", to: "resolve-style" },
+    { from: "input", to: "classnames" },
+  ]}
+/>
+
 ## Examples
 
-### Different variants
+### Different Variants
 
 <DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
 
-### Left & right sections
+### Left & Right Sections
 
 <DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
 
-### Disabled state
+### Disabled State
 
 <DocLayout.Live node={<Demo04 />} code={demo04SourceCode} />
 
-### Different sizes
+### Different Sizes
 
 <DocLayout.Live node={<Demo05 />} code={demo05SourceCode} />

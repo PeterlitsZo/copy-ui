@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
 
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { InputBase } from "@/components/InputBase";
-import { useTheme } from "@/components/ThemeProvider";
 import { resolveStyle } from "@/utils/resolve-style";
-import { useJss } from "../CopyUiProvider";
+
 import styles from "./input.module.scss";
 
 export type InputProps = Omit<ComponentProps<"input">, "size"> & {

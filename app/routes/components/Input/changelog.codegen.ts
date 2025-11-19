@@ -15,4 +15,5 @@ export const changelog = ''
   + '  Adjust padding based on presence of these sections.\n'
   + '- 2025-10-20: Support `disabled` prop.\n'
   + '- 2025-10-26: Support `variant` prop. Update styles to make it look better.\n'
+  + '- 2025-11-19: Remove the dependency on `ThemeProvider`.\n'
   ;

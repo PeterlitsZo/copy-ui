@@ -11,3 +11,4 @@
   Adjust padding based on presence of these sections.
 - 2025-10-20: Support `disabled` prop.
 - 2025-10-26: Support `variant` prop. Update styles to make it look better.
+- 2025-11-19: Remove the dependency on `ThemeProvider`.
