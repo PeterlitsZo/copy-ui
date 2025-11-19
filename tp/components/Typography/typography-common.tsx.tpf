@@ -1,0 +1,34 @@
+  | import classNames from "classnames";
+  | import type { ComponentProps, FC } from "react";
+  | 
+  | import styles from "./typography-common.module.scss";
+  | 
+  | type TypographyStrongProps = ComponentProps<"strong">;
+  | 
+  | const TypographyStrong: FC<TypographyStrongProps> = (props) => {
+  |   const { className, children, ...rest } = props;
+  | 
+  |   return (
+  |     <strong className={classNames(styles.strong, className)} {...rest}>
+  |       {children}
+  |     </strong>
+  |   );
+  | };
+  | 
+  | TypographyStrong.displayName = "Typography.Strong";
+  | 
+  | type TypographyEmProps = ComponentProps<"em">;
+  | 
+  | const TypographyEm: FC<TypographyEmProps> = (props) => {
+  |   const { className, children, ...rest } = props;
+  | 
+  |   return (
+  |     <strong className={classNames(styles.em, className)} {...rest}>
+  |       {children}
+  |     </strong>
+  |   );
+  | };
+  | 
+  | TypographyEm.displayName = "Typography.Em";
+  | 
+  | export { TypographyStrong, TypographyEm };

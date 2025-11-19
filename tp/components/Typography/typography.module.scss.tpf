@@ -1,0 +1,36 @@
+  | @layer components {
+  |   .typography > *:first-child {
+  |     margin-top: 0;
+  |   }
+  | 
+  |   .typography > *:last-child {
+  |     margin-bottom: 0;
+  |   }
+  | 
+  |   .p {
+  |     margin-bottom: 1rem;
+  | 
+  |     font-size: 1rem;
+  |     line-height: 1.5rem;
+  |     font-weight: 400;
+  |   }
+  | 
+  |   .code {
+  |     padding-inline: 0.375rem;
+  |     padding-block: calc(0.125rem + 0.5px);
+  | 
+  |     font-family: var(--font-mono);
+  |     font-size: calc(0.875rem - 1px);
+  | 
+  |     border-radius: 0.375rem;
+  | 
+  |     background-color: var(--typography-code-bg-color);
+  |     color: var(--typography-code-color);
+  |   }
+if features["with-typography-codeblock"] then
+  | 
+  |   .codeBlock {
+  |     margin-bottom: 1rem;
+  |   }
+end
+  | }
