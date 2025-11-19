@@ -3,6 +3,7 @@ mod config;
 mod evaluator;
 mod generator;
 mod parser;
+mod templates;
 
 use std::env;
 use std::fs;
@@ -16,22 +17,14 @@ fn main() -> anyhow::Result<()> {
     
     let config = config::Config::from_toml(&config_content)?;
     
-    let tp_base_dir = pwd.join("tp");
     let output_base_dir = pwd.join(&config.structure.components);
     
     for (component_name, component_config) in &config.components {
         println!("Processing component: {}", component_name);
         
-        let tp_component_dir = tp_base_dir.join("components").join(component_name);
-        if !tp_component_dir.exists() {
-            eprintln!("Warning: Component directory not found: {}", tp_component_dir.display());
-            continue;
-        }
-        
         generator::generate_component(
             component_name,
             component_config,
-            &tp_component_dir,
             &output_base_dir,
         )?;
     }
