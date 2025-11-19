@@ -1,0 +1,32 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "popover-menu", label: "PopoverMenu" },
+    { id: "popover", label: "Popover" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "popover-menu", to: "popover" },
+    { from: "popover-menu", to: "copy-ui-provider" },
+    { from: "popover-menu", to: "scroll-area" },
+    { from: "popover-menu", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### With Separators and Disabled Items
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />

@@ -1,0 +1,54 @@
+import type { ComponentProps, FC, ReactNode } from "react";
+
+import {
+  type Placement,
+  Popover,
+  type PopoverTriggerRender,
+} from "@/components/Popover";
+
+import { PopoverMenuContent } from "./popover-menu-content";
+import { PopoverMenuItem } from "./popover-menu-item";
+import { PopoverMenuSeparator } from "./popover-menu-separator";
+
+export type PopoverMenuProps = ComponentProps<typeof Popover> & {
+  trigger: PopoverTriggerRender;
+  children: ReactNode;
+};
+
+type PopoverMenuComponent = FC<PopoverMenuProps> & {
+  Item: typeof PopoverMenuItem;
+  Separator: typeof PopoverMenuSeparator;
+};
+
+const PopoverMenu: PopoverMenuComponent = (props) => {
+  const {
+    trigger,
+    children,
+    placement = "bottom-end",
+    offset = 4,
+    ...popoverProps
+  } = props;
+
+  return (
+    <Popover placement={placement} offset={offset} {...popoverProps}>
+      <Popover.Trigger render={trigger} />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, isOpen, floatingStyles }) =>
+          isOpen && (
+            <PopoverMenuContent ref={setRef} style={floatingStyles}>
+              {children}
+            </PopoverMenuContent>
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+PopoverMenu.displayName = "PopoverMenu";
+PopoverMenu.Item = PopoverMenuItem;
+PopoverMenu.Separator = PopoverMenuSeparator;
+
+export { PopoverMenu };
+export type { Placement };

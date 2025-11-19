@@ -27,6 +27,7 @@ export const components: Component[] = [
   {"name": "MultiSelect", "path": "/v0/components/MultiSelect", "wip": false, "deprecated": false},
   {"name": "Paper", "path": "/v0/components/Paper", "wip": false, "deprecated": false},
   {"name": "Popover", "path": "/v0/components/Popover", "wip": false, "deprecated": false},
+  {"name": "PopoverMenu", "path": "/v0/components/PopoverMenu", "wip": false, "deprecated": false},
   {"name": "ScrollArea", "path": "/v0/components/ScrollArea", "wip": false, "deprecated": false},
   {"name": "Select", "path": "/v0/components/Select", "wip": false, "deprecated": false},
   {"name": "SortIndicator", "path": "/v0/components/SortIndicator", "wip": false, "deprecated": false},
