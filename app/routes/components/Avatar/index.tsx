@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+import { DocLayout } from "@/layouts/DocLayout";
 
 import { changelog } from "./changelog.codegen";
 import Doc from "./doc.mdx";

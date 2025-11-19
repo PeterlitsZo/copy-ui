@@ -10,4 +10,6 @@ export const changelog = ''
   + '  And add a border.\n'
   + '- 2025-11-18: Add `Avatar.Fallback` sub-component and support to show it when\n'
   + '  `Avatar.Img` not loaded.\n'
+  + '- 2025-11-19: Use `useRef` to hold the avatar store instance. Add make `Avatar`\n'
+  + '  expose more props as a `span` element.\n'
   ;

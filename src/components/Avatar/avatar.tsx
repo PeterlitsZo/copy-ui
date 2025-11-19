@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import type { FC } from "react";
+import { type ComponentProps, type FC, useRef } from "react";
 import tinycolor from "tinycolor2";
-import { useStore } from "zustand";
+import { type StoreApi, useStore } from "zustand";
 
 import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
 
@@ -9,13 +9,12 @@ import styles from "./avatar.module.scss";
 import { AvatarContext, useAvatarStore } from "./avatar-context";
 import { AvatarFallback } from "./avatar-fallback";
 import { AvatarImg } from "./avatar-img";
-import { buildAvatarStore } from "./avatar-store";
+import { type AvatarStore, buildAvatarStore } from "./avatar-store";
 
-interface AvatarProps {
+type AvatarProps = ComponentProps<"span"> & {
   size: string;
   color?: ColorName;
-  children?: React.ReactNode;
-}
+};
 
 type AvatarComponent = FC<AvatarProps> & {
   Img: typeof AvatarImg;
@@ -23,10 +22,13 @@ type AvatarComponent = FC<AvatarProps> & {
 };
 
 const Avatar: AvatarComponent = (props: AvatarProps) => {
-  const avatarStore = buildAvatarStore();
+  const avatarStore = useRef<StoreApi<AvatarStore> | null>(null);
+  if (!avatarStore.current) {
+    avatarStore.current = buildAvatarStore();
+  }
 
   return (
-    <AvatarContext value={avatarStore}>
+    <AvatarContext value={avatarStore.current}>
       <AvatarInternal {...props} />
     </AvatarContext>
   );
@@ -38,7 +40,7 @@ Avatar.Img = AvatarImg;
 Avatar.Fallback = AvatarFallback;
 
 const AvatarInternal: FC<AvatarProps> = (props) => {
-  const { size, color = "gray", children } = props;
+  const { size, color = "gray", children, ...rest } = props;
 
   const theme = useTheme();
   const jss = useJss();
@@ -62,6 +64,7 @@ const AvatarInternal: FC<AvatarProps> = (props) => {
     <span
       className={classNames(styles.avatar, stx)}
       data-avatar-img-loaded={imgState === "loaded" ? true : undefined}
+      {...rest}
     >
       {children}
     </span>
