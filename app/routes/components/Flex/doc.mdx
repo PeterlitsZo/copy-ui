@@ -1,0 +1,42 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+I do not think use `Flex` everywhere is a good idea. Sometimes what you need is
+just a simple CSS files (or tailwind classes). But it is also useful that you
+just want a simple flex container and do not want to name any class for it
+(simple flex container means it does nothing but just for layout) -- So `Flex`
+is here.
+
+If you are using tailwind, just use it directly.
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "flex", label: "Flex" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "flex", to: "copy-ui-provider" },
+    { from: "flex", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### With Different Justify and Align Items
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+You can use `justifyContent` or `justify` prop to set the `justify-content`
+style (and values `start` and `end` are alias of `flex-start` and `flex-end`).
+
+You can use `alignItems` or `items` prop to set the `align-items` style (and
+values `start` and `end` are alias of `flex-start` and `flex-end`).

@@ -1,16 +1,36 @@
+import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
-import { useJss } from "../CopyUiProvider";
+
+import { useJss } from "@/components/CopyUiProvider";
+
+type Direction = "row" | "column";
+
+type AlignItems =
+  | "start"
+  | "flex-start"
+  | "center"
+  | "end"
+  | "flex-end"
+  | "stretch"
+  | "baseline";
+
+type JustifyContent =
+  | "start"
+  | "flex-start"
+  | "center"
+  | "end"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly";
 
 type FlexProps = ComponentProps<"div"> & {
-  dir?: "row" | "column";
-  alignItems?: "flex-start" | "center" | "flex-end" | "stretch" | "baseline";
-  justifyContent?:
-    | "flex-start"
-    | "center"
-    | "flex-end"
-    | "space-between"
-    | "space-around"
-    | "space-evenly";
+  dir?: Direction;
+  direction?: Direction;
+  items?: AlignItems;
+  alignItems?: AlignItems;
+  justify?: JustifyContent;
+  justifyContent?: JustifyContent;
   gap?: string;
   wrap?: boolean;
   children?: React.ReactNode;
@@ -18,11 +38,15 @@ type FlexProps = ComponentProps<"div"> & {
 
 export const Flex: FC<FlexProps> = (props) => {
   const {
-    dir: direction = "row",
-    alignItems = "stretch",
-    justifyContent = "flex-start",
+    dir = "row",
+    direction = dir,
+    items = "stretch",
+    alignItems = items,
+    justify = "flex-start",
+    justifyContent = justify,
     gap = "0",
     wrap = false,
+    className,
     children,
     ...rest
   } = props;
@@ -32,15 +56,37 @@ export const Flex: FC<FlexProps> = (props) => {
   const stx = jss.hash({
     display: "flex",
     flexDirection: direction,
-    alignItems,
-    justifyContent,
+    alignItems: normalizeAlignItems(alignItems),
+    justifyContent: normalizeJustifyContent(justifyContent),
     gap,
     flexWrap: wrap ? "wrap" : "nowrap",
   });
 
   return (
-    <div className={stx} {...rest}>
+    <div className={classNames(stx, className)} {...rest}>
       {children}
     </div>
   );
 };
+
+function normalizeAlignItems(items: AlignItems): AlignItems {
+  switch (items) {
+    case "start":
+      return "flex-start";
+    case "end":
+      return "flex-end";
+    default:
+      return items;
+  }
+}
+
+function normalizeJustifyContent(justify: JustifyContent): JustifyContent {
+  switch (justify) {
+    case "start":
+      return "flex-start";
+    case "end":
+      return "flex-end";
+    default:
+      return justify;
+  }
+}

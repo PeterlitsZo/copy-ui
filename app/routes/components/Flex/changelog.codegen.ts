@@ -6,4 +6,7 @@ export const changelog = ''
   + '- 2025-10-04: Support custom `style` prop and spread additional props. Extend\n'
   + '  from `ComponentProps<"div">` for better TypeScript support.\n'
   + '- 2025-10-26: Refactor to use `useJss` for styling.\n'
+  + '- 2025-11-19: Make `Flex` support `direction`, `items` and `justify` prop as alias\n'
+  + '  of `dir`, `alignItems` and `justifyContent`. Support `start` and `end` values\n'
+  + '  for `justify` prop. Support append class by `className` prop.\n'
   ;
