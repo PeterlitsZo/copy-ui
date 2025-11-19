@@ -1,0 +1,6 @@
+[structure]
+components = "src/components"
+
+[components.CopyUiProvider]
+with-mdx-provider = true
+with-toast-provider = true

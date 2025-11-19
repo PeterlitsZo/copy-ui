@@ -1,0 +1,81 @@
+  | import { createContext, type FC, useEffect, useRef, useState } from "react";
+  | import { createStore, type StoreApi } from "zustand";
+  | 
+if features["with-toast-provider"] then
+  | import { Toast } from "@/components/Toast";
+end
+  | import { createJssState, type JssState } from "@/utils/jss";
+  | 
+  | import { DEFAULT_THEME } from "./default-theme";
+if features["with-mdx-provider"] then
+  | import { MdxProvider } from "./mdx-provider";
+end
+  | import type { Theme } from "./theme";
+  | import { useJss } from "./use-jss";
+  | 
+  | type CopyUiStoreState = {
+  |   jssState: JssState;
+  |   theme: Theme;
+  | };
+  | 
+  | type CopyUiStore = CopyUiStoreState;
+  | 
+  | const CopyUiContext = createContext<StoreApi<CopyUiStore> | null>(null);
+  | 
+  | type CopyUiProviderProps = {
+  |   children?: React.ReactNode;
+  | };
+  | 
+  | const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
+  |   const { children } = props;
+  | 
+  |   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
+  |   if (storeRef.current === null) {
+  |     storeRef.current = createStore<CopyUiStore>()(() => ({
+  |       jssState: createJssState(),
+  |       theme: DEFAULT_THEME,
+  |     }));
+  |   }
+  | 
+  |   return (
+  |     <CopyUiContext.Provider value={storeRef.current}>
+if features["with-mdx-provider"] and features["with-toast-provider"] then
+  |       <Toast.Context>
+  |         <MdxProvider>{children}</MdxProvider>
+  |         <Toast.Container />
+  |       </Toast.Context>
+elif features["with-mdx-provider"] then
+  |       <MdxProvider>{children}</MdxProvider>
+elif features["with-toast-provider"] then
+  |       <Toast.Context>
+  |         {children}
+  |         <Toast.Container />
+  |       </Toast.Context>
+else
+  |       {children}
+end
+  |       <JssSsrCss />
+  |     </CopyUiContext.Provider>
+  |   );
+  | };
+  | 
+  | const JssSsrCss = () => {
+  |   const jss = useJss();
+  |   const css = jss.extractSsrCss();
+  |   const [jssSsr, setJssSsr] = useState(true);
+  | 
+  |   useEffect(() => {
+  |     // Remove the style tag after hydration.
+  |     setJssSsr(false);
+  |   }, []);
+  | 
+  |   if (!jssSsr) {
+  |     return null;
+  |   } else {
+  |     return <style suppressHydrationWarning={true}>{css}</style>;
+  |   }
+  | };
+  | 
+  | CopyUiProvider.displayName = "CopyUiProvider";
+  | 
+  | export { CopyUiContext, CopyUiProvider };
