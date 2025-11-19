@@ -1,6 +1,6 @@
 use include_dir::{include_dir, Dir};
 
-static TP_DIR: Dir<'_> = include_dir!("src/tp");
+static TP_DIR: Dir<'_> = include_dir!("tp");
 
 pub fn get_tp_file(component_name: &str, filename: &str) -> anyhow::Result<&'static str> {
     let path = format!("components/{}/{}", component_name, filename);
