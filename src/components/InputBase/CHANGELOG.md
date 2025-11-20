@@ -5,3 +5,4 @@
   paths and code formatting.
 - 2025-10-20: Support `disabled` prop.
 - 2025-10-24: Support the `className` prop.
+- 2025-11-20: Support the `width` and `wrapperStyle` props.

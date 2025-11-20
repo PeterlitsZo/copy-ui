@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import type { CSSProperties, FC } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { resolveStyle } from "@/utils/resolve-style";
 
 import styles from "./input-base.module.scss";
@@ -10,10 +9,12 @@ import styles from "./input-base.module.scss";
 interface InputBaseProps {
   size?: "sm" | "md" | "lg";
   disabled?: boolean;
+  width?: "sm" | "md" | "lg" | "full";
 
   className?: string;
   wrapperClassName?: string;
   style?: CSSProperties;
+  wrapperStyle?: CSSProperties;
 
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
@@ -24,10 +25,12 @@ export const InputBase: FC<InputBaseProps> = (props) => {
   const {
     size = "md",
     disabled = false,
+    width = "md",
 
     className,
-    wrapperClassName,
     style,
+    wrapperClassName,
+    wrapperStyle,
 
     leftSection,
     rightSection,
@@ -40,11 +43,9 @@ export const InputBase: FC<InputBaseProps> = (props) => {
   const stx = jss.hash(
     resolveStyle({
       base: {
-        "--input-base-min-width": "16rem",
         "--input-base-border-color": theme.tokens.inputBaseDefaultBorderColor,
         "--input-base-border-radius": theme.tokens.inputBaseBorderRadius,
         "--input-base-disabled-bg-color": theme.colors.gray["100"],
-        ...style,
       },
       variants: {
         size: {
@@ -58,9 +59,16 @@ export const InputBase: FC<InputBaseProps> = (props) => {
             "--input-base-height": theme.tokens.inputBaseLgHeight,
           },
         },
+        width: {
+          sm: { "--input-base-width": "12rem" },
+          md: { "--input-base-width": "16rem" },
+          lg: { "--input-base-width": "20rem" },
+          full: { "--input-base-width": "100%" },
+        },
       },
       cls: {
         size,
+        width,
       },
     }),
   );
@@ -68,10 +76,14 @@ export const InputBase: FC<InputBaseProps> = (props) => {
   return (
     <div
       className={classNames(styles.inputBase, stx, className)}
+      style={style}
       data-disabled={disabled || undefined}
     >
       {leftSection && <div className={styles.leftSection}>{leftSection}</div>}
-      <div className={classNames(styles.wrapper, wrapperClassName)}>
+      <div
+        className={classNames(styles.wrapper, wrapperClassName)}
+        style={wrapperStyle}
+      >
         {children}
       </div>
       {rightSection && (

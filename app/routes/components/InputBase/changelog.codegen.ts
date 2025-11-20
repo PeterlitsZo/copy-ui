@@ -9,4 +9,5 @@ export const changelog = ''
   + '  paths and code formatting.\n'
   + '- 2025-10-20: Support `disabled` prop.\n'
   + '- 2025-10-24: Support the `className` prop.\n'
+  + '- 2025-11-20: Support the `width` and `wrapperStyle` props.\n'
   ;

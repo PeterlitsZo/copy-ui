@@ -1,0 +1,21 @@
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+
+The thing you need to know is that you should not use `InputBase` directly. It
+is a low-level component meant to be used as a building block for more complex
+input components.
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "input-base", label: "InputBase" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "resolve-style", label: "resolve-style" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "input-base", to: "copy-ui-provider" },
+    { from: "input-base", to: "resolve-style" },
+    { from: "input-base", to: "classnames" },
+  ]}
+/>
