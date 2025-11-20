@@ -5,11 +5,11 @@ export default function Demo() {
   return (
     <Flex dir="column" gap="1rem">
       <Flex gap="0.5rem">
-        <Tag>React</Tag>
-        <Tag>TypeScript</Tag>
-        <Tag>JavaScript</Tag>
-        <Tag>CSS</Tag>
-        <Tag>HTML</Tag>
+        <Tag variant="default">React</Tag>
+        <Tag variant="outline">TypeScript</Tag>
+        <Tag variant="badge">JavaScript</Tag>
+        <Tag variant="secondary">CSS</Tag>
+        <Tag variant="destructive">HTML</Tag>
       </Flex>
 
       <Flex gap="0.5rem">

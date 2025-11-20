@@ -1,0 +1,36 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "tag", label: "Tag" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "resolve-style", label: "resolve-style" },
+    { id: "tinycolor2", label: "tinycolor2", color: "green" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "tag", to: "copy-ui-provider" },
+    { from: "tag", to: "resolve-style" },
+    { from: "tag", to: "tinycolor2" },
+    { from: "tag", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### With Different Variants, Sizes, Colors
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+## Acknowledgements
+
+- The `Tag` component is inspired by shadcn/ui's `Badge` component.

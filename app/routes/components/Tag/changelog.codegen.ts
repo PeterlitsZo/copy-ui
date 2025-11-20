@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-09-26: Initial version.\n'
   + '- 2025-10-08: Add alpha transparency, code formatting improvements.\n'
   + '- 2025-10-21: Support `withDot` and `size` props.\n'
+  + '- 2025-11-20: Support more variants.\n'
   ;
