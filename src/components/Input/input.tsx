@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import type { ComponentProps, CSSProperties, FC } from "react";
+import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { InputBase } from "@/components/InputBase";
@@ -10,6 +10,8 @@ import styles from "./input.module.scss";
 export type InputProps = Omit<ComponentProps<"input">, "size"> & {
   variant?: "default" | "filled";
   size?: "sm" | "md" | "lg";
+  width?: "sm" | "md" | "lg" | "full";
+
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
 };
@@ -18,9 +20,11 @@ export const Input: FC<InputProps> = (props) => {
   const {
     variant = "default",
     size = "md",
+    width,
     leftSection,
     rightSection,
     className,
+    style,
     disabled,
     ...rest
   } = props;
@@ -68,22 +72,23 @@ export const Input: FC<InputProps> = (props) => {
     }),
   );
 
+  // TODO (PeterlitsZo): I think it is a bad idea... Need some time to rethink it.
+  const borderColorStx = jss.hash({
+    "--input-base-border-color":
+      variant === "filled"
+        ? "transparent"
+        : theme.tokens.inputBaseDefaultBorderColor,
+  });
+
   return (
     <InputBase
       size={size}
+      width={width}
       leftSection={leftSection}
       rightSection={rightSection}
       disabled={disabled}
-      style={
-        // TODO (PeterlitsZo): I think it is a bad idea... Need some time to rethink it.
-        {
-          "--input-base-border-color":
-            variant === "filled"
-              ? "transparent"
-              : theme.tokens.inputBaseDefaultBorderColor,
-        } as CSSProperties
-      }
-      className={classNames(styles.inputBase, stx)}
+      style={style}
+      className={classNames(styles.inputBase, stx, borderColorStx, className)}
     >
       <input className={classNames(styles.input, className)} {...rest} />
     </InputBase>

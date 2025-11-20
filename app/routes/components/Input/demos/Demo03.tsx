@@ -1,8 +1,8 @@
 import { Search } from "lucide-react";
 
+import { useTheme } from "@/components/CopyUiProvider";
 import { Flex } from "@/components/Flex";
 import { Input } from "@/components/Input";
-import { useTheme } from "@/components/ThemeProvider";
 
 export default function Demo() {
   const theme = useTheme();

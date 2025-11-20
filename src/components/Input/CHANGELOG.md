@@ -12,3 +12,5 @@
 - 2025-10-20: Support `disabled` prop.
 - 2025-10-26: Support `variant` prop. Update styles to make it look better.
 - 2025-11-19: Remove the dependency on `ThemeProvider`.
+- 2025-11-20: Support the `width` prop and let `className` and `style` props
+  effect the `InputBase` component rather than the internal `input` element.

@@ -16,4 +16,6 @@ export const changelog = ''
   + '- 2025-10-20: Support `disabled` prop.\n'
   + '- 2025-10-26: Support `variant` prop. Update styles to make it look better.\n'
   + '- 2025-11-19: Remove the dependency on `ThemeProvider`.\n'
+  + '- 2025-11-20: Support the `width` prop and let `className` and `style` props\n'
+  + '  effect the `InputBase` component rather than the internal `input` element.\n'
   ;
