@@ -1,0 +1,32 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "file-input", label: "FileInput" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "input-base", label: "InputBase" },
+    { id: "resolve-style", label: "resolve-style" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "file-input", to: "copy-ui-provider" },
+    { from: "file-input", to: "input-base" },
+    { from: "file-input", to: "resolve-style" },
+    { from: "file-input", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### Different Widths
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />

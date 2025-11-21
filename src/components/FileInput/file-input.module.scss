@@ -1,0 +1,57 @@
+@layer components {
+  .inputBase {
+    background-color: var(--input-bg-color);
+    cursor: pointer;
+
+    &[data-disabled="true"] {
+      cursor: not-allowed;
+    }
+  }
+
+  .fileInputWrapper {
+    position: relative;
+    align-self: stretch;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    padding-inline-start: var(--input-padding-inline-start);
+    padding-inline-end: var(--input-padding-inline-end);
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
+
+    cursor: pointer;
+
+    [data-disabled="true"] & {
+      pointer-events: none;
+      cursor: inherit;
+    }
+  }
+
+  .fileInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    cursor: pointer;
+
+    [data-disabled="true"] & {
+      pointer-events: none;
+      cursor: inherit;
+    }
+  }
+
+  .fileInputText {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .fileInputText.placeholder {
+    color: var(--input-placeholder-color);
+  }
+}
