@@ -18,4 +18,7 @@ export const changelog = ''
   + '- 2025-10-31: Add the check mark for the selected item in the list.\n'
   + '- 2025-11-04: Wrap the list with `ScrollArea` to make it scrollable when there\n'
   + '  are many options.\n'
+  + '- 2025-11-21: Add `width` prop to control the width of the component. Remove the\n'
+  + '  `min-width` constraint on the trigger. And remove the dependency on\n'
+  + '  `ThemeProvider`.\n'
   ;

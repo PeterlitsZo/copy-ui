@@ -2,8 +2,7 @@ import classNames from "classnames";
 import { ChevronsUpDown } from "lucide-react";
 import type { FC, Ref } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./select-trigger.module.scss";
 

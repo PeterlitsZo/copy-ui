@@ -1,0 +1,45 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "select", label: "Select" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "theme-provider", label: "ThemeProvider" },
+    { id: "popover", label: "Popover" },
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "resolve-style", label: "resolve-style" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+  ]}
+  edges={[
+    { from: "select", to: "copy-ui-provider" },
+    { from: "select", to: "popover" },
+    { from: "select", to: "theme-provider" },
+    { from: "select", to: "scroll-area" },
+    { from: "select", to: "resolve-style" },
+    { from: "select", to: "classnames" },
+    { from: "select", to: "lucide-react" },
+  ]}
+/>
+
+## Examples
+
+### With large list of options
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### Different Widths
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
+

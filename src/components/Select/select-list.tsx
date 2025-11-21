@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { Check } from "lucide-react";
 import type { CSSProperties, FC, Ref } from "react";
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
-import { ScrollArea } from "../ScrollArea";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { ScrollArea } from "@/components/ScrollArea";
+
 import styles from "./select-list.module.scss";
 
 type SelectListProps<V extends string> = {

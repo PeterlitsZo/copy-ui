@@ -1,7 +1,9 @@
+import classNames from "classnames";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
 import { Popover, type PopoverTriggerRender } from "@/components/Popover";
+import { resolveStyle } from "@/utils/resolve-style";
 
 import { SelectList } from "./select-list";
 import { SelectTrigger } from "./select-trigger";
@@ -10,6 +12,8 @@ interface SelectProps<V extends string> {
   id?: string;
   value?: V | null;
   defaultValue?: V | null;
+
+  width?: "sm" | "md" | "lg" | "full";
 
   options: Array<{ value: V; label: string }>;
   placeholder?: string;
@@ -23,11 +27,10 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     id,
     value = null,
     defaultValue = null,
-
+    width = "md",
     options,
     placeholder = "Select an option",
     disabled = false,
-
     onChange,
   } = props;
 
@@ -73,6 +76,23 @@ const Select = <V extends string>(props: SelectProps<V>) => {
       "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
   });
 
+  const widthStx = jss.hash(
+    resolveStyle({
+      base: {},
+      variants: {
+        width: {
+          sm: { "--select-trigger-width": "12rem" },
+          md: { "--select-trigger-width": "16rem" },
+          lg: { "--select-trigger-width": "20rem" },
+          full: { "--select-trigger-width": "100%" },
+        },
+      },
+      cls: {
+        width,
+      },
+    }),
+  );
+
   const popoverTriggerRender: PopoverTriggerRender = useCallback(
     ({ setRef, isOpen, onToggle }) => (
       <SelectTrigger
@@ -82,14 +102,14 @@ const Select = <V extends string>(props: SelectProps<V>) => {
           setTriggerEl(el);
         }}
         placeholder={placeholder}
-        className={baseStx}
+        className={classNames(baseStx, widthStx)}
         disabled={disabled}
         isOpen={isOpen}
         onToggle={onToggle}
         showLabel={showLabel}
       />
     ),
-    [id, placeholder, baseStx, disabled, showLabel],
+    [id, placeholder, baseStx, widthStx, disabled, showLabel],
   );
 
   return (
