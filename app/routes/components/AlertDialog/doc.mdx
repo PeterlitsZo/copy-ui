@@ -1,0 +1,26 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "alert-dialog", label: "AlertDialog" },
+    { id: "modal", label: "Modal" },
+    { id: "card", label: "Card" },
+    { id: "button", label: "Button" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "alert-dialog", to: "modal" },
+    { from: "alert-dialog", to: "card" },
+    { from: "alert-dialog", to: "button" },
+    { from: "alert-dialog", to: "copy-ui-provider" },
+    { from: "alert-dialog", to: "classnames" },
+  ]}
+/>
