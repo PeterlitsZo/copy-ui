@@ -1,0 +1,28 @@
+@layer components {
+  .topbar {
+    background-color: var(--topbar-bg);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--topbar-border-color);
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 2.75rem;
+    padding-inline: 1rem;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}
+
