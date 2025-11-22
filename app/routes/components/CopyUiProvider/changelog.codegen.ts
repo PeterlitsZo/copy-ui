@@ -14,4 +14,5 @@ export const changelog = ''
   + '  lime and orange to the theme.\n'
   + '- 2025-11-17: Export type `Theme`. And Enhance internal MdxProvider to use more\n'
   + '  sub-components of `Typography`.\n'
+  + '- 2025-11-22: Add `useMode` and `useSetMode` hooks, support the `mode` state.\n'
   ;

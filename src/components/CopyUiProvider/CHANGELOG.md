@@ -10,3 +10,4 @@
   lime and orange to the theme.
 - 2025-11-17: Export type `Theme`. And Enhance internal MdxProvider to use more
   sub-components of `Typography`.
+- 2025-11-22: Add `useMode` and `useSetMode` hooks, support the `mode` state.

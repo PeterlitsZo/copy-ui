@@ -12,9 +12,16 @@ import { useJss } from "./use-jss";
 type CopyUiStoreState = {
   jssState: JssState;
   theme: Theme;
+  mode: "light" | "dark";
 };
 
-type CopyUiStore = CopyUiStoreState;
+type CopyUiStoreActions = {
+  setMode: (
+    mode: "light" | "dark" | ((prevMode: "light" | "dark") => "light" | "dark"),
+  ) => void;
+};
+
+type CopyUiStore = CopyUiStoreState & CopyUiStoreActions;
 
 const CopyUiContext = createContext<StoreApi<CopyUiStore> | null>(null);
 
@@ -27,9 +34,15 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
 
   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
   if (storeRef.current === null) {
-    storeRef.current = createStore<CopyUiStore>()(() => ({
+    storeRef.current = createStore<CopyUiStore>()((set) => ({
       jssState: createJssState(),
       theme: DEFAULT_THEME,
+      mode: "light",
+      setMode: (mode) => {
+        set((state) => ({
+          mode: typeof mode === "function" ? mode(state.mode) : mode,
+        }));
+      },
     }));
   }
 

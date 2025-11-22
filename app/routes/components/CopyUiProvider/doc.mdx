@@ -216,3 +216,25 @@ const MyComponent = () => {
   )
 }
 ```
+
+### useMode and useSetMode
+
+You can use the hooks `useMode` and `useSetMode` to access the mode state and
+set the mode.
+
+```tsx
+import { useMode, useSetMode } from '@/components/CopyUiProvider'
+
+const MyComponent = () => {
+  const mode = useMode();
+  const setMode = useSetMode();
+
+  return (
+    <div>
+      <div>Current mode: {mode}</div>
+      <button onClick={() => setMode("light")}>Set to light</button>
+      <button onClick={() => setMode("dark")}>Set to dark</button>
+    </div>
+  )
+}
+```
