@@ -1,4 +1,6 @@
 /**
+ * jss from copy-ui @ 2025-11-23.
+ *
  * A simple CSS-in-JS utility function.
  *
  * Inspired by goober.
@@ -7,27 +9,6 @@
 import type { CSSProperties } from "react";
 
 type Style = CSSProperties | Partial<Record<`--${string}`, string>>;
-
-function toBase62(n: number): string {
-  if (n === 0) {
-    return "0";
-  }
-  var digits = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var result = "";
-  while (n > 0) {
-    result = digits[n % digits.length] + result;
-    n = parseInt((n / digits.length).toString(), 10);
-  }
-
-  return result;
-}
-
-function toHash(str: string): string {
-  let i = 0,
-    out = 11;
-  while (i < str.length) out = (101 * out + str.charCodeAt(i++)) >>> 0;
-  return toBase62(out);
-}
 
 type JssState = {
   hash: (style: Style) => string;
@@ -79,11 +60,7 @@ function createJssState(): JssState {
           if (value === undefined) {
             continue;
           }
-          const normalizeKey = key.replace(
-            /[A-Z]/g,
-            (match) => `-${match.toLowerCase()}`,
-          );
-          css += `${normalizeKey}:${value};`;
+          css += `${normalizeKey(key)}:${value};`;
         }
         css += "} ";
 
@@ -108,6 +85,35 @@ function createJssState(): JssState {
   };
 
   return jssState;
+}
+
+function toBase62(n: number): string {
+  if (n === 0) {
+    return "0";
+  }
+  var digits = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var result = "";
+  while (n > 0) {
+    result = digits[n % digits.length] + result;
+    n = parseInt((n / digits.length).toString(), 10);
+  }
+
+  return result;
+}
+
+function toHash(str: string): string {
+  let i = 0,
+    out = 11;
+  while (i < str.length) out = (101 * out + str.charCodeAt(i++)) >>> 0;
+  return toBase62(out);
+}
+
+function normalizeKey(key: string): string {
+  if (key.startsWith("--")) {
+    return key;
+  }
+
+  return key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
 }
 
 export type { JssState };
