@@ -12,6 +12,7 @@ export default function Demo() {
       <Field>
         <Field.Label htmlFor={usernameId}>Username</Field.Label>
         <Field.Input
+          width="sm"
           id={usernameId}
           type="text"
           placeholder="Enter your username"

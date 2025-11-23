@@ -2,6 +2,7 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { FileInput } from "@/components/FileInput";
 import { Input } from "@/components/Input";
 import { Select } from "@/components/Select";
 import { Textarea } from "@/components/Textarea";
@@ -103,6 +104,21 @@ const FieldInput: FC<FieldInputProps> = (props) => {
 
 FieldInput.displayName = "Field.Input";
 
+// Field.FileInput
+// =============================================================================
+
+type FieldFileInputProps = ComponentProps<typeof FileInput>;
+
+const FieldFileInput: FC<FieldFileInputProps> = (props) => {
+  const { ...rest } = props;
+
+  const { id } = useFieldContext();
+
+  return <FileInput id={id} {...rest} />;
+};
+
+FieldFileInput.displayName = "Field.FileInput";
+
 // Field.Textarea
 // =============================================================================
 
@@ -139,6 +155,7 @@ export {
   FieldDescription,
   FieldError,
   FieldInput,
+  FieldFileInput,
   FieldTextarea,
   FieldSelect,
 };

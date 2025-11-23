@@ -6,4 +6,6 @@ export const changelog = ''
   + '- 2025-10-12: Add `Field.Select` component.\n'
   + '- 2025-10-27: Add `Field.TextArea` component.\n'
   + '- 2025-11-08: Refactor code structure.\n'
+  + '- 2025-11-21: Add `Field.FileInput` component. And remove useless style\n'
+  + '  `width: 100%`.\n'
   ;

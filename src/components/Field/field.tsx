@@ -6,6 +6,7 @@ import styles from "./field.module.scss";
 import {
   FieldDescription,
   FieldError,
+  FieldFileInput,
   FieldInput,
   FieldLabel,
   FieldSelect,
@@ -19,8 +20,9 @@ type FieldComponent = FC<FieldProps> & {
   Label: typeof FieldLabel;
   Description: typeof FieldDescription;
   Error: typeof FieldError;
-  Textarea: typeof FieldTextarea;
   Input: typeof FieldInput;
+  FileInput: typeof FieldFileInput;
+  Textarea: typeof FieldTextarea;
   Select: typeof FieldSelect;
 };
 
@@ -43,13 +45,14 @@ const Field: FieldComponent = (props) => {
   );
 };
 
+Field.displayName = "Field";
+
 Field.Label = FieldLabel;
 Field.Description = FieldDescription;
 Field.Error = FieldError;
-Field.Textarea = FieldTextarea;
 Field.Input = FieldInput;
+Field.FileInput = FieldFileInput;
+Field.Textarea = FieldTextarea;
 Field.Select = FieldSelect;
-
-Field.displayName = "Field";
 
 export { Field };
