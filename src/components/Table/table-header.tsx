@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
+import { useJss } from "@/components/CopyUiProvider";
+
 import styles from "./table-header.module.scss";
 
 type TableHeaderProps = ComponentProps<"thead">;
@@ -8,8 +10,17 @@ type TableHeaderProps = ComponentProps<"thead">;
 const TableHeader: FC<TableHeaderProps> = (props) => {
   const { className, ...rest } = props;
 
+  const jss = useJss();
+
+  const stx = jss.hash({
+    "--tableHeader-borderColor": "var(--table-borderColor)",
+  });
+
   return (
-    <thead className={classNames(styles.TableHeader, className)} {...rest} />
+    <thead
+      className={classNames(styles.TableHeader, stx, className)}
+      {...rest}
+    />
   );
 };
 

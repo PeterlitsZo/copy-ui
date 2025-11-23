@@ -1,13 +1,14 @@
 @layer components {
   .TableRow {
-    background-color: white;
+    background-color: var(--tableRow-bgColor);
+    color: var(--tableRow-color);
 
     &:not(:last-child) {
-      border-bottom: 1px solid var(--table-border-color);
+      border-bottom: 1px solid var(--table-borderColor);
     }
 
     &:hover {
-      background-color: var(--table-row-hover-bg-color);
+      background-color: var(--tableRow-hover-bgColor);
     }
   }
 }

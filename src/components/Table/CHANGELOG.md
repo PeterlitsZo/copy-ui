@@ -1,1 +1,2 @@
 - 2025-11-15: Initial version.
+- 2025-11-23: Support the dark mode.

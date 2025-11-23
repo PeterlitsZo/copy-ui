@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
-import tinycolor from "tinycolor2";
-import { useJss, useTheme } from "@/components/CopyUiProvider";
+
+import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
+
 import { TableBody } from "./table-body";
 import { TableCell } from "./table-cell";
 import { TableFooter } from "./table-footer";
@@ -23,14 +24,13 @@ type TableComponent = FC<TableProps> & {
 const Table: TableComponent = (props: TableProps) => {
   const { className, ...rest } = props;
 
+  const mode = useMode();
   const theme = useTheme();
   const jss = useJss();
 
   const stx = jss.hash({
-    "--table-border-color": theme.colors.gray["200"],
-    "--table-row-hover-bg-color": tinycolor(theme.colors.gray["100"])
-      .setAlpha(0.5)
-      .toString(),
+    "--table-borderColor":
+      mode === "light" ? theme.colors.gray["200"] : theme.colors.gray["600"],
   });
 
   return <table className={classNames(stx, className)} {...rest} />;
