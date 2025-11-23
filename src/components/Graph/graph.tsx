@@ -2,7 +2,18 @@ import dagre from "@dagrejs/dagre";
 import type { FC } from "react";
 import { useId, useMemo } from "react";
 
-import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
+import {
+  type ColorName,
+  useJss,
+  useMode,
+  useTheme,
+} from "@/components/CopyUiProvider";
+
+const NODESEP = 25;
+const RANKSEP = 60;
+const NODEWIDTH = 140;
+const NODEHEIGHT = 40;
+const PADDING = 20;
 
 type GraphNode = {
   id: string;
@@ -28,8 +39,8 @@ const Graph: FC<GraphProps> = (props) => {
 
     g.setGraph({
       rankdir: "LR",
-      nodesep: 40,
-      ranksep: 60,
+      nodesep: NODESEP,
+      ranksep: RANKSEP,
     });
 
     g.setDefaultEdgeLabel(() => ({}));
@@ -37,8 +48,8 @@ const Graph: FC<GraphProps> = (props) => {
     for (const node of nodes) {
       g.setNode(node.id, {
         label: node.label,
-        width: 130,
-        height: 40,
+        width: NODEWIDTH,
+        height: NODEHEIGHT,
       });
     }
 
@@ -65,13 +76,13 @@ const Graph: FC<GraphProps> = (props) => {
     let maxY = Number.NEGATIVE_INFINITY;
 
     for (const { x, y } of nodePositions.values()) {
-      minX = Math.min(minX, x - 50);
-      minY = Math.min(minY, y - 20);
-      maxX = Math.max(maxX, x + 50);
-      maxY = Math.max(maxY, y + 20);
+      minX = Math.min(minX, x - NODEWIDTH / 2);
+      minY = Math.min(minY, y - NODEHEIGHT / 2);
+      maxX = Math.max(maxX, x + NODEWIDTH / 2);
+      maxY = Math.max(maxY, y + NODEHEIGHT / 2);
     }
 
-    const padding = 20;
+    const padding = PADDING;
     const width = maxX - minX + padding * 2;
     const height = maxY - minY + padding * 2;
     const offsetX = -minX + padding;
@@ -88,7 +99,11 @@ const Graph: FC<GraphProps> = (props) => {
   }, [nodes, edges]);
 
   const theme = useTheme();
+  const mode = useMode();
   const arrowheadId = useId();
+
+  const arrowheadColor =
+    mode === "dark" ? theme.colors.gray["400"] : theme.colors.gray["600"];
 
   return (
     <svg
@@ -106,7 +121,7 @@ const Graph: FC<GraphProps> = (props) => {
           refY="3"
           orient="auto"
         >
-          <polygon points="0 0, 6 3, 0 6" fill={theme.colors.gray["600"]} />
+          <polygon points="0 0, 6 3, 0 6" fill={arrowheadColor} />
         </marker>
       </defs>
 
@@ -146,22 +161,34 @@ type GraphEdgeProps = {
 
 const GraphEdge: FC<GraphEdgeProps> = (props) => {
   const { points, arrowheadId } = props;
+
   const theme = useTheme();
+  const mode = useMode();
 
-  if (points.length < 2) return null;
+  if (points.length !== 3) return null;
 
-  const pathData = points
-    .map((point, idx) => {
-      const command = idx === 0 ? "M" : "L";
-      return `${command} ${point.x} ${point.y}`;
-    })
-    .join(" ");
+  const [start, control, end] = points;
+
+  const midStart = {
+    x: (start.x + control.x) / 2,
+    y: (start.y + control.y) / 2,
+  };
+  const midEnd = { x: (control.x + end.x) / 2, y: (control.y + end.y) / 2 };
+
+  const pathData = [
+    `M ${start.x} ${start.y}`,
+    `L ${midStart.x} ${midStart.y}`,
+    `C ${control.x} ${control.y} ${midEnd.x} ${midEnd.y} ${end.x} ${end.y}`,
+  ].join(" ");
+
+  const edgeColor =
+    mode === "dark" ? theme.colors.gray["400"] : theme.colors.gray["600"];
 
   return (
     <path
       d={pathData}
       fill="none"
-      stroke={theme.colors.gray["600"]}
+      stroke={edgeColor}
       strokeWidth="1"
       markerEnd={`url(#${arrowheadId})`}
     />
@@ -178,11 +205,18 @@ type GraphNodeProps = {
 const GraphNode: FC<GraphNodeProps> = (props) => {
   const { x, y, color, label } = props;
 
+  const mode = useMode();
   const theme = useTheme();
   const jss = useJss();
 
+  const nodeTextColor =
+    mode === "dark" ? theme.colors.gray["200"] : theme.colors.gray["800"];
+  const nodeBorderColor =
+    mode === "dark" ? theme.colors[color]["400"] : theme.colors[color]["600"];
+  const nodeBackgroundColor =
+    mode === "dark" ? theme.colors[color]["800"] : theme.colors[color]["000"];
+
   const nodeTextStx = jss.hash({
-    color: theme.colors.gray["800"],
     dominantBaseline: "middle",
     textAnchor: "middle",
   });
@@ -190,15 +224,17 @@ const GraphNode: FC<GraphNodeProps> = (props) => {
   return (
     <g style={{ transform: `translate(${x}px, ${y}px)` }}>
       <rect
-        x={-65}
-        y={-20}
-        width={130}
-        height={40}
-        fill={theme.colors[color]["000"]}
-        stroke={theme.colors[color]["600"]}
+        x={-NODEWIDTH / 2}
+        y={-NODEHEIGHT / 2}
+        width={NODEWIDTH}
+        height={NODEHEIGHT}
+        fill={nodeBackgroundColor}
+        stroke={nodeBorderColor}
         rx="0.25rem"
       />
-      <text className={nodeTextStx}>{label}</text>
+      <text className={nodeTextStx} fill={nodeTextColor}>
+        {label}
+      </text>
     </g>
   );
 };

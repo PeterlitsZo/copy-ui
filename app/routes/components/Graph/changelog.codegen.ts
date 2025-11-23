@@ -3,4 +3,6 @@
 
 export const changelog = ''
   + '- 2025-11-16: Initial version.\n'
+  + '- 2025-11-23: Refactor the code to use constants. Let the edges use bezier\n'
+  + '  curves. Support dark mode.\n'
   ;
