@@ -1,0 +1,5 @@
+id: find-resolve-style
+language: TSX
+rule:
+  kind: call_expression
+  pattern: resolveStyle($$$ARGS)

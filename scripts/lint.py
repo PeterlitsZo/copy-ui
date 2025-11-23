@@ -10,6 +10,9 @@ def main():
     # Make sure no deprecated `Typography.Root` is used.
     check_no_typography_root()
 
+    # Make sure no deprecated `resolveStyle` is used.
+    check_no_resolve_style()
+
 def check_ast_grep_exists():
     try:
         subprocess.run(["ast-grep", "--version"], check=True, capture_output=True)
@@ -43,6 +46,19 @@ def check_no_typography_root():
     result = json.loads(result.stdout)
     for match in result:
         print(f"WARN use deprecated Typography.Root component in {match['file']} -- Please just use Typography.")
+        
+def check_no_resolve_style():
+    cmd = [
+        "ast-grep",
+        "scan",
+        "--rule",
+        "scripts/etc/find-resolve-style.yaml",
+        "--json",       
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = json.loads(result.stdout)
+    for match in result:
+        print(f"WARN use deprecated resolveStyle function in {match['file']} -- Please just use resolveStyle2.")
 
 if __name__ == "__main__":
     main()
