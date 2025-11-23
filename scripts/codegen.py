@@ -301,24 +301,21 @@ def codegen_utils():
             'path': f"routes/utils/{file_path.stem}/index.tsx"
         })
         
-        # Get the path for the codegen file (and make sure its parent exists).
-        codegen_file_path = app_dir / file_path.stem / "source-code.codegen.ts"
-        (app_dir / file_path.stem).mkdir(parents=True, exist_ok=True)
-
-        # Code generation for the source code file. 
-        with open(codegen_file_path, 'w', encoding='utf-8') as of:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                filecontent = f.read()
-
-            of.write(get_codegen_header())
-            of.write(f"const sourceCode = ''\n")
-            for line in filecontent.splitlines():
-                line += '\n'
-                of.write(f"  + {repr(line)}\n")
-            of.write("  ;\n\n")
-
-            of.write("export default sourceCode;\n")
-    
+        # Codegen for the file.
+        codegen_utils_for_file(file_path, app_dir)
+        
+    # Process each directory in the utils directory.
+    for dir_path in utils_dir.glob("*"):
+        if dir_path.is_dir():
+            # Append to utils routes.
+            utils_routes.append({
+                'name': dir_path.stem,
+                'path': f"routes/utils/{dir_path.stem}/index.tsx"
+            })
+            
+            # Codegen for the directory.
+            codegen_utils_for_dir(dir_path, app_dir)
+           
     # Codegen for `app/utils-routes.codegen.ts`.
     utils_routes_codegen_path = project_root_dir / "app" / "utils-routes.codegen.ts"
     utils_routes.sort(key=lambda x: x['name'].lower())
@@ -341,6 +338,64 @@ def codegen_utils():
             }
             of.write(f"  {json.dumps(nav_data)},\n")
         of.write("];\n")
+
+def codegen_utils_for_file(file_path: Path, app_dir: Path):
+    """Generates the codegen file for a specific file."""
+    
+    # Get the path for the codegen file (and make sure its parent exists).
+    codegen_file_path = app_dir / file_path.stem / "source-code.codegen.ts"
+    (app_dir / file_path.stem).mkdir(parents=True, exist_ok=True)
+
+    # Code generation for the source code file. 
+    with open(codegen_file_path, 'w', encoding='utf-8') as of:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            filecontent = f.read()
+
+        of.write(get_codegen_header())
+        of.write(f"const sourceCode = ''\n")
+        for line in filecontent.splitlines():
+            line += '\n'
+            of.write(f"  + {repr(line)}\n")
+        of.write("  ;\n\n")
+
+        of.write("export default sourceCode;\n")
+        
+def codegen_utils_for_dir(dir_path: Path, app_dir: Path):
+    """Generates the codegen files for a specific directory."""
+
+    # Get the path for the codegen file (and make sure its parent exists).
+    codegen_file_path = app_dir / dir_path.stem / "source-code.codegen.ts"
+    (app_dir / dir_path.stem).mkdir(parents=True, exist_ok=True)
+
+    # Code generation for the source code file. 
+    with open(codegen_file_path, 'w', encoding='utf-8') as of:
+        with open(dir_path / "index.ts", 'r', encoding='utf-8') as f:
+            filecontent = f.read()
+            
+        of.write(get_codegen_header())
+        of.write(f"const sourceCode = ''\n")
+        for line in filecontent.splitlines():
+            line += '\n'
+            of.write(f"  + {repr(line)}\n")
+        of.write("  ;\n\n")
+
+        of.write("export default sourceCode;\n")
+        
+    # Codegen for the `CHANGELOG.md` file.
+    changelog_file_path = dir_path / "CHANGELOG.md"
+    if os.path.isfile(changelog_file_path):
+        with open(changelog_file_path, 'r', encoding='utf-8') as f:
+            changelog_content = f.read()
+            
+        with open(app_dir / dir_path.stem / "changelog.codegen.ts", 'w', encoding='utf-8') as of:
+            of.write(get_codegen_header())
+            of.write(f"const changelog = ''\n")
+            for line in changelog_content.splitlines():
+                line += '\n'
+                of.write(f"  + {repr(line)}\n")
+            of.write("  ;\n\n")
+            
+            of.write("export default changelog;\n")
 
 def get_codegen_header() -> str:
     return (
