@@ -1,0 +1,44 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01sourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+import Demo04 from "./demos/Demo04";
+import demo04SourceCode from "./demos/Demo04.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01sourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "button", label: "Button" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "resolve-style2", label: "resolve-style2" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "tinycolor2", label: "tinycolor2", color: "green" },
+  ]}
+  edges={[
+    { from: "button", to: "copy-ui-provider" },
+    { from: "button", to: "resolve-style2" },
+    { from: "button", to: "classnames" },
+    { from: "button", to: "tinycolor2" },
+  ]}
+/>
+
+## Examples
+
+### With Different Colors
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### With Different Sizes
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
+
+### With Different Variants
+
+<DocLayout.Live node={<Demo04 />} code={demo04SourceCode} />

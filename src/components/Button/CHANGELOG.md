@@ -17,3 +17,4 @@
   default icon size for SVG children in left or right section.
 - 2025-11-15: Update icon size to make it smaller, remove the dependency on
   deprecated ThemeProvider.
+- 2025-11-23: Update the CSS variables names with camelCase.

@@ -1,4 +1,4 @@
-// IconButton from copy-ui @ 2025-10-30.
+// IconButton from copy-ui @ 2025-11-23.
 
-export type { IconButtonProps } from "./IconButton";
-export { IconButton } from "./IconButton";
+export type { IconButtonProps } from "./icon-button";
+export { IconButton } from "./icon-button";

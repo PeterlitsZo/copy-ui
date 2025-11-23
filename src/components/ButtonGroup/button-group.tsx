@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import type { FC } from "react";
 
-import styles from "./ButtonGroup.module.scss";
+import styles from "./button-group.module.scss";
 
 export type ButtonGroupProps = {
   className?: string;

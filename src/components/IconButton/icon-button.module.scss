@@ -6,17 +6,17 @@
 
     height: var(--button-size);
     width: var(--button-size);
-    background-color: var(--button-bg);
+    background-color: var(--button-bgColor);
     color: var(--button-color);
-    border-width: var(--button-border-width);
-    border-style: var(--button-border-style);
-    border-color: var(--button-border-color);
-    border-radius: var(--button-radius);
+    border-width: var(--button-bdWidth);
+    border-style: var(--button-bdStyle);
+    border-color: var(--button-bdColor);
+    border-radius: var(--button-bdRadius);
 
     cursor: pointer;
 
     &:hover {
-      background-color: var(--button-bg-hover);
+      background-color: var(--button-hover-bgColor);
     }
 
     & > svg {

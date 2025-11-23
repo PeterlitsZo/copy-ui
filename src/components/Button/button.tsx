@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 import tinycolor from "tinycolor2";
-import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
-import { resolveStyle } from "@/utils/resolve-style";
+
+import type { ColorName, Theme } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { resolveStyle2 } from "@/utils/resolve-style2";
 
 import styles from "./button.module.scss";
 
@@ -31,127 +33,23 @@ const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme();
   const jss = useJss();
 
+  const baseStx = jss.hash({
+    "--button-bdRadius": "0.375rem",
+  });
+
   const stx = jss.hash(
-    resolveStyle({
-      base: {
-        "--button-radius": "0.375rem",
-      },
-      variants: {
-        variant: {
-          default: {
-            "--button-bg": "white",
-            "--button-color": theme.colors.gray["800"],
-            "--button-border-width": "1px",
-            "--button-border-style": "solid",
-            "--button-border-color": theme.tokens.inputBaseDefaultBorderColor,
-            "--button-bg-hover": theme.colors.gray["100"],
-            "--button-disabled-bg-color": theme.colors.gray["100"],
-            "--button-disabled-color": theme.colors.gray["500"],
-            "--button-disabled-border-color":
-              theme.tokens.inputBaseDefaultBorderColor,
-            "--button-disabled-hover-bg-color": theme.colors.gray["100"],
-          },
-          filled: {
-            "--button-bg": theme.colors[color]["600"],
-            "--button-color": "white",
-            "--button-border-width": "1px",
-            "--button-border-style": "solid",
-            "--button-border-color": theme.colors[color]["700"],
-            "--button-bg-hover": theme.colors[color]["700"],
-            "--button-disabled-bg-color": theme.colors.gray["300"],
-            "--button-disabled-color": theme.colors.gray["500"],
-            "--button-disabled-border-color": theme.colors.gray["300"],
-            "--button-disabled-hover-bg-color": theme.colors.gray["300"],
-          },
-          secondary: {
-            "--button-bg": theme.colors.gray["000"],
-            "--button-color": theme.colors.gray["800"],
-            "--button-border-width": "1px",
-            "--button-border-style": "solid",
-            "--button-border-color": "transparent",
-            "--button-border-separator-color": theme.colors.gray["200"],
-            "--button-bg-hover": theme.colors.gray["100"],
-            "--button-disabled-bg-color": theme.colors.gray["100"],
-            "--button-disabled-color": theme.colors.gray["500"],
-            "--button-disabled-border-color": "transparent",
-            "--button-disabled-hover-bg-color": theme.colors.gray["100"],
-          },
-          ghost: {
-            "--button-bg": "transparent",
-            "--button-color": theme.colors[color]["800"],
-            "--button-border-width": "1px",
-            "--button-border-style": "solid",
-            "--button-border-color": "transparent",
-            "--button-bg-hover": tinycolor(theme.colors.gray["200"])
-              .setAlpha(0.5)
-              .toString(),
-            "--button-disabled-color": theme.colors.gray["500"],
-            "--button-disabled-bg-color": "transparent",
-            "--button-disabled-hover-bg-color": "transparent",
-            "--button-disabled-border-color": "transparent",
-          },
-          light: {
-            "--button-bg": theme.colors[color]["000"],
-            "--button-color": theme.colors[color]["800"],
-            "--button-border-width": "1px",
-            "--button-border-style": "solid",
-            "--button-border-color": "transparent",
-            "--button-border-separator-color": theme.colors[color]["100"],
-            "--button-bg-hover": theme.colors[color]["100"],
-            "--button-disabled-color": theme.colors.gray["500"],
-            "--button-disabled-bg-color": theme.colors.gray["100"],
-            "--button-disabled-hover-bg-color": theme.colors.gray["100"],
-            "--button-disabled-border-color": "transparent",
-          },
-        },
-        size: {
-          xs: {
-            "--button-height": theme.tokens.inputBaseXsHeight,
-            "--icon-size": `calc(var(--button-height) / 2.125)`,
-            "--button-padding-x": "0.625rem",
-            "--button-section-gap": "0.375rem",
-            "--button-font-size": "0.75rem",
-          },
-          sm: {
-            "--button-height": theme.tokens.inputBaseSmHeight,
-            "--icon-size": `calc(var(--button-height) / 2.125)`,
-            "--button-padding-x": "0.75rem",
-            "--button-section-gap": "0.5rem",
-            "--button-font-size": "0.875rem",
-          },
-          md: {
-            "--button-height": theme.tokens.inputBaseMdHeight,
-            "--icon-size": `calc(var(--button-height) / 2.125)`,
-            "--button-padding-x": "1rem",
-            "--button-section-gap": "0.625rem",
-            "--button-font-size": "1rem",
-          },
-          lg: {
-            "--button-height": theme.tokens.inputBaseLgHeight,
-            "--icon-size": `calc(var(--button-height) / 2.125)`,
-            "--button-padding-x": "1.25rem",
-            "--button-section-gap": "0.75rem",
-            "--button-font-size": "1.125rem",
-          },
-          xl: {
-            "--button-height": theme.tokens.inputBaseXlHeight,
-            "--icon-size": `calc(var(--button-height) / 2.125)`,
-            "--button-padding-x": "1.5rem",
-            "--button-section-gap": "1rem",
-            "--button-font-size": "1.25rem",
-          },
-        },
-      },
-      cls: {
-        variant,
-        size,
-      },
+    buttonStyle(
+      theme,
+      color,
+    )({
+      variant,
+      size,
     }),
   );
 
   return (
     <button
-      className={classNames(styles.button, stx, className)}
+      className={classNames(styles.button, baseStx, stx, className)}
       disabled={disabled}
       data-disabled={disabled ? true : undefined}
       {...rest}
@@ -168,5 +66,112 @@ const Button: FC<ButtonProps> = (props) => {
 };
 
 Button.displayName = "Button";
+
+const buttonStyle = (theme: Theme, color: ColorName) =>
+  resolveStyle2({
+    variant: {
+      default: {
+        "--button-bgColor": "white",
+        "--button-color": theme.colors.gray["800"],
+        "--button-bdWidth": "1px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": theme.tokens.inputBaseDefaultBorderColor,
+        "--button-hover-bgColor": theme.colors.gray["100"],
+        "--button-disabled-bgColor": theme.colors.gray["100"],
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bdColor": theme.tokens.inputBaseDefaultBorderColor,
+        "--button-disabled-hover-bgColor": theme.colors.gray["100"],
+      },
+      filled: {
+        "--button-bgColor": theme.colors[color]["600"],
+        "--button-color": "white",
+        "--button-bdWidth": "1px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": theme.colors[color]["700"],
+        "--button-hover-bgColor": theme.colors[color]["700"],
+        "--button-disabled-bgColor": theme.colors.gray["300"],
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bdColor": theme.colors.gray["300"],
+        "--button-disabled-hover-bgColor": theme.colors.gray["300"],
+      },
+      secondary: {
+        "--button-bgColor": theme.colors.gray["000"],
+        "--button-color": theme.colors.gray["800"],
+        "--button-bdWidth": "1px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": "transparent",
+        "--button-separatorBdColor": theme.colors.gray["200"],
+        "--button-hover-bgColor": theme.colors.gray["100"],
+        "--button-disabled-bgColor": theme.colors.gray["100"],
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bdColor": "transparent",
+        "--button-disabled-hover-bgColor": theme.colors.gray["100"],
+      },
+      ghost: {
+        "--button-bgColor": "transparent",
+        "--button-color": theme.colors[color]["800"],
+        "--button-bdWidth": "1px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": "transparent",
+        "--button-hover-bgColor": tinycolor(theme.colors.gray["200"])
+          .setAlpha(0.5)
+          .toString(),
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bgColor": "transparent",
+        "--button-disabled-hover-bgColor": "transparent",
+        "--button-disabled-bdColor": "transparent",
+      },
+      light: {
+        "--button-bgColor": theme.colors[color]["000"],
+        "--button-color": theme.colors[color]["800"],
+        "--button-bdWidth": "1px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": "transparent",
+        "--button-separatorBdColor": theme.colors[color]["100"],
+        "--button-hover-bgColor": theme.colors[color]["100"],
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bgColor": theme.colors.gray["100"],
+        "--button-disabled-hover-bgColor": theme.colors.gray["100"],
+        "--button-disabled-bdColor": "transparent",
+      },
+    },
+    size: {
+      xs: {
+        "--button-height": theme.tokens.inputBaseXsHeight,
+        "--icon-size": `calc(var(--button-height) / 2.125)`,
+        "--button-px": "0.625rem",
+        "--button-sectionGap": "0.375rem",
+        "--button-fontSize": "0.75rem",
+      },
+      sm: {
+        "--button-height": theme.tokens.inputBaseSmHeight,
+        "--icon-size": `calc(var(--button-height) / 2.125)`,
+        "--button-px": "0.75rem",
+        "--button-sectionGap": "0.5rem",
+        "--button-fontSize": "0.875rem",
+      },
+      md: {
+        "--button-height": theme.tokens.inputBaseMdHeight,
+        "--icon-size": `calc(var(--button-height) / 2.125)`,
+        "--button-px": "1rem",
+        "--button-sectionGap": "0.625rem",
+        "--button-fontSize": "1rem",
+      },
+      lg: {
+        "--button-height": theme.tokens.inputBaseLgHeight,
+        "--icon-size": `calc(var(--button-height) / 2.125)`,
+        "--button-px": "1.25rem",
+        "--button-sectionGap": "0.75rem",
+        "--button-fontSize": "1.125rem",
+      },
+      xl: {
+        "--button-height": theme.tokens.inputBaseXlHeight,
+        "--icon-size": `calc(var(--button-height) / 2.125)`,
+        "--button-px": "1.5rem",
+        "--button-sectionGap": "1rem",
+        "--button-fontSize": "1.25rem",
+      },
+    },
+  });
 
 export { Button };
