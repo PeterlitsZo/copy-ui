@@ -1,0 +1,14 @@
+import type { ComponentProps, FC } from "react";
+import { Flex } from "@/components/Flex";
+
+type EmptyContentProps = ComponentProps<typeof Flex>;
+
+const EmptyContentFlex: FC<EmptyContentProps> = (props) => {
+  const { children, ...rest } = props;
+
+  return <Flex {...rest}>{children}</Flex>;
+};
+
+EmptyContentFlex.displayName = "Empty.ContentFlex";
+
+export { EmptyContentFlex };

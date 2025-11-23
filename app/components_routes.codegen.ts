@@ -15,6 +15,7 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "CodeHighlight", "path": "routes/components/CodeHighlight/index.tsx"},
   {"name": "CopyUiProvider", "path": "routes/components/CopyUiProvider/index.tsx"},
   {"name": "DatePicker", "path": "routes/components/DatePicker/index.tsx"},
+  {"name": "Empty", "path": "routes/components/Empty/index.tsx"},
   {"name": "Field", "path": "routes/components/Field/index.tsx"},
   {"name": "FileInput", "path": "routes/components/FileInput/index.tsx"},
   {"name": "Flex", "path": "routes/components/Flex/index.tsx"},

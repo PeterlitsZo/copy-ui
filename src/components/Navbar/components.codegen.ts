@@ -17,6 +17,7 @@ export const components: Component[] = [
   {"name": "CodeHighlight", "path": "/v0/components/CodeHighlight", "wip": false, "deprecated": false},
   {"name": "CopyUiProvider", "path": "/v0/components/CopyUiProvider", "wip": false, "deprecated": false},
   {"name": "DatePicker", "path": "/v0/components/DatePicker", "wip": false, "deprecated": false},
+  {"name": "Empty", "path": "/v0/components/Empty", "wip": false, "deprecated": false},
   {"name": "Field", "path": "/v0/components/Field", "wip": false, "deprecated": false},
   {"name": "FileInput", "path": "/v0/components/FileInput", "wip": false, "deprecated": false},
   {"name": "Flex", "path": "/v0/components/Flex", "wip": false, "deprecated": false},

@@ -1,0 +1,26 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "empty", label: "Empty" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "flex", label: "Flex" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "empty", to: "copy-ui-provider" },
+    { from: "empty", to: "flex" },
+    { from: "empty", to: "classnames" },
+  ]}
+/>
+
+## Acknowledgments
+
+This component is inspired by shadcn/ui's Empty component.
