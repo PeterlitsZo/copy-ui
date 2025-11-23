@@ -1,0 +1,60 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+You can use the Modal component to display content in a modal overlay.
+The code to render the Modal component looks like the following:
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+return (
+  <Modal isOpen={isOpen}>
+    <Modal.Overlay onClick={() => setIsOpen(false)} />
+    <Modal.Content center shadow>
+      {anyThingYouWantToRender}
+    </Modal.Content>
+  </Modal>
+);
+```
+
+It contains two main sub-components: `Modal.Overlay` and `Modal.Content`. The
+`Modal.Overlay` is used to render the overlay background, and the
+`Modal.Content` is used to render the actual content of the modal (you can use
+the `center` and `shadow` props to make it place properly and have good shadow).
+
+It also provides a `Modal.Raw` sub-component that can render the modal but
+without any default styling. See the section below for an example.
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "modal", label: "Modal" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "tinycolor2", label: "tinycolor2", color: "green" },
+  ]}
+  edges={[
+    { from: "modal", to: "copy-ui-provider" },
+    { from: "modal", to: "classnames" },
+    { from: "modal", to: "tinycolor2" },
+  ]}
+/>
+
+## Examples
+
+### Using Modal.Raw
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### With Different Y Offsets
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />

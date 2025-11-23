@@ -4,7 +4,7 @@ import { DocLayout } from "@/layouts/DocLayout";
 
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
-import { Doc } from "./docs";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -38,7 +38,7 @@ export default function ModalPage() {
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}

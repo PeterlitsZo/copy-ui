@@ -22,7 +22,7 @@ export default function Demo01() {
         <Card>
           <Card.Header>Modal Title</Card.Header>
           <Card.Content>
-            <Typography.Root>
+            <Typography>
               <Typography.P>
                 This is a simple modal example using the Modal component from
                 Copy UI.
@@ -32,7 +32,7 @@ export default function Demo01() {
                   Close Modal
                 </Button>
               </Typography.P>
-            </Typography.Root>
+            </Typography>
           </Card.Content>
         </Card>
       </Modal.Raw>

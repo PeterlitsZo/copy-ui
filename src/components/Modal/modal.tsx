@@ -2,8 +2,7 @@ import classNames from "classnames";
 import type { CSSProperties, FC } from "react";
 import tinycolor from "tinycolor2";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
 import { ModalContent } from "./modal-content";
 import { ModalOverlay } from "./modal-overlay";

@@ -1,19 +1,28 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
+import { useJss } from "@/components/CopyUiProvider";
+
 import styles from "./modal-content.module.scss";
 
 type ModalContentProps = ComponentProps<"div"> & {
+  yOffset?: string;
   center?: boolean;
   shadow?: boolean;
 };
 
 const ModalContent: FC<ModalContentProps> = (props) => {
-  const { className, center, shadow, ...rest } = props;
+  const { yOffset, center, shadow, className, ...rest } = props;
+
+  const jss = useJss();
+
+  const stx = jss.hash({
+    "--modal-content-y-offset": yOffset,
+  });
 
   return (
     <div
-      className={classNames(styles.modalContent, className)}
+      className={classNames(styles.modalContent, stx, className)}
       data-center={center}
       data-shadow={shadow}
       {...rest}
