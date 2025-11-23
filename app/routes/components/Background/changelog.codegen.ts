@@ -6,4 +6,5 @@ export const changelog = ''
   + '- 2025-10-04: Update code style.\n'
   + '- 2025-10-25: Support `style` prop and add `Background.Container` sub-component.\n'
   + '- 2025-11-05: Support the `chessboard` kind.\n'
+  + '- 2025-11-23: Support dark mode, and the `config` prop.\n'
   ;

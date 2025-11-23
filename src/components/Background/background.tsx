@@ -1,22 +1,56 @@
 import classNames from "classnames";
-import { type CSSProperties, type FC, useLayoutEffect, useRef } from "react";
+import type { CSSProperties } from "react";
+import { useLayoutEffect, useRef } from "react";
+
+import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./background.module.scss";
 import { BackgroundContainer } from "./background-container";
 import { drawChessboard, drawDots, drawLines } from "./draw";
 
-type BackgroundProps = {
-  className?: string;
-  style?: CSSProperties;
-  kind: "dots" | "lines" | "chessboard";
+type BackgroundKind = "dots" | "lines" | "chessboard";
+
+type BackgroundConfigDots = {
+  dotColor: string;
 };
 
-type BackgroundComponent = FC<BackgroundProps> & {
+type BackgroundConfigLines = {
+  lineColor: string;
+};
+
+type BackgroundConfigChessboard = {
+  chessboardColor: string;
+};
+
+type BackgroundConfig<K extends BackgroundKind> = K extends "dots"
+  ? BackgroundConfigDots
+  : K extends "lines"
+    ? BackgroundConfigLines
+    : K extends "chessboard"
+      ? BackgroundConfigChessboard
+      : never;
+
+type BackgroundProps<K extends BackgroundKind> = {
+  className?: string;
+  style?: CSSProperties;
+  kind: K;
+  config?: BackgroundConfig<K>;
+};
+
+type BackgroundComponent = {
+  <K extends BackgroundKind>(props: BackgroundProps<K>): React.ReactNode;
+  displayName: string;
   Container: typeof BackgroundContainer;
 };
 
-const Background: BackgroundComponent = (props: BackgroundProps) => {
-  const { className, style, kind } = props;
+const Background: BackgroundComponent = <K extends BackgroundKind>(
+  props: BackgroundProps<K>,
+) => {
+  const { className, style, kind, config } = props;
+
+  const jss = useJss();
+  const mode = useMode();
+  const theme = useTheme();
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -52,13 +86,35 @@ const Background: BackgroundComponent = (props: BackgroundProps) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (kind === "lines") {
-        drawLines(ctx, width, height, { lineColor: `rgba(0, 0, 0, 0.05)` });
+        const c: BackgroundConfigLines = (config as
+          | BackgroundConfigLines
+          | undefined) ?? {
+          lineColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.05)`
+              : `rgba(0, 0, 0, 0.05)`,
+        };
+        drawLines(ctx, width, height, c);
       } else if (kind === "dots") {
-        drawDots(ctx, width, height, { dotColor: `rgba(0, 0, 0, 0.15)` });
+        const c: BackgroundConfigDots = (config as
+          | BackgroundConfigDots
+          | undefined) ?? {
+          dotColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.15)`
+              : `rgba(0, 0, 0, 0.15)`,
+        };
+        drawDots(ctx, width, height, c);
       } else if (kind === "chessboard") {
-        drawChessboard(ctx, width, height, {
-          chessboardColor: `rgba(0, 0, 0, 0.02)`,
-        });
+        const c: BackgroundConfigChessboard = (config as
+          | BackgroundConfigChessboard
+          | undefined) ?? {
+          chessboardColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.03)`
+              : `rgba(0, 0, 0, 0.02)`,
+        };
+        drawChessboard(ctx, width, height, c);
       }
     };
 
@@ -72,11 +128,16 @@ const Background: BackgroundComponent = (props: BackgroundProps) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [kind]);
+  }, [mode, kind, config]);
+
+  const stx = jss.hash({
+    "--backgroundWrapper-bgColor":
+      mode === "dark" ? theme.colors.gray["800"] : "white",
+  });
 
   return (
     <div
-      className={classNames(styles.backgroundWrapper, className)}
+      className={classNames(styles.backgroundWrapper, stx, className)}
       style={style}
       ref={wrapperRef}
     >
@@ -89,4 +150,5 @@ Background.displayName = "Background";
 
 Background.Container = BackgroundContainer;
 
+export type { BackgroundProps, BackgroundKind, BackgroundConfig };
 export { Background };

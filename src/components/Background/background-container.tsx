@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import type { CSSProperties, FC } from "react";
+
 import styles from "./background-container.module.scss";
 
 type BackgroundContainerProps = {
