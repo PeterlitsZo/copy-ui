@@ -3,6 +3,8 @@
     background-color: var(--paper-bg);
     border-radius: var(--paper-border-radius);
     box-shadow: var(--paper-box-shadow);
+    color: var(--paper-color);
+
     overflow: hidden;
 
     &[data-with-border='true'] {

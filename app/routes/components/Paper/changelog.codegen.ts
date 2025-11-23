@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-10-17: Initial version.\n'
   + '- 2025-10-22: Add `withPadding` prop to control internal padding.\n'
   + '- 2025-10-25: Use `useJss` for styles & add `overflow: hidden` style.\n'
+  + '- 2025-11-23: Support dark mode.\n'
   ;

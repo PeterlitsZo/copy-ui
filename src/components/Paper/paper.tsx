@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps, CSSProperties, FC } from "react";
 
-import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./paper.module.scss";
 
@@ -23,10 +23,13 @@ const Paper: FC<PaperProps> = (props) => {
   } = props;
 
   const theme = useTheme();
+  const mode = useMode();
   const jss = useJss();
 
   const stx = jss.hash({
-    "--paper-bg": "white",
+    "--paper-bg": mode === "light" ? "white" : theme.colors.gray["800"],
+    "--paper-color":
+      mode === "light" ? theme.colors.gray["900"] : theme.colors.gray["100"],
     "--paper-border-color": theme.colors.gray["300"],
     "--paper-border-radius": {
       none: "0px",
