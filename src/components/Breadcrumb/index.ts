@@ -1,3 +1,3 @@
-// Breadcrumb from copy-ui @ 2025-10-26.
+// Breadcrumb from copy-ui @ 2025-11-24.
 
 export { Breadcrumb } from "./breadcrumb";

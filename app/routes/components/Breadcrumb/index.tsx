@@ -1,16 +1,10 @@
 import { useState } from "react";
 
-import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout";
 
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
-import Demo01 from "./demos/Demo01";
-import demo01sourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02sourceCode from "./demos/Demo02.source_code.codegen";
-import Demo03 from "./demos/Demo03";
-import demo03sourceCode from "./demos/Demo03.source_code.codegen";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -40,20 +34,11 @@ export default function BreadcrumbPage() {
       />
       {tabsValue === "doc" && (
         <DocLayout.Content>
-          <DocLayout.Live node={<Demo01 />} code={demo01sourceCode} />
-          <Typography.H2>Examples</Typography.H2>
-          <Typography.H3>With different size</Typography.H3>
-          <DocLayout.Live node={<Demo02 />} code={demo02sourceCode} />
-          <Typography.P>
-            You can use the prop <Typography.Code>size</Typography.Code> to
-            change the size of the breadcrumb items.
-          </Typography.P>
-          <Typography.H3>With custom separator</Typography.H3>
-          <DocLayout.Live node={<Demo03 />} code={demo03sourceCode} />
+          <Doc />
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}

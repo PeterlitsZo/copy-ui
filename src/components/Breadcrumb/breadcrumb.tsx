@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import type { FC } from "react";
-import { useJss } from "../CopyUiProvider";
+
+import { useJss } from "@/components/CopyUiProvider";
+
 import styles from "./breadcrumb.module.scss";
 import { BreadcrumbItem } from "./breadcrumb-item";
 import { BreadcrumbSep } from "./breadcrumb-sep";
@@ -21,7 +23,7 @@ const Breadcrumb: BreadcrumbComponent = (props: BreadcrumbProps) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--breadcrumb-font-size": {
+    "--breadcrumb-fontSize": {
       sm: "0.875rem",
       md: "1rem",
       lg: "1.125rem",

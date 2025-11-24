@@ -4,13 +4,12 @@
     align-items: center;
     justify-content: center;
     margin: 0 8px;
-    color: var(--breadcrumb-sep-color);
-    font-size: var(--breadcrumb-font-size);
+    color: var(--breadcrumbSep-color);
     user-select: none;
 
     > svg {
-      width: var(--breadcrumb-font-size);
-      height: var(--breadcrumb-font-size);
+      width: var(--breadcrumb-fontSize);
+      height: var(--breadcrumb-fontSize);
     }
   }
 }

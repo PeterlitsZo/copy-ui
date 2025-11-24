@@ -1,0 +1,36 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01sourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02sourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03sourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01sourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "breadcrumb", label: "Breadcrumb" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "breadcrumb", to: "copy-ui-provider" },
+    { from: "breadcrumb", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### With Different Size
+
+<DocLayout.Live node={<Demo02 />} code={demo02sourceCode} />
+
+You can use the prop `size` to change the size of the breadcrumb items.
+
+### With custom separator
+
+<DocLayout.Live node={<Demo03 />} code={demo03sourceCode} />

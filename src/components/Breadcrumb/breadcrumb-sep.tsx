@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import type { FC } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./breadcrumb-sep.module.scss";
 
@@ -17,7 +16,7 @@ const BreadcrumbSep: FC<BreadcrumbSepProps> = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--breadcrumb-sep-color": theme.colors.gray["500"],
+    "--breadcrumbSep-color": theme.colors.gray["500"],
   });
 
   return <li className={classNames(styles.breadcrumbSep, stx)}>{children}</li>;
