@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Check } from "lucide-react";
+import { Check, Inbox } from "lucide-react";
 import type { CSSProperties, FC, Ref } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -30,21 +30,18 @@ const SelectList = <V extends string>(props: SelectListProps<V>) => {
     onItemClicked,
   } = props;
 
-  const theme = useTheme();
   const jss = useJss();
 
   const listStx = jss.hash({
-    "--select-font-size": theme.tokens.inputBaseMdFontSize,
-    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
-
-    "--select-list-border-color": theme.tokens.inputBaseDefaultBorderColor,
-    "--select-list-border-radius": theme.tokens.inputBaseBorderRadius,
-
-    "--select-item-hover-bg-color": theme.colors.gray["000"],
+    "--selectList-fontSize": "var(--select-fontSize)",
+    "--selectList-lineHeight": "var(--select-lineHeight)",
+    "--selectList-bdColor": "var(--select-borderColor)",
+    "--selectList-bdRadius": "var(--select-borderRadius)",
+    "--selectList-p": "0.25rem",
   });
 
   const listWidthStx = jss.hash({
-    "--select-list-width": `${width}px`,
+    "--selectList-w": `${width}px`,
   });
 
   const viewStx = jss.hash({
@@ -64,18 +61,21 @@ const SelectList = <V extends string>(props: SelectListProps<V>) => {
     >
       <ScrollArea.Viewport className={viewStx}>
         <ScrollArea.Content>
-          <ul className={classNames(styles.selectList)}>
-            {options.map((option) => {
-              return (
-                <SelectItem
-                  key={option.value}
-                  marked={option.value === internalValue}
-                  label={option.label}
-                  onChoose={() => onItemClicked(option.value)}
-                />
-              );
-            })}
-          </ul>
+          {options.length > 0 && (
+            <ul className={classNames(styles.selectList)}>
+              {options.map((option) => {
+                return (
+                  <SelectItem
+                    key={option.value}
+                    marked={option.value === internalValue}
+                    label={option.label}
+                    onChoose={() => onItemClicked(option.value)}
+                  />
+                );
+              })}
+            </ul>
+          )}
+          {options.length === 0 && <EmptyState />}
         </ScrollArea.Content>
       </ScrollArea.Viewport>
       <ScrollArea.ScrollbarWithThumb />
@@ -97,7 +97,9 @@ const SelectItem: FC<SelectItemProps> = (props) => {
   const jss = useJss();
   const theme = useTheme();
   const stx = jss.hash({
-    "--select-item-mark-color": theme.colors.gray["600"],
+    "--selectItem-markColor": theme.colors.gray["600"],
+    "--selectItem-hover-bgColor": theme.colors.gray["000"],
+    "--selectItem-px": "0.5rem",
   });
 
   return (
@@ -118,6 +120,25 @@ const SelectItem: FC<SelectItemProps> = (props) => {
         {marked && <Check />}
       </button>
     </li>
+  );
+};
+
+const EmptyState: FC = () => {
+  const jss = useJss();
+  const theme = useTheme();
+  const stx = jss.hash({
+    "--emptyState-color": theme.colors.gray["600"],
+    "--emptyStateIcon-color": theme.colors.gray["900"],
+    "--emptyStateIcon-bgColor": theme.colors.gray["100"],
+  });
+
+  return (
+    <div className={classNames(styles.emptyState, stx)}>
+      <div className={styles.emptyStateIcon}>
+        <Inbox size="1.5rem" />
+      </div>
+      <div>No options here...</div>
+    </div>
   );
 };
 

@@ -6,6 +6,8 @@ import Demo02 from "./demos/Demo02";
 import demo02SourceCode from "./demos/Demo02.source_code.codegen";
 import Demo03 from "./demos/Demo03";
 import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+import Demo04 from "./demos/Demo04";
+import demo04SourceCode from "./demos/Demo04.source_code.codegen";
 
 <DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
 
@@ -15,19 +17,17 @@ import demo03SourceCode from "./demos/Demo03.source_code.codegen";
   nodes={[
     { id: "select", label: "Select" },
     { id: "copy-ui-provider", label: "CopyUiProvider" },
-    { id: "theme-provider", label: "ThemeProvider" },
     { id: "popover", label: "Popover" },
     { id: "scroll-area", label: "ScrollArea" },
-    { id: "resolve-style", label: "resolve-style" },
+    { id: "resolve-style2", label: "resolve-style2" },
     { id: "classnames", label: "classnames", color: "green" },
     { id: "lucide-react", label: "lucide-react", color: "green" },
   ]}
   edges={[
     { from: "select", to: "copy-ui-provider" },
     { from: "select", to: "popover" },
-    { from: "select", to: "theme-provider" },
     { from: "select", to: "scroll-area" },
-    { from: "select", to: "resolve-style" },
+    { from: "select", to: "resolve-style2" },
     { from: "select", to: "classnames" },
     { from: "select", to: "lucide-react" },
   ]}
@@ -35,7 +35,7 @@ import demo03SourceCode from "./demos/Demo03.source_code.codegen";
 
 ## Examples
 
-### With large list of options
+### With Large List of Options
 
 <DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
 
@@ -43,3 +43,6 @@ import demo03SourceCode from "./demos/Demo03.source_code.codegen";
 
 <DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
 
+### Empty State
+
+<DocLayout.Live node={<Demo04 />} code={demo04SourceCode} />

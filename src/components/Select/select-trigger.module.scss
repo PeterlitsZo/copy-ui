@@ -5,16 +5,16 @@
     gap: 0.5rem;
 
     text-align: start;
-    font-size: var(--select-font-size);
+    font-size: var(--selectTrigger-fontSize);
 
-    padding-inline: var(--select-main-padding-inline);
-    height: var(--select-main-height);
-    width: var(--select-trigger-width);
+    padding-inline: var(--selectTrigger-px);
+    height: var(--selectTrigger-h);
+    width: var(--selectTrigger-w);
 
     border-width: 1px;
     border-style: solid;
-    border-color: var(--select-main-border-color);
-    border-radius: var(--select-main-border-radius);
+    border-color: var(--selectTrigger-bdColor);
+    border-radius: var(--selectTrigger-bdRadius);
 
     background-color: white;
 
@@ -22,20 +22,20 @@
     user-select: none;
 
     &:not([data-value-picked="true"]) {
-      color: var(--select-main-placeholder-color);
+      color: var(--selectTrigger-placeholderColor);
     }
     &[data-disabled="true"] {
-      background-color: var(--select-main-disabled-bg-color);
-      border-color: var(--select-main-disabled-border-color);
-      color: var(--select-main-disabled-color);
+      background-color: var(--selectTrigger-disabled-bgColor);
+      border-color: var(--selectTrigger-disabled-borderColor);
+      color: var(--selectTrigger-disabled-color);
       cursor: not-allowed;
     }
     &:focus {
-      border-color: var(--select-main-focus-border-color);
+      border-color: var(--selectTrigger-focus-borderColor);
       outline: none;
     }
     &[data-opened="true"] {
-      border-color: var(--select-main-focus-border-color);
+      border-color: var(--selectTrigger-focus-borderColor);
     }
   }
 
@@ -44,7 +44,7 @@
     align-items: center;
     justify-content: center;
 
-    width: var(--select-line-height);
-    height: var(--select-line-height);
+    width: var(--selectTrigger-lineHeight);
+    height: var(--selectTrigger-lineHeight);
   }
 }

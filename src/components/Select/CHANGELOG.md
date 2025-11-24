@@ -17,3 +17,4 @@
 - 2025-11-21: Add `width` prop to control the width of the component. Remove the
   `min-width` constraint on the trigger. And remove the dependency on
   `ThemeProvider`.
+- 2025-11-24: Support the empty state.

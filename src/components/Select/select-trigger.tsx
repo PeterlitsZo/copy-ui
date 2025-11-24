@@ -35,17 +35,19 @@ const SelectTrigger: FC<SelectTriggerProps> = (props) => {
   const jss = useJss();
 
   const triggerStx = jss.hash({
-    "--select-font-size": theme.tokens.inputBaseMdFontSize,
-    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
+    "--selectTrigger-fontSize": theme.tokens.inputBaseMdFontSize,
+    "--selectTrigger-lineHeight": theme.tokens.inputBaseMdLineHeight,
 
-    "--select-main-height": theme.tokens.inputBaseMdHeight,
-    "--select-main-border-color": theme.tokens.inputBaseDefaultBorderColor,
-    "--select-main-border-radius": theme.tokens.inputBaseBorderRadius,
-    "--select-main-placeholder-color": theme.tokens.inputBasePlaceholderColor,
-    "--select-main-disabled-color": theme.colors.gray["600"],
-    "--select-main-disabled-bg-color": theme.colors.gray["000"],
-    "--select-main-disabled-border-color": theme.colors.gray["200"],
-    "--select-main-focus-border-color": theme.colors.blue["800"],
+    "--selectTrigger-h": theme.tokens.inputBaseMdHeight,
+    "--selectTrigger-bdColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--selectTrigger-bdRadius": theme.tokens.inputBaseBorderRadius,
+    "--selectTrigger-placeholderColor": theme.tokens.inputBasePlaceholderColor,
+    "--selectTrigger-disabled-color": theme.colors.gray["600"],
+    "--selectTrigger-disabled-bgColor": theme.colors.gray["000"],
+    "--selectTrigger-disabled-borderColor": theme.colors.gray["200"],
+    "--selectTrigger-focus-borderColor": theme.colors.blue["800"],
+
+    "--selectTrigger-px": "0.75rem",
   });
 
   return (

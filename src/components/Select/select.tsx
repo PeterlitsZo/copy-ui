@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { Popover, type PopoverTriggerRender } from "@/components/Popover";
-import { resolveStyle } from "@/utils/resolve-style";
+import { resolveStyle2 } from "@/utils/resolve-style2";
 
 import { SelectList } from "./select-list";
 import { SelectTrigger } from "./select-trigger";
@@ -35,6 +35,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
   } = props;
 
   const jss = useJss();
+  const theme = useTheme();
 
   const [triggerEl, setTriggerEl] = useState<HTMLButtonElement | null>(null);
 
@@ -70,28 +71,13 @@ const Select = <V extends string>(props: SelectProps<V>) => {
     : null;
 
   const baseStx = jss.hash({
-    "--select-list-padding": "0.25rem",
-    "--select-list-item-padding-inline": "0.5rem",
-    "--select-main-padding-inline":
-      "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
+    "--select-fontSize": theme.tokens.inputBaseMdFontSize,
+    "--select-lineHeight": "1.375rem",
+    "--select-borderColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--select-borderRadius": theme.tokens.inputBaseBorderRadius,
   });
 
-  const widthStx = jss.hash(
-    resolveStyle({
-      base: {},
-      variants: {
-        width: {
-          sm: { "--select-trigger-width": "12rem" },
-          md: { "--select-trigger-width": "16rem" },
-          lg: { "--select-trigger-width": "20rem" },
-          full: { "--select-trigger-width": "100%" },
-        },
-      },
-      cls: {
-        width,
-      },
-    }),
-  );
+  const widthStx = jss.hash(calcWidthStx({ width }));
 
   const popoverTriggerRender: PopoverTriggerRender = useCallback(
     ({ setRef, isOpen, onToggle }) => (
@@ -143,5 +129,14 @@ const Select = <V extends string>(props: SelectProps<V>) => {
 };
 
 Select.displayName = "Select";
+
+const calcWidthStx = resolveStyle2({
+  width: {
+    sm: { "--selectTrigger-w": "12rem" },
+    md: { "--selectTrigger-w": "16rem" },
+    lg: { "--selectTrigger-w": "20rem" },
+    full: { "--selectTrigger-w": "100%" },
+  },
+});
 
 export { Select };
