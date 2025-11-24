@@ -46,6 +46,9 @@ def codegen_component():
         ]
         for config_path in config_paths:
             if os.path.isfile(config_path):
+                if config_path.endswith('.copy_ui_config.toml'):
+                    print(f"WARN Find config file {config_path} -- which is deprecated, please use `.copy-ui-config.toml` instead.")
+                    
                 with open(config_path, 'r', encoding='utf-8') as cf:
                     config_content = cf.read()
                     if 'private = true' in config_content:
