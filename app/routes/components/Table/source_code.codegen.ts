@@ -180,6 +180,7 @@ sourceCode['table-cell.module.scss'] = ''
   + '  .TableCell {\n'
   + '    height: 2rem;\n'
   + '    padding-inline: 0.5rem;\n'
+  + '    padding-block: 0.25rem;\n'
   + '  }\n'
   + '}\n'
   ;
@@ -236,7 +237,7 @@ sourceCode['table.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Table from copy-ui @ 2025-11-23.\n'
+  + '// Table from copy-ui @ 2025-11-25.\n'
   + '\n'
   + 'export { Table } from "./table";\n'
   ;

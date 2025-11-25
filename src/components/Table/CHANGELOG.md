@@ -1,2 +1,3 @@
 - 2025-11-15: Initial version.
 - 2025-11-23: Support the dark mode.
+- 2025-11-25: Update the `padding-block` style for `Table.Cell`.

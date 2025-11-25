@@ -4,4 +4,5 @@
 export const changelog = ''
   + '- 2025-11-15: Initial version.\n'
   + '- 2025-11-23: Support the dark mode.\n'
+  + '- 2025-11-25: Update the `padding-block` style for `Table.Cell`.\n'
   ;
