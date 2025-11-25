@@ -6,6 +6,7 @@ import { Paper } from "@/components/Paper";
 
 import styles from "./card.module.scss";
 import { CardContent } from "./card-content";
+import { CardContentInScrollArea } from "./card-content-in-scroll-area";
 import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";
 
@@ -17,6 +18,7 @@ type CardProps = ComponentProps<typeof Paper> & {
 type CardComponent = FC<CardProps> & {
   Header: typeof CardHeader;
   Content: typeof CardContent;
+  ContentInScrollArea: typeof CardContentInScrollArea;
   Footer: typeof CardFooter;
 };
 
@@ -54,6 +56,7 @@ Card.displayName = "Card";
 
 Card.Header = CardHeader;
 Card.Content = CardContent;
+Card.ContentInScrollArea = CardContentInScrollArea;
 Card.Footer = CardFooter;
 
 export { Card };

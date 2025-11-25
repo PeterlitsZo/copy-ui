@@ -9,7 +9,11 @@ const CardContent: FC<CardContentProps> = (props) => {
   const { children, className, ...rest } = props;
 
   return (
-    <div className={classNames(styles.cardContent, className)} {...rest}>
+    <div
+      className={classNames(styles.cardContent, className)}
+      data-component="card-content"
+      {...rest}
+    >
       {children}
     </div>
   );

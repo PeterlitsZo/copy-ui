@@ -5,4 +5,7 @@ export const changelog = ''
   + '- 2025-10-21: Initial version.\n'
   + '- 2025-10-31: Add the sub-component `Card.Footer`, update styles to make it\n'
   + '  looks better, etc.\n'
+  + '- 2025-11-25: Add the sub-component `Card.ContentInScrollArea`, and support the\n'
+  + '  `withBorder` prop for `Card.Header` and `Card.Footer`. Some styles are updated\n'
+  + '  to make it looks better.\n'
   ;
