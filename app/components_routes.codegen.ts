@@ -13,6 +13,7 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "Checkbox", "path": "routes/components/Checkbox/index.tsx"},
   {"name": "CodeBlock", "path": "routes/components/CodeBlock/index.tsx"},
   {"name": "CodeHighlight", "path": "routes/components/CodeHighlight/index.tsx"},
+  {"name": "Combobox", "path": "routes/components/Combobox/index.tsx"},
   {"name": "CopyUiProvider", "path": "routes/components/CopyUiProvider/index.tsx"},
   {"name": "DatePicker", "path": "routes/components/DatePicker/index.tsx"},
   {"name": "Empty", "path": "routes/components/Empty/index.tsx"},

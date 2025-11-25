@@ -1,0 +1,44 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "combobox", label: "Combobox" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "popover", label: "Popover" },
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "resolve-style2", label: "resolve-style2" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+    { id: "es-toolkit", label: "es-toolkit", color: "green" },
+  ]}
+  edges={[
+    { from: "combobox", to: "copy-ui-provider" },
+    { from: "combobox", to: "popover" },
+    { from: "combobox", to: "scroll-area" },
+    { from: "combobox", to: "resolve-style2" },
+    { from: "combobox", to: "classnames" },
+    { from: "combobox", to: "lucide-react" },
+    { from: "combobox", to: "es-toolkit" },
+  ]}
+/>
+
+## Examples
+
+### With Large List of Options
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### Different Widths
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />

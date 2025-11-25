@@ -1,0 +1,227 @@
+import classNames from "classnames";
+import { debounce } from "es-toolkit";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { Popover, type PopoverTriggerRender } from "@/components/Popover";
+import { resolveStyle2 } from "@/utils/resolve-style2";
+
+import { ComboboxList } from "./combobox-list";
+import { ComboboxTrigger } from "./combobox-trigger";
+
+interface ComboboxProps<V extends string> {
+  id?: string;
+  value?: V | null;
+  defaultValue?: V | null;
+
+  width?: "sm" | "md" | "lg" | "full";
+
+  optionsLoader: (query: string) => Promise<Array<{ value: V; label: string }>>;
+  placeholder?: string;
+  disabled?: boolean;
+
+  onChange?: (value: V) => void;
+}
+
+const Combobox = <V extends string>(props: ComboboxProps<V>) => {
+  const {
+    id,
+    value = null,
+    defaultValue = null,
+    width = "md",
+    optionsLoader,
+    placeholder = "Search...",
+    disabled = false,
+    onChange,
+  } = props;
+
+  const jss = useJss();
+  const theme = useTheme();
+
+  const [triggerEl, setTriggerEl] = useState<HTMLButtonElement | null>(null);
+  const [internalValue, setInternalValue] = useState<V | null>(defaultValue);
+  const [triggerWidth, setTriggerWidth] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [options, setOptions] = useState<Array<{ value: V; label: string }>>(
+    [],
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+
+  // Update internal value when `value` prop changes.
+  useEffect(() => {
+    setInternalValue(value ?? null);
+  }, [value]);
+
+  // Load selected label when value changes.
+  useEffect(() => {
+    if (internalValue) {
+      const loadLabel = async () => {
+        try {
+          const loadedOptions = await optionsLoader("");
+          const selected = loadedOptions.find((o) => o.value === internalValue);
+          setSelectedLabel(selected?.label ?? null);
+        } catch (error) {
+          console.error("Failed to load label:", error);
+        }
+      };
+      loadLabel();
+    } else {
+      setSelectedLabel(null);
+    }
+  }, [internalValue, optionsLoader]);
+
+  // Create debounced options loader
+  const debouncedLoadOptionsRef = useRef<ReturnType<typeof debounce> | null>(
+    null,
+  );
+  const isInitialLoadRef = useRef(true);
+
+  useEffect(() => {
+    // Create debounced function
+    debouncedLoadOptionsRef.current = debounce(async (query: string) => {
+      setIsLoading(true);
+      try {
+        const loadedOptions = await optionsLoader(query);
+        setOptions(loadedOptions);
+      } catch (error) {
+        console.error("Failed to load options:", error);
+        setOptions([]);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300);
+
+    return () => {
+      // Cleanup debounced function on unmount or when optionsLoader changes
+      debouncedLoadOptionsRef.current?.cancel();
+      debouncedLoadOptionsRef.current = null;
+    };
+  }, [optionsLoader]);
+
+  // Load options when search query changes (debounced).
+  useEffect(() => {
+    // Load initial options immediately (no debounce for initial load).
+    if (isInitialLoadRef.current) {
+      isInitialLoadRef.current = false;
+      (async () => {
+        setIsLoading(true);
+        try {
+          const loadedOptions = await optionsLoader(searchQuery);
+          setOptions(loadedOptions);
+        } catch (error) {
+          console.error("Failed to load options:", error);
+          setOptions([]);
+        } finally {
+          setIsLoading(false);
+        }
+      })();
+      return;
+    }
+
+    // Use debounced loader for subsequent changes.
+    if (debouncedLoadOptionsRef.current) {
+      debouncedLoadOptionsRef.current(searchQuery);
+    }
+  }, [searchQuery, optionsLoader]);
+
+  // Update trigger width on mount and resize.
+  useLayoutEffect(() => {
+    if (triggerEl) {
+      setTriggerWidth(triggerEl.offsetWidth);
+
+      const ro = new ResizeObserver(() => {
+        const width = triggerEl.offsetWidth;
+        if (width) {
+          setTriggerWidth(triggerEl.offsetWidth);
+        }
+      });
+      ro.observe(triggerEl);
+
+      return () => {
+        ro.disconnect();
+      };
+    }
+  }, [triggerEl]);
+
+  const baseStx = jss.hash({
+    "--select-fontSize": theme.tokens.inputBaseMdFontSize,
+    "--select-lineHeight": "1.375rem",
+    "--select-borderColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--select-borderRadius": theme.tokens.inputBaseBorderRadius,
+  });
+
+  const widthStx = jss.hash(calcWidthStx({ width }));
+
+  const popoverTriggerRender: PopoverTriggerRender = useCallback(
+    ({ setRef, isOpen, onToggle }) => (
+      <ComboboxTrigger
+        id={id}
+        ref={(el) => {
+          setRef(el);
+          setTriggerEl(el);
+        }}
+        placeholder={placeholder}
+        className={classNames(baseStx, widthStx)}
+        disabled={disabled}
+        isOpen={isOpen}
+        onToggle={onToggle}
+        showLabel={selectedLabel}
+      />
+    ),
+    [id, placeholder, baseStx, widthStx, disabled, selectedLabel],
+  );
+
+  return (
+    <Popover>
+      <Popover.Trigger render={popoverTriggerRender} />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
+          isOpen && (
+            <ComboboxList
+              ref={setRef}
+              className={baseStx}
+              style={floatingStyles}
+              options={options}
+              internalValue={internalValue}
+              width={triggerWidth}
+              searchQuery={searchQuery}
+              onSearchQueryChange={setSearchQuery}
+              isLoading={isLoading}
+              onItemClicked={(v) => {
+                if (!disabled) {
+                  const selected = options.find((o) => o.value === v);
+                  setInternalValue(v);
+                  setSelectedLabel(selected?.label ?? null);
+                  setSearchQuery("");
+                  onChange?.(v);
+                }
+                togglePortal();
+              }}
+            />
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+Combobox.displayName = "Combobox";
+
+const calcWidthStx = resolveStyle2({
+  width: {
+    sm: { "--selectTrigger-w": "12rem" },
+    md: { "--selectTrigger-w": "16rem" },
+    lg: { "--selectTrigger-w": "20rem" },
+    full: { "--selectTrigger-w": "100%" },
+  },
+});
+
+export { Combobox };
