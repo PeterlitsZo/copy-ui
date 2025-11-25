@@ -1,3 +1,3 @@
-// Checkbox from copy-ui @ 2025-10-25.
+// Checkbox from copy-ui @ 2025-11-26.
 
 export { Checkbox } from "./checkbox";

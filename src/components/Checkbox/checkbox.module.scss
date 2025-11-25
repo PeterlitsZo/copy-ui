@@ -5,21 +5,21 @@
     justify-content: center;
     width: 1rem;
     height: 1rem;
-    border: 1px solid var(--checkbox-border-color);
+    border: 1px solid var(--checkbox-bdColor);
     border-radius: 0.25rem;
-    background-color: var(--checkbox-bg-color);
+    background-color: var(--checkbox-bgColor);
     cursor: pointer;
     user-select: none;
 
     &.checked {
-      background-color: var(--checkbox-checked-bg-color);
-      border-color: var(--checkbox-checked-border-color);
+      background-color: var(--checkbox-checked-bgColor);
+      border-color: var(--checkbox-checked-bdColor);
     }
   }
 
   .checkboxMark {
     width: 0.75rem;
     height: 0.75rem;
-    color: var(--checkbox-mark-color);
+    color: var(--checkbox-markColor);
   }
 }

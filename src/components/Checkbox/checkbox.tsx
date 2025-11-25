@@ -1,8 +1,9 @@
 import classNames from "classnames";
 import { CheckIcon } from "lucide-react";
 import { type FC, useState } from "react";
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+
+import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
+
 import styles from "./checkbox.module.scss";
 
 interface CheckboxProps {
@@ -14,15 +15,20 @@ const Checkbox: FC<CheckboxProps> = (props) => {
 
   const theme = useTheme();
   const jss = useJss();
+  const mode = useMode();
 
   const [checked, setChecked] = useState(false);
 
   const stx = jss.hash({
-    "--checkbox-bg-color": "white",
-    "--checkbox-border-color": theme.colors.gray["300"],
-    "--checkbox-checked-bg-color": theme.colors.gray["700"],
-    "--checkbox-checked-border-color": theme.colors.gray["700"],
-    "--checkbox-mark-color": "white",
+    "--checkbox-bgColor": mode === "light" ? "white" : theme.colors.gray["900"],
+    "--checkbox-bdColor":
+      mode === "light" ? theme.colors.gray["300"] : theme.colors.gray["700"],
+    "--checkbox-markColor":
+      mode === "light" ? "white" : theme.colors.gray["900"],
+    "--checkbox-checked-bgColor":
+      mode === "light" ? theme.colors.gray["700"] : theme.colors.gray["100"],
+    "--checkbox-checked-bdColor":
+      mode === "light" ? theme.colors.gray["700"] : theme.colors.gray["100"],
   });
 
   return (

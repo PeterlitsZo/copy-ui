@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-25: Initial version.\n'
+  + '- 2025-11-26: Support the dark mode.\n'
   ;

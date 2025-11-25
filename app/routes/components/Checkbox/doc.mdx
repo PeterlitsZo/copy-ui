@@ -1,0 +1,23 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "checkbox", label: "Checkbox" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+  ]}
+  edges={[
+    { from: "checkbox", to: "copy-ui-provider" },
+    { from: "checkbox", to: "classnames" },
+    { from: "checkbox", to: "lucide-react" },
+  ]}
+/>
+
