@@ -9,6 +9,7 @@ export default function Demo() {
       <Button variant="light">Light</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
     </Flex>
   );
 }

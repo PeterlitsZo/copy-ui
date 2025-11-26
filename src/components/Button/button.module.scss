@@ -18,6 +18,11 @@
 
     &:hover {
       background-color: var(--button-hover-bgColor);
+
+      &[data-variant="link"] {
+        text-decoration: underline;
+        text-underline-offset: 0.25rem;
+      }
     }
 
     &[data-disabled="true"] {

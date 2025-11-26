@@ -9,7 +9,7 @@ import { resolveStyle2 } from "@/utils/resolve-style2";
 import styles from "./button.module.scss";
 
 export type ButtonProps = ComponentProps<"button"> & {
-  variant?: "default" | "filled" | "light" | "secondary" | "ghost";
+  variant?: "default" | "filled" | "light" | "secondary" | "ghost" | "link";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   color?: ColorName;
 
@@ -52,6 +52,7 @@ const Button: FC<ButtonProps> = (props) => {
       className={classNames(styles.button, baseStx, stx, className)}
       disabled={disabled}
       data-disabled={disabled ? true : undefined}
+      data-variant={variant}
       {...rest}
     >
       {leftSection && (
@@ -132,6 +133,18 @@ const buttonStyle = (theme: Theme, color: ColorName) =>
         "--button-disabled-color": theme.colors.gray["500"],
         "--button-disabled-bgColor": theme.colors.gray["100"],
         "--button-disabled-hover-bgColor": theme.colors.gray["100"],
+        "--button-disabled-bdColor": "transparent",
+      },
+      link: {
+        "--button-bgColor": "transparent",
+        "--button-color": theme.colors[color]["800"],
+        "--button-bdWidth": "0px",
+        "--button-bdStyle": "solid",
+        "--button-bdColor": "transparent",
+        "--button-hover-bgColor": "transparent",
+        "--button-disabled-color": theme.colors.gray["500"],
+        "--button-disabled-bgColor": "transparent",
+        "--button-disabled-hover-bgColor": "transparent",
         "--button-disabled-bdColor": "transparent",
       },
     },
