@@ -1,0 +1,24 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "calendar", label: "Calendar" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "dayjs", label: "dayjs", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "calendar", to: "copy-ui-provider" },
+    { from: "calendar", to: "dayjs" },
+    { from: "calendar", to: "lucide-react" },
+    { from: "calendar", to: "classnames" },
+  ]}
+/>

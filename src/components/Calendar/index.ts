@@ -1,3 +1,3 @@
-// Calendar from copy-ui @ 2025-11-01.
+// Calendar from copy-ui @ 2025-11-26.
 
 export { Calendar } from "./calendar";

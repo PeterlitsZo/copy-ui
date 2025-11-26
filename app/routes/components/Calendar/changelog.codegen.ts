@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-10-03: Initial version.\n'
   + '- 2025-10-08: Update its `border-color` and `border-radius` styles.\n'
   + '- 2025-11-01: Make it use `utils/jss` and put its styles in CSS layer, etc.\n'
+  + '- 2025-11-26: Support the month/year picker.\n'
   ;
