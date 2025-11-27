@@ -11,3 +11,5 @@
 - 2025-11-17: Export type `Theme`. And Enhance internal MdxProvider to use more
   sub-components of `Typography`.
 - 2025-11-22: Add `useMode` and `useSetMode` hooks, support the `mode` state.
+- 2025-11-28: Add internal `ClickOutsideEventListener` class and the
+  `useClickOutside` hook to handle the click outside event.

@@ -238,3 +238,46 @@ const MyComponent = () => {
   )
 }
 ```
+
+### useClickOutside
+
+You can use the hook `useClickOutside` to detect clicks outside a specific
+element. This is useful for implementing features like closing a dropdown or
+modal when clicking outside of it.
+
+```tsx
+import { useRef, useState } from 'react';
+import { useClickOutside } from '@/components/CopyUiProvider'
+
+const MyComponent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref.current, (event) => {
+    setIsOpen(false);
+  });
+
+  return (
+    <div>
+      <button onClick={() => setIsOpen(true)}>Open</button>
+      {isOpen && (
+        <div ref={ref}>
+          <p>This content will close when you click outside</p>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+The hook takes two parameters:
+
+- `el`: The element to detect clicks outside of. Can be `null` (the hook will
+  do nothing in this case).
+- `callback`: A function that will be called when a click outside the element
+  is detected. The function receives the `MouseEvent` as its parameter.
+
+This hook is useful because it has an internal stack of elements and callbacks.
+When a click outside the element is detected, only the callback of the top
+element will be called. That makes the popover component in a nested popover
+component work correctly.

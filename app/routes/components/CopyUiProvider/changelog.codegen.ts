@@ -15,4 +15,6 @@ export const changelog = ''
   + '- 2025-11-17: Export type `Theme`. And Enhance internal MdxProvider to use more\n'
   + '  sub-components of `Typography`.\n'
   + '- 2025-11-22: Add `useMode` and `useSetMode` hooks, support the `mode` state.\n'
+  + '- 2025-11-28: Add internal `ClickOutsideEventListener` class and the\n'
+  + '  `useClickOutside` hook to handle the click outside event.\n'
   ;

@@ -4,15 +4,19 @@ import { createStore, type StoreApi } from "zustand";
 import { Toast } from "@/components/Toast";
 import { createJssState, type JssState } from "@/utils/jss";
 
+import { ClickOutsideEventListener } from "./click-outside-event-listener";
 import { DEFAULT_THEME } from "./default-theme";
 import { MdxProvider } from "./mdx-provider";
 import type { Theme } from "./theme";
 import { useJss } from "./use-jss";
 
 type CopyUiStoreState = {
-  jssState: JssState;
   theme: Theme;
   mode: "light" | "dark";
+
+  jssState: JssState;
+
+  clickOutsideEventListener: ClickOutsideEventListener;
 };
 
 type CopyUiStoreActions = {
@@ -35,9 +39,13 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
   if (storeRef.current === null) {
     storeRef.current = createStore<CopyUiStore>()((set) => ({
-      jssState: createJssState(),
       theme: DEFAULT_THEME,
       mode: "light",
+
+      jssState: createJssState(),
+
+      clickOutsideEventListener: new ClickOutsideEventListener(),
+
       setMode: (mode) => {
         set((state) => ({
           mode: typeof mode === "function" ? mode(state.mode) : mode,
