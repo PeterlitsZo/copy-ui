@@ -23,14 +23,15 @@ export default function Demo() {
 
   return (
     <Tooltip
+      anchor="pointer"
+      placement="bottom-start"
       label="This is a tooltip"
-      triggerRender={({ setRef, onOpen, onClose }) => {
+      triggerRender={({ onOpen, onClose }) => {
         openTooltipRef.current = onOpen;
         closeTooltipRef.current = onClose;
 
         return (
           <Button
-            ref={setRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >

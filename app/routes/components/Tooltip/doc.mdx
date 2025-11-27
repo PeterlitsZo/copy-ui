@@ -1,0 +1,34 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Demo02 from "./demos/Demo02";
+import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "tooltip", label: "Tooltip" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "popover", label: "Popover" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "tooltip", to: "popover" },
+    { from: "tooltip", to: "copy-ui-provider" },
+    { from: "tooltip", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### Delayed Tooltip on Hover
+
+<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+You can use `setTimeout` to delay the tooltip.
+
+The `anchor="pointer"` is useful to let the tooltip follow the mouse cursor.
