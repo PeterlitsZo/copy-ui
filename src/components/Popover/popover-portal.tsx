@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useStore } from "zustand";
 
+import { useClickOutside } from "@/components/CopyUiProvider";
 import { Modal } from "@/components/Modal";
 
 import { usePopoverStore } from "./popover-context";
@@ -59,44 +60,23 @@ const PopoverPortal: FC<PopoverPortalProps> = (props) => {
     (state) => state.disableTriggerClickHandler,
   );
 
-  useEffect(() => {
-    const floatingRefOriginal = floatingRef;
-    if (!floatingRefOriginal) return;
+  useClickOutside(floatingRef, (event) => {
+    // Call the handle for click outside.
+    onClickOutside?.({
+      closePortal: close,
+    });
 
-    /** Check if the click is outside the popover portal */
-    function handleClickOutside(event: MouseEvent) {
-      if (!floatingRefOriginal || !event.target) return;
+    if (elRef) {
+      event.preventDefault();
 
-      if (!floatingRefOriginal.contains(event.target as Node)) {
-        // Call the handle for click outside.
-        onClickOutside?.({
-          closePortal: close,
-        });
-
-        if (elRef) {
-          const elRefOriginal = elRef;
-          function handleMouseUp(event: MouseEvent) {
-            event.preventDefault();
-
-            // If we clicked on the `elRef` (trigger), we need to disable the
-            // trigger click handler (then the trigger will ignore the following
-            // click event & enable the handler for the next click).
-            if (elRefOriginal.contains(event.target as Node)) {
-              disablePortalClickHandler();
-            }
-
-            document.removeEventListener("mouseup", handleMouseUp);
-          }
-          document.addEventListener("mouseup", handleMouseUp);
-        }
+      // If we clicked on the `elRef` (trigger), we need to disable the trigger
+      // click handler (then the trigger will ignore the following click event
+      // & enable the handler for the next click).
+      if (elRef.contains(event.target as Node)) {
+        disablePortalClickHandler();
       }
     }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [floatingRef, elRef, close, onClickOutside, disablePortalClickHandler]);
+  });
 
   const PopoverPortalRender = useMemo(() => memo(render), [render]);
 

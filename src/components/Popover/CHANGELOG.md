@@ -18,3 +18,5 @@
   trigger and the portal.
 - 2025-11-26: Support `anchor="pointer"` to make the popover follow the mouse
   cursor.
+- 2025-11-28: Use `useClickOutside` hook from `CopyUiProvider` to handle the
+  click outside event -- make nested popover components work correctly.
