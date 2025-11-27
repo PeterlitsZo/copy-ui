@@ -4,13 +4,8 @@ import { useMemo } from "react";
 
 import { Button } from "@/components/Button";
 import { Popover } from "@/components/Popover";
-
+import { safeParseTimeRange, type TimeRange } from "./time-range";
 import { TimeSelectorPortal } from "./time-selector-portal";
-
-export type TimeRange = {
-  from: string;
-  to: string;
-};
 
 export type TimeSelectorProps = {
   value?: TimeRange;
@@ -22,31 +17,52 @@ const TimeSelector: FC<TimeSelectorProps> = (props) => {
 
   const showTitle = useMemo(() => {
     if (value) {
-      if (value.to === "now" && /now - \d+(m|h|d|y)/.test(value.from)) {
-        const regex = /now - (\d+)(m|h|d|y)/;
-        const match = value.from.match(regex);
-        if (match) {
-          const amount = match[1];
-          const unit = match[2];
-          let unitFull = "";
-          switch (unit) {
-            case "m":
-              unitFull = amount === "1" ? "minute" : "minutes";
-              break;
-            case "h":
-              unitFull = amount === "1" ? "hour" : "hours";
-              break;
-            case "d":
-              unitFull = amount === "1" ? "day" : "days";
-              break;
-            case "y":
-              unitFull = amount === "1" ? "year" : "years";
-              break;
+      const parsedTimeRangeResult = safeParseTimeRange(value);
+      if (parsedTimeRangeResult.ok) {
+        const parsedTimeRange = parsedTimeRangeResult.value;
+
+        // The `Last XX <unit>` format.
+        if (
+          parsedTimeRange.to.expr.t === "atom" &&
+          parsedTimeRange.to.expr.atom.t === "now"
+        ) {
+          const fromExpr = parsedTimeRange.from.expr;
+          if (fromExpr.t === "sub") {
+            const left = fromExpr.left;
+            const right = fromExpr.right;
+            if (
+              left.t === "atom" &&
+              left.atom.t === "now" &&
+              right.t === "atom" &&
+              right.atom.t === "duration"
+            ) {
+              let unit: string;
+              switch (right.atom.unit) {
+                case "m":
+                  unit = "minute";
+                  break;
+                case "h":
+                  unit = "hour";
+                  break;
+                case "d":
+                  unit = "day";
+                  break;
+                case "y":
+                  unit = "year";
+                  break;
+              }
+              if (right.atom.amount > 1) {
+                unit += "s";
+              }
+              return `Last ${right.atom.amount} ${unit}`;
+            }
           }
-          return `Last ${amount} ${unitFull}`;
-        } else {
-          throw new Error("Invalid time range format");
         }
+
+        // The `<from> -- <to>` format.
+        return `${value.from.v} ~ ${value.to.v}`;
+      } else {
+        return "Invalid time range";
       }
     }
     return "Select Time";

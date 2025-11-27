@@ -11,4 +11,7 @@ export const changelog = ''
   + '  styles and cancel button variant. Code formatting improvements.\n'
   + '- 2025-11-06: Refactor code and use `Field` component for input fields. Adjust\n'
   + '  input widths and spacing, etc.\n'
+  + '- 2025-11-28: Support parsing the "from" and "to" fields to the AST. Support the\n'
+  + '  timezone selection, support the `safeResolveTimeRange` function -- help user\n'
+  + '  to resolve the time range to the real time range.\n'
   ;

@@ -1,4 +1,9 @@
-// TimeSelector from copy-ui @ 2025-11-06.
+// TimeSelector from copy-ui @ 2025-11-28.
 
-export type { TimeRange } from "./time-selector";
+export type {
+  ResolvedTimeRange,
+  ResolvedTimeRangeResult,
+  TimeRange,
+} from "./time-range";
+export { safeResolveTimeRange } from "./time-range";
 export { TimeSelector } from "./time-selector";

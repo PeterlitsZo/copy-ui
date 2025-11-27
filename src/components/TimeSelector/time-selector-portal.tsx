@@ -1,7 +1,6 @@
 import {
   type CSSProperties,
   type FC,
-  useId,
   useLayoutEffect,
   useRef,
   useState,
@@ -11,8 +10,9 @@ import { Button } from "@/components/Button";
 import { useTheme } from "@/components/CopyUiProvider";
 import { Field } from "@/components/Field";
 import { ScrollArea } from "@/components/ScrollArea";
+import { Select } from "@/components/Select";
 
-import type { TimeRange } from "./time-selector";
+import type { TimeRange, TimeValue } from "./time-range";
 import styles from "./time-selector-portal.module.scss";
 
 interface TimeSelectorPortalProps {
@@ -39,17 +39,21 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
   const detailRef = useRef<HTMLDivElement | null>(null);
 
   const [detailHeight, setDetailHeight] = useState<number | null>(null);
-  const [valueFrom, setValueFrom] = useState(value?.from || "");
-  const [valueTo, setValueTo] = useState(value?.to || "");
-
-  const fromInputId = useId();
-  const toInputId = useId();
+  const [valueFrom, setValueFrom] = useState(value?.from || null);
+  const [valueTo, setValueTo] = useState(value?.to || null);
+  // Initialize timezone with current timezone offset (in minutes)
+  const [tz, setTz] = useState(
+    value?.tz ?? -new Date().getTimezoneOffset() / 60,
+  );
 
   const computedStyle = {
-    "--color-border": theme.tokens.inputBaseDefaultBorderColor,
-    "--radius": "0.375rem",
-    "--preset-list-height": detailHeight ? `${detailHeight}px` : "0px",
-    "--color-hover": theme.colors.gray["000"],
+    "--timeSelectorPortal-bdColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--timeSelectorPortal-bdRadius": "0.375rem",
+    "--timeSelectorPortalPresetList-h": detailHeight
+      ? `${detailHeight}px`
+      : "0px",
+    "--timeSelectorPortalPresetListButton-hover-bgColor":
+      theme.colors.gray["000"],
   };
 
   useLayoutEffect(() => {
@@ -58,6 +62,16 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
       setDetailHeight(detail.clientHeight);
     }
   }, []);
+
+  // Generate timezone options (UTC-12 to UTC+14)
+  const timezoneOptions = Array.from({ length: 27 }, (_, i) => {
+    const offset = i - 12; // -12 to +14
+    const offsetHours = Math.abs(offset);
+    const sign = offset >= 0 ? "+" : "-";
+    const label = `UTC${sign}${offsetHours}`;
+    const value = offset;
+    return { value: value.toString(), label };
+  });
 
   const presetList = [
     { label: "Last 5 minutes", from: "now - 5m", to: "now" },
@@ -86,41 +100,38 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
       }}
     >
       <div className={styles.detail} ref={detailRef}>
-        <Field>
-          <Field.Label htmlFor={fromInputId}>From</Field.Label>
-          <Field.Input
-            id={fromInputId}
-            value={valueFrom}
-            style={{ width: "16rem" }}
-            onChange={(e) => setValueFrom(e.target.value)}
-            placeholder="Enter the start time"
-          />
-          <Field.Description>
-            E.g. "now - 15m", "now - 1h", etc.
-          </Field.Description>
-        </Field>
-        <Field>
-          <Field.Label htmlFor={toInputId}>To</Field.Label>
-          <Field.Input
-            id={toInputId}
-            value={valueTo}
-            style={{ width: "16rem" }}
-            onChange={(e) => setValueTo(e.target.value)}
-            placeholder="Enter the end time"
-          />
-          <Field.Description>E.g. "now"</Field.Description>
-        </Field>
+        <TimeSelectorPortalForm
+          valueFrom={valueFrom}
+          valueTo={valueTo}
+          onChangeValueFrom={setValueFrom}
+          onChangeValueTo={setValueTo}
+        />
         <div className={styles.detailFooter}>
           <Button
             size="sm"
             variant="filled"
-            onClick={() => onChange?.({ from: valueFrom, to: valueTo })}
+            onClick={() => {
+              if (valueFrom && valueTo) {
+                onChange?.({
+                  from: valueFrom,
+                  to: valueTo,
+                  tz,
+                });
+              }
+            }}
           >
             Apply
           </Button>
           <Button size="sm" variant="ghost" onClick={() => togglePortal()}>
             Cancel
           </Button>
+          <div style={{ flex: 1 }} />
+          <Select
+            width="xs"
+            value={tz.toString()}
+            options={timezoneOptions}
+            onChange={(value) => setTz(Number.parseInt(value, 10))}
+          />
         </div>
       </div>
       <ScrollArea className={styles.presetListScrollArea}>
@@ -132,7 +143,11 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
                   <button
                     type="button"
                     onClick={() =>
-                      onChange?.({ from: preset.from, to: preset.to })
+                      onChange?.({
+                        from: { t: "_time_value", v: preset.from },
+                        to: { t: "_time_value", v: preset.to },
+                        tz,
+                      })
                     }
                   >
                     {preset.label}
@@ -142,14 +157,56 @@ const TimeSelectorPortal: FC<TimeSelectorPortalProps> = (props) => {
             </menu>
           </ScrollArea.Content>
         </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar>
-          <ScrollArea.Thumb />
-        </ScrollArea.Scrollbar>
+        <ScrollArea.ScrollbarWithThumb />
       </ScrollArea>
     </div>
   );
 };
 
 TimeSelectorPortal.displayName = "TimeSelector.Portal";
+
+type TimeSelectorPortalFormProps = {
+  valueFrom: TimeValue | null;
+  valueTo: TimeValue | null;
+  onChangeValueFrom: (value: TimeValue) => void;
+  onChangeValueTo: (value: TimeValue) => void;
+};
+
+const TimeSelectorPortalForm: FC<TimeSelectorPortalFormProps> = (props) => {
+  const { valueFrom, valueTo, onChangeValueFrom, onChangeValueTo } = props;
+
+  return (
+    <>
+      <Field>
+        <Field.Label>From</Field.Label>
+        <Field.Input
+          value={valueFrom?.v}
+          width="full"
+          onChange={(e) =>
+            onChangeValueFrom({ t: "_time_value", v: e.target.value })
+          }
+          placeholder="Enter the start time"
+        />
+        <Field.Description>
+          e.g. "now - 15m", "now - 1h", etc.
+        </Field.Description>
+      </Field>
+      <Field>
+        <Field.Label>To</Field.Label>
+        <Field.Input
+          value={valueTo?.v}
+          width="full"
+          onChange={(e) =>
+            onChangeValueTo({ t: "_time_value", v: e.target.value })
+          }
+          placeholder="Enter the end time"
+        />
+        <Field.Description>
+          e.g. "now", "2025-01-01 12:00:00", etc.
+        </Field.Description>
+      </Field>
+    </>
+  );
+};
 
 export { TimeSelectorPortal };

@@ -1,0 +1,31 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "time-selector", label: "TimeSelector" },
+    { id: "button", label: "Button" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "field", label: "Field" },
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "select", label: "Select" },
+    { id: "popover", label: "Popover" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+  ]}
+  edges={[
+    { from: "time-selector", to: "button" },
+    { from: "time-selector", to: "copy-ui-provider" },
+    { from: "time-selector", to: "field" },
+    { from: "time-selector", to: "scroll-area" },
+    { from: "time-selector", to: "select" },
+    { from: "time-selector", to: "popover" },
+    { from: "time-selector", to: "lucide-react" },
+  ]}
+/>
+

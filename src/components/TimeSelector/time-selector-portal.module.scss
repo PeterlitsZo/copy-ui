@@ -4,29 +4,30 @@
     flex-direction: row;
 
     background-color: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border: 1px solid var(--timeSelectorPortal-bdColor);
+    border-radius: var(--timeSelectorPortal-bdRadius);
   }
 
   .detail {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    width: 22rem;
+    gap: 1rem;
 
     padding: 0.75rem;
-    border-right: 1px solid var(--color-border);
+    border-right: 1px solid var(--timeSelectorPortal-bdColor);
   }
 
   .detailFooter {
     display: flex;
     justify-content: flex-start;
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1.875rem;
   }
 
   .presetListScrollArea {
     width: 12rem;
-    height: var(--preset-list-height);
+    height: var(--timeSelectorPortalPresetList-h);
   }
 
   .presetList {
@@ -42,12 +43,12 @@
       padding: 0.25rem 0.5rem;
       text-align: start;
 
-      border-radius: var(--radius);
+      border-radius: var(--timeSelectorPortal-bdRadius);
 
       cursor: pointer;
 
       &:hover {
-        background-color: var(--color-hover);
+        background-color: var(--timeSelectorPortalPresetListButton-hover-bgColor);
       }
     }
   }

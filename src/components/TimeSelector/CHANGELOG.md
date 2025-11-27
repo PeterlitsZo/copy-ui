@@ -7,3 +7,6 @@
   styles and cancel button variant. Code formatting improvements.
 - 2025-11-06: Refactor code and use `Field` component for input fields. Adjust
   input widths and spacing, etc.
+- 2025-11-28: Support parsing the "from" and "to" fields to the AST. Support the
+  timezone selection, support the `safeResolveTimeRange` function -- help user
+  to resolve the time range to the real time range.
