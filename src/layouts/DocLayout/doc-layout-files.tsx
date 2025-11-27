@@ -124,7 +124,7 @@ const FilesTreeItem: FC<FilesTreeItemProps> = (props) => {
   const handleMouseEnter = () => {
     timeoutIdRef.current = setTimeout(() => {
       openTooltipRef.current?.();
-    }, 500);
+    }, 750);
   };
 
   const handleMouseLeave = () => {
@@ -137,8 +137,9 @@ const FilesTreeItem: FC<FilesTreeItemProps> = (props) => {
 
   return (
     <Tooltip
+      anchor="pointer"
       label={filename}
-      placement="right"
+      placement="bottom-start"
       triggerRender={({ setRef, onOpen, onClose }) => {
         openTooltipRef.current = onOpen;
         closeTooltipRef.current = onClose;
