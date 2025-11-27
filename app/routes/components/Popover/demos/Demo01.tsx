@@ -26,7 +26,7 @@ export default function Demo() {
   ];
 
   return (
-    <Flex dir="column" gap="4rem">
+    <Flex dir="column" gap="4rem" items="center">
       <Popover placement={placement || undefined}>
         <Popover.Trigger
           render={({ setRef, onToggle }) => (
@@ -59,6 +59,7 @@ export default function Demo() {
       </Popover>
       <Select
         value={placement}
+        width="sm"
         placeholder="Select placement"
         onChange={(value) => setPlacement(value)}
         options={placementOptions}

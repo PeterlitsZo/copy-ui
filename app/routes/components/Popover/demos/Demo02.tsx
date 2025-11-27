@@ -19,7 +19,7 @@ export default function Demo() {
   ];
 
   return (
-    <Flex dir="column" gap="4rem">
+    <Flex dir="column" gap="4rem" items="center">
       <Popover placement="bottom-end" offset={Number.parseInt(offset, 10)}>
         <Popover.Trigger
           render={({ setRef, onToggle }) => (
@@ -52,6 +52,7 @@ export default function Demo() {
       </Popover>
       <Select
         value={offset}
+        width="sm"
         placeholder="Select placement"
         onChange={(value) => setOffset(value)}
         options={offsetOptions}

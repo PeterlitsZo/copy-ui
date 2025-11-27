@@ -8,7 +8,9 @@ import {
   useState,
 } from "react";
 import { useStore } from "zustand";
-import { Modal } from "../Modal";
+
+import { Modal } from "@/components/Modal";
+
 import { usePopoverStore } from "./popover-context";
 
 interface PopoverPortalRenderProps {

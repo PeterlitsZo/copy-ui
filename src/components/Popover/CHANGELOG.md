@@ -16,3 +16,5 @@
   `PopoverTriggerRender`.
 - 2025-11-15: Add `offset` prop to `Popover` to control the distance between the
   trigger and the portal.
+- 2025-11-26: Support `anchor="pointer"` to make the popover follow the mouse
+  cursor.

@@ -4,11 +4,33 @@ import Demo01 from "./demos/Demo01";
 import demo01SourceCode from "./demos/Demo01.source_code.codegen";
 import Demo02 from "./demos/Demo02";
 import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Demo03 from "./demos/Demo03";
+import demo03SourceCode from "./demos/Demo03.source_code.codegen";
 
 <DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "popover", label: "Popover" },
+    { id: "modal", label: "Modal" },
+    { id: "floating-ui", label: "@floating-ui/react", color: "green" },
+    { id: "zustand", label: "zustand", color: "green" },
+  ]}
+  edges={[
+    { from: "popover", to: "modal" },
+    { from: "popover", to: "floating-ui" },
+    { from: "popover", to: "zustand" },
+  ]}
+/>
 
 ## Examples
 
 ### With Different Offsets
 
 <DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+
+### With Pointer Anchor
+
+<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
