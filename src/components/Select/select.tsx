@@ -13,7 +13,7 @@ interface SelectProps<V extends string> {
   value?: V | null;
   defaultValue?: V | null;
 
-  width?: "sm" | "md" | "lg" | "full";
+  width?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
 
   options: Array<{ value: V; label: string }>;
   placeholder?: string;
@@ -132,9 +132,11 @@ Select.displayName = "Select";
 
 const calcWidthStx = resolveStyle2({
   width: {
+    xs: { "--selectTrigger-w": "8rem" },
     sm: { "--selectTrigger-w": "12rem" },
     md: { "--selectTrigger-w": "16rem" },
     lg: { "--selectTrigger-w": "20rem" },
+    xl: { "--selectTrigger-w": "24rem" },
     full: { "--selectTrigger-w": "100%" },
   },
 });

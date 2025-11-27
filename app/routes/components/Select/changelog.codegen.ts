@@ -22,4 +22,5 @@ export const changelog = ''
   + '  `min-width` constraint on the trigger. And remove the dependency on\n'
   + '  `ThemeProvider`.\n'
   + '- 2025-11-24: Support the empty state.\n'
+  + '- 2025-11-28: Support the `xs` and `xl` width props.\n'
   ;
