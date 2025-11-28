@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-27: Initial version.\n'
+  + '- 2025-11-28: Update its styles to match the style of `Input` component.\n'
   ;

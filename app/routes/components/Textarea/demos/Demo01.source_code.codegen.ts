@@ -5,7 +5,7 @@ const demoSourceCode = ''
   + 'import { Textarea } from "@/components/Textarea";\n'
   + '\n'
   + 'export default function Demo() {\n'
-  + '  return <Textarea />;\n'
+  + '  return <Textarea placeholder="Enter your message..." />;\n'
   + '}\n'
   ;
 

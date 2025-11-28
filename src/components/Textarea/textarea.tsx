@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
 import styles from "./textarea.module.scss";
 
@@ -15,11 +14,12 @@ const Textarea: React.FC<TextareaProps> = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--textarea-border-color": theme.colors.gray["300"],
-    "--textarea-focus-border-color": theme.colors.blue["800"],
-    "--textarea-bg-color": "white",
-    "--textarea-font-size": "0.875rem",
-    "--textarea-placeholder-color": theme.tokens.inputBasePlaceholderColor,
+    "--textarea-bdColor": theme.colors.gray["400"],
+    "--textarea-focus-bdColor": theme.colors.blue["800"],
+    "--textarea-bgColor": "white",
+    "--textarea-fontSize": "0.875rem",
+    "--textarea-lineHeight": "1.125rem",
+    "--textarea-placeholderColor": theme.tokens.inputBasePlaceholderColor,
   });
 
   return (
