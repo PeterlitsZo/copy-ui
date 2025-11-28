@@ -1,3 +1,4 @@
-// Toast from copy-ui @ 2025-11-19.
+// Toast from copy-ui @ 2025-11-28.
 
-export { Toast, useToast } from "./toast";
+export { Toast } from "./toast";
+export { useToast } from "./use-toast";

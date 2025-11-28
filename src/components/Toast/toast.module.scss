@@ -14,15 +14,57 @@
   }
 
   .toast {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
 
     border-radius: 0.25rem;
     border-width: 1px;
     border-style: solid;
-    border-color: var(--toast-border-color);
+    border-color: var(--toast-bdColor);
 
-    background-color: var(--toast-bg-color);
+    background-color: var(--toast-bgColor);
 
-    box-shadow: var(--toast-box-shadow);
+    box-shadow: var(--toast-boxShadow);
+
+    &.withIcon {
+      display: flex;
+      align-items: start;
+      gap: 0.5rem;
+    }
+  }
+
+  .toastIcon {
+    width: 1rem;
+    height: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--toast-iconColor);
+
+    > svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .toastMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.125rem;
+  }
+
+  .toastMessageTitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+    color: var(--toast-titleColor);
+  }
+
+  .toastMessageDescription {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: var(--toast-descriptionColor);
   }
 }

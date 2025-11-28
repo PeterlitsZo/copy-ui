@@ -1,18 +1,32 @@
 import { uniqueId } from "es-toolkit/compat";
 import { createStore } from "zustand";
 
+type ToastType = "default" | "info" | "success" | "warning" | "error";
+
 type Toast = {
   id: string;
-  content: string;
+  content: {
+    type: ToastType;
+    message: string;
+    description?: string;
+  };
   timeoutHandler: ReturnType<typeof setTimeout> | null;
 };
+
+type AddToastOpts =
+  | {
+      type?: ToastType;
+      message: string;
+      description?: string;
+    }
+  | string;
 
 type ToastStoreState = {
   toasts: Array<Toast>;
 };
 
 type ToastStoreActions = {
-  addToast: (message: string) => void;
+  addToast: (opts: AddToastOpts) => void;
   hoverToast?: (id: string) => void;
   unhoverToast?: (id: string) => void;
 };
@@ -24,6 +38,7 @@ function buildToastStore() {
     toasts: [],
 
     addToast: (message) => {
+      // The timeout handler to close the toast.
       const timeoutHandler = setTimeout(() => {
         set((state) => ({
           toasts: state.toasts.filter((t) => t.id !== toast.id),
@@ -31,9 +46,21 @@ function buildToastStore() {
       }, 4000);
 
       const id = uniqueId("toast-");
+      const toastContent =
+        typeof message === "string"
+          ? {
+              type: "default" as ToastType,
+              message,
+              description: undefined,
+            }
+          : {
+              type: message.type ?? "default",
+              message: message.message,
+              description: message.description,
+            };
       const toast = {
         id,
-        content: message,
+        content: toastContent,
         timeoutHandler,
       };
 
@@ -70,4 +97,4 @@ function buildToastStore() {
   }));
 }
 
-export { buildToastStore, type ToastStore };
+export { buildToastStore, type Toast, type ToastStore };

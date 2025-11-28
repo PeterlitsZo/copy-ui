@@ -11,6 +11,23 @@ are provided by the `Toast.Context` and `Toast.Container` components. You should
 not need to use them directly because they are already rendered by the
 `CopyUiProvider` component.
 
+You can use `addToast` to add a toast, like this:
+
+```tsx
+addToast("This is a toast"); // A default toast.
+
+addToast({
+  type: "success",
+  message: "This is a success toast",
+});
+
+addToast({
+  type: "error",
+  message: "This is an error toast",
+  description: "This is an error toast description", // Optional description.
+});
+```
+
 ## Dependency Graph
 
 <DocLayout.DepGraph
@@ -21,6 +38,7 @@ not need to use them directly because they are already rendered by the
     { id: "classnames", label: "classnames", color: "green" },
     { id: "zustand", label: "zustand", color: "green" },
     { id: "es-toolkit", label: "es-toolkit", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
   ]}
   edges={[
     { from: "toast", to: "copy-ui-provider" },
@@ -28,5 +46,6 @@ not need to use them directly because they are already rendered by the
     { from: "toast", to: "classnames" },
     { from: "toast", to: "zustand" },
     { from: "toast", to: "es-toolkit" },
+    { from: "toast", to: "lucide-react" },
   ]}
 />

@@ -8,7 +8,14 @@ export default function Demo() {
   const [counter, setCounter] = useState(1);
 
   const handleAddToast = () => {
-    addToast(`Toast message ${counter}`);
+    const type = (["default", "success", "info", "warning", "error"] as const)[
+      Math.floor(Math.random() * 5)
+    ];
+    addToast({
+      type,
+      message: `This is toast message ${counter}`,
+      description: "You can send more toasts, if you like.",
+    });
     setCounter(counter + 1);
   };
 
