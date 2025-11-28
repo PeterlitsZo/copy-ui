@@ -125,6 +125,24 @@ export const Calendar: FC<CalendarProps> = (props) => {
     }
   };
 
+  // Wheel helpers: only update state; scrolling is derived from state
+  // in the effects that center the selected month/year item.
+  const changeMonthByStep = useCallback((direction: 1 | -1) => {
+    setViewMonth((prevMonth) => {
+      let nextMonth = prevMonth + direction;
+      if (nextMonth < 0) {
+        nextMonth = 0;
+      } else if (nextMonth > 11) {
+        nextMonth = 11;
+      }
+      return nextMonth;
+    });
+  }, []);
+
+  const changeYearByStep = useCallback((direction: 1 | -1) => {
+    setViewYear((prevYear) => prevYear + direction);
+  }, []);
+
   const handleToggleMonthYearPicker = () => {
     if (!showMonthYearPicker) {
       // Opening picker: get table dimensions first, then show picker.
@@ -142,18 +160,44 @@ export const Calendar: FC<CalendarProps> = (props) => {
     }
   };
 
-  const handleSelectMonth = useCallback((month: number) => {
-    setViewMonth(month);
-  }, []);
+  const centerPickerColumns = useCallback((smooth: boolean = true) => {
+    // Scroll month column to center based on selected month
+    if (monthColumnRef.current) {
+      const selectedMonthItem = monthColumnRef.current.querySelector(
+        `[data-selected-month="true"]`,
+      ) as HTMLElement;
+      if (selectedMonthItem) {
+        const container = monthColumnRef.current;
+        const scrollTop =
+          selectedMonthItem.offsetTop -
+          container.clientHeight / 2 +
+          selectedMonthItem.clientHeight / 2;
+        container.scrollTo({
+          top: scrollTop,
+          behavior: smooth ? "smooth" : "instant",
+        });
+      }
+    }
 
-  const handleSelectYear = useCallback((year: number) => {
-    setViewYear(year);
+    // Scroll year column to center based on selected year
+    if (yearColumnRef.current) {
+      const selectedYearItem = yearColumnRef.current.querySelector(
+        `[data-selected-year="true"]`,
+      ) as HTMLElement;
+      if (selectedYearItem) {
+        const container = yearColumnRef.current;
+        const scrollTop =
+          selectedYearItem.offsetTop -
+          container.clientHeight / 2 +
+          selectedYearItem.clientHeight / 2;
+        container.scrollTo({ top: scrollTop, behavior: "smooth" });
+      }
+    }
   }, []);
 
   // Calculate spacer height and scroll to center when picker is shown.
   useEffect(() => {
     if (!showMonthYearPicker) return;
-    if (pickerReadyToScroll) return;
 
     // Use setTimeout to ensure DOM is updated and styles are applied.
     const timeoutId = setTimeout(() => {
@@ -164,35 +208,7 @@ export const Calendar: FC<CalendarProps> = (props) => {
         setSpacerHeight(spacerHeightValue);
 
         requestAnimationFrame(() => {
-          // Scroll month column to center
-          if (monthColumnRef.current) {
-            const selectedMonthItem = monthColumnRef.current.querySelector(
-              `[data-selected-month="true"]`,
-            ) as HTMLElement;
-            if (selectedMonthItem) {
-              const container = monthColumnRef.current;
-              const scrollTop =
-                selectedMonthItem.offsetTop -
-                container.clientHeight / 2 +
-                selectedMonthItem.clientHeight / 2;
-              container.scrollTo({ top: scrollTop });
-            }
-          }
-
-          // Scroll year column to center
-          if (yearColumnRef.current) {
-            const selectedYearItem = yearColumnRef.current.querySelector(
-              `[data-selected-year="true"]`,
-            ) as HTMLElement;
-            if (selectedYearItem) {
-              const container = yearColumnRef.current;
-              const scrollTop =
-                selectedYearItem.offsetTop -
-                container.clientHeight / 2 +
-                selectedYearItem.clientHeight / 2;
-              container.scrollTo({ top: scrollTop });
-            }
-          }
+          centerPickerColumns();
           setPickerReadyToScroll(true);
         });
       }
@@ -201,172 +217,92 @@ export const Calendar: FC<CalendarProps> = (props) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [showMonthYearPicker, pickerReadyToScroll]);
+  }, [showMonthYearPicker, centerPickerColumns]);
 
-  // Handle scroll-based selection and snap to center on scroll end
+  // Attach non-passive wheel listeners so we can fully control scroll behavior
+  // on the month/year columns. Wheel only updates state; scrolling is derived
+  // from state in the centering effect below.
+  const monthWheelCntRef = useRef(0);
+  const yearWheelCntRef = useRef(0);
+  const stepRef = useRef(10);
+  const minDeltaYRef = useRef(11);
+  const maxDeltaYRef = useRef(1000);
+  const lastScrollTimeRef = useRef<number>(0);
   useEffect(() => {
     if (!showMonthYearPicker) return;
-    if (!pickerReadyToScroll) return;
 
-    let rafId: number | null = null;
-    let scrollTimeoutId: ReturnType<typeof setTimeout> | null = null;
+    const monthEl = monthColumnRef.current;
+    const yearEl = yearColumnRef.current;
+    if (!monthEl && !yearEl) return;
 
-    const snapToCenter = (container: HTMLElement, selector: string) => {
-      const containerRect = container.getBoundingClientRect();
-      const barCenter = containerRect.top + containerRect.height / 2;
+    const handleHelper = (
+      event: WheelEvent,
+      cntRef: React.RefObject<number>,
+      changeFn: (direction: 1 | -1) => void,
+    ) => {
+      event.preventDefault();
 
-      const items = container.querySelectorAll(
-        selector,
-      ) as NodeListOf<HTMLElement>;
-      let closestItem: HTMLElement | null = null;
-      let minDistance = Infinity;
+      const BURNOUT_TIME = 256;
 
-      items.forEach((item) => {
-        const itemRect = item.getBoundingClientRect();
-        const itemCenter = itemRect.top + itemRect.height / 2;
-        const distance = Math.abs(itemCenter - barCenter);
+      const currentTime = Date.now();
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestItem = item;
+      // Calculate the direction and deltaY.
+      const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
+      if (Math.abs(event.deltaY) <= 0) {
+        return;
+      }
+      let deltaY = Math.min(
+        Math.max(Math.abs(event.deltaY) ** 1.3, minDeltaYRef.current),
+        maxDeltaYRef.current,
+      );
+      const lastScrollTimeDiff = currentTime - lastScrollTimeRef.current;
+      if (lastScrollTimeDiff < BURNOUT_TIME) {
+        // Already scrolled for a short time, too tried. Slow down please.
+        deltaY = deltaY * 0.03;
+      } else if (lastScrollTimeDiff < BURNOUT_TIME * 4) {
+        // Already scrolled for a long time, still tried.
+        const alpha =
+          ((lastScrollTimeDiff - BURNOUT_TIME) / (BURNOUT_TIME * 3)) * 0.97 +
+          0.03;
+        deltaY = deltaY * alpha;
+      }
+
+      // Update the counter.
+      cntRef.current += direction * deltaY;
+      while (Math.abs(cntRef.current) >= stepRef.current) {
+        if (cntRef.current > 0) {
+          cntRef.current -= stepRef.current;
+        } else {
+          cntRef.current += stepRef.current;
         }
-      });
 
-      if (closestItem !== null) {
-        const item = closestItem as HTMLElement;
-        const scrollTop =
-          item.offsetTop - container.clientHeight / 2 + item.clientHeight / 2;
-        container.scrollTo({ top: scrollTop, behavior: "smooth" });
+        changeFn(direction);
+        requestAnimationFrame(() => centerPickerColumns(true));
+        lastScrollTimeRef.current = currentTime;
+        cntRef.current *= 0.5;
       }
     };
 
-    const handleScroll = () => {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-
-      rafId = requestAnimationFrame(() => {
-        // Handle month column scroll.
-        if (monthColumnRef.current) {
-          const container = monthColumnRef.current;
-          const containerRect = container.getBoundingClientRect();
-          const barCenter = containerRect.top + containerRect.height / 2;
-
-          const items = container.querySelectorAll(
-            "[data-month-index]",
-          ) as NodeListOf<HTMLElement>;
-          let closestItem: HTMLElement | null = null;
-          let minDistance = Infinity;
-
-          items.forEach((item) => {
-            const itemRect = item.getBoundingClientRect();
-            const itemCenter = itemRect.top + itemRect.height / 2;
-            const distance = Math.abs(itemCenter - barCenter);
-
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestItem = item;
-            }
-          });
-
-          if (closestItem !== null) {
-            const monthIndexAttr = (closestItem as HTMLElement).getAttribute(
-              "data-month-index",
-            );
-            if (monthIndexAttr !== null) {
-              const monthIndex = parseInt(monthIndexAttr, 10);
-              if (monthIndex !== viewMonth) {
-                handleSelectMonth(monthIndex);
-              }
-            }
-          }
-        }
-
-        // Handle year column scroll.
-        if (yearColumnRef.current) {
-          const container = yearColumnRef.current;
-          const containerRect = container.getBoundingClientRect();
-          const barCenter = containerRect.top + containerRect.height / 2;
-
-          const items = container.querySelectorAll(
-            "[data-year-value]",
-          ) as NodeListOf<HTMLElement>;
-          let closestItem: HTMLElement | null = null;
-          let minDistance = Infinity;
-
-          items.forEach((item) => {
-            const itemRect = item.getBoundingClientRect();
-            const itemCenter = itemRect.top + itemRect.height / 2;
-            const distance = Math.abs(itemCenter - barCenter);
-
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestItem = item;
-            }
-          });
-
-          if (closestItem !== null) {
-            const yearValueAttr = (closestItem as HTMLElement).getAttribute(
-              "data-year-value",
-            );
-            if (yearValueAttr !== null) {
-              const yearValue = parseInt(yearValueAttr, 10);
-              if (yearValue !== viewYear) {
-                handleSelectYear(yearValue);
-              }
-            }
-          }
-        }
-      });
-
-      // Clear existing timeout.
-      if (scrollTimeoutId !== null) {
-        clearTimeout(scrollTimeoutId);
-      }
-
-      // Set timeout to snap to center when scrolling ends.
-      scrollTimeoutId = setTimeout(() => {
-        if (monthColumnRef.current) {
-          snapToCenter(monthColumnRef.current, "[data-month-index]");
-        }
-        if (yearColumnRef.current) {
-          snapToCenter(yearColumnRef.current, "[data-year-value]");
-        }
-      }, 100); // 100ms after scroll stops.
+    const handleWheelMonth = (event: WheelEvent) => {
+      handleHelper(event, monthWheelCntRef, changeMonthByStep);
     };
 
-    if (monthColumnRef.current) {
-      monthColumnRef.current.addEventListener("scroll", handleScroll, {
-        passive: true,
-      });
-    }
-    if (yearColumnRef.current) {
-      yearColumnRef.current.addEventListener("scroll", handleScroll, {
-        passive: true,
-      });
-    }
+    const handleWheelYear = (event: WheelEvent) => {
+      handleHelper(event, yearWheelCntRef, changeYearByStep);
+    };
+
+    monthEl?.addEventListener("wheel", handleWheelMonth, { passive: false });
+    yearEl?.addEventListener("wheel", handleWheelYear, { passive: false });
 
     return () => {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-      if (scrollTimeoutId !== null) {
-        clearTimeout(scrollTimeoutId);
-      }
-      if (monthColumnRef.current) {
-        monthColumnRef.current.removeEventListener("scroll", handleScroll);
-      }
-      if (yearColumnRef.current) {
-        yearColumnRef.current.removeEventListener("scroll", handleScroll);
-      }
+      monthEl?.removeEventListener("wheel", handleWheelMonth);
+      yearEl?.removeEventListener("wheel", handleWheelYear);
     };
   }, [
     showMonthYearPicker,
-    viewMonth,
-    viewYear,
-    pickerReadyToScroll,
-    handleSelectMonth,
-    handleSelectYear,
+    changeMonthByStep,
+    changeYearByStep,
+    centerPickerColumns,
   ]);
 
   return (
@@ -434,14 +370,20 @@ export const Calendar: FC<CalendarProps> = (props) => {
                 const monthName = dayjs().month(i).format("MMM");
                 const isSelected = i === viewMonth;
                 return (
-                  <div
+                  <button
                     key={monthName}
                     data-month-index={i}
                     data-selected-month={isSelected ? "true" : undefined}
                     className={styles.calendarMonthYearPickerItem}
+                    type="button"
+                    onClick={() => {
+                      setViewMonth(i);
+                      // Re-center after state update.
+                      requestAnimationFrame(() => centerPickerColumns(true));
+                    }}
                   >
                     {monthName}
-                  </div>
+                  </button>
                 );
               })}
               <div
@@ -457,18 +399,24 @@ export const Calendar: FC<CalendarProps> = (props) => {
                 className={styles.calendarMonthYearPickerSpacer}
                 style={{ height: spacerHeight }}
               />
-              {Array.from({ length: 201 }, (_, i) => {
-                const year = viewYear - 100 + i;
+              {Array.from({ length: 21 }, (_, i) => {
+                const year = viewYear - 10 + i;
                 const isSelected = year === viewYear;
                 return (
-                  <div
+                  <button
                     key={year}
                     data-year-value={year}
                     data-selected-year={isSelected ? "true" : undefined}
                     className={styles.calendarMonthYearPickerItem}
+                    type="button"
+                    onClick={() => {
+                      setViewYear(year);
+                      // Re-center after state update.
+                      requestAnimationFrame(() => centerPickerColumns(true));
+                    }}
                   >
                     {year}
-                  </div>
+                  </button>
                 );
               })}
               <div

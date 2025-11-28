@@ -6,4 +6,6 @@ export const changelog = ''
   + '- 2025-10-08: Update its `border-color` and `border-radius` styles.\n'
   + '- 2025-11-01: Make it use `utils/jss` and put its styles in CSS layer, etc.\n'
   + '- 2025-11-26: Support the month/year picker.\n'
+  + '- 2025-11-28: Optimize month/year picker scrolling by using state-driven styles\n'
+  + '  and computing scroll distance from `event.deltaY`.\n'
   ;
