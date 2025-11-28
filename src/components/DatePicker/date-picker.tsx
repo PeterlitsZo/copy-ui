@@ -1,13 +1,21 @@
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { type FC, type KeyboardEventHandler, useEffect, useState } from "react";
-import { useJss } from "@/components/CopyUiProvider";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { InputBase } from "@/components/InputBase";
-import { useTheme } from "@/components/ThemeProvider";
+
 import { CalendarOpener } from "./calendar-opener";
 import styles from "./date-picker.module.scss";
 
-const DatePicker: FC = () => {
+type DatePickerProps = {
+  date?: dayjs.Dayjs | null;
+  onDateChange?: (value: dayjs.Dayjs | null) => void;
+};
+
+const DatePicker: FC<DatePickerProps> = (props) => {
+  const { date, onDateChange } = props;
+
   const theme = useTheme();
   const jss = useJss();
 
@@ -18,8 +26,28 @@ const DatePicker: FC = () => {
   const [internalMinute, setInternalMinute] = useState<number | null>(null);
   const [internalSecond, setInternalSecond] = useState<number | null>(null);
 
+  // Sync external `date` prop to internal state.
+  useEffect(() => {
+    if (!date) {
+      setInternalYear(null);
+      setInternalMonth(null);
+      setInternalDay(null);
+      setInternalHour(null);
+      setInternalMinute(null);
+      setInternalSecond(null);
+      return;
+    }
+
+    setInternalYear(date.year());
+    setInternalMonth(date.month() + 1);
+    setInternalDay(date.date());
+    setInternalHour(date.hour());
+    setInternalMinute(date.minute());
+    setInternalSecond(date.second());
+  }, [date]);
+
   const calendarValue = (() => {
-    let result = dayjs();
+    let result = date ?? dayjs();
     if (internalYear !== null) {
       result = result.year(internalYear);
     }
@@ -41,10 +69,63 @@ const DatePicker: FC = () => {
     return result;
   })();
 
+  // Notify parent when internal date parts change.
+  useEffect(() => {
+    if (!onDateChange) return;
+
+    // Require year, month, and day to form a valid date.
+    const badYear = internalYear === null;
+    const badMonth = internalMonth === null;
+    const badDay = internalDay === null;
+    const badHour = internalHour === null;
+    const badMinute = internalMinute === null;
+    const badSecond = internalSecond === null;
+    if (badYear || badMonth || badDay || badHour || badMinute || badSecond) {
+      if (date != null) {
+        onDateChange(null);
+      }
+      return;
+    }
+
+    let result = dayjs();
+    result = result
+      .year(internalYear)
+      .month(internalMonth - 1)
+      .date(internalDay);
+    result = result
+      .hour(internalHour)
+      .minute(internalMinute)
+      .second(internalSecond)
+      .millisecond(0);
+
+    if (date == null || !date.isSame(result)) {
+      onDateChange(result);
+      return;
+    }
+  }, [
+    internalYear,
+    internalMonth,
+    internalDay,
+    internalHour,
+    internalMinute,
+    internalSecond,
+    date,
+    onDateChange,
+  ]);
+
   const handleCalendarChange = (day: dayjs.Dayjs) => {
     setInternalYear(day.year());
     setInternalMonth(day.month() + 1);
     setInternalDay(day.date());
+    if (internalHour == null) {
+      setInternalHour(0);
+    }
+    if (internalMinute == null) {
+      setInternalMinute(0);
+    }
+    if (internalSecond == null) {
+      setInternalSecond(0);
+    }
   };
 
   const stx = jss.hash({

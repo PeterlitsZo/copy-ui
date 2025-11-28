@@ -1,8 +1,10 @@
 import type dayjs from "dayjs";
 import { CalendarDays } from "lucide-react";
 import type { FC } from "react";
+
 import { Calendar } from "@/components/Calendar";
 import { Popover } from "@/components/Popover";
+
 import styles from "./calendar-opener.module.scss";
 
 type CalendarOpenerProps = {
@@ -29,10 +31,16 @@ const CalendarOpener: FC<CalendarOpenerProps> = (props) => {
       />
       <Popover.Portal
         onClickOutside={({ closePortal }) => closePortal()}
-        render={({ setRef, isOpen, floatingStyles }) =>
+        render={({ setRef, isOpen, floatingStyles, togglePortal }) =>
           isOpen && (
             <div ref={(el) => setRef(el)} style={floatingStyles}>
-              <Calendar value={value} onChange={onChange} />
+              <Calendar
+                value={value}
+                onChange={(v) => {
+                  onChange?.(v);
+                  togglePortal();
+                }}
+              />
             </div>
           )
         }

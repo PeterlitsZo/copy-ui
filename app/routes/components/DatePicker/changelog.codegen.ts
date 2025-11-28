@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-10-25: Initial version.\n'
+  + '- 2025-11-28: Support `date` and `onDateChange` props to make the component controllable.\n'
   ;
