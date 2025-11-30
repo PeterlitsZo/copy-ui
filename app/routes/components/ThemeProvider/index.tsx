@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 
 import type { Route } from "./+types/index";
 import { changelog } from "./changelog.codegen";
+import Doc from "./doc.mdx";
 import { sourceCode } from "./source_code.codegen";
 
 export function meta(_: Route.MetaArgs) {
@@ -37,20 +37,11 @@ export default function ThemeProviderPage() {
       />
       {tabsValue === "doc" && (
         <DocLayout.Content>
-          <Typography.P>
-            The ThemeProvider component is used to provide a theme to all Copy
-            UI components in your application. It uses React Context to pass
-            down the theme values.
-          </Typography.P>
-          <Typography.P>
-            You can use the function useTheme to access the current theme values
-            in your components. Like this:
-          </Typography.P>
-          <Typography.CodeBlock lang="tsx" code={usageCode} withLineNumbers />
+          <Doc />
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}
@@ -62,17 +53,3 @@ export default function ThemeProviderPage() {
     </DocLayout>
   );
 }
-
-const usageCode = `\
-import { useTheme } from "@/components/ThemeProvider";
-
-export function MyComponent() {
-  const theme = useTheme();
-
-  return (
-    <div style={{ backgroundColor: theme.colors.gray["000"] }}>
-      This div has a background color from the theme!
-    </div>
-  );
-}
-`;
