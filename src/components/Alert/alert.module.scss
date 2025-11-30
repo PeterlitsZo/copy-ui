@@ -1,0 +1,18 @@
+@layer components {
+  .alert {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--alert-bdRadius);
+    background-color: var(--alert-bgColor);
+    border: 1px solid var(--alert-bdColor);
+
+    & > svg {
+      color: var(--alert-iconColor);
+      height: 1rem;
+      width: 1rem;
+      transform: translateY(0.125rem);
+    }
+  }
+}

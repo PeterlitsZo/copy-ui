@@ -4,6 +4,7 @@
 type Component = { name: string, path: string, wip: boolean, deprecated: boolean };
 
 export const components: Component[] = [
+  {"name": "Alert", "path": "/v0/components/Alert", "wip": false, "deprecated": false},
   {"name": "AlertDialog", "path": "/v0/components/AlertDialog", "wip": false, "deprecated": false},
   {"name": "Avatar", "path": "/v0/components/Avatar", "wip": false, "deprecated": false},
   {"name": "Background", "path": "/v0/components/Background", "wip": false, "deprecated": false},

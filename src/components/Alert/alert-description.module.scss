@@ -1,0 +1,10 @@
+@layer components {
+  .alertDescription {
+    font-size: var(--alert-description-fontSize);
+    line-height: var(--alert-description-lineHeight);
+    color: var(--alert-description-color);
+    margin: 0;
+    grid-column: 2;
+  }
+}
+
