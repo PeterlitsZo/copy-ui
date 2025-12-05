@@ -12,4 +12,5 @@ export const changelog = ''
   + '  `Avatar.Img` not loaded.\n'
   + '- 2025-11-19: Use `useRef` to hold the avatar store instance. Add make `Avatar`\n'
   + '  expose more props as a `span` element.\n'
+  + '- 2025-12-05: Add `variant` prop to `Avatar` component.\n'
   ;

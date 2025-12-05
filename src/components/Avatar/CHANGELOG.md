@@ -8,3 +8,4 @@
   `Avatar.Img` not loaded.
 - 2025-11-19: Use `useRef` to hold the avatar store instance. Add make `Avatar`
   expose more props as a `span` element.
+- 2025-12-05: Add `variant` prop to `Avatar` component.

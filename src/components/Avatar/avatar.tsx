@@ -14,6 +14,7 @@ import { type AvatarStore, buildAvatarStore } from "./avatar-store";
 type AvatarProps = ComponentProps<"span"> & {
   size: string;
   color?: ColorName;
+  variant?: "circle" | "rounded";
 };
 
 type AvatarComponent = FC<AvatarProps> & {
@@ -40,7 +41,7 @@ Avatar.Img = AvatarImg;
 Avatar.Fallback = AvatarFallback;
 
 const AvatarInternal: FC<AvatarProps> = (props) => {
-  const { size, color = "gray", children, ...rest } = props;
+  const { size, color = "gray", variant = "circle", children, ...rest } = props;
 
   const theme = useTheme();
   const jss = useJss();
@@ -51,13 +52,14 @@ const AvatarInternal: FC<AvatarProps> = (props) => {
   const stx = jss.hash({
     "--avatar-size": size,
     "--avatar-color": theme.colors[color]["700"],
-    "--avatar-background-color": tinycolor(theme.colors[color]["100"])
+    "--avatar-bgColor": tinycolor(theme.colors[color]["100"])
       .brighten(5)
       .desaturate(20)
       .toHexString(),
-    "--avatar-border-color": tinycolor(theme.colors[color]["100"])
+    "--avatar-bdColor": tinycolor(theme.colors[color]["100"])
       .desaturate(20)
       .toHexString(),
+    "--avatar-bdRadius": variant === "circle" ? "999999px" : "0.375rem",
   });
 
   return (
