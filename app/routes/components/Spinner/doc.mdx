@@ -1,0 +1,46 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithDifferentSizes from "./demos/WithDifferentSizes";
+import withDifferentSizesSourceCode from "./demos/WithDifferentSizes.source-code.codegen";
+import WithDifferentIcons from "./demos/WithDifferentIcons";
+import withDifferentIconsSourceCode from "./demos/WithDifferentIcons.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode["index.tsx"]} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "spinner", label: "Spinner" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+  ]}
+  edges={[
+    { from: "spinner", to: "copy-ui-provider" },
+    { from: "spinner", to: "classnames" },
+    { from: "spinner", to: "lucide-react" },
+  ]}
+/>
+
+## Examples
+
+### With Different Sizes
+
+<DocLayout.Live
+  node={<WithDifferentSizes />}
+  code={withDifferentSizesSourceCode["index.tsx"]}
+/>
+
+### With Different Icons
+
+<DocLayout.Live
+  node={<WithDifferentIcons />}
+  code={withDifferentIconsSourceCode["index.tsx"]}
+/>
+
+## Acknowledgements
+
+- The `Spinner` component is inspired by shadcn/ui's `Spinner` component.

@@ -4,4 +4,5 @@
 export const changelog = ''
   + '- 2025-10-10: Initial version.\n'
   + '- 2025-11-05: Support the `size` prop.\n'
+  + '- 2025-12-07: Support the `icon` prop.\n'
   ;
