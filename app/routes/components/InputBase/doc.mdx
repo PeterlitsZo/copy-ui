@@ -1,5 +1,14 @@
 import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 
+import { AlertCircle } from "lucide-react";
+import { Alert } from "@/components/Alert";
+
+<Alert color="red" style={{ marginBottom: "1rem" }}>
+  <AlertCircle size="1.25rem" />
+  <Alert.Title>Deprecated</Alert.Title>
+  <Alert.Description>This component is deprecated and will be removed in the future. Use `IbsBase` instead.</Alert.Description>
+</Alert>
+
 The thing you need to know is that you should not use `InputBase` directly. It
 is a low-level component meant to be used as a building block for more complex
 input components.
