@@ -2,96 +2,82 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { InputBase } from "@/components/InputBase";
-import { resolveStyle } from "@/utils/resolve-style";
+import { extractStylesProps, IbsBase } from "@/components/IbsBase";
 
 import styles from "./input.module.scss";
 
-export type InputProps = Omit<ComponentProps<"input">, "size"> & {
-  variant?: "default" | "filled";
-  size?: "sm" | "md" | "lg";
-  width?: "sm" | "md" | "lg" | "full";
-
-  leftSection?: React.ReactNode;
-  rightSection?: React.ReactNode;
-};
+export type InputProps = ComponentProps<typeof IbsBase> &
+  ComponentProps<"input"> & {
+    variant?: "default" | "filled";
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    leftSection?: React.ReactNode;
+    rightSection?: React.ReactNode;
+  };
 
 export const Input: FC<InputProps> = (props) => {
   const {
     variant = "default",
     size = "md",
-    width,
     leftSection,
     rightSection,
     className,
     style,
     disabled,
-    ...rest
+
+    placeholder,
+    onChange,
+
+    ...others
   } = props;
+
+  const { stx: baseStyleStx, rest } = extractStylesProps(others);
 
   const theme = useTheme();
   const jss = useJss();
 
-  const stx = jss.hash(
-    resolveStyle({
-      base: {
-        "--input-focus-border-color": theme.colors.blue["800"],
-        "--input-padding-inline-start": leftSection ? "0.125rem" : "0.75rem",
-        "--input-padding-inline-end": rightSection ? "0.125rem" : "0.75rem",
-        "--input-placeholder-color": theme.tokens.inputBasePlaceholderColor,
-        "--input-caret-color": theme.colors.blue["800"],
-      },
-      variants: {
-        variant: {
-          default: {
-            "--input-bg-color": "white",
-          },
-          filled: {
-            "--input-bg-color": theme.colors.gray["000"],
-          },
-        },
-        size: {
-          sm: {
-            "--input-font-size": theme.tokens.inputBaseSmFontSize,
-            "--input-line-height": theme.tokens.inputBaseSmLineHeight,
-          },
-          md: {
-            "--input-font-size": theme.tokens.inputBaseMdFontSize,
-            "--input-line-height": theme.tokens.inputBaseMdLineHeight,
-          },
-          lg: {
-            "--input-font-size": theme.tokens.inputBaseLgFontSize,
-            "--input-line-height": theme.tokens.inputBaseLgLineHeight,
-          },
-        },
-      },
-      cls: {
-        size,
-        variant,
-      },
-    }),
-  );
+  const baseStx = jss.hash({
+    "--input-focus-bdColor": theme.colors.blue["800"],
+    "--input-paddingInlineStart": leftSection ? "0.125rem" : "0.75rem",
+    "--input-paddingInlineEnd": rightSection ? "0.125rem" : "0.75rem",
+    "--input-placeholderColor": theme.tokens.inputBasePlaceholderColor,
+    "--input-caretColor": theme.colors.blue["800"],
+  });
 
-  // TODO (PeterlitsZo): I think it is a bad idea... Need some time to rethink it.
-  const borderColorStx = jss.hash({
-    "--input-base-border-color":
-      variant === "filled"
-        ? "transparent"
-        : theme.tokens.inputBaseDefaultBorderColor,
+  const inputStx = jss.hash({
+    "--input-fontSize": "var(--ibsBase-fontSize)",
+    "--input-lineHeight": "var(--ibsBase-lineHeight)",
   });
 
   return (
-    <InputBase
+    <IbsBase
+      variant={variant}
       size={size}
-      width={width}
-      leftSection={leftSection}
-      rightSection={rightSection}
       disabled={disabled}
       style={style}
-      className={classNames(styles.inputBase, stx, borderColorStx, className)}
+      className={classNames(styles.ibsBase, baseStx, baseStyleStx, className)}
     >
-      <input className={classNames(styles.input, className)} {...rest} />
-    </InputBase>
+      {leftSection && <IbsBase.LeftSection>{leftSection}</IbsBase.LeftSection>}
+      {leftSection || rightSection ? (
+        <IbsBase.Wrapper>
+          <input
+            className={classNames(styles.input, inputStx)}
+            placeholder={placeholder}
+            onChange={onChange}
+            {...rest}
+          />
+        </IbsBase.Wrapper>
+      ) : (
+        <input
+          className={classNames(styles.input, inputStx)}
+          placeholder={placeholder}
+          onChange={onChange}
+          {...rest}
+        />
+      )}
+      {rightSection && (
+        <IbsBase.RightSection>{rightSection}</IbsBase.RightSection>
+      )}
+    </IbsBase>
   );
 };
 

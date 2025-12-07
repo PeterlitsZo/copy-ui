@@ -1,30 +1,29 @@
 @layer components {
-  .inputBase {
-    background-color: var(--input-bg-color);
+  .ibsBase {
+    &:has(.input:focus) {
+      outline: none;
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--input-focus-bdColor);
+    }
   }
 
   .input {
     align-self: stretch;
     flex: 1;
 
-    padding-inline-start: var(--input-padding-inline-start);
-    padding-inline-end: var(--input-padding-inline-end);
-    font-size: var(--input-font-size);
-    line-height: var(--input-line-height);
-    caret-color: var(--input-caret-color);
+    padding-inline-start: var(--input-paddingInlineStart);
+    padding-inline-end: var(--input-paddingInlineEnd);
+    caret-color: var(--input-caretColor);
 
     outline: none;
     border: none;
 
-    .inputBase:has(&:focus) {
-      outline: none;
-      border-width: 1px;
-      border-style: solid;
-      border-color: var(--input-focus-border-color);
-    }
+    font-size: var(--input-fontSize);
+    line-height: var(--input-lineHeight);
 
     &::placeholder {
-      color: var(--input-placeholder-color);
+      color: var(--input-placeholderColor);
     }
 
     [data-disabled="true"] & {

@@ -11,10 +11,10 @@ export default function Demo() {
 
   return (
     <Flex dir="column" gap="1rem" className={stx}>
-      <Input width="sm" placeholder="Type something..." />
-      <Input width="md" placeholder="Type something..." />
-      <Input width="lg" placeholder="Type something..." />
-      <Input width="full" placeholder="Type something..." />
+      <Input w="12rem" placeholder="Type something..." />
+      <Input w="16rem" placeholder="Type something..." />
+      <Input w="20rem" placeholder="Type something..." />
+      <Input w="100%" placeholder="Type something..." />
     </Flex>
   );
 }

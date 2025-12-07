@@ -18,4 +18,5 @@ export const changelog = ''
   + '- 2025-11-19: Remove the dependency on `ThemeProvider`.\n'
   + '- 2025-11-20: Support the `width` prop and let `className` and `style` props\n'
   + '  effect the `InputBase` component rather than the internal `input` element.\n'
+  + '- 2025-12-07: Use `IbsBase` component instead of `InputBase` component.\n'
   ;

@@ -14,3 +14,4 @@
 - 2025-11-19: Remove the dependency on `ThemeProvider`.
 - 2025-11-20: Support the `width` prop and let `className` and `style` props
   effect the `InputBase` component rather than the internal `input` element.
+- 2025-12-07: Use `IbsBase` component instead of `InputBase` component.
