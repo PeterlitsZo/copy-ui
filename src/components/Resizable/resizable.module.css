@@ -1,0 +1,6 @@
+@layer components {
+  .resizableHandle {
+    width: 1px;
+    background-color: var(--resizableHandle-bgColor);
+  }
+}

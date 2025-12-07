@@ -1,0 +1,26 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode["index.tsx"]} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "resizable", label: "Resizable" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "react-resizable-panels", label: "react-resizable-panels", color: "green" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "resizable", to: "copy-ui-provider" },
+    { from: "resizable", to: "react-resizable-panels" },
+    { from: "resizable", to: "classnames" },
+  ]}
+/>
+
+## Acknowledgements
+
+- The `Resizable` component is inspired by shadcn/ui's `Resizable` component.

@@ -34,6 +34,7 @@ export const components: Component[] = [
   {"name": "Paper", "path": "/v0/react/components/Paper", "wip": false, "deprecated": false},
   {"name": "Popover", "path": "/v0/react/components/Popover", "wip": false, "deprecated": false},
   {"name": "PopoverMenu", "path": "/v0/react/components/PopoverMenu", "wip": false, "deprecated": false},
+  {"name": "Resizable", "path": "/v0/react/components/Resizable", "wip": false, "deprecated": false},
   {"name": "ScrollArea", "path": "/v0/react/components/ScrollArea", "wip": false, "deprecated": false},
   {"name": "Select", "path": "/v0/react/components/Select", "wip": false, "deprecated": false},
   {"name": "SortIndicator", "path": "/v0/react/components/SortIndicator", "wip": false, "deprecated": false},
