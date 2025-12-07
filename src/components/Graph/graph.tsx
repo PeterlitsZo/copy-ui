@@ -1,6 +1,6 @@
 import dagre from "@dagrejs/dagre";
 import type { FC } from "react";
-import { useId, useMemo } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 
 import {
   type ColorName,
@@ -11,9 +11,30 @@ import {
 
 const NODESEP = 25;
 const RANKSEP = 60;
-const NODEWIDTH = 140;
-const NODEHEIGHT = 40;
+const NODE_MIN_WIDTH = 140;
+const NODE_HEIGHT = 38;
 const PADDING = 20;
+const TEXT_PADDING = 32;
+const TEXT_FONT_SIZE = 15;
+const TEXT_FONT_FAMILY = "ui-sans-serif, system-ui, sans-serif";
+
+/**
+ * Measures text width using Canvas API.
+ *
+ * Matches SVG text rendering with the given `TEXT_FONT_SIZE` and
+ * `TEXT_FONT_FAMILY`.
+ */
+function measureTextWidth(text: string): number {
+  // Create a temporary canvas element for measurement.
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return NODE_MIN_WIDTH;
+
+  // Match SVG text styling.
+  context.font = `${TEXT_FONT_SIZE}px ${TEXT_FONT_FAMILY}`;
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
 
 type GraphNode = {
   id: string;
@@ -34,6 +55,30 @@ type GraphProps = {
 const Graph: FC<GraphProps> = (props) => {
   const { nodes, edges = [] } = props;
 
+  const [isClient, setIsClient] = useState(false);
+  const [nodeWidths, setNodeWidths] = useState<Map<string, number>>(new Map());
+
+  const theme = useTheme();
+  const mode = useMode();
+  const arrowheadId = useId();
+
+  // Mark as client-side on mount.
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Measure text widths on client-side.
+  useEffect(() => {
+    if (!isClient) return;
+    const measuredWidths = new Map<string, number>();
+    for (const node of nodes) {
+      const textWidth = measureTextWidth(node.label);
+      const nodeWidth = Math.max(textWidth + TEXT_PADDING, NODE_MIN_WIDTH);
+      measuredWidths.set(node.id, nodeWidth);
+    }
+    setNodeWidths(measuredWidths);
+  }, [nodes, isClient]);
+
   const layout = useMemo(() => {
     const g = new dagre.graphlib.Graph();
 
@@ -46,10 +91,15 @@ const Graph: FC<GraphProps> = (props) => {
     g.setDefaultEdgeLabel(() => ({}));
 
     for (const node of nodes) {
+      // Use measured width if available, otherwise fall back to NODE_MIN_WIDTH.
+      //
+      // This allows SSR to work with default width, then client updates with
+      // measured width.
+      const nodeWidth = nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
       g.setNode(node.id, {
         label: node.label,
-        width: NODEWIDTH,
-        height: NODEHEIGHT,
+        width: nodeWidth,
+        height: NODE_HEIGHT,
       });
     }
 
@@ -75,11 +125,14 @@ const Graph: FC<GraphProps> = (props) => {
     let maxX = Number.NEGATIVE_INFINITY;
     let maxY = Number.NEGATIVE_INFINITY;
 
-    for (const { x, y } of nodePositions.values()) {
-      minX = Math.min(minX, x - NODEWIDTH / 2);
-      minY = Math.min(minY, y - NODEHEIGHT / 2);
-      maxX = Math.max(maxX, x + NODEWIDTH / 2);
-      maxY = Math.max(maxY, y + NODEHEIGHT / 2);
+    for (const node of nodes) {
+      const pos = nodePositions.get(node.id);
+      if (!pos) continue;
+      const nodeWidth = nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
+      minX = Math.min(minX, pos.x - nodeWidth / 2);
+      minY = Math.min(minY, pos.y - NODE_HEIGHT / 2);
+      maxX = Math.max(maxX, pos.x + nodeWidth / 2);
+      maxY = Math.max(maxY, pos.y + NODE_HEIGHT / 2);
     }
 
     const padding = PADDING;
@@ -91,16 +144,18 @@ const Graph: FC<GraphProps> = (props) => {
     return {
       nodePositions,
       edgePaths,
+      nodeWidths,
       width,
       height,
       offsetX,
       offsetY,
     };
-  }, [nodes, edges]);
+  }, [nodes, edges, nodeWidths]);
 
-  const theme = useTheme();
-  const mode = useMode();
-  const arrowheadId = useId();
+  // Return null on server-side since text measurement requires browser APIs.
+  if (!isClient) {
+    return null;
+  }
 
   const arrowheadColor =
     mode === "dark" ? theme.colors.gray["400"] : theme.colors.gray["600"];
@@ -137,11 +192,13 @@ const Graph: FC<GraphProps> = (props) => {
         {nodes.map((node) => {
           const pos = layout.nodePositions.get(node.id);
           if (!pos) return null;
+          const nodeWidth = layout.nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
           return (
             <GraphNode
               key={node.id}
               x={pos.x}
               y={pos.y}
+              width={nodeWidth}
               color={node.color ?? "blue"}
               label={node.label}
             />
@@ -198,12 +255,13 @@ const GraphEdge: FC<GraphEdgeProps> = (props) => {
 type GraphNodeProps = {
   x: number;
   y: number;
+  width: number;
   color: ColorName;
   label: string;
 };
 
 const GraphNode: FC<GraphNodeProps> = (props) => {
-  const { x, y, color, label } = props;
+  const { x, y, width, color, label } = props;
 
   const mode = useMode();
   const theme = useTheme();
@@ -224,15 +282,20 @@ const GraphNode: FC<GraphNodeProps> = (props) => {
   return (
     <g style={{ transform: `translate(${x}px, ${y}px)` }}>
       <rect
-        x={-NODEWIDTH / 2}
-        y={-NODEHEIGHT / 2}
-        width={NODEWIDTH}
-        height={NODEHEIGHT}
+        x={-width / 2}
+        y={-NODE_HEIGHT / 2}
+        width={width}
+        height={NODE_HEIGHT}
         fill={nodeBackgroundColor}
         stroke={nodeBorderColor}
         rx="0.25rem"
       />
-      <text className={nodeTextStx} fill={nodeTextColor}>
+      <text
+        className={nodeTextStx}
+        fill={nodeTextColor}
+        fontSize={TEXT_FONT_SIZE}
+        fontFamily={TEXT_FONT_FAMILY}
+      >
         {label}
       </text>
     </g>

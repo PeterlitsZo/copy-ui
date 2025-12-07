@@ -5,12 +5,12 @@ export default function Demo() {
     <Graph
       nodes={[
         { id: "graph", label: "Graph" },
-        { id: "copyuiprovider", label: "CopyUiProvider" },
+        { id: "copy-ui-provider", label: "CopyUiProvider" },
         { id: "dagre", label: "@dagrejs/dagre", color: "green" },
       ]}
       edges={[
+        { from: "graph", to: "copy-ui-provider" },
         { from: "graph", to: "dagre" },
-        { from: "graph", to: "copyuiprovider" },
       ]}
     />
   );
