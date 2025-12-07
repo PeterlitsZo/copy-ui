@@ -79,7 +79,7 @@ const DocLayoutFiles: FC<DocLayoutFilesProps> = (props) => {
     <>
       <div className={classNames(styles.sourceCode, stx)}>
         {sourceCodeTree}
-        {sourceCodeBlock(true, "90vh")}
+        {sourceCodeBlock(true, "calc(90vh - 3rem)")}
       </div>
       <Modal isOpen={isModalOpen} className={stx}>
         <Modal.Overlay onClick={() => setModalOpen(false)} />
