@@ -1,6 +1,7 @@
 @layer components {
   .topbar {
     background-color: var(--topbar-bg);
+    color: var(--topbar-color);
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--topbar-border-color);

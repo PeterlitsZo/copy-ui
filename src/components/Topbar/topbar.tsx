@@ -2,7 +2,12 @@ import classNames from "classnames";
 import { Moon, Sun } from "lucide-react";
 import type { FC } from "react";
 
-import { useMode, useSetMode, useTheme } from "@/components/CopyUiProvider";
+import {
+  useJss,
+  useMode,
+  useSetMode,
+  useTheme,
+} from "@/components/CopyUiProvider";
 import { IconButton } from "@/components/IconButton";
 
 import styles from "./topbar.module.scss";
@@ -13,24 +18,27 @@ type TopbarProps = {
 
 const Topbar: FC<TopbarProps> = (props) => {
   const { className } = props;
+
   const theme = useTheme();
+  const jss = useJss();
   const mode = useMode();
+
   const setMode = useSetMode();
 
   const handleToggleDarkMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
+  const stx = jss.hash({
+    "--topbar-bg":
+      mode === "dark" ? theme.colors.gray["800"] : theme.colors.gray["000"],
+    "--topbar-border-color": theme.colors.gray["300"],
+    "--topbar-color":
+      mode === "dark" ? theme.colors.gray["200"] : theme.colors.gray["800"],
+  });
+
   return (
-    <div
-      className={classNames(styles.topbar, className)}
-      style={
-        {
-          "--topbar-bg": "white",
-          "--topbar-border-color": theme.colors.gray["300"],
-        } as React.CSSProperties
-      }
-    >
+    <div className={classNames(styles.topbar, stx, className)}>
       <div className={styles.content}>
         <span className={styles.logo}>Copy UI</span>
         <div className={styles.spacer} />
