@@ -1,0 +1,6 @@
+id: find-input-base
+language: TSX
+rule:
+  kind: import_statement
+  pattern: import $LIST from $MOD
+  regex: "from .*InputBase.*"

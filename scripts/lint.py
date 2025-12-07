@@ -12,6 +12,9 @@ def main():
 
     # Make sure no deprecated `resolveStyle` is used.
     check_no_resolve_style()
+    
+    # Make sure no deprecated `InputBase` is used.
+    check_no_input_base()
 
 def check_ast_grep_exists():
     try:
@@ -59,6 +62,19 @@ def check_no_resolve_style():
     result = json.loads(result.stdout)
     for match in result:
         print(f"WARN use deprecated resolveStyle function in {match['file']} -- Please just use resolveStyle2.")
+        
+def check_no_input_base():
+    cmd = [
+        "ast-grep",
+        "scan",
+        "--rule",
+        "scripts/etc/find-input-base.yaml",
+        "--json",       
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = json.loads(result.stdout)
+    for match in result:
+        print(f"WARN use deprecated InputBase component in {match['file']} -- Please just use IbsBase.")
 
 if __name__ == "__main__":
     main()
