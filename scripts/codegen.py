@@ -139,7 +139,7 @@ def codegen_component():
         for component in components:
             nav_data = {
                 'name': component['name'],
-                'path': f"/v0/components/{component['name']}",
+                'path': f"/v0/react/components/{component['name']}",
                 'wip': component['wip'],
                 'deprecated': component['deprecated'],
             }
@@ -362,7 +362,7 @@ def codegen_utils():
         for route in utils_routes:
             nav_data = {
                 'name': route['name'],
-                'path': f"/v0/utils/{route['name']}"
+                'path': f"/v0/react/utils/{route['name']}"
             }
             of.write(f"  {json.dumps(nav_data)},\n")
         of.write("];\n")

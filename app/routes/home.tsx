@@ -9,5 +9,5 @@ export function meta(_: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Navigate to="/v0/components/Avatar" replace />;
+  return <Navigate to="/v0/react/components/Avatar" replace />;
 }

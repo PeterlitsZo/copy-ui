@@ -25,7 +25,7 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     "--navbar-bdColor": theme.colors.gray["300"],
   };
 
-  const docs = [{ name: "Get Started", path: "/v0/docs/get-started" }];
+  const docs = [{ name: "Get Started", path: "/v0/react/docs/get-started" }];
 
   function isActive(
     kind: "doc" | "component" | "utils",
@@ -34,9 +34,9 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     if (kind === "doc") {
       return pathOrComponentName === active;
     } else if (kind === "component") {
-      return `/v0/components/${pathOrComponentName}` === active;
+      return `/v0/react/components/${pathOrComponentName}` === active;
     } else if (kind === "utils") {
-      return `/v0/utils/${pathOrComponentName}` === active;
+      return `/v0/react/utils/${pathOrComponentName}` === active;
     }
   }
 

@@ -18,7 +18,7 @@ const PageLayout: FC<PageLayoutProps> = (props) => {
   const { kind, name, children } = props;
 
   const currentPath = useMemo(() => {
-    return `/v0/${kind}/${name}`;
+    return `/v0/react/${kind}/${name}`;
   }, [kind, name]);
 
   return (

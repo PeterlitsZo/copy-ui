@@ -8,15 +8,17 @@ export default [
   index("routes/home.tsx"),
 
   layout("./layouts/page-layout.tsx", [
-    ...prefix("v0/docs", [route("get-started", "routes/docs/get-started.tsx")]),
+    ...prefix("v0/react/docs", [
+      route("get-started", "routes/docs/get-started.tsx"),
+    ]),
     ...prefix(
-      "v0/components",
+      "v0/react/components",
       componentsRoutes.map((componentsRoute) => {
         return route(componentsRoute.name, componentsRoute.path);
       }),
     ),
     ...prefix(
-      "v0/utils",
+      "v0/react/utils",
       utilsRoutes.map((utilsRoute) => {
         return route(utilsRoute.name, utilsRoute.path);
       }),
