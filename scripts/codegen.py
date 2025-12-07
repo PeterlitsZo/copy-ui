@@ -12,6 +12,9 @@ class CodegenEnv:
 
     def get_components_app_dir(self) -> Path:
         return self.project_root / "app" / "routes" / "components"
+    
+    def get_app_dir(self) -> Path:
+        return self.project_root / "app"
 
 class Component:
     def __init__(self, env: CodegenEnv, name: str):
@@ -148,7 +151,7 @@ def codegen_component():
         of.write("];\n")
 
     # Code generation for `app/components_routes.codegen.ts`.
-    app_components_routes_codegen_path = env.get_components_app_dir() / "components_routes.codegen.ts"
+    app_components_routes_codegen_path = env.get_app_dir() / "components-routes.codegen.ts"
     with open(app_components_routes_codegen_path, 'w', encoding='utf-8') as of:
         of.write(get_codegen_header())
         of.write("export const componentsRoutes: { name: string, path: string }[] = [\n")

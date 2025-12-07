@@ -1,7 +1,7 @@
 import type { RouteConfig } from "@react-router/dev/routes";
 import { index, layout, prefix, route } from "@react-router/dev/routes";
 
-import { componentsRoutes } from "./components_routes.codegen";
+import { componentsRoutes } from "./components-routes.codegen";
 import { utilsRoutes } from "./utils-routes.codegen";
 
 export default [
