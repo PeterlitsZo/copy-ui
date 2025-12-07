@@ -2,9 +2,9 @@ import classnames from "classnames";
 import type { FC } from "react";
 import { Link } from "react-router";
 
+import { useTheme } from "@/components/CopyUiProvider";
 import { ScrollArea } from "@/components/ScrollArea";
 import { Tag } from "@/components/Tag";
-import { useTheme } from "@/components/ThemeProvider";
 
 import { components } from "./components.codegen";
 import styles from "./Navbar.module.scss";
@@ -18,11 +18,11 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
   const theme = useTheme();
 
   const computedStyles = {
-    "--navbar-link-bg-hover": theme.colors.gray["100"],
-    "--navbar-link-bg-active": theme.colors.blue["000"],
-    "--navbar-link-color-active": theme.colors.blue["900"],
-    "--navbar-border-color": theme.colors.gray["300"],
-    "--navbar-link-color": theme.colors.gray["700"],
+    "--navbarLink-color": theme.colors.gray["700"],
+    "--navbarLink-hover-bgColor": theme.colors.gray["100"],
+    "--navbarLink-active-bgColor": theme.colors.blue["000"],
+    "--navbarLink-active-color-active": theme.colors.blue["900"],
+    "--navbar-bdColor": theme.colors.gray["300"],
   };
 
   const docs = [{ name: "Get Started", path: "/v0/docs/get-started" }];
