@@ -1,0 +1,19 @@
+import { AlertCircle } from "lucide-react";
+import { Alert } from "@/components/Alert";
+import { Typography } from "@/components/Typography";
+import { DocLayout } from "@/layouts/DocLayout";
+
+import sourceCode from "./source-code.codegen";
+
+<Alert color="red" style={{ marginBottom: "1rem" }}>
+  <AlertCircle size="1.25rem" />
+  <Alert.Title>Deprecated</Alert.Title>
+  <Alert.Description>This utility is deprecated and will be removed in the future. Use `resolve-style2` instead.</Alert.Description>
+</Alert>
+
+<Typography.CodeBlock
+  withLineNumbers
+  code={sourceCode}
+  lang="typescript"
+/>
+

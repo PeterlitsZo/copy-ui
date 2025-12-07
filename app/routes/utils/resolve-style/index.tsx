@@ -1,7 +1,6 @@
-import { Typography } from "@/components/Typography";
 import { DocLayout } from "@/layouts/DocLayout";
 
-import sourceCode from "./source-code.codegen";
+import Doc from "./doc.mdx";
 
 export function meta() {
   return [
@@ -21,11 +20,7 @@ export default function ResolveStylePage() {
         desc="Calculate styles at runtime."
       />
       <DocLayout.Content>
-        <Typography.CodeBlock
-          withLineNumbers
-          code={sourceCode}
-          lang="typescript"
-        />
+        <Doc />
       </DocLayout.Content>
     </DocLayout>
   );
