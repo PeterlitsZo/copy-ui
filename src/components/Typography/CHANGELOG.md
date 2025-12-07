@@ -17,3 +17,4 @@
   component.
 - 2025-11-17: Remove `Typography.Root` component. Just use `Typography` as the
   root component. Some minor styles are updated.
+- 2025-12-07: Update the padding for `Typography.P`.

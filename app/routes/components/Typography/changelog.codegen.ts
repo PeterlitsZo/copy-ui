@@ -21,4 +21,5 @@ export const changelog = ''
   + '  component.\n'
   + '- 2025-11-17: Remove `Typography.Root` component. Just use `Typography` as the\n'
   + '  root component. Some minor styles are updated.\n'
+  + '- 2025-12-07: Update the padding for `Typography.P`.\n'
   ;
