@@ -1,11 +1,13 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithScrollableContent from "./demos/WithScrollableContent";
+import withScrollableContentSourceCode from "./demos/WithScrollableContent.source-code.codegen";
+import WithTypography from "./demos/WithTypography";
+import withTypographySourceCode from "./demos/WithTypography.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
 
 ## Dependency Graph
 
@@ -15,12 +17,14 @@ import demo02SourceCode from "./demos/Demo02.source_code.codegen";
     { id: "paper", label: "Paper" },
     { id: "scroll-area", label: "ScrollArea" },
     { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "typography", label: "Typography" },
     { id: "classnames", label: "classnames", color: "green" },
   ]}
   edges={[
     { from: "card", to: "paper" },
     { from: "card", to: "scroll-area" },
     { from: "card", to: "copy-ui-provider" },
+    { from: "card", to: "typography" },
     { from: "card", to: "classnames" },
   ]}
 />
@@ -29,5 +33,22 @@ import demo02SourceCode from "./demos/Demo02.source_code.codegen";
 
 ### With Scrollable Content
 
-<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+<DocLayout.Live
+  node={<WithScrollableContent />}
+  code={withScrollableContentSourceCode['index.tsx']}
+/>
 
+You can use the `Card.ContentInScrollArea` sub-component rather then the plain
+`Card.Content` sub-component to wrap the content in a `ScrollArea` component.
+
+This is useful when you have a lot of content that needs to be scrollable.
+
+### With Typography
+
+<DocLayout.Live
+  node={<WithTypography />}
+  code={withTypographySourceCode['index.tsx']}
+/>
+
+You can use the `withTypography` prop to wrap the content in a `Typography`
+component.

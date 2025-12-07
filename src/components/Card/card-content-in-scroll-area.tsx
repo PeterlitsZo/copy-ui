@@ -1,13 +1,16 @@
 import type { ComponentProps, FC } from "react";
 
 import { ScrollArea } from "@/components/ScrollArea";
+import { Typography } from "@/components/Typography";
 
 import styles from "./card-content-in-scroll-area.module.scss";
 
-type CardContentInScrollAreaProps = ComponentProps<"div">;
+type CardContentInScrollAreaProps = ComponentProps<"div"> & {
+  withTypography?: boolean;
+};
 
 const CardContentInScrollArea: FC<CardContentInScrollAreaProps> = (props) => {
-  const { children, className, style, ...rest } = props;
+  const { children, className, style, withTypography = false, ...rest } = props;
 
   return (
     <ScrollArea
@@ -17,7 +20,7 @@ const CardContentInScrollArea: FC<CardContentInScrollAreaProps> = (props) => {
     >
       <ScrollArea.Viewport className={className} style={style}>
         <ScrollArea.Content className={styles.cardContentInScrollAreaContent}>
-          {children}
+          {withTypography ? <Typography>{children}</Typography> : children}
         </ScrollArea.Content>
       </ScrollArea.Viewport>
       <ScrollArea.ScrollbarWithThumb />

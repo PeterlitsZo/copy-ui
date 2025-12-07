@@ -8,4 +8,6 @@ export const changelog = ''
   + '- 2025-11-25: Add the sub-component `Card.ContentInScrollArea`, and support the\n'
   + '  `withBorder` prop for `Card.Header` and `Card.Footer`. Some styles are updated\n'
   + '  to make it looks better.\n'
+  + '- 2025-12-07: Add the `withTypography` prop to `Card.Content` and\n'
+  + '  `Card.ContentInScrollArea`.\n'
   ;

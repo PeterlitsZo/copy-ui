@@ -1,12 +1,16 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
+import { Typography } from "@/components/Typography";
+
 import styles from "./card-content.module.scss";
 
-type CardContentProps = ComponentProps<"div">;
+type CardContentProps = ComponentProps<"div"> & {
+  withTypography?: boolean;
+};
 
 const CardContent: FC<CardContentProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, withTypography = false, ...rest } = props;
 
   return (
     <div
@@ -14,7 +18,7 @@ const CardContent: FC<CardContentProps> = (props) => {
       data-component="card-content"
       {...rest}
     >
-      {children}
+      {withTypography ? <Typography>{children}</Typography> : children}
     </div>
   );
 };

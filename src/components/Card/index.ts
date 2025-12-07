@@ -1,3 +1,3 @@
-// Card from copy-ui @ 2025-11-25.
+// Card from copy-ui @ 2025-12-07.
 
 export { Card } from "./card";
