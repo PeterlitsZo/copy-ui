@@ -22,6 +22,7 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "FileInput", "path": "routes/components/FileInput/index.tsx"},
   {"name": "Flex", "path": "routes/components/Flex/index.tsx"},
   {"name": "Graph", "path": "routes/components/Graph/index.tsx"},
+  {"name": "IbsBase", "path": "routes/components/IbsBase/index.tsx"},
   {"name": "IconButton", "path": "routes/components/IconButton/index.tsx"},
   {"name": "Input", "path": "routes/components/Input/index.tsx"},
   {"name": "InputBase", "path": "routes/components/InputBase/index.tsx"},

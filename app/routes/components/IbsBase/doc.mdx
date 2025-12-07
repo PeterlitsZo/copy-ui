@@ -1,0 +1,38 @@
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
+import { Info } from "lucide-react";
+import { Alert } from "@/components/Alert";
+
+import Demo01 from "./demos/Demo01";
+import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+
+<Alert color="blue" style={{ marginBottom: "1rem" }}>
+  <Info />
+  <Alert.Title>Info</Alert.Title>
+  <Alert.Description>This component is a low-level component meant to be used as
+    a building block for more complex input, button or select (or more)
+    components.</Alert.Description>
+</Alert>
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "ibs-base", label: "IbsBase" },
+    { id: "box", label: "Box" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "resolve-style2", label: "resolve-style2" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "ibs-base", to: "box" },
+    { from: "ibs-base", to: "copy-ui-provider" },
+    { from: "ibs-base", to: "resolve-style2" },
+    { from: "ibs-base", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### Basic Usage
+
+<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
