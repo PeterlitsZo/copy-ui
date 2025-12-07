@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import type { FC } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
-import { resolveStyle } from "@/utils/resolve-style";
+import { type Theme, useJss, useTheme } from "@/components/CopyUiProvider";
+import { resolveStyle2 } from "@/utils/resolve-style2";
 
 import styles from "./switch.module.scss";
 
@@ -19,54 +18,21 @@ const Switch: FC<SwitchProps> = (props) => {
   const theme = useTheme();
   const jss = useJss();
 
-  const switchStx = jss.hash(
-    resolveStyle({
-      base: {
-        "--switch-rail-bg": theme.colors.gray["300"],
-        "--switch-rail-checked-bg": theme.colors.blue["600"],
-        "--switch-rail-border-color": theme.colors.gray["400"],
-        "--switch-rail-checked-border-color": theme.colors.blue["700"],
-        "--switch-thumb-bg": "white",
-        "--switch-thumb-border-color": theme.colors.gray["400"],
-        "--switch-thumb-checked-border-color": theme.colors.blue["700"],
-      },
-      variants: {
-        size: {
-          text: {
-            "--switch-rail-height": "0.875rem",
-            "--switch-thumb-gap": "-0.5px",
-          },
-          xs: {
-            "--switch-rail-height": `calc(${theme.tokens.inputBaseXsHeight} * 0.75)`,
-            "--switch-thumb-gap": "0.5px",
-          },
-          sm: {
-            "--switch-rail-height": `calc(${theme.tokens.inputBaseSmHeight} * 0.8)`,
-            "--switch-thumb-gap": "0.5px",
-          },
-          md: {
-            "--switch-rail-height": `calc(${theme.tokens.inputBaseMdHeight} * 0.8)`,
-            "--switch-thumb-gap": "1px",
-          },
-          lg: {
-            "--switch-rail-height": `calc(${theme.tokens.inputBaseLgHeight} * 0.8)`,
-            "--switch-thumb-gap": "1px",
-          },
-          xl: {
-            "--switch-rail-height": `calc(${theme.tokens.inputBaseXlHeight} * 0.8)`,
-            "--switch-thumb-gap": "1px",
-          },
-        },
-      },
-      cls: {
-        size,
-      },
-    }),
-  );
+  const baseStx = jss.hash({
+    "--switchRail-bg": theme.colors.gray["300"],
+    "--switchRail-bdColor": theme.colors.gray["400"],
+    "--switchRail-checked-bg": theme.colors.blue["600"],
+    "--switchRail-checked-bdColor": theme.colors.blue["700"],
+    "--switchThumb-bg": "white",
+    "--switchThumb-bdColor": theme.colors.gray["400"],
+    "--switchThumb-checked-bdColor": theme.colors.blue["700"],
+  });
+
+  const stx = jss.hash(switchStyle(theme)({ size }));
 
   return (
     <button
-      className={classNames(styles.rail, switchStx)}
+      className={classNames(styles.rail, baseStx, stx)}
       data-checked={value}
       onClick={() => onChange?.(!value)}
       type="button"
@@ -79,6 +45,36 @@ const Switch: FC<SwitchProps> = (props) => {
 };
 
 Switch.displayName = "Switch";
+
+const switchStyle = (theme: Theme) =>
+  resolveStyle2({
+    size: {
+      text: {
+        "--switchRail-h": "0.875rem",
+        "--switchThumb-gap": "-0.5px",
+      },
+      xs: {
+        "--switchRail-h": `calc(1.25rem + 1px)`,
+        "--switchThumb-gap": "0.5px",
+      },
+      sm: {
+        "--switchRail-h": `calc(1.5rem + 1px)`,
+        "--switchThumb-gap": "0.5px",
+      },
+      md: {
+        "--switchRail-h": `calc(1.75rem + 1px)`,
+        "--switchThumb-gap": "1px",
+      },
+      lg: {
+        "--switchRail-h": `calc(2rem + 1px)`,
+        "--switchThumb-gap": "1px",
+      },
+      xl: {
+        "--switchRail-h": `calc(2.25rem + 1px)`,
+        "--switchThumb-gap": "1px",
+      },
+    },
+  });
 
 export type { SwitchProps };
 export { Switch };

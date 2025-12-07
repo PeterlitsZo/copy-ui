@@ -2,42 +2,42 @@
   .rail {
     position: relative;
 
-    height: var(--switch-rail-height);
-    width: calc(var(--switch-rail-height) * 1.75);
+    height: var(--switchRail-h);
+    width: calc(var(--switchRail-h) * 1.75);
 
     border-radius: 999999px;
-    border: 1px solid var(--switch-rail-border-color);
+    border: 1px solid var(--switchRail-bdColor);
 
-    background-color: var(--switch-rail-bg);
+    background-color: var(--switchRail-bg);
 
     cursor: pointer;
 
     transition: background-color 0.15s, border-color 0.15s;
 
     &[data-checked="true"] {
-      background-color: var(--switch-rail-checked-bg);
-      border: 1px solid var(--switch-rail-checked-border-color);
+      background-color: var(--switchRail-checked-bg);
+      border: 1px solid var(--switchRail-checked-bdColor);
     }
   }
 
   .thumb {
     position: absolute;
-    top: var(--switch-thumb-gap);
-    left: var(--switch-thumb-gap);
+    top: var(--switchThumb-gap);
+    left: var(--switchThumb-gap);
 
-    height: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2 - 2px);
-    width: calc(var(--switch-rail-height) - var(--switch-thumb-gap) * 2 - 2px);
+    height: calc(var(--switchRail-h) - var(--switchThumb-gap) * 2 - 2px);
+    width: calc(var(--switchRail-h) - var(--switchThumb-gap) * 2 - 2px);
 
     border-radius: 999999px;
-    border: 1px solid var(--switch-thumb-border-color);
+    border: 1px solid var(--switchThumb-bdColor);
 
-    background-color: var(--switch-thumb-bg);
+    background-color: var(--switchThumb-bg);
 
     transition: left 0.15s, border-color 0.15s;
 
     .rail[data-checked="true"] & {
-      left: calc(var(--switch-rail-height) * 1.75 - var(--switch-rail-height) + var(--switch-thumb-gap));
-      border: 1px solid var(--switch-thumb-checked-border-color);
+      left: calc(var(--switchRail-h) * 1.75 - var(--switchRail-h) + var(--switchThumb-gap));
+      border: 1px solid var(--switchThumb-checked-bdColor);
     }
   }
 }

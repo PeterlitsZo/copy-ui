@@ -12,4 +12,5 @@ export const changelog = ''
   + '- 2025-10-14: Add border styles, use ratio-based width calculation, adjust thumb\n'
   + '  gap values. \n'
   + '- 2025-11-03: Use JSS & resolve-style for styles.\n'
+  + '- 2025-12-07: Refactor code and remove deprecated dependencies.\n'
   ;
