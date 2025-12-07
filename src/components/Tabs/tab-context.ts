@@ -4,6 +4,7 @@ interface TabsContextValue {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   variant: "default" | "enclosed";
+  size: "md" | "lg";
 }
 
 const TabsContext = createContext<TabsContextValue | null>(null);

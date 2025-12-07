@@ -3,3 +3,4 @@
 - 2025-10-31: Support the `enclosed` variant.
 - 2025-11-15: Adjust spacing between tabs for better visual balance. Remove the
   dependency on deprecated `ThemeProvider` and use `CopyUiProvider` instead.
+- 2025-12-07: Support the `size` prop.

@@ -33,6 +33,7 @@ const DocLayoutTitle: FC<DocLayoutTitleProps> = (props) => {
         </Typography.P>
       </Typography>
       <Tabs
+        size="lg"
         value={tabsValue}
         onValueChange={onTabsValueChange}
         className={styles.docLayoutTitleWrapper}

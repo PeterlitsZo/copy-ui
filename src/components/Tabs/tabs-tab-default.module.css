@@ -1,0 +1,46 @@
+@layer components {
+  .tabsTabDefault {
+    --tab-bdBottomWidth: calc(0.125rem + 0.5px);
+    --tab-bdBottomStyle: solid;
+    --tab-bdBottomColor: transparent;
+    --tab-bgColor: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: var(--tab-px);
+    padding-right: var(--tab-px);
+    padding-top: var(--tab-pt);
+    padding-bottom: var(--tab-pb);
+
+    border-bottom-width: var(--tab-bdBottomWidth);
+    border-bottom-style: var(--tab-bdBottomStyle);
+    border-bottom-color: var(--tab-bdBottomColor);
+
+    background-color: var(--tab-bgColor);
+    color: var(--tab-color);
+
+    font-size: var(--tab-fontSize);
+
+    cursor: pointer;
+
+    &[data-active="true"] {
+      border-bottom-color: var(--tab-active-bdBottomColor);
+      color: var(--tab-active-color);
+      background-color: var(--tab-active-bgColor);
+    }
+
+    .tabContent {
+      padding-left: var(--tabContent-px);
+      padding-right: var(--tabContent-px);
+      padding-top: var(--tabContent-py);
+      padding-bottom: var(--tabContent-py);
+      border-radius: 0.5rem;
+    }
+
+    &:hover .tabContent {
+      background-color: var(--tab-hover-contentBgColor);
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@layer components {
+  .tabs {
+    display: flex;
+    background-color: var(--tabs-bgColor);
+    width: var(--tabs-w);
+    border-radius: var(--tabs-bdRadius);
+    padding: var(--tabs-p);
+    gap: var(--tabs-gap);
+  }
+}

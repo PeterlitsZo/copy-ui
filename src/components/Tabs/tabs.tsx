@@ -3,15 +3,16 @@ import type { ComponentProps, FC } from "react";
 import { useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { resolveStyle } from "@/utils/resolve-style";
+import { resolveStyle2 } from "@/utils/resolve-style2";
 
 import { TabsContext, type TabsContextValue } from "./tab-context";
-import styles from "./tabs.module.scss";
+import styles from "./tabs.module.css";
 import { TabsTab } from "./tabs-tab";
 
 export type TabsProps = ComponentProps<"div"> & {
   defaultValue?: string;
   value?: string;
+  size?: "md" | "lg";
   onValueChange?: (value: string) => void;
   variant?: "default" | "enclosed";
   children: React.ReactNode;
@@ -29,6 +30,7 @@ const Tabs: TabsComponent = (props: TabsProps) => {
     value,
     onValueChange,
     variant = "default",
+    size = "md",
     ...rest
   } = props;
 
@@ -49,31 +51,10 @@ const Tabs: TabsComponent = (props: TabsProps) => {
     activeTab,
     setActiveTab,
     variant,
+    size,
   };
 
-  const tabsStx = jss.hash(
-    resolveStyle({
-      base: {},
-      variants: {
-        variant: {
-          default: {
-            "--tabs-bg-color": "transparent",
-            "--tabs-width": "auto",
-            "--tabs-border-radius": "auto",
-            "--tabs-gap": "0.75rem",
-          },
-          enclosed: {
-            "--tabs-bg-color": theme.colors.gray["100"],
-            "--tabs-width": "fit-content",
-            "--tabs-border-radius": "0.75rem",
-            "--tabs-padding": "0.25rem",
-            "--tabs-gap": "0.125rem",
-          },
-        },
-      },
-      cls: { variant: variant },
-    }),
-  );
+  const tabsStx = useTabsStx(variant, size);
 
   return (
     <TabsContext.Provider value={contextValue}>
@@ -89,5 +70,49 @@ const Tabs: TabsComponent = (props: TabsProps) => {
 };
 
 Tabs.Tab = TabsTab;
+
+function useTabsStx(variant: "default" | "enclosed", size: "md" | "lg") {
+  const jss = useJss();
+  const theme = useTheme();
+
+  const styles = resolveStyle2({
+    variant: {
+      default: {
+        "--tabs-bgColor": "transparent",
+        "--tabs-w": "auto",
+        "--tabs-bdRadius": "auto",
+        "--tabs-gap": "0.75rem",
+      },
+      enclosed: {
+        "--tabs-bgColor": theme.colors.gray["100"],
+        "--tabs-w": "fit-content",
+        "--tabs-bdRadius": "0.75rem",
+        "--tabs-p": "0.25rem",
+        "--tabs-gap": "0.125rem",
+      },
+    },
+    variantAndSize: {
+      default_md: {
+        "--tabs-gap": "0.5rem",
+      },
+      default_lg: {
+        "--tabs-gap": "1rem",
+      },
+      enclosed_md: {
+        "--tabs-gap": "0.125rem",
+      },
+      enclosed_lg: {
+        "--tabs-gap": "0.25rem",
+      },
+    },
+  });
+
+  return jss.hash(
+    styles({
+      variant,
+      variantAndSize: `${variant}_${size}`,
+    }),
+  );
+}
 
 export { Tabs };

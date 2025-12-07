@@ -1,0 +1,42 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithDifferentVariants from "./demos/WithDifferentVariants";
+import withDifferentVariantsSourceCode from "./demos/WithDifferentVariants.source-code.codegen";
+import WithDifferentSizes from "./demos/WithDifferentSizes";
+import withDifferentSizesSourceCode from "./demos/WithDifferentSizes.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "tabs", label: "Tabs" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "resolve-style2", label: "resolve-style2" },
+    { id: "classnames", label: "classnames", color: "green" },
+  ]}
+  edges={[
+    { from: "tabs", to: "copy-ui-provider" },
+    { from: "tabs", to: "resolve-style2" },
+    { from: "tabs", to: "classnames" },
+  ]}
+/>
+
+## Examples
+
+### With Different Variants
+
+<DocLayout.Live
+  node={<WithDifferentVariants />}
+  code={withDifferentVariantsSourceCode["index.tsx"]}
+/>
+
+### With Different Sizes
+
+<DocLayout.Live
+  node={<WithDifferentSizes />}
+  code={withDifferentSizesSourceCode["index.tsx"]}
+/>
