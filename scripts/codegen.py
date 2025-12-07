@@ -3,24 +3,48 @@ from typing import TextIO, List, TypedDict
 import json
 from pathlib import Path
 
+class CodegenEnv:
+    def __init__(self, project_root: Path):
+        self.project_root = project_root
+        
+    def get_components_src_dir(self) -> Path:
+        return self.project_root / "src" / "components"
+
+    def get_components_app_dir(self) -> Path:
+        return self.project_root / "app" / "routes" / "components"
+
+class Component:
+    def __init__(self, env: CodegenEnv, name: str):
+        self.env = env
+        self.name = name
+        
+    def get_src_dir(self) -> Path:
+        return self.env.get_components_src_dir() / self.name
+    
+    def get_app_dir(self) -> Path:
+        return self.env.get_components_app_dir() / self.name
+    
+    def get_app_demos_dir(self) -> Path:
+        return self.get_app_dir() / "demos"
+
 def main():
     codegen_component()
     codegen_utils()
 
 def codegen_component():
-    """Reads all component directories under `src/components`, and converts their
+    """
+    Reads all component directories under `src/components`, and converts their
     file contents into a TypeScript file (with suffix `.codegen.ts`), etc.
     """
+
     # The script is in the 'scripts' directory. We need to go up one level to
     # the project root.
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
+    env = CodegenEnv(Path(project_root))
     
-    components_dir = os.path.join(project_root, 'src', 'components')
-    components_route_dir = os.path.join(project_root, 'app', 'routes', 'components')
-    
-    if not os.path.exists(components_dir):
-        print(f"Error: Components directory not found at {repr(components_dir)}")
+    if not env.get_components_src_dir().exists():
+        print(f"Error: Components directory not found at {repr(env.get_components_src_dir())}")
         return
 
     # List of all component names.        
@@ -30,10 +54,9 @@ def codegen_component():
         deprecated: bool
     components: List[ComponentInfo] = []
 
-    for component_name in os.listdir(components_dir):
-        component_dir_path = os.path.join(components_dir, component_name)
-        component_route_dir_path = os.path.join(components_route_dir, component_name)
-
+    for component_name in env.get_components_src_dir().glob("*"):
+        component = Component(env, component_name.stem)
+        
         # Default config's flags.
         wip = False
         deprecated = False
@@ -41,23 +64,21 @@ def codegen_component():
 
         # Read the component config file, if exists.
         config_paths = [
-            os.path.join(component_dir_path, '.copy_ui_config.toml'),
-            os.path.join(component_dir_path, '.copy-ui-config.toml'),
+            component.get_src_dir() / '.copy_ui_config.toml',
+            component.get_src_dir() / '.copy-ui-config.toml',
         ]
         for config_path in config_paths:
-            if os.path.isfile(config_path):
-                if config_path.endswith('.copy_ui_config.toml'):
+            if config_path.is_file():
+                if config_path.name == '.copy_ui_config.toml':
                     print(f"WARN Find config file {config_path} -- which is deprecated, please use `.copy-ui-config.toml` instead.")
                     
-                with open(config_path, 'r', encoding='utf-8') as cf:
-                    config_content = cf.read()
-                    if 'private = true' in config_content:
-                        private = True
-                    if 'wip = true' in config_content:
-                        wip = True
-                    if 'deprecated = true' in config_content:
-                        deprecated = True
-                break
+                config_content = config_path.read_text(encoding='utf-8')
+                if 'private = true' in config_content:
+                    private = True
+                if 'wip = true' in config_content:
+                    wip = True
+                if 'deprecated = true' in config_content:
+                    deprecated = True
             
         # Skip private components.
         if private:
@@ -65,55 +86,52 @@ def codegen_component():
 
         # Add to the list of components.
         components.append({
-            "name": component_name,
+            "name": component.name,
             "wip": wip,
             "deprecated": deprecated
         })
 
         # Code generation for `source_code.codegen.ts`.
         source_code_codegen_filename = "source_code.codegen.ts"
-        if os.path.isdir(component_dir_path):
+        if component.get_src_dir().is_dir():
             # Make sure the output file directory exists.
-            output_file_path = os.path.join(component_route_dir_path, source_code_codegen_filename)
-            if not os.path.exists(os.path.dirname(output_file_path)):
-                os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+            output_file_path = component.get_app_dir() / source_code_codegen_filename
+            output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
             # Code generation for this component.
             with open(output_file_path, 'w', encoding='utf-8') as of:
-                codegen_source_code_for_component(component_dir_path, of)
+                codegen_source_code_for_component(component.get_src_dir(), of)
 
         # Code generation for `Demo_source_code.codegen.ts`.
-        codegen_demo_for_component(component_name, component_route_dir_path)
+        codegen_demo_for_component(component)
 
         # Code generation for `CHANGELOG.md`.
         changelog_codegen_filename = 'changelog.codegen.ts'
-        if os.path.isdir(component_dir_path):
+        if component.get_src_dir().is_dir():
             # Make sure the output file directory exists.
-            if not os.path.exists(component_route_dir_path):
-                os.makedirs(component_route_dir_path, exist_ok=True)
+            output_file_path = component.get_app_dir() / changelog_codegen_filename
+            output_file_path.parent.mkdir(parents=True, exist_ok=True)
 
             # Code generation for this component.
-            with open(os.path.join(component_route_dir_path, changelog_codegen_filename), 'w', encoding='utf-8') as of:
-                codegen_changelog_for_component(component_dir_path, of)
+            with open(output_file_path, 'w', encoding='utf-8') as of:
+                codegen_changelog_for_component(component.get_src_dir(), of)
 
         # Code generation for default `index.tsx` if it doesn't exist.
-        index_tsx_path = os.path.join(component_route_dir_path, 'index.tsx')
+        index_tsx_path = component.get_app_dir() / 'index.tsx'
         if not os.path.exists(index_tsx_path):
             # Make sure the output file directory exists.
-            if not os.path.exists(component_route_dir_path):
-                os.makedirs(component_route_dir_path, exist_ok=True)
+            index_tsx_path.parent.mkdir(parents=True, exist_ok=True)
             
             # Generate default index.tsx.
             with open(index_tsx_path, 'w', encoding='utf-8') as of:
-                codegen_default_index_tsx(component_name, of)
+                codegen_default_index_tsx(component.name, of)
 
     # Sort components alphabetically.
     components.sort(key=lambda x: x['name'].lower())
 
     # Code generation for `src/components/Navbar/components.codegen.ts`.
-    navbar_components_codegen_path = os.path.join(project_root, 'src', 'components', 'Navbar', 'components.codegen.ts')
-    if not os.path.exists(os.path.dirname(navbar_components_codegen_path)):
-        os.makedirs(os.path.dirname(navbar_components_codegen_path), exist_ok=True)
+    navbar_components_codegen_path = env.get_components_src_dir() / "Navbar" / "components.codegen.ts"
+    navbar_components_codegen_path.parent.mkdir(parents=True, exist_ok=True)
     with open(navbar_components_codegen_path, 'w', encoding='utf-8') as of:
         of.write(get_codegen_header())
         of.write("type Component = { name: string, path: string, wip: boolean, deprecated: boolean };\n\n")
@@ -130,7 +148,7 @@ def codegen_component():
         of.write("];\n")
 
     # Code generation for `app/components_routes.codegen.ts`.
-    app_components_routes_codegen_path = os.path.join(project_root, 'app', 'components_routes.codegen.ts')
+    app_components_routes_codegen_path = env.get_components_app_dir() / "components_routes.codegen.ts"
     with open(app_components_routes_codegen_path, 'w', encoding='utf-8') as of:
         of.write(get_codegen_header())
         of.write("export const componentsRoutes: { name: string, path: string }[] = [\n")
@@ -171,49 +189,56 @@ def codegen_source_code_for_component(component_dir_path: str, of: TextIO):
             except Exception as e:
                 print(f"Error reading file {file_path}: {e}")
 
-def codegen_demo_for_component(component_name: str, component_route_dir_path: str):
+def codegen_demo_for_component(component: Component):
     """
     Generates the demo codegen file for a specific component.
 
-    The demo file should be located at `Demo.tsx` or `demos/*.tsx`. If it is
-    `Demo.tsx`, a `Demo_source_code.codegen.ts` file will be generated. If it
-    is `demos/*.tsx`, a `demos/<original_name>.source_code.codegen.ts` file
-    will be generated.
+    The demo file should be located at `demos/*.tsx` or `demos/*/` folder.
+    If it is a file, the source code of the demo will be generated into a
+    `*.source_code.codegen.ts` file. If it is a folder, the source code of the
+    demo will be generated into a `demos/*.source-code.codegen.ts` file.
     """
-    def codegen_demo_source_code(of: TextIO, demo_content: str, export_default: bool = False):
-        of.write("// This file is auto-generated by `just codegen`.\n")
-        of.write("// Do not edit this file directly.\n\n")
-        if export_default:
-            of.write("const demoSourceCode = ''\n")
-        else:
-            of.write("export const demoSourceCode = ''\n")
+
+    def codegen_demo_source_code(of: TextIO, demo_content: str):
+        of.write(get_codegen_header())
+        of.write("const demoSourceCode = ''\n")
         for line in demo_content.splitlines():
             line += '\n'
             of.write(f"  + {repr(line)}\n")
         of.write("  ;\n")
-        if export_default:
-            of.write("\nexport default demoSourceCode;\n")
+        of.write("\nexport default demoSourceCode;\n")
+        
+    def codegen_demo_source_code_for_dir(of: TextIO, demo_dir_path: Path):
+        of.write(get_codegen_header())
+        of.write("const sourceCode: Record<string, string> = {};\n\n")
+        for filename in os.listdir(demo_dir_path):
+            with open(demo_dir_path / filename, 'r', encoding='utf-8') as f:
+                file_content = f.read()
+            of.write(f"sourceCode['{filename}'] = ''\n")
+            for line in file_content.splitlines():
+                line += '\n'
+                of.write(f"  + {repr(line)}\n")
+            of.write("  ;\n")
+        of.write(";\n")
+        of.write("\nexport default sourceCode;\n")
 
-    demo_file_path = os.path.join(component_route_dir_path, 'Demo.tsx')
-    of_path = os.path.join(component_route_dir_path, 'Demo_source_code.codegen.ts')
-    if os.path.isfile(demo_file_path):
-        print(f"WARN Find component {component_name} has Demo.tsx to codegen -- which is deprecated, please use `demos/` folder instead.")
-        with open(of_path, 'w', encoding='utf-8') as of:
-            with open(demo_file_path, 'r', encoding='utf-8') as df:
-                demo_content = df.read()
+    # Code generation for `demos/*.tsx`.
+    demos_dir_path = component.get_app_demos_dir()
+    if demos_dir_path.is_dir():
+        for demo_file_path in demos_dir_path.glob("*.tsx"):
+            of_filename = f"{demo_file_path.stem}.source_code.codegen.ts"
+            of_path = demos_dir_path / of_filename
+            with open(of_path, 'w', encoding='utf-8') as of:
+                demo_content = demo_file_path.read_text(encoding='utf-8')
                 codegen_demo_source_code(of, demo_content)
-
-    demos_dir_path = os.path.join(component_route_dir_path, 'demos')
-    if os.path.isdir(demos_dir_path):
-        for filename in os.listdir(demos_dir_path):
-            if filename.endswith('.tsx'):
-                demo_file_path = os.path.join(demos_dir_path, filename)
-                of_filename = f"{os.path.splitext(filename)[0]}.source_code.codegen.ts"
-                of_path = os.path.join(demos_dir_path, of_filename)
-                with open(of_path, 'w', encoding='utf-8') as of:
-                    with open(demo_file_path, 'r', encoding='utf-8') as df:
-                        demo_content = df.read()
-                        codegen_demo_source_code(of, demo_content, export_default=True)
+                
+    # Code generation for `demos/*/`.
+    for demo_dir_path in demos_dir_path.glob("*"):
+        if demo_dir_path.is_dir():
+            of_filename = f"{demo_dir_path.stem}.source-code.codegen.ts"
+            of_path = component.get_app_demos_dir() / of_filename
+            with open(of_path, 'w', encoding='utf-8') as of:
+                codegen_demo_source_code_for_dir(of, demo_dir_path)
 
 def codegen_changelog_for_component(component_dir_path: str, of: TextIO):
     """
