@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-11-21: Initial version.\n'
+  + '- 2025-12-08: Use `IbsBase` rather than the deprecated `InputBase` component.\n'
   ;

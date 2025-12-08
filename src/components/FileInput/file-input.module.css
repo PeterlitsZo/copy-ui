@@ -1,10 +1,10 @@
 @layer components {
-  .inputBase {
-    background-color: var(--input-bg-color);
-    cursor: pointer;
-
-    &[data-disabled="true"] {
-      cursor: not-allowed;
+  .ibsBase {
+    &:has(.fileInput:focus) {
+      outline: none;
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--fileInput-focus-bdColor);
     }
   }
 
@@ -16,10 +16,10 @@
     align-items: center;
     text-align: left;
 
-    padding-inline-start: var(--input-padding-inline-start);
-    padding-inline-end: var(--input-padding-inline-end);
-    font-size: var(--input-font-size);
-    line-height: var(--input-line-height);
+    padding-inline-start: var(--fileInput-paddingInlineStart);
+    padding-inline-end: var(--fileInput-paddingInlineEnd);
+    font-size: var(--fileInput-fontSize);
+    line-height: var(--fileInput-lineHeight);
 
     cursor: pointer;
 
@@ -52,6 +52,6 @@
   }
 
   .fileInputText.placeholder {
-    color: var(--input-placeholder-color);
+    color: var(--fileInput-placeholderColor);
   }
 }

@@ -11,10 +11,10 @@ export default function Demo() {
 
   return (
     <Flex dir="column" gap="1rem" className={stx}>
-      <FileInput width="sm" placeholder="Choose file..." />
-      <FileInput width="md" placeholder="Choose file..." />
-      <FileInput width="lg" placeholder="Choose file..." />
-      <FileInput width="full" placeholder="Choose file..." />
+      <FileInput w="12rem" placeholder="Choose file..." />
+      <FileInput w="16rem" placeholder="Choose file..." />
+      <FileInput w="20rem" placeholder="Choose file..." />
+      <FileInput w="100%" placeholder="Choose file..." />
     </Flex>
   );
 }

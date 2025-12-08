@@ -2,31 +2,24 @@ import classNames from "classnames";
 import { type ComponentProps, type FC, useRef, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { InputBase } from "@/components/InputBase";
-import { resolveStyle } from "@/utils/resolve-style";
+import { extractStylesProps, IbsBase } from "@/components/IbsBase";
 
-import styles from "./file-input.module.scss";
+import styles from "./file-input.module.css";
 
-export type FileInputProps = Omit<
-  ComponentProps<"input">,
-  "size" | "type" | "onChange"
-> & {
-  variant?: "default" | "filled";
-  size?: "sm" | "md" | "lg";
-  width?: "sm" | "md" | "lg" | "full";
+export type FileInputProps = ComponentProps<typeof IbsBase> &
+  Omit<ComponentProps<"input">, "size"> & {
+    variant?: "default" | "filled";
+    leftSection?: React.ReactNode;
+    rightSection?: React.ReactNode;
 
-  leftSection?: React.ReactNode;
-  rightSection?: React.ReactNode;
-
-  onChange?: (files: FileList | null) => void;
-  placeholder?: string;
-};
+    onChange?: (files: FileList | null) => void;
+    placeholder?: string;
+  };
 
 export const FileInput: FC<FileInputProps> = (props) => {
   const {
     variant = "default",
     size = "md",
-    width,
     leftSection,
     rightSection,
     className,
@@ -36,59 +29,27 @@ export const FileInput: FC<FileInputProps> = (props) => {
     placeholder = "Choose file...",
     accept,
     multiple,
-    ...rest
+
+    ...others
   } = props;
+
+  const { stx: baseStyleStx, rest } = extractStylesProps(others);
 
   const theme = useTheme();
   const jss = useJss();
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
-  const stx = jss.hash(
-    resolveStyle({
-      base: {
-        "--input-focus-border-color": theme.colors.blue["800"],
-        "--input-padding-inline-start": leftSection ? "0.125rem" : "0.75rem",
-        "--input-padding-inline-end": rightSection ? "0.125rem" : "0.75rem",
-        "--input-placeholder-color": theme.tokens.inputBasePlaceholderColor,
-      },
-      variants: {
-        variant: {
-          default: {
-            "--input-bg-color": "white",
-          },
-          filled: {
-            "--input-bg-color": theme.colors.gray["000"],
-          },
-        },
-        size: {
-          sm: {
-            "--input-font-size": theme.tokens.inputBaseSmFontSize,
-            "--input-line-height": theme.tokens.inputBaseSmLineHeight,
-          },
-          md: {
-            "--input-font-size": theme.tokens.inputBaseMdFontSize,
-            "--input-line-height": theme.tokens.inputBaseMdLineHeight,
-          },
-          lg: {
-            "--input-font-size": theme.tokens.inputBaseLgFontSize,
-            "--input-line-height": theme.tokens.inputBaseLgLineHeight,
-          },
-        },
-      },
-      cls: {
-        size,
-        variant,
-      },
-    }),
-  );
+  const baseStx = jss.hash({
+    "--fileInput-focus-bdColor": theme.colors.blue["800"],
+    "--fileInput-paddingInlineStart": leftSection ? "0.125rem" : "0.75rem",
+    "--fileInput-paddingInlineEnd": rightSection ? "0.125rem" : "0.75rem",
+    "--fileInput-placeholderColor": theme.colors.gray["600"],
+  });
 
-  // TODO (PeterlitsZo): I think it is a bad idea... Need some time to rethink it.
-  const borderColorStx = jss.hash({
-    "--input-base-border-color":
-      variant === "filled"
-        ? "transparent"
-        : theme.tokens.inputBaseDefaultBorderColor,
+  const inputStx = jss.hash({
+    "--fileInput-fontSize": "var(--ibsBase-fontSize)",
+    "--fileInput-lineHeight": "var(--ibsBase-lineHeight)",
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,45 +75,49 @@ export const FileInput: FC<FileInputProps> = (props) => {
   };
 
   return (
-    <InputBase
+    <IbsBase
+      variant={variant}
       size={size}
-      width={width}
-      leftSection={leftSection}
-      rightSection={rightSection}
       disabled={disabled}
       style={style}
-      className={classNames(styles.inputBase, stx, borderColorStx, className)}
+      className={classNames(styles.ibsBase, baseStx, baseStyleStx, className)}
     >
-      <input
-        ref={inputRef}
-        type="file"
-        className={styles.fileInput}
-        accept={accept}
-        multiple={multiple}
-        disabled={disabled}
-        onChange={handleFileChange}
-        {...rest}
-      />
-      <button
-        className={styles.fileInputWrapper}
-        onClick={handleClick}
-        type="button"
-        tabIndex={disabled ? undefined : 0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            handleClick();
-          }
-        }}
-      >
-        <span
-          className={classNames(styles.fileInputText, {
-            [styles.placeholder]: !selectedFiles?.length,
-          })}
+      {leftSection && <IbsBase.LeftSection>{leftSection}</IbsBase.LeftSection>}
+      <IbsBase.Wrapper>
+        <input
+          ref={inputRef}
+          type="file"
+          className={styles.fileInput}
+          accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+          onChange={handleFileChange}
+          {...rest}
+        />
+        <button
+          className={classNames(styles.fileInputWrapper, inputStx)}
+          onClick={handleClick}
+          type="button"
+          tabIndex={disabled ? undefined : 0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleClick();
+            }
+          }}
         >
-          {getDisplayText()}
-        </span>
-      </button>
-    </InputBase>
+          <span
+            className={classNames(styles.fileInputText, {
+              [styles.placeholder]: !selectedFiles?.length,
+            })}
+          >
+            {getDisplayText()}
+          </span>
+        </button>
+      </IbsBase.Wrapper>
+      {rightSection && (
+        <IbsBase.RightSection>{rightSection}</IbsBase.RightSection>
+      )}
+    </IbsBase>
   );
 };
 
