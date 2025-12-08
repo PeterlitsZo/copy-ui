@@ -34,6 +34,7 @@ const DocLayoutFiles: FC<DocLayoutFilesProps> = (props) => {
       tsx: "tsx",
       md: "markdown",
       scss: "scss",
+      css: "css",
     }[currentFilename.split(".").pop() ?? ""] || "none";
   const fileContentToShow =
     Object.entries(files).find(
