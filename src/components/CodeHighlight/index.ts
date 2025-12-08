@@ -1,3 +1,3 @@
-// CodeHighlight from copy-ui @ 2025-10-13.
+// CodeHighlight from copy-ui @ 2025-12-08.
 
 export { CodeHighlight } from "./code-highlight";

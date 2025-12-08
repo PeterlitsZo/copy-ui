@@ -10,6 +10,7 @@ export const highlighter = await createHighlighterCore({
     () => import("@shikijs/langs/tsx"),
     () => import("@shikijs/langs/markdown"),
     () => import("@shikijs/langs/scss"),
+    () => import("@shikijs/langs/css"),
   ],
   engine: createOnigurumaEngine(import("shiki/wasm")),
 });

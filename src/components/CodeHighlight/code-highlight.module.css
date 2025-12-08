@@ -15,17 +15,17 @@
   }
 
   .codeHighlightPre {
-    padding-top: var(--code-highlight-py);
-    padding-bottom: var(--code-highlight-py);
+    padding-top: var(--codeHighlight-py);
+    padding-bottom: var(--codeHighlight-py);
     flex: 1;
   }
 
   .codeHighlightLine {
     width: 100%;
-    padding-right: var(--code-highlight-px);
+    padding-right: var(--codeHighlight-px);
 
     &[data-highlighted="true"] {
-      background-color: var(--code-highlight-line-highlight-bg);
+      background-color: var(--codeHighlightLine-highlighted-bgColor);
     }
 
     &[data-with-line-number="true"] {
@@ -35,23 +35,23 @@
 
   .codeHighlightLineNumber {
     padding-right: 0.25rem;
-    padding-left: var(--code-highlight-px);
+    padding-left: var(--codeHighlight-px);
 
     &[data-highlighted="true"] {
-      color: var(--code-highlight-line-number-highlight-color);
-      background-color: var(--code-highlight-line-number-highlight-bg);
+      color: var(--codeHighlightLineNumber-highlighted-color);
+      background-color: var(--codeHighlightLineNumber-highlighted-bgColor);
     }
   }
 
   .codeHighlightLineNumberContainer {
     display: flex;
     flex-direction: column;
-    color: var(--code-highlight-line-numbers-color);
+    color: var(--codeHighlightLineNumbers-color);
     text-align: right;
     min-width: 1.75rem;
     font-family: var(--font-mono);
     user-select: none;
-    padding-top: var(--code-highlight-py);
-    padding-bottom: var(--code-highlight-py);
+    padding-top: var(--codeHighlight-py);
+    padding-bottom: var(--codeHighlight-py);
   }
 }

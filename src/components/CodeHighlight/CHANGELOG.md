@@ -5,3 +5,5 @@
 - 2025-10-16: Refactor code to use hast to build the HTML. That make the
   `CodeHighlight` component support `lineHighlight` prop, etc.
 - 2025-10-22: Refactor code. And use JSS for styling.
+- 2025-12-08: Support the highlighting for CSS language, remove the dependency
+  on `ThemeProvider`, etc.

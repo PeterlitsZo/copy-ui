@@ -2,10 +2,9 @@ import classNames from "classnames";
 import { toHtml } from "hast-util-to-html";
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { useJss } from "@/components/CopyUiProvider";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
-import styles from "./code-highlight.module.scss";
+import styles from "./code-highlight.module.css";
 import { highlighter } from "./highlighter";
 import { transformRoot } from "./transformer";
 
@@ -53,12 +52,12 @@ export const CodeHighlight: FC<CodeHighlightProps> = (props) => {
   }, [code, lang, withLineNumbers, lineHighlight]);
 
   const stx = jss.hash({
-    "--code-highlight-line-numbers-color": theme.colors.gray["500"],
-    "--code-highlight-line-number-highlight-color": theme.colors.gray["600"],
-    "--code-highlight-line-number-highlight-bg": theme.colors.gray["100"],
-    "--code-highlight-line-highlight-bg": theme.colors.gray["100"],
-    "--code-highlight-px": px ?? "0",
-    "--code-highlight-py": py ?? "0",
+    "--codeHighlightLineNumbers-color": theme.colors.gray["500"],
+    "--codeHighlightLineNumber-highlighted-color": theme.colors.gray["600"],
+    "--codeHighlightLineNumber-highlighted-bgColor": theme.colors.gray["100"],
+    "--codeHighlightLine-highlighted-bgColor": theme.colors.gray["100"],
+    "--codeHighlight-px": px ?? "0",
+    "--codeHighlight-py": py ?? "0",
   });
 
   return (

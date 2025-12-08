@@ -1,0 +1,26 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "code-highlight", label: "CodeHighlight" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "hast-util-to-html", label: "hast-util-to-html", color: "green" },
+    { id: "hast", label: "hast", color: "green" },
+    { id: "shiki", label: "shiki", color: "green" },
+  ]}
+  edges={[
+    { from: "code-highlight", to: "copy-ui-provider" },
+    { from: "code-highlight", to: "classnames" },
+    { from: "code-highlight", to: "hast-util-to-html" },
+    { from: "code-highlight", to: "hast" },
+    { from: "code-highlight", to: "shiki" },
+  ]}
+/>
