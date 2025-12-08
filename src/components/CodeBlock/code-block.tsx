@@ -1,17 +1,16 @@
 import classNames from "classnames";
+import { Clipboard } from "lucide-react";
 import { type FC, useRef } from "react";
 
 import { CodeHighlight } from "@/components/CodeHighlight";
-import { useJss } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { IconButton } from "@/components/IconButton";
 import { ScrollArea } from "@/components/ScrollArea";
-import { useTheme } from "@/components/ThemeProvider";
+import { useToast } from "@/components/Toast";
 
-import styles from "./code-block.module.scss";
+import styles from "./code-block.module.css";
 
 type CodeBlockProp = {
-  /** The `className` for root. */
-  className?: string;
-
   /** The code to display. */
   code: string;
   /** The language of the code. */
@@ -21,26 +20,36 @@ type CodeBlockProp = {
   title?: string;
   /** Whether to show line numbers. */
   withLineNumbers?: boolean;
+  /** With copy button. */
+  withCopyButton?: boolean;
 
   /** The height of the code block's scroll-area. */
   scrollAreaHeight?: string;
   /** The max-height of the code block's scroll-area. */
   scrollAreaMaxHeight?: string;
+
+  /** The `className` for root. */
+  className?: string;
 };
 
 const CodeBlock: FC<CodeBlockProp> = (props) => {
   const {
-    className,
     code,
     lang,
+
     title,
     withLineNumbers,
+    withCopyButton,
+
     scrollAreaHeight,
     scrollAreaMaxHeight,
+
+    className,
   } = props;
 
   const theme = useTheme();
   const jss = useJss();
+  const { addToast } = useToast();
 
   const scrollContentRef = useRef<HTMLDivElement>(null);
 
@@ -50,13 +59,22 @@ const CodeBlock: FC<CodeBlockProp> = (props) => {
   });
 
   const codeBlockStx = jss.hash({
-    "--code-block-border-radius": "0.375rem",
-    "--code-block-bg-color": theme.colors.gray["000"],
-    "--code-block-title-color": theme.colors.gray["600"],
-    "--code-block-title-px": "0.75rem",
-    "--code-block-title-py": "0.5rem",
-    "--code-block-title-border-bottom-color": theme.colors.gray["200"],
+    "--codeBlock-bdRadius": "0.375rem",
+    "--codeBlock-bgColor": theme.colors.gray["000"],
+    "--codeBlockTitle-color": theme.colors.gray["600"],
+    "--codeBlockTitle-px": "0.75rem",
+    "--codeBlockTitle-py": "0.5rem",
+    "--codeBlockTitle-bdBottomColor": theme.colors.gray["200"],
   });
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    addToast({
+      type: "success",
+      message: "Copied to clipboard!",
+      description: "The code has been copied to your clipboard.",
+    });
+  };
 
   return (
     <div className={classNames(styles.codeBlock, codeBlockStx, className)}>
@@ -74,9 +92,14 @@ const CodeBlock: FC<CodeBlockProp> = (props) => {
             />
           </ScrollArea.Content>
         </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar>
-          <ScrollArea.Thumb />
-        </ScrollArea.Scrollbar>
+        <ScrollArea.ScrollbarWithThumb />
+        {withCopyButton && (
+          <div className={styles.codeBlockCopyButton}>
+            <IconButton onClick={handleCopy}>
+              <Clipboard size={"60%"} color={theme.colors.gray["700"]} />
+            </IconButton>
+          </div>
+        )}
       </ScrollArea>
     </div>
   );

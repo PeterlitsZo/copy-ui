@@ -1,3 +1,3 @@
-// CodeBlock from copy-ui @ 2025-10-12.
+// CodeBlock from copy-ui @ 2025-12-08.
 
 export { CodeBlock } from "./code-block";

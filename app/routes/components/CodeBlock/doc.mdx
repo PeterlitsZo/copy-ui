@@ -1,0 +1,47 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithTitle from "./demos/WithTitle";
+import withTitleSourceCode from "./demos/WithTitle.source-code.codegen";
+import WithCustomScrollAreaHeightOrMaxHeight from "./demos/WithCustomScrollAreaHeightOrMaxHeight";
+import withCustomScrollAreaHeightOrMaxHeightSourceCode from "./demos/WithCustomScrollAreaHeightOrMaxHeight.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "code-block", label: "CodeBlock" },
+    { id: "code-highlight", label: "CodeHighlight" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "icon-button", label: "IconButton" },
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "toast", label: "Toast" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "lucide-react", label: "lucide-react", color: "green" },
+  ]}
+  edges={[
+    { from: "code-block", to: "code-highlight" },
+    { from: "code-block", to: "copy-ui-provider" },
+    { from: "code-block", to: "icon-button" },
+    { from: "code-block", to: "scroll-area" },
+    { from: "code-block", to: "toast" },
+    { from: "code-block", to: "classnames" },
+    { from: "code-block", to: "lucide-react" },
+  ]}
+/>
+
+## Examples
+
+### With Title
+
+<DocLayout.Live node={<WithTitle />} code={withTitleSourceCode['index.tsx']} />
+
+### With Custom Scroll Area Height or Max-Height
+
+<DocLayout.Live
+  node={<WithCustomScrollAreaHeightOrMaxHeight />}
+  code={withCustomScrollAreaHeightOrMaxHeightSourceCode["index.tsx"]}
+/>
