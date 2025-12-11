@@ -11,4 +11,6 @@ export const changelog = ''
   + '- 2025-10-30: Add the variant `absolute` (it uses absolute positioning to make\n'
   + '  viewport just fill the container).\n'
   + '- 2025-11-04: Support the `ScrollArea.ScrollbarWithThumb`.\n'
+  + '- 2025-12-11: Support the horizontal scrollbars with prop\n'
+  + '  `orientation="horizontal"`.\n'
   ;

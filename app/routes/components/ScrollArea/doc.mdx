@@ -1,0 +1,53 @@
+import { DocLayout } from "@/layouts/DocLayout";
+
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithAbsolutePosition from "./demos/WithAbsolutePosition";
+import withAbsolutePositionSourceCode from "./demos/WithAbsolutePosition.source-code.codegen";
+import WithBothScrollbars from "./demos/WithBothScrollbars";
+import withBothScrollbarsSourceCode from "./demos/WithBothScrollbars.source-code.codegen";
+
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+## Dependency Graph
+
+<DocLayout.DepGraph
+  nodes={[
+    { id: "scroll-area", label: "ScrollArea" },
+    { id: "copy-ui-provider", label: "CopyUiProvider" },
+    { id: "zustand", label: "zustand", color: "green" },
+    { id: "classnames", label: "classnames", color: "green" },
+    { id: "tinycolor2", label: "tinycolor2", color: "green" },
+  ]}
+  edges={[
+    { from: "scroll-area", to: "copy-ui-provider" },
+    { from: "scroll-area", to: "zustand" },
+    { from: "scroll-area", to: "classnames" },
+    { from: "scroll-area", to: "tinycolor2" },
+  ]}
+/>
+
+## Examples
+
+### With Absolute Position
+
+<DocLayout.Live
+  node={<WithAbsolutePosition />}
+  code={withAbsolutePositionSourceCode["index.tsx"]}
+/>
+
+The `default` variant's viewport just uses `height: 100%;` and `width: 100%;`
+to fill the container. The `absolute` variant uses absolute positioning to fill
+the container, which move out the content from the normal document flow and can
+help to avoid some layout issues.
+
+### With Both Scrollbars
+
+<DocLayout.Live
+  node={<WithBothScrollbars />}
+  code={withBothScrollbarsSourceCode["index.tsx"]}
+/>
+
+## Acknowledgements
+
+- This component is inspired by Base UI's ScrollArea component.

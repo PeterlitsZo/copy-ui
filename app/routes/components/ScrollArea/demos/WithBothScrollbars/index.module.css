@@ -1,0 +1,26 @@
+.root {
+  width: 30rem;
+  height: 20rem;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 1rem;
+  width: fit-content;
+  padding: 1rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+}

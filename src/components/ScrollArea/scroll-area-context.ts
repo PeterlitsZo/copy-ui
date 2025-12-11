@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import type { StoreApi } from "zustand";
+
 import type { ScrollAreaStore } from "./scroll-area-store";
 
 const ScrollAreaContext = createContext<StoreApi<ScrollAreaStore> | null>(null);

@@ -1,5 +1,5 @@
+import { useTheme } from "@/components/CopyUiProvider";
 import { ScrollArea } from "@/components/ScrollArea";
-import { useTheme } from "@/components/ThemeProvider";
 
 import { lorem } from "./lorem";
 
@@ -29,9 +29,7 @@ export default function Demo() {
           <p>{lorem}</p>
         </ScrollArea.Content>
       </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar>
-        <ScrollArea.Thumb />
-      </ScrollArea.Scrollbar>
+      <ScrollArea.ScrollbarWithThumb />
     </ScrollArea>
   );
 }
