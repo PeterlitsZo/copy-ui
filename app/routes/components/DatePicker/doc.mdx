@@ -1,9 +1,9 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
 
 ## Dependency Graph
 
@@ -13,7 +13,7 @@ import demo01SourceCode from "./demos/Demo01.source_code.codegen";
     { id: "calendar", label: "Calendar" },
     { id: "popover", label: "Popover" },
     { id: "copy-ui-provider", label: "CopyUiProvider" },
-    { id: "input-base", label: "InputBase" },
+    { id: "ibs-base", label: "IbsBase" },
     { id: "classnames", label: "classnames", color: "green" },
     { id: "dayjs", label: "dayjs", color: "green" },
     { id: "lucide-react", label: "lucide-react", color: "green" },
@@ -22,7 +22,7 @@ import demo01SourceCode from "./demos/Demo01.source_code.codegen";
     { from: "date-picker", to: "calendar" },
     { from: "date-picker", to: "popover" },
     { from: "date-picker", to: "copy-ui-provider" },
-    { from: "date-picker", to: "input-base" },
+    { from: "date-picker", to: "ibs-base" },
     { from: "date-picker", to: "classnames" },
     { from: "date-picker", to: "dayjs" },
     { from: "date-picker", to: "lucide-react" },

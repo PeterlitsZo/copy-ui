@@ -1,11 +1,11 @@
+import classNames from "classnames";
 import type dayjs from "dayjs";
 import { CalendarDays } from "lucide-react";
 import type { FC } from "react";
-
 import { Calendar } from "@/components/Calendar";
+import { useJss } from "@/components/CopyUiProvider";
 import { Popover } from "@/components/Popover";
-
-import styles from "./calendar-opener.module.scss";
+import styles from "./calendar-opener.module.css";
 
 type CalendarOpenerProps = {
   value?: dayjs.Dayjs | null;
@@ -15,13 +15,22 @@ type CalendarOpenerProps = {
 const CalendarOpener: FC<CalendarOpenerProps> = (props) => {
   const { value, onChange } = props;
 
+  const jss = useJss();
+
+  const stx = jss.hash({
+    "--calendarOpenerTrigger-color":
+      "var(--dataPickerCalendarOpenerTrigger-color)",
+    "--calendarOpenerTrigger-hover-bgColor":
+      "var(--dataPickerCalendarOpenerTrigger-hover-bgColor)",
+  });
+
   return (
     <Popover>
       <Popover.Trigger
         render={({ setRef, onToggle }) => (
           <button
             type="button"
-            className={styles.calendarOpener}
+            className={classNames(styles.calendarOpener, stx)}
             ref={setRef}
             onClick={onToggle}
           >

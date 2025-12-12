@@ -1,6 +1,6 @@
 @layer components {
   .datePickerInput {
-    padding-inline: var(--data-picker-input-padding-inline);
+    padding-inline: var(--dataPickerInput-paddingInline);
     user-select: none;
   }
 
@@ -12,11 +12,11 @@
     caret-color: transparent;
 
     &:hover {
-      background-color: var(--data-picker-input-part-hover-bg-color);
+      background-color: var(--dataPickerInputPart-hover-bgColor);
     }
 
     &:focus {
-      background-color: var(--data-picker-input-part-focus-bg-color);
+      background-color: var(--dataPickerInputPart-focus-bgColor);
     }
 
     &:focus-visible {
@@ -24,13 +24,13 @@
     }
 
     &.noValue {
-      color: var(--data-picker-input-part-no-value-color);
+      color: var(--dataPickerInputPart-noValue-color);
     }
   }
 
   .datePickerInputDecorator {
     position: relative;
-    color: var(--data-picker-input-decorator-color);
+    color: var(--dataPickerInputDecorator-color);
     padding: 0 0.5px;
   }
 }

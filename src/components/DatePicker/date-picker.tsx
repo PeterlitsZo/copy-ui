@@ -1,20 +1,23 @@
 import classNames from "classnames";
 import dayjs from "dayjs";
-import { type FC, type KeyboardEventHandler, useEffect, useState } from "react";
+import type { ComponentProps, FC, KeyboardEventHandler } from "react";
+import { useEffect, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { InputBase } from "@/components/InputBase";
+import { extractStylesProps, IbsBase } from "@/components/IbsBase";
 
 import { CalendarOpener } from "./calendar-opener";
-import styles from "./date-picker.module.scss";
+import styles from "./date-picker.module.css";
 
-type DatePickerProps = {
+type DatePickerProps = ComponentProps<typeof IbsBase> & {
   date?: dayjs.Dayjs | null;
   onDateChange?: (value: dayjs.Dayjs | null) => void;
 };
 
 const DatePicker: FC<DatePickerProps> = (props) => {
-  const { date, onDateChange } = props;
+  const { date, onDateChange, ...others } = props;
+
+  const { stx: baseStyleStx, rest } = extractStylesProps(others);
 
   const theme = useTheme();
   const jss = useJss();
@@ -129,65 +132,65 @@ const DatePicker: FC<DatePickerProps> = (props) => {
   };
 
   const stx = jss.hash({
-    "--data-picker-button-color": theme.colors.gray["700"],
-    "--data-picker-button-hover-bg-color": theme.colors.gray["100"],
-    "--data-picker-input-padding-inline": "0.5rem",
-    "--data-picker-input-part-no-value-color": theme.colors.gray["600"],
-    "--data-picker-input-part-hover-bg-color": theme.colors.gray["100"],
-    "--data-picker-input-part-focus-bg-color": theme.colors.gray["200"],
-    "--data-picker-input-decorator-color": theme.colors.gray["500"],
+    "--dataPickerInput-paddingInline": "0.5rem",
+    "--dataPickerInputPart-noValue-color": theme.colors.gray["600"],
+    "--dataPickerInputPart-hover-bgColor": theme.colors.gray["100"],
+    "--dataPickerInputPart-focus-bgColor": theme.colors.gray["200"],
+    "--dataPickerInputDecorator-color": theme.colors.gray["500"],
+
+    "--dataPickerCalendarOpenerTrigger-color": theme.colors.gray["700"],
+    "--dataPickerCalendarOpenerTrigger-hover-bgColor": theme.colors.gray["100"],
   });
 
   return (
-    <InputBase
-      className={stx}
-      wrapperClassName={styles.datePickerInput}
-      rightSection={
+    <IbsBase className={classNames(stx, baseStyleStx)} {...rest}>
+      <IbsBase.Wrapper className={styles.datePickerInput}>
+        <DatePickerInputPart
+          placeholder="YYYY"
+          type="year"
+          value={internalYear}
+          onChange={setInternalYear}
+        />
+        <span className={styles.datePickerInputDecorator}>-</span>
+        <DatePickerInputPart
+          placeholder="MM"
+          type="month"
+          value={internalMonth}
+          onChange={setInternalMonth}
+        />
+        <span className={styles.datePickerInputDecorator}>-</span>
+        <DatePickerInputPart
+          placeholder="DD"
+          type="day"
+          value={internalDay}
+          onChange={setInternalDay}
+        />
+        <span className={styles.datePickerInputDecorator}>&nbsp;</span>
+        <DatePickerInputPart
+          placeholder="hh"
+          type="hour"
+          value={internalHour}
+          onChange={setInternalHour}
+        />
+        <span className={styles.datePickerInputDecorator}>:</span>
+        <DatePickerInputPart
+          placeholder="mm"
+          type="minute"
+          value={internalMinute}
+          onChange={setInternalMinute}
+        />
+        <span className={styles.datePickerInputDecorator}>:</span>
+        <DatePickerInputPart
+          placeholder="ss"
+          type="second"
+          value={internalSecond}
+          onChange={setInternalSecond}
+        />
+      </IbsBase.Wrapper>
+      <IbsBase.RightSection>
         <CalendarOpener value={calendarValue} onChange={handleCalendarChange} />
-      }
-    >
-      <DatePickerInputPart
-        placeholder="YYYY"
-        type="year"
-        value={internalYear}
-        onChange={setInternalYear}
-      />
-      <span className={styles.datePickerInputDecorator}>-</span>
-      <DatePickerInputPart
-        placeholder="MM"
-        type="month"
-        value={internalMonth}
-        onChange={setInternalMonth}
-      />
-      <span className={styles.datePickerInputDecorator}>-</span>
-      <DatePickerInputPart
-        placeholder="DD"
-        type="day"
-        value={internalDay}
-        onChange={setInternalDay}
-      />
-      <span className={styles.datePickerInputDecorator}>&nbsp;</span>
-      <DatePickerInputPart
-        placeholder="hh"
-        type="hour"
-        value={internalHour}
-        onChange={setInternalHour}
-      />
-      <span className={styles.datePickerInputDecorator}>:</span>
-      <DatePickerInputPart
-        placeholder="mm"
-        type="minute"
-        value={internalMinute}
-        onChange={setInternalMinute}
-      />
-      <span className={styles.datePickerInputDecorator}>:</span>
-      <DatePickerInputPart
-        placeholder="ss"
-        type="second"
-        value={internalSecond}
-        onChange={setInternalSecond}
-      />
-    </InputBase>
+      </IbsBase.RightSection>
+    </IbsBase>
   );
 };
 
