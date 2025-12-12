@@ -1,0 +1,36 @@
+.colorSwatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--swatch-bdColor);
+}
+
+.swatchColor {
+  height: 4rem;
+  width: 100%;
+}
+
+.swatchLabel {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.swatchName {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.swatchValue {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  opacity: 0.8;
+}

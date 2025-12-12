@@ -1,0 +1,27 @@
+import ColorPalette from "./color-palette";
+
+Copy UI uses a color palette based on [open-color][1]. All colors are available through the theme system.
+
+## Color Palette
+
+<ColorPalette />
+
+## Usage
+
+You can access colors through the theme:
+
+```tsx
+import { useTheme } from "@/components/CopyUiProvider";
+
+function MyComponent() {
+  const theme = useTheme();
+  
+  return (
+    <div style={{ backgroundColor: theme.colors.blue["500"] }}>
+      Blue background
+    </div>
+  );
+}
+```
+
+[1]: https://yeun.github.io/open-color/

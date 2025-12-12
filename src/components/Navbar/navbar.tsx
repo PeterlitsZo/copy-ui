@@ -25,7 +25,10 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     "--navbar-bdColor": theme.colors.gray["300"],
   };
 
-  const docs = [{ name: "Get Started", path: "/v0/react/docs/get-started" }];
+  const docs = [
+    { name: "Get Started", path: "/v0/react/docs/get-started" },
+    { name: "Colors", path: "/v0/react/docs/colors" },
+  ];
 
   function isActive(
     kind: "doc" | "component" | "utils",

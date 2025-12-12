@@ -20,6 +20,7 @@
     "@tanstack/react-form": "^1.23.8",
     "@types/hast": "^3.0.4",
     "classnames": "^2.5.1",
+    "colorjs.io": "^0.5.2",
     "dayjs": "^1.11.18",
     "es-toolkit": "^1.39.10",
     "hast-util-to-html": "^9.0.5",
