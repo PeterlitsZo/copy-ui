@@ -27,7 +27,6 @@ export const components: Component[] = [
   {"name": "IbsBase", "path": "/v0/react/components/IbsBase", "wip": false, "deprecated": false},
   {"name": "IconButton", "path": "/v0/react/components/IconButton", "wip": false, "deprecated": false},
   {"name": "Input", "path": "/v0/react/components/Input", "wip": false, "deprecated": false},
-  {"name": "InputBase", "path": "/v0/react/components/InputBase", "wip": false, "deprecated": true},
   {"name": "Markdown", "path": "/v0/react/components/Markdown", "wip": false, "deprecated": false},
   {"name": "Modal", "path": "/v0/react/components/Modal", "wip": false, "deprecated": false},
   {"name": "MultiSelect", "path": "/v0/react/components/MultiSelect", "wip": false, "deprecated": false},

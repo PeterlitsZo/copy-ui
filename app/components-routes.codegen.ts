@@ -25,7 +25,6 @@ export const componentsRoutes: { name: string, path: string }[] = [
   {"name": "IbsBase", "path": "routes/components/IbsBase/index.tsx"},
   {"name": "IconButton", "path": "routes/components/IconButton/index.tsx"},
   {"name": "Input", "path": "routes/components/Input/index.tsx"},
-  {"name": "InputBase", "path": "routes/components/InputBase/index.tsx"},
   {"name": "Markdown", "path": "routes/components/Markdown/index.tsx"},
   {"name": "Modal", "path": "routes/components/Modal/index.tsx"},
   {"name": "MultiSelect", "path": "routes/components/MultiSelect/index.tsx"},
