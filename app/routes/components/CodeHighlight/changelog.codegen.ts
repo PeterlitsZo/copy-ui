@@ -11,4 +11,5 @@ export const changelog = ''
   + '- 2025-10-22: Refactor code. And use JSS for styling.\n'
   + '- 2025-12-08: Support the highlighting for CSS language, remove the dependency\n'
   + '  on `ThemeProvider`, etc.\n'
+  + '- 2025-12-12: Support the `className` prop to CodeHighlight component.\n'
   ;

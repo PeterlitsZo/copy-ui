@@ -1,9 +1,33 @@
+import { Info } from "lucide-react";
+
 import { DocLayout } from "@/layouts/DocLayout";
+import { Alert } from "@/components/Alert";
+import { Typography } from "@/components/Typography";
 
 import Main from "./demos/Main";
 import mainSourceCode from "./demos/Main.source-code.codegen";
 
 <DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+<Alert color="blue" style={{ marginBottom: "1rem" }}>
+  <Info size="1.25rem" />
+  <Alert.Title>See Also</Alert.Title>
+  <Alert.Description>
+    <>You can also check the `CodeBlock` component - it is built on top of
+    `CodeHighlight`, but with more features (copy button, scroll area, etc.).</>
+  </Alert.Description>
+</Alert>
+
+You can use the `CodeHighlight` component to render your code with syntax
+highlighting. It is built on top of [shiki](https://github.com/shikijs/shiki).
+
+The supported languages are listed in `highlighter.ts` file. The default
+languages are only `typescript`, `tsx`, `markdown`, `scss` and `css` - very
+useful for this website but not enough for your project. So feel free to add
+more languages you need.
+
+Interestingly to know, I use some hacks to make the `CodeHighlight` component
+support the line highlighting, line numbers, etc.
 
 ## Dependency Graph
 

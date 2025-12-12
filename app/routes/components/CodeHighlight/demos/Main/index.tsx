@@ -1,23 +1,17 @@
 import { CodeHighlight } from "@/components/CodeHighlight";
-import { useTheme } from "@/components/ThemeProvider";
+import { useJss, useTheme } from "@/components/CopyUiProvider";
 
-const code = `\
-/**
- * Return the string 'foobar'.
- */
-function foobar() {
-  return 'foobar';
-}
-`;
+import code from "./code.txt?raw";
 
 export default function Demo() {
   const theme = useTheme();
+  const jss = useJss();
 
-  const style = {
+  const stx = jss.hash({
     backgroundColor: theme.colors.gray["000"],
     borderRadius: "0.5rem",
     width: "40rem",
-  };
+  });
 
   return (
     <CodeHighlight
@@ -25,7 +19,7 @@ export default function Demo() {
       lang="typescript"
       withLineNumbers
       lineHighlight={{ ge: 4, lt: 7 }}
-      style={style}
+      className={stx}
       px="1.5rem"
       py="0.75rem"
     />

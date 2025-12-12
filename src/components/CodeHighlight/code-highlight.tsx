@@ -15,6 +15,7 @@ interface CodeHighlightProps {
   withLineNumbers?: boolean;
   lineHighlight?: { ge: number; lt: number };
 
+  className?: string;
   style?: CSSProperties;
 
   px?: string;
@@ -25,9 +26,13 @@ export const CodeHighlight: FC<CodeHighlightProps> = (props) => {
   const {
     code,
     lang,
+
     withLineNumbers = false,
     lineHighlight,
+
+    className,
     style,
+
     px,
     py,
   } = props;
@@ -62,7 +67,7 @@ export const CodeHighlight: FC<CodeHighlightProps> = (props) => {
 
   return (
     <div
-      className={classNames(styles.codeHighlight, stx)}
+      className={classNames(styles.codeHighlight, stx, className)}
       style={style}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: shikijs think it is safe.
       dangerouslySetInnerHTML={{ __html: html }}
