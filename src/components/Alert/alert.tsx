@@ -3,7 +3,7 @@ import type { ComponentProps, FC, ReactNode } from "react";
 
 import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
 
-import styles from "./alert.module.scss";
+import styles from "./alert.module.css";
 import { AlertDescription } from "./alert-description";
 import { AlertTitle } from "./alert-title";
 

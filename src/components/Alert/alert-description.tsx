@@ -3,7 +3,7 @@ import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 
-import styles from "./alert-description.module.scss";
+import styles from "./alert-description.module.css";
 
 type AlertDescriptionProps = ComponentProps<"p">;
 

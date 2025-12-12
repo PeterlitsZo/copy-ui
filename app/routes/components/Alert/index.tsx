@@ -27,7 +27,7 @@ export default function AlertPage() {
     <DocLayout>
       <DocLayout.Title
         title="Alert"
-        desc=""
+        desc="Warning! Warning! Warning!"
         tabsValue={tabsValue}
         tabs={tabs}
         onTabsValueChange={setTabsValue}

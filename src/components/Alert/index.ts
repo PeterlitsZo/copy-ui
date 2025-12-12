@@ -1,3 +1,3 @@
-// Alert from copy-ui @ 2025-11-30.
+// Alert from copy-ui @ 2025-12-12.
 
 export { Alert } from "./alert";

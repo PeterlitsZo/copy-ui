@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-11-30: Initial version.\n'
+  + '- 2025-12-12: Update the styles - padding and gap - to make it look better.\n'
   ;

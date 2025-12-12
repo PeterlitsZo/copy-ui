@@ -1,9 +1,11 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import SeeAlso from "./demos/SeeAlso";
+import seeAlsoSourceCode from "./demos/SeeAlso.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
 
 ## Dependency Graph
 
@@ -18,3 +20,9 @@ import demo01SourceCode from "./demos/Demo01.source_code.codegen";
     { from: "alert", to: "classnames" },
   ]}
 />
+
+## Examples
+
+### See Also
+
+<DocLayout.Live node={<SeeAlso />} code={seeAlsoSourceCode['index.tsx']} />

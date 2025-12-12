@@ -3,7 +3,7 @@ import type { ComponentProps, FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
 
-import styles from "./alert-title.module.scss";
+import styles from "./alert-title.module.css";
 
 type AlertTitleProps = ComponentProps<"h3">;
 
