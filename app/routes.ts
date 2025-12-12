@@ -9,7 +9,7 @@ export default [
 
   layout("./layouts/page-layout.tsx", [
     ...prefix("v0/react/docs", [
-      route("get-started", "routes/docs/get-started.tsx"),
+      route("get-started", "routes/docs/get-started/index.tsx"),
     ]),
     ...prefix(
       "v0/react/components",

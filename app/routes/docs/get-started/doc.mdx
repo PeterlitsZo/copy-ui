@@ -1,0 +1,58 @@
+import { Typography } from "@/components/Typography";
+
+import resetCssCode from "./reset-css-code.txt?raw";
+
+Copy UI is a simple and stupid collection of code - help you build your UI
+faster.
+
+For example, to build your Avatar component, you can just check the Copy UI's
+Avatar component document, copy its code and paste it into your own project.
+That's it.
+
+## Why Copy UI?
+
+Code in Copy UI is stupid enough, so I think it is easy to read and change by
+yourself. I try to build it without any headless UI library, because - I know
+those libraries are good - headless UI libraries are hard to change for me (yes,
+I can fork it and modify it, but it is really hard to understand it).
+
+I like shadcn/ui, but it is build on top of Radix UI (or Base UI, React Aria).
+If you want to change its layout / logic, it is really hard sometime.
+
+Copy UI is inspired by shadcn/ui, but you can not only copy styles, but also
+logic. Another thing you need to know is, Copy UI does not use Tailwind CSS. Yes
+Tailwind CSS is good, but I like to write CSS Module more. I need to say that
+this project is heavily inspired by:
+
+- shadcn/ui
+- Mantine
+- Radix UI
+- Base UI
+- Hero UI
+- Naive UI
+- MUI
+
+Maybe you can find some component looks like one of those projects - just
+because it looks really good. Those projects are under MIT License - so this
+project does the same thing.
+
+## Reset CSS
+
+Copy UI use Tailwind CSS's preflight files. To use Copy UI, you need to copy
+this CSS file content into your project, name it like reset.css, and import it
+in your root file:
+
+<Typography.CodeBlock
+  title="reset.css"
+  scrollAreaMaxHeight="35rem"
+  code={resetCssCode}
+  lang="css"
+  withLineNumbers
+  withCopyButton
+/>
+
+It is copied from Tailwind CSS, but I just remove some comments, replace some
+magic functions (its `--theme` function) to make it work. You can read
+[its documentation][1] to know more about it.
+
+[1]: https://tailwindcss.com/docs/preflight
