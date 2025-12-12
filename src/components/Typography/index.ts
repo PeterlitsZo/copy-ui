@@ -1,3 +1,3 @@
-// Typography from copy-ui @ 2025-11-17.
+// Typography from copy-ui @ 2025-12-12.
 
 export { Typography } from "./typography";

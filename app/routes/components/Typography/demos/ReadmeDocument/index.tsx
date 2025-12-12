@@ -6,7 +6,8 @@ export default function Demo() {
     <Paper withBorder withPadding radius="md" style={{ width: "40rem" }}>
       <Typography>
         <Ty.P>
-          This is the main source code repository for Rust. It contains the
+          This is the main source code repository for{" "}
+          <Ty.A href="https://www.rust-lang.org/">Rust</Ty.A>. It contains the
           compiler, standard library, and documentation.
         </Ty.P>
         <Ty.H2>Why Rust</Ty.H2>

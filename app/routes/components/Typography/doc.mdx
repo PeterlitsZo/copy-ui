@@ -13,6 +13,41 @@ import readmeDocumentSourceCode from "./demos/ReadmeDocument.source-code.codegen
 
 <DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
 
+The `Typography` component provides a set of typographic components for
+consistent text styling. Now we support the following components:
+
+- `Typography.H1` - The heading-1 component.
+- `Typography.H2` - The heading-2 component.
+- `Typography.H3` - The heading-3 component.
+- `Typography.H4` - The heading-4 component.
+- `Typography.P` - The paragraph component.
+- `Typography.Strong` - The strong component.
+- `Typography.Em` - The emphasized component.
+- `Typography.A` - The anchor component.
+- `Typography.Ul` - The unordered list component.
+- `Typography.Ol` - The ordered list component.
+- `Typography.Li` - The list item component.
+- `Typography.Code` - The inline code component.
+- `Typography.CodeBlock` - The code block component.
+
+You should use the `Typography` component as the root component to wrap your
+other content (to avoid some unexpected margin for the first and last child),
+for example:
+
+```tsx
+<Typography>
+  <Typography.H1>Title</Typography.H1>
+  <Typography.P>Paragraph</Typography.P>
+</Typography>
+```
+
+If you just want to render the markdown content, you can check the
+[Markdown component](./Markdown).
+
+If you want to use the MDX component, you can check the
+[CopyUiProvider component](./CopyUiProvider) - it contains a `MdxProvider`
+component that injects the `Typography` components into the MDX components.
+
 ## Dependency Graph
 
 <Paper radius="md" withBorder withPadding>
@@ -42,3 +77,10 @@ import readmeDocumentSourceCode from "./demos/ReadmeDocument.source-code.codegen
 ### README Document
 
 <DocLayout.Live node={<ReadmeDocument />} code={readmeDocumentSourceCode['index.tsx']} />
+
+## Acknowledgements
+
+- This component is inspired by shadcn/ui's `Typography` component and the
+  project [github-markdown-css][1].
+
+[1]: https://github.com/sindresorhus/github-markdown-css
