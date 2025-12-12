@@ -13,14 +13,17 @@ const MdxProvider: FC<MdxProviderProps> = (props) => {
     h2: Typography.H2,
     h3: Typography.H3,
     h4: Typography.H4,
+
     p: Typography.P,
+    strong: Typography.Strong,
+    em: Typography.Em,
+    a: Typography.A,
+
     ul: Typography.Ul,
     ol: Typography.Ol,
     li: Typography.Li,
-    strong: Typography.Strong,
-    em: Typography.Em,
-    code: Typography.Code,
 
+    code: Typography.Code,
     "copy-ui-hack-codeblock": (props: { lang: string; code: string }) => {
       const { lang, code } = props;
       return <Typography.CodeBlock withLineNumbers code={code} lang={lang} />;
