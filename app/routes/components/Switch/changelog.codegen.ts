@@ -13,4 +13,5 @@ export const changelog = ''
   + '  gap values. \n'
   + '- 2025-11-03: Use JSS & resolve-style for styles.\n'
   + '- 2025-12-07: Refactor code and remove deprecated dependencies.\n'
+  + '- 2025-12-13: Update to support the new color scheme.\n'
   ;

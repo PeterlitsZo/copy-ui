@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { type Theme, useJss, useTheme } from "@/components/CopyUiProvider";
 import { resolveStyle2 } from "@/utils/resolve-style2";
 
-import styles from "./switch.module.scss";
+import styles from "./switch.module.css";
 
 type SwitchProps = {
   size?: "text" | "xs" | "sm" | "md" | "lg" | "xl";
@@ -19,13 +19,13 @@ const Switch: FC<SwitchProps> = (props) => {
   const jss = useJss();
 
   const baseStx = jss.hash({
-    "--switchRail-bg": theme.colors.gray["300"],
-    "--switchRail-bdColor": theme.colors.gray["400"],
-    "--switchRail-checked-bg": theme.colors.blue["600"],
-    "--switchRail-checked-bdColor": theme.colors.blue["700"],
-    "--switchThumb-bg": "white",
-    "--switchThumb-bdColor": theme.colors.gray["400"],
-    "--switchThumb-checked-bdColor": theme.colors.blue["700"],
+    "--switchRail-bgColor": theme.colors.gray["300"],
+    "--switchRail-bdColor": theme.colors.gray["350"],
+    "--switchRail-checked-bgColor": theme.colors.blue["600"],
+    "--switchRail-checked-bdColor": theme.colors.blue["650"],
+    "--switchThumb-bgColor": "white",
+    "--switchThumb-bdColor": theme.colors.gray["350"],
+    "--switchThumb-checked-bdColor": theme.colors.blue["650"],
   });
 
   const stx = jss.hash(switchStyle(theme)({ size }));

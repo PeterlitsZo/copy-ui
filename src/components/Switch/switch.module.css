@@ -8,14 +8,16 @@
     border-radius: 999999px;
     border: 1px solid var(--switchRail-bdColor);
 
-    background-color: var(--switchRail-bg);
+    background-color: var(--switchRail-bgColor);
 
     cursor: pointer;
 
-    transition: background-color 0.15s, border-color 0.15s;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s;
 
     &[data-checked="true"] {
-      background-color: var(--switchRail-checked-bg);
+      background-color: var(--switchRail-checked-bgColor);
       border: 1px solid var(--switchRail-checked-bdColor);
     }
   }
@@ -31,12 +33,19 @@
     border-radius: 999999px;
     border: 1px solid var(--switchThumb-bdColor);
 
-    background-color: var(--switchThumb-bg);
+    background-color: var(--switchThumb-bgColor);
 
-    transition: left 0.15s, border-color 0.15s;
+    transition:
+      left 0.15s,
+      border-color 0.15s;
 
     .rail[data-checked="true"] & {
-      left: calc(var(--switchRail-h) * 1.75 - var(--switchRail-h) + var(--switchThumb-gap));
+      left: calc(
+        var(--switchRail-h) *
+        1.75 -
+        var(--switchRail-h) +
+        var(--switchThumb-gap)
+      );
       border: 1px solid var(--switchThumb-checked-bdColor);
     }
   }
