@@ -43,7 +43,6 @@ export const components: Component[] = [
   {"name": "Tabs", "path": "/v0/react/components/Tabs", "wip": false, "deprecated": false},
   {"name": "Tag", "path": "/v0/react/components/Tag", "wip": false, "deprecated": false},
   {"name": "Textarea", "path": "/v0/react/components/Textarea", "wip": false, "deprecated": false},
-  {"name": "ThemeProvider", "path": "/v0/react/components/ThemeProvider", "wip": false, "deprecated": true},
   {"name": "TimeSelector", "path": "/v0/react/components/TimeSelector", "wip": false, "deprecated": false},
   {"name": "Toast", "path": "/v0/react/components/Toast", "wip": false, "deprecated": false},
   {"name": "Tooltip", "path": "/v0/react/components/Tooltip", "wip": false, "deprecated": false},
