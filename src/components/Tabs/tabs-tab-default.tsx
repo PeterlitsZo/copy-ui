@@ -19,11 +19,11 @@ const TabsTabDefault: FC<TabsTabProps & { size: "md" | "lg" }> = (props) => {
   const isActive = activeTab === value;
 
   const baseStx = jss.hash({
-    "--tab-color": theme.colors.gray["600"],
+    "--tab-color": theme.colors.gray["550"],
 
-    "--tab-active-bdBottomColor": theme.colors.blue["800"],
-    "--tab-active-color": theme.colors.blue["800"],
-    "--tab-hover-contentBgColor": `color-mix(in srgb, ${theme.colors.gray["100"]} 50%, transparent)`,
+    "--tab-active-bdBottomColor": theme.colors.blue["650"],
+    "--tab-active-color": theme.colors.blue["650"],
+    "--tab-hover-contentBgColor": theme.colors.gray["050"],
   });
 
   const stx = useTabsTabDefaultStx(size);

@@ -4,3 +4,4 @@
 - 2025-11-15: Adjust spacing between tabs for better visual balance. Remove the
   dependency on deprecated `ThemeProvider` and use `CopyUiProvider` instead.
 - 2025-12-07: Support the `size` prop.
+- 2025-12-13: Update to support the new color scheme.
