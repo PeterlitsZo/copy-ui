@@ -1,3 +1,3 @@
-// Tooltip from copy-ui @ 2025-11-27.
+// Tooltip from copy-ui @ 2025-12-14.
 
 export { Tooltip } from "./tooltip";

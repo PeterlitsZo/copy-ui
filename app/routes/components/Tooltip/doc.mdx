@@ -1,11 +1,11 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import DelayedTooltipOnHover from "./demos/DelayedTooltipOnHover";
+import delayedTooltipOnHoverSourceCode from "./demos/DelayedTooltipOnHover.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode["index.tsx"]} />
 
 ## Dependency Graph
 
@@ -27,8 +27,7 @@ import demo02SourceCode from "./demos/Demo02.source_code.codegen";
 
 ### Delayed Tooltip on Hover
 
-<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
-
-You can use `setTimeout` to delay the tooltip.
-
-The `anchor="pointer"` is useful to let the tooltip follow the mouse cursor.
+<DocLayout.Live
+  node={<DelayedTooltipOnHover />}
+  code={delayedTooltipOnHoverSourceCode["index.tsx"]}
+/>

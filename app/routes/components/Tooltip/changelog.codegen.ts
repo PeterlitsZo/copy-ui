@@ -9,4 +9,6 @@ export const changelog = ''
   + '- 2025-10-31: Code formatting improvement.\n'
   + '- 2025-11-27: Support the `anchor` prop to make the tooltip follow the mouse\n'
   + '  cursor.\n'
+  + '- 2025-12-14: Add `openDelay` prop to `Tooltip` to control the delay time before\n'
+  + '  the tooltip is opened.\n'
   ;

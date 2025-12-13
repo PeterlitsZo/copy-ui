@@ -5,3 +5,5 @@
 - 2025-10-31: Code formatting improvement.
 - 2025-11-27: Support the `anchor` prop to make the tooltip follow the mouse
   cursor.
+- 2025-12-14: Add `openDelay` prop to `Tooltip` to control the delay time before
+  the tooltip is opened.

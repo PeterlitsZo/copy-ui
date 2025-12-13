@@ -2,7 +2,7 @@
   .tooltip {
     padding: 0.25rem 0.375rem;
     border-radius: 0.375rem;
-    background-color: var(--tooltip-background-color);
+    background-color: var(--tooltip-bgColor);
     color: var(--tooltip-color);
     font-size: 0.75rem;
   }

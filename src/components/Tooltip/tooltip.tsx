@@ -4,7 +4,7 @@ import { type FC, type ReactNode, useMemo } from "react";
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { type Placement, Popover } from "@/components/Popover";
 
-import styles from "./tooltip.module.scss";
+import styles from "./tooltip.module.css";
 
 interface TooltipTriggerRenderProps {
   setRef: (el: Element | null) => void;
@@ -17,17 +17,25 @@ interface TooltipProps {
   label: string;
   anchor?: "element" | "pointer";
   placement?: Placement;
+  openDelay?: number;
+
   triggerRender: (props: TooltipTriggerRenderProps) => ReactNode;
 }
 
 export const Tooltip: FC<TooltipProps> = (props) => {
-  const { label, anchor = "element", placement = "top", triggerRender } = props;
+  const {
+    label,
+    anchor = "element",
+    placement = "top",
+    openDelay = 300,
+    triggerRender,
+  } = props;
 
   const theme = useTheme();
   const jss = useJss();
 
   const computedStyle = jss.hash({
-    "--tooltip-background-color": theme.colors.gray["900"],
+    "--tooltip-bgColor": theme.colors.gray["900"],
     "--tooltip-color": theme.colors.gray["100"],
   });
 
@@ -40,9 +48,8 @@ export const Tooltip: FC<TooltipProps> = (props) => {
 
   return (
     <Popover offset={offset} anchor={anchor} placement={placement}>
-      <Popover.Trigger render={triggerRender} />
+      <Popover.Trigger openDelay={openDelay} render={triggerRender} />
       <Popover.Portal
-        onClickOutside={({ closePortal }) => closePortal()}
         render={({ setRef, isOpen, floatingStyles }) =>
           isOpen && (
             <div
