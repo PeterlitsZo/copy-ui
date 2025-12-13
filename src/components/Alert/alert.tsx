@@ -24,11 +24,11 @@ const Alert: AlertComponent = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--alert-bgColor": `color-mix(in srgb, ${theme.colors[color]["000"]}, white)`,
-    "--alert-bdColor": `color-mix(in srgb, ${theme.colors[color]["500"]}, ${theme.colors.gray["500"]} 25%)`,
+    "--alert-bgColor": theme.colors[color]["050"],
+    "--alert-bdColor": theme.colors[color]["400"],
     "--alert-bdRadius": "0.5rem",
-    "--alert-iconColor": theme.colors[color]["800"],
-    "--alert-titleColor": theme.colors[color]["900"],
+    "--alert-iconColor": theme.colors[color]["700"],
+    "--alert-titleColor": theme.colors[color]["700"],
   });
 
   return (

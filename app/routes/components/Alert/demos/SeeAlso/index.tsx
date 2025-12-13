@@ -1,4 +1,4 @@
-import { AlertCircle } from "lucide-react";
+import { Info } from "lucide-react";
 import { Alert } from "@/components/Alert";
 import { useJss } from "@/components/CopyUiProvider";
 
@@ -11,7 +11,7 @@ export default function Demo() {
 
   return (
     <Alert color="blue" className={stx}>
-      <AlertCircle size="1.25rem" />
+      <Info size="1.25rem" />
       <Alert.Title>See Also</Alert.Title>
       <Alert.Description>
         You can also check the CodeBlock component - it is built on top of

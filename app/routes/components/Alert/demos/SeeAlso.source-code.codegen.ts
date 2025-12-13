@@ -4,7 +4,7 @@
 const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + 'import { AlertCircle } from "lucide-react";\n'
+  + 'import { Info } from "lucide-react";\n'
   + 'import { Alert } from "@/components/Alert";\n'
   + 'import { useJss } from "@/components/CopyUiProvider";\n'
   + '\n'
@@ -17,7 +17,7 @@ sourceCode['index.tsx'] = ''
   + '\n'
   + '  return (\n'
   + '    <Alert color="blue" className={stx}>\n'
-  + '      <AlertCircle size="1.25rem" />\n'
+  + '      <Info size="1.25rem" />\n'
   + '      <Alert.Title>See Also</Alert.Title>\n'
   + '      <Alert.Description>\n'
   + '        You can also check the CodeBlock component - it is built on top of\n'
