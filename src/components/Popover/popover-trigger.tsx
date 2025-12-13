@@ -1,4 +1,4 @@
-import { type FC, memo, useMemo } from "react";
+import { type FC, memo, useCallback, useMemo, useRef } from "react";
 import { useStore } from "zustand";
 import { usePopoverStore } from "./popover-context";
 
@@ -15,18 +15,19 @@ interface PopoverTriggerRenderProps {
 type PopoverTriggerRender = FC<PopoverTriggerRenderProps>;
 
 interface PopoverTriggerProps {
+  openDelay?: number;
   render: PopoverTriggerRender;
 }
 
 const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
-  const { render } = props;
+  const { openDelay = 0, render } = props;
 
   const popoverStore = usePopoverStore();
 
   const isOpen = useStore(popoverStore, (state) => state.isOpen);
   const toggle = useStore(popoverStore, (state) => state.toggle);
-  const open = useStore(popoverStore, (state) => state.open);
-  const close = useStore(popoverStore, (state) => state.close);
+  const openInternal = useStore(popoverStore, (state) => state.open);
+  const closeInternal = useStore(popoverStore, (state) => state.close);
   const setElRef = useStore(popoverStore, (state) => state.setElRef);
   const enableTriggerClickHandler = useStore(
     popoverStore,
@@ -37,14 +38,37 @@ const PopoverTrigger: FC<PopoverTriggerProps> = (props) => {
     (state) => state.triggerClickHandlerEnabled,
   );
 
+  const timeoutIdRef = useRef<null | ReturnType<typeof setTimeout>>(null);
+
+  const handleOpen = useCallback(() => {
+    if (openDelay > 0) {
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+      timeoutIdRef.current = setTimeout(() => {
+        openInternal();
+      }, openDelay);
+    } else {
+      openInternal();
+    }
+  }, [openDelay, openInternal]);
+
+  const handleClose = useCallback(() => {
+    closeInternal();
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+    }
+  }, [closeInternal]);
+
   const PopoverTriggerRender = useMemo(() => memo(render), [render]);
 
   return (
     <PopoverTriggerRender
       setRef={setElRef}
       isOpen={isOpen}
-      onOpen={open}
-      onClose={close}
+      onOpen={handleOpen}
+      onClose={handleClose}
       onToggle={() => {
         if (triggerClickHandlerEnabled) {
           toggle();

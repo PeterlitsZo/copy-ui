@@ -24,4 +24,6 @@ export const changelog = ''
   + '  cursor.\n'
   + '- 2025-11-28: Use `useClickOutside` hook from `CopyUiProvider` to handle the\n'
   + '  click outside event -- make nested popover components work correctly.\n'
+  + '- 2025-12-14: Add `openDelay` prop to `Popover.Trigger` to control the delay\n'
+  + '  time before the popover is opened.\n'
   ;

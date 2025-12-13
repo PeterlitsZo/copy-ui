@@ -1,0 +1,16 @@
+.popoverTriggerCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 7rem;
+  width: 14rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+}
+
+.popoverPortal {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}

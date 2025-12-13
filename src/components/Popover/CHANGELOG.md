@@ -20,3 +20,5 @@
   cursor.
 - 2025-11-28: Use `useClickOutside` hook from `CopyUiProvider` to handle the
   click outside event -- make nested popover components work correctly.
+- 2025-12-14: Add `openDelay` prop to `Popover.Trigger` to control the delay
+  time before the popover is opened.

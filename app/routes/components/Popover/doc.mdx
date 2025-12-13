@@ -1,13 +1,15 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
-import Demo03 from "./demos/Demo03";
-import demo03SourceCode from "./demos/Demo03.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithDifferentOffsets from "./demos/WithDifferentOffsets";
+import withDifferentOffsetsSourceCode from "./demos/WithDifferentOffsets.source-code.codegen";
+import WithPointerAnchor from "./demos/WithPointerAnchor";
+import withPointerAnchorSourceCode from "./demos/WithPointerAnchor.source-code.codegen";
+import WithOpenDelay from "./demos/WithOpenDelay";
+import withOpenDelaySourceCode from "./demos/WithOpenDelay.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode["index.tsx"]} />
 
 ## Dependency Graph
 
@@ -29,8 +31,21 @@ import demo03SourceCode from "./demos/Demo03.source_code.codegen";
 
 ### With Different Offsets
 
-<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+<DocLayout.Live
+  node={<WithDifferentOffsets />}
+  code={withDifferentOffsetsSourceCode["index.tsx"]}
+/>
 
 ### With Pointer Anchor
 
-<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
+<DocLayout.Live
+  node={<WithPointerAnchor />}
+  code={withPointerAnchorSourceCode["index.tsx"]}
+/>
+
+### With Open Delay
+
+<DocLayout.Live
+  node={<WithOpenDelay />}
+  code={withOpenDelaySourceCode["index.tsx"]}
+/>

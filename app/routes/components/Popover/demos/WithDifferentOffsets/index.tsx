@@ -1,9 +1,11 @@
 import { useState } from "react";
+
 import { Flex } from "@/components/Flex";
 import { Paper } from "@/components/Paper";
 import { Popover } from "@/components/Popover";
 import { Select } from "@/components/Select";
-import styles from "./Demo01.module.scss";
+
+import styles from "./index.module.css";
 
 export default function Demo() {
   const [offset, setOffset] = useState("8");
