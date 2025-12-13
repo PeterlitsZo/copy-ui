@@ -24,12 +24,6 @@ class ClickOutsideEventListener {
 
   handleClickOutsideInner(event: MouseEvent) {
     const topEl = this.stack[this.stack.length - 1].el;
-    console.log("handleClickOutside", {
-      event,
-      stack: this.stack,
-      topEl,
-      c: topEl.contains(event.target as Node),
-    });
     if (topEl.contains(event.target as Node)) {
       return;
     }

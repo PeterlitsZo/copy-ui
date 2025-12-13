@@ -57,7 +57,6 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
   // Update internal value when `value` prop changes.
   useEffect(() => {
     if (value !== internalValueRef.current) {
-      console.log("MultiSelect: updating internal value from props:", value);
       internalValueRef.current = value ?? null;
     }
   }, [value]);
@@ -94,7 +93,6 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
 
   const popoverTriggerRender: PopoverTriggerRender = useCallback(
     ({ setRef, isOpen, onToggle }) => {
-      console.log("MultiSelect: rendering trigger, isOpen =", isOpen);
       return (
         <MultiSelectTrigger
           id={id}
@@ -138,10 +136,6 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
                   } else {
                     internalValueRef.current = [...prev, v];
                   }
-                  console.log(
-                    "MultiSelect: new internal value:",
-                    internalValueRef.current,
-                  );
                   onChange?.(internalValueRef.current);
                   updateShowLabelsByInternalValue();
                 }
