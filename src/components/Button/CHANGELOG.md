@@ -19,3 +19,4 @@
   deprecated ThemeProvider.
 - 2025-11-23: Update the CSS variables names with camelCase.
 - 2025-11-26: Add `link` variant.
+- 2025-12-13: Update to support the new color scheme.

@@ -23,4 +23,5 @@ export const changelog = ''
   + '  deprecated ThemeProvider.\n'
   + '- 2025-11-23: Update the CSS variables names with camelCase.\n'
   + '- 2025-11-26: Add `link` variant.\n'
+  + '- 2025-12-13: Update to support the new color scheme.\n'
   ;
