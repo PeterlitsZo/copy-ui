@@ -76,26 +76,11 @@ const ToastInternal: FC<ToastInternalProps> = ({ toast }) => {
     return "gray";
   }, [toast.content.type]);
   const stx = jss.hash({
-    "--toast-bgColor":
-      color === "gray"
-        ? "white"
-        : `color-mix(in srgb, ${theme.colors[color]["000"]}, white)`,
-    "--toast-bdColor":
-      color === "gray"
-        ? theme.colors.gray["300"]
-        : `color-mix(in srgb, ${theme.colors[color]["300"]}, ${theme.colors.gray["300"]})`,
-    "--toast-iconColor":
-      color === "gray"
-        ? theme.colors.gray["800"]
-        : `color-mix(in srgb, ${theme.colors[color]["800"]}, ${theme.colors.gray["900"]} 25%)`,
-    "--toast-titleColor":
-      color === "gray"
-        ? theme.colors.gray["800"]
-        : `color-mix(in srgb, ${theme.colors[color]["800"]}, ${theme.colors.gray["900"]} 25%)`,
-    "--toast-descriptionColor":
-      color === "gray"
-        ? theme.colors.gray["600"]
-        : `color-mix(in srgb, ${theme.colors[color]["500"]}, ${theme.colors.gray["800"]} 25%)`,
+    "--toast-bgColor": color === "gray" ? "white" : theme.colors[color]["050"],
+    "--toast-bdColor": theme.colors[color]["400"],
+    "--toast-iconColor": theme.colors[color]["650"],
+    "--toast-titleColor": theme.colors[color]["650"],
+    "--toast-descriptionColor": `color-mix(in oklch, ${theme.colors[color]["600"]}, ${theme.colors.gray["600"]} 50%)`,
   });
 
   return (

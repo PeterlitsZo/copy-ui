@@ -9,4 +9,5 @@ export const changelog = ''
   + '- 2025-10-28: Use `Modal.Raw` to render the toast container.\n'
   + '- 2025-11-19: Remove the dependency on `ThemeProvider`.\n'
   + '- 2025-11-28: Enhance this with more toast types and optional description.\n'
+  + '- 2025-12-13: Update to support the new color scheme.\n'
   ;
