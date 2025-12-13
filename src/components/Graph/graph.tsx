@@ -268,11 +268,11 @@ const GraphNode: FC<GraphNodeProps> = (props) => {
   const jss = useJss();
 
   const nodeTextColor =
-    mode === "dark" ? theme.colors.gray["200"] : theme.colors.gray["800"];
+    mode === "dark" ? theme.colors.gray["200"] : theme.colors.gray["700"];
   const nodeBorderColor =
-    mode === "dark" ? theme.colors[color]["400"] : theme.colors[color]["600"];
+    mode === "dark" ? theme.colors[color]["450"] : theme.colors[color]["550"];
   const nodeBackgroundColor =
-    mode === "dark" ? theme.colors[color]["800"] : theme.colors[color]["000"];
+    mode === "dark" ? theme.colors[color]["700"] : theme.colors[color]["050"];
 
   const nodeTextStx = jss.hash({
     dominantBaseline: "middle",

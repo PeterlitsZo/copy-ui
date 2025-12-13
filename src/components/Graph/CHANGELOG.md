@@ -3,3 +3,4 @@
   curves. Support dark mode.
 - 2025-12-07: Use Canvas API to measure text width to handle the node with long
   label.
+- 2025-12-13: Update to support the new color scheme.

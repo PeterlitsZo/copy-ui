@@ -7,4 +7,5 @@ export const changelog = ''
   + '  curves. Support dark mode.\n'
   + '- 2025-12-07: Use Canvas API to measure text width to handle the node with long\n'
   + '  label.\n'
+  + '- 2025-12-13: Update to support the new color scheme.\n'
   ;
