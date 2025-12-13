@@ -2,3 +2,4 @@
 - 2025-10-08: Add alpha transparency, code formatting improvements.
 - 2025-10-21: Support `withDot` and `size` props.
 - 2025-11-20: Support more variants.
+- 2025-12-13: Update to support the new color scheme.

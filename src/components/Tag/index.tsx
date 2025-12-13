@@ -1,3 +1,3 @@
-// Tag from copy-ui @ 2025-11-20.
+// Tag from copy-ui @ 2025-12-13.
 
 export { Tag } from "./tag";

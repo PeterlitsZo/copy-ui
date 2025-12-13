@@ -1,0 +1,28 @@
+@layer components {
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--tag-h);
+    font-size: calc(var(--tag-h) * 0.625);
+    padding-inline: calc(var(--tag-h) * 0.375);
+    border-radius: 999999px;
+
+    background-color: var(--tag-bgColor);
+    color: var(--tag-color);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--tag-bdColor);
+  }
+
+  .tagDot {
+    width: calc(var(--tag-h) * 0.45);
+    height: calc(var(--tag-h) * 0.45);
+    margin-right: calc(var(--tag-h) * 0.2);
+    margin-left: calc(var(--tag-h) * -0.1);
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+}
