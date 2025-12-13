@@ -19,9 +19,9 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
 
   const computedStyles = {
     "--navbarLink-color": theme.colors.gray["700"],
-    "--navbarLink-hover-bgColor": theme.colors.gray["100"],
-    "--navbarLink-active-bgColor": theme.colors.blue["000"],
-    "--navbarLink-active-color-active": theme.colors.blue["900"],
+    "--navbarLink-hover-bgColor": theme.colors.gray["050"],
+    "--navbarLink-active-bgColor": theme.colors.blue["100"],
+    "--navbarLink-active-color": theme.colors.blue["800"],
     "--navbar-bdColor": theme.colors.gray["300"],
   };
 
@@ -41,6 +41,7 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
     } else if (kind === "utils") {
       return `/v0/react/utils/${pathOrComponentName}` === active;
     }
+    return false;
   }
 
   return (
@@ -53,52 +54,33 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
           >
             <div className={styles.title}>DOCS</div>
             {docs.map((doc) => (
-              <Link
+              <NavbarLink
                 key={doc.name}
-                className={classnames(
-                  styles.link,
-                  isActive("doc", doc.path) && styles.active,
-                )}
                 to={doc.path}
-              >
-                <span>{doc.name}</span>
-              </Link>
+                name={doc.name}
+                active={isActive("doc", doc.path)}
+              />
             ))}
             <div className={styles.title}>COMPONENTS</div>
             {components.map((component) => (
-              <Link
+              <NavbarLink
                 key={component.name}
-                className={classnames(
-                  styles.link,
-                  isActive("component", component.name) && styles.active,
-                )}
                 to={component.path}
-              >
-                <span>{component.name}</span>
-                {component.wip && (
-                  <Tag color="red" size="sm">
-                    WIP
-                  </Tag>
-                )}
-                {component.deprecated && (
-                  <Tag color="red" size="sm">
-                    Deprecated
-                  </Tag>
-                )}
-              </Link>
+                name={component.name}
+                active={isActive("component", component.name)}
+                wip={component.wip}
+                deprecated={component.deprecated}
+              />
             ))}
             <div className={styles.title}>UTILS</div>
             {utils.map((util) => (
-              <Link
+              <NavbarLink
                 key={util.name}
-                className={classnames(
-                  styles.link,
-                  isActive("utils", util.name) && styles.active,
-                )}
                 to={util.path}
-              >
-                <span>{util.name}</span>
-              </Link>
+                name={util.name}
+                active={isActive("utils", util.name)}
+                deprecated={util.name === "resolve-style"}
+              />
             ))}
           </nav>
         </ScrollArea.Content>
@@ -111,3 +93,31 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
 };
 
 Navbar.displayName = "Navbar";
+
+interface NavbarLinkProps {
+  to: string;
+  name: string;
+  active: boolean;
+  wip?: boolean;
+  deprecated?: boolean;
+}
+
+const NavbarLink: FC<NavbarLinkProps> = (props) => {
+  const { to, name, active, wip, deprecated } = props;
+
+  return (
+    <Link className={classnames(styles.link, active && styles.active)} to={to}>
+      <span>{name}</span>
+      {wip && (
+        <Tag color="red" size="sm">
+          WIP
+        </Tag>
+      )}
+      {deprecated && (
+        <Tag color="red" size="sm">
+          Deprecated
+        </Tag>
+      )}
+    </Link>
+  );
+};
