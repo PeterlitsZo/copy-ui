@@ -118,33 +118,13 @@ type FilesTreeItemProps = {
 const FilesTreeItem: FC<FilesTreeItemProps> = (props) => {
   const { filename, active, onClick } = props;
 
-  const openTooltipRef = useRef<null | (() => void)>(null);
-  const closeTooltipRef = useRef<null | (() => void)>(null);
-  const timeoutIdRef = useRef<null | ReturnType<typeof setTimeout>>(null);
-
-  const handleMouseEnter = () => {
-    timeoutIdRef.current = setTimeout(() => {
-      openTooltipRef.current?.();
-    }, 750);
-  };
-
-  const handleMouseLeave = () => {
-    closeTooltipRef.current?.();
-    if (timeoutIdRef.current) {
-      clearTimeout(timeoutIdRef.current);
-      timeoutIdRef.current = null;
-    }
-  };
-
   return (
     <Tooltip
       anchor="pointer"
       label={filename}
       placement="bottom-start"
+      openDelay={750}
       triggerRender={({ setRef, onOpen, onClose }) => {
-        openTooltipRef.current = onOpen;
-        closeTooltipRef.current = onClose;
-
         return (
           <button
             ref={setRef}
@@ -154,8 +134,8 @@ const FilesTreeItem: FC<FilesTreeItemProps> = (props) => {
               active && styles.active,
             )}
             onClick={() => onClick()}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={onOpen}
+            onMouseLeave={onClose}
             type="button"
           >
             {filename}
