@@ -1,36 +1,63 @@
-.colorSwatches {
+.colorPalette {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-.swatch {
+.colorPaletteItem {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  border: 1px solid var(--colorPaletteItem-bdColor);
   border-radius: 0.5rem;
   overflow: hidden;
-  border: 1px solid var(--swatch-bdColor);
 }
 
-.swatchColor {
-  height: 4rem;
-  width: 100%;
-}
-
-.swatchLabel {
-  padding: 0.5rem;
+.colorPaletteItemColor {
+  flex: 1.5;
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  align-items: start;
+  justify-content: end;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  line-height: 1;
 }
 
-.swatchName {
-  font-weight: 600;
+.colorPaletteItemColorTitle {
+  font-size: 2.5rem;
+}
+
+.colorPaletteItemColorDescription {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  gap: 0.5rem;
   font-size: 0.875rem;
 }
 
-.swatchValue {
+.colorPaletteItemColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.colorPaletteItemColumnColor {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  height: 1.625rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: inherit;
+  width: 100%;
+  color: transparent;
   font-size: 0.75rem;
   font-family: var(--font-mono);
-  opacity: 0.8;
+
+  .colorPaletteItem:hover & {
+    color: var(--colorPaletteItemColumnColor-color);
+  }
 }
