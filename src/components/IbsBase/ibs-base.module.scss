@@ -2,7 +2,7 @@
   .ibsBase {
     display: inline-flex;
 
-    height: var(--ibsBase-h);
+    min-height: var(--ibsBase-minH);
 
     border-width: 1px;
     border-style: solid;

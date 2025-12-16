@@ -1,16 +1,19 @@
-import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 import { Info } from "lucide-react";
+
+import { DocLayout } from "@/layouts/DocLayout/doc-layout";
 import { Alert } from "@/components/Alert";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
+import BasicUsage from "./demos/BasicUsage";
+import basicUsageSourceCode from "./demos/BasicUsage.source-code.codegen";
 
 <Alert color="blue" style={{ marginBottom: "1rem" }}>
   <Info />
   <Alert.Title>Info</Alert.Title>
-  <Alert.Description>This component is a low-level component meant to be used as
+  <Alert.Description>
+    <>This component is a low-level component meant to be used as
     a building block for more complex input, button or select (or more)
-    components.</Alert.Description>
+    components.</>
+  </Alert.Description>
 </Alert>
 
 ## Dependency Graph
@@ -35,4 +38,12 @@ import demo01SourceCode from "./demos/Demo01.source_code.codegen";
 
 ### Basic Usage
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live
+  node={<BasicUsage />}
+  code={basicUsageSourceCode["index.tsx"]}
+/>
+
+## See Also
+
+- [Input](./Input)
+- [FileInput](./FileInput)

@@ -65,27 +65,27 @@ const ibsBaseStyle = (theme: Theme) =>
   resolveStyle2({
     size: {
       xs: {
-        "--ibsBase-h": "1.75rem",
+        "--ibsBase-minH": "1.75rem",
         "--ibsBase-fontSize": "0.625rem",
         "--ibsBase-lineHeight": "1.25rem",
       },
       sm: {
-        "--ibsBase-h": "2rem",
+        "--ibsBase-minH": "2rem",
         "--ibsBase-fontSize": "0.75rem",
         "--ibsBase-lineHeight": "1.375rem",
       },
       md: {
-        "--ibsBase-h": "2.25rem",
+        "--ibsBase-minH": "2.25rem",
         "--ibsBase-fontSize": "0.875rem",
         "--ibsBase-lineHeight": "1.5rem",
       },
       lg: {
-        "--ibsBase-h": "2.5rem",
+        "--ibsBase-minH": "2.5rem",
         "--ibsBase-fontSize": "1rem",
         "--ibsBase-lineHeight": "1.75rem",
       },
       xl: {
-        "--ibsBase-h": "3rem",
+        "--ibsBase-minH": "3rem",
         "--ibsBase-fontSize": "1.125rem",
         "--ibsBase-lineHeight": "2rem",
       },
