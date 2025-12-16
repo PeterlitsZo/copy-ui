@@ -1,10 +1,17 @@
 import classNames from "classnames";
 import { ChevronsUpDown } from "lucide-react";
-import type { FC, Ref } from "react";
+import {
+  type ComponentProps,
+  createContext,
+  type FC,
+  type Ref,
+  useContext,
+} from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { extractStylesProps, IbsBase } from "@/components/IbsBase";
 
-import styles from "./multi-select-trigger.module.scss";
+import styles from "./multi-select-trigger.module.css";
 
 type MultiSelectTriggerProps = {
   id?: string;
@@ -31,6 +38,10 @@ const MultiSelectTrigger: FC<MultiSelectTriggerProps> = (props) => {
     onToggle,
   } = props;
 
+  const ibsBaseProps = useContext(TriggerIbsBasePropsContext);
+
+  const { stx: baseStyleStx } = extractStylesProps(ibsBaseProps ?? {});
+
   const theme = useTheme();
   const jss = useJss();
 
@@ -44,43 +55,50 @@ const MultiSelectTrigger: FC<MultiSelectTriggerProps> = (props) => {
   };
 
   const triggerStx = jss.hash({
-    "--select-font-size": theme.tokens.inputBaseMdFontSize,
-    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
+    "--multiSelectTrigger-bdColor": theme.colors.gray["400"],
+    "--multiSelectTrigger-bdRadius": "0.5rem",
+    "--multiSelectTrigger-placeholderColor": theme.colors.gray["600"],
+    "--multiSelectTrigger-pl": "var(--multiSelect-triggerPl)",
+    "--multiSelectTrigger-iconColor": theme.colors.gray["600"],
 
-    "--select-main-height": theme.tokens.inputBaseMdHeight,
-    "--select-main-border-color": theme.tokens.inputBaseDefaultBorderColor,
-    "--select-main-border-radius": theme.tokens.inputBaseBorderRadius,
-    "--select-main-placeholder-color": theme.tokens.inputBasePlaceholderColor,
-    "--select-main-disabled-color": theme.colors.gray["600"],
-    "--select-main-disabled-bg-color": theme.colors.gray["000"],
-    "--select-main-disabled-border-color": theme.colors.gray["200"],
-    "--select-main-focus-border-color": theme.colors.blue["800"],
+    "--multiSelectTrigger-disabled-color": theme.colors.gray["600"],
+    "--multiSelectTrigger-disabled-bgColor": theme.colors.gray["000"],
+    "--multiSelectTrigger-disabled-bdColor": theme.colors.gray["200"],
+
+    "--multiSelectTrigger-focus-bdColor": theme.colors.blue["700"],
   });
 
   return (
-    <div
+    <IbsBase
       id={id}
       ref={ref}
-      className={classNames(styles.selectTrigger, triggerStx, className)}
+      className={classNames(
+        styles.selectTrigger,
+        triggerStx,
+        baseStyleStx,
+        className,
+      )}
       onClick={() => !disabled && onToggle()}
-      data-value-picked={showLabels == null ? undefined : "true"}
-      data-disabled={disabled ? "true" : undefined}
-      data-opened={isOpen ? "true" : undefined}
       tabIndex={0}
       onKeyDown={handleKeyDown}
       role="combobox"
       aria-haspopup="listbox"
-      aria-expanded="false"
+      aria-expanded={isOpen ? "true" : "false"}
+      data-value-picked={showLabels == null ? undefined : "true"}
+      data-disabled={disabled ? "true" : undefined}
+      data-opened={isOpen ? "true" : undefined}
     >
-      <span className={styles.selectLabelsContainer}>
-        {showLabels !== null
-          ? showLabels.map((l) => <MultiSelectLabel key={l} label={l} />)
-          : placeholder}
-      </span>
-      <span className={styles.selectIcon}>
-        <ChevronsUpDown size="62.5%" />
-      </span>
-    </div>
+      <IbsBase.Wrapper>
+        <span className={styles.selectLabelsContainer}>
+          {showLabels !== null
+            ? showLabels.map((l) => <MultiSelectLabel key={l} label={l} />)
+            : placeholder}
+        </span>
+      </IbsBase.Wrapper>
+      <IbsBase.RightSection className={styles.selectIcon}>
+        <ChevronsUpDown size="50%" />
+      </IbsBase.RightSection>
+    </IbsBase>
   );
 };
 
@@ -91,8 +109,8 @@ const MultiSelectLabel = ({ label }: { label: string }) => {
   const jss = useJss();
 
   const labelStx = jss.hash({
-    "--select-label-padding": "0.125rem 0.375rem",
-    "--select-label-bg-color": theme.colors.gray["100"],
+    "--multiSelectTrigger-labelP": "0.125rem 0.375rem",
+    "--multiSelectTrigger-labelBgColor": theme.colors.gray["100"],
   });
 
   return (
@@ -100,4 +118,8 @@ const MultiSelectLabel = ({ label }: { label: string }) => {
   );
 };
 
-export { MultiSelectTrigger };
+const TriggerIbsBasePropsContext = createContext<ComponentProps<
+  typeof IbsBase
+> | null>(null);
+
+export { MultiSelectTrigger, TriggerIbsBasePropsContext };

@@ -3,4 +3,5 @@
 
 export const changelog = ''
   + '- 2025-11-06: Initial version.\n'
+  + '- 2025-12-16: Use `IbsBase` as the base component, etc.\n'
   ;

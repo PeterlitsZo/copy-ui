@@ -5,7 +5,7 @@ import type { CSSProperties, FC, Ref } from "react";
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { ScrollArea } from "@/components/ScrollArea";
 
-import styles from "./multi-select-list.module.scss";
+import styles from "./multi-select-list.module.css";
 
 type MultiSelectListProps<V extends string> = {
   ref?: Ref<HTMLDivElement>;
@@ -34,17 +34,17 @@ const MultiSelectList = <V extends string>(props: MultiSelectListProps<V>) => {
   const jss = useJss();
 
   const listStx = jss.hash({
-    "--select-font-size": theme.tokens.inputBaseMdFontSize,
-    "--select-line-height": theme.tokens.inputBaseMdLineHeight,
-
-    "--select-list-border-color": theme.tokens.inputBaseDefaultBorderColor,
-    "--select-list-border-radius": theme.tokens.inputBaseBorderRadius,
-
-    "--select-item-hover-bg-color": theme.colors.gray["000"],
+    "--multiSelectList-p": "var(--multiSelect-listP)",
+    "--multiSelectList-fontSize": "0.875rem",
+    "--multiSelectList-lineHeight": "1.5rem",
+    "--multiSelectList-bdColor": theme.colors.gray["400"],
+    "--multiSelectList-bdRadius": "0.5rem",
+    "--multiSelectList-itemHoverBgColor": theme.colors.gray["000"],
+    "--multiSelectList-itemPx": "var(--multiSelect-listItemPx)",
   });
 
   const listWidthStx = jss.hash({
-    "--select-list-width": `${width}px`,
+    "--multiSelectList-w": `${width}px`,
   });
 
   const viewStx = jss.hash({
@@ -97,7 +97,7 @@ const MultiSelectItem: FC<MultiSelectItemProps> = (props) => {
   const jss = useJss();
   const theme = useTheme();
   const stx = jss.hash({
-    "--select-item-mark-color": theme.colors.gray["600"],
+    "--multiSelectItem-markColor": theme.colors.gray["600"],
   });
 
   return (

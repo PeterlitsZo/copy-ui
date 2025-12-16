@@ -1,4 +1,5 @@
 import {
+  type ComponentProps,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -7,12 +8,19 @@ import {
 } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
+import type { IbsBase } from "@/components/IbsBase";
 import { Popover, type PopoverTriggerRender } from "@/components/Popover";
 
 import { MultiSelectList } from "./multi-select-list";
-import { MultiSelectTrigger } from "./multi-select-trigger";
+import {
+  MultiSelectTrigger,
+  TriggerIbsBasePropsContext,
+} from "./multi-select-trigger";
 
-interface SelectProps<V extends string> {
+type MultiSelectProps<V extends string> = Omit<
+  ComponentProps<typeof IbsBase>,
+  "onChange"
+> & {
   id?: string;
   value?: V[] | null;
   defaultValue?: V[] | null;
@@ -22,9 +30,9 @@ interface SelectProps<V extends string> {
   disabled?: boolean;
 
   onChange?: (value: V[] | null) => void;
-}
+};
 
-const MultiSelect = <V extends string>(props: SelectProps<V>) => {
+const MultiSelect = <V extends string>(props: MultiSelectProps<V>) => {
   const {
     id,
     value = null,
@@ -35,6 +43,8 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
     disabled = false,
 
     onChange,
+
+    ...rest
   } = props;
 
   const jss = useJss();
@@ -81,14 +91,12 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
   }, [triggerEl]);
 
   const baseStx = jss.hash({
-    "--select-list-padding": "0.25rem",
-    "--select-list-item-padding-inline": "0.5rem",
-    "--select-trigger-padding-right":
-      "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
-    "--select-trigger-padding-left":
+    "--multiSelect-listP": "0.25rem",
+    "--multiSelect-listItemPx": "0.5rem",
+    "--multiSelect-triggerPl":
       internalValueRef.current != null
-        ? "calc(var(--select-list-padding) + var(--select-list-item-padding-inline) - 0.25rem)"
-        : "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
+        ? "calc(var(--multiSelect-listP) + var(--multiSelect-listItemPx) - 0.25rem)"
+        : "calc(var(--multiSelect-listP) + var(--multiSelect-listItemPx))",
   });
 
   const popoverTriggerRender: PopoverTriggerRender = useCallback(
@@ -114,10 +122,12 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
 
   return (
     <Popover>
-      <Popover.Trigger render={popoverTriggerRender} />
+      <TriggerIbsBasePropsContext value={rest}>
+        <Popover.Trigger render={popoverTriggerRender} />
+      </TriggerIbsBasePropsContext>
       <Popover.Portal
         onClickOutside={({ closePortal }) => closePortal()}
-        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
+        render={({ setRef, isOpen, floatingStyles }) =>
           isOpen && (
             <MultiSelectList
               ref={setRef}
@@ -127,8 +137,6 @@ const MultiSelect = <V extends string>(props: SelectProps<V>) => {
               internalValue={internalValueRef.current}
               width={triggerWidth}
               onItemClicked={(v) => {
-                togglePortal();
-
                 if (!disabled) {
                   const prev = internalValueRef.current ?? [];
                   if (prev.includes(v)) {
