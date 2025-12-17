@@ -79,7 +79,6 @@ export const Navbar: FC<NavbarProps> = ({ active }) => {
                 to={util.path}
                 name={util.name}
                 active={isActive("utils", util.name)}
-                deprecated={util.name === "resolve-style"}
               />
             ))}
           </nav>

@@ -3,6 +3,5 @@
 
 export const utilsRoutes: { name: string, path: string }[] = [
   {"name": "jss", "path": "routes/utils/jss/index.tsx"},
-  {"name": "resolve-style", "path": "routes/utils/resolve-style/index.tsx"},
   {"name": "resolve-style2", "path": "routes/utils/resolve-style2/index.tsx"},
 ];

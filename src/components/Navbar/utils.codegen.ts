@@ -3,6 +3,5 @@
 
 export const utils: { name: string, path: string }[] = [
   {"name": "jss", "path": "/v0/react/utils/jss"},
-  {"name": "resolve-style", "path": "/v0/react/utils/resolve-style"},
   {"name": "resolve-style2", "path": "/v0/react/utils/resolve-style2"},
 ];
