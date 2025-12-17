@@ -9,4 +9,6 @@ export const changelog = ''
   + '  the `SortIndicator` has its style.\n'
   + '- 2025-11-15: Add the variant `compact`. The `size` prop is removed -- user\n'
   + '  should use CSS to set its size.\n'
+  + '- 2025-12-17: Add the new hook `useDirections`, which is useful to manage\n'
+  + '  multiple sort indicators.\n'
   ;

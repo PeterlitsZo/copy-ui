@@ -1,16 +1,128 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithDifferentVariants from "./demos/WithDifferentVariants";
+import withDifferentVariantsSourceCode from "./demos/WithDifferentVariants.source-code.codegen";
+import UseWithTable from "./demos/UseWithTable";
+import useWithTableSourceCode from "./demos/UseWithTable.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
+
+## Hooks
+
+### useDirection
+
+You can use the hook `useDirection` to manage the direction of a single sort
+indicator.
+
+```tsx
+import { useDirection } from "@/components/SortIndicator";
+
+function Demo() {
+  const [direction, setDirection] = useDirection("asc");
+  
+  return (
+    <Button
+      rightSection={<SortIndicator direction={direction} />}
+      onClick={() => setDirection()}
+    >
+      <span>Volume</span>
+    </Button>
+  );
+}
+```
+
+When call the `setDirection` function without any argument, it will set it to
+the next direction. The next direction is determined by the current direction.
+
+- `asc` → `desc`;
+- `desc` → `none`;
+- `none` → `asc`.
+
+But you can also pass the next direction directly to the `setDirection`
+function.
+
+```tsx
+setDirection("desc");
+```
+
+You can also pass a function to the `setDirection` function. The function will
+receive the current direction and return the next direction.
+
+```tsx
+setDirection((direction) => direction === "asc" ? "desc" : "asc");
+```
+
+### useDirections
+
+You can use the hook `useDirections` to manage the directions of multiple sort
+indicators.
+
+```tsx
+import { useDirections } from "@/components/SortIndicator";
+
+function Demo() {
+  const [directions, setDirection] = useDirections({
+    name: "asc",
+    age: "none",
+    gender: "none",
+    city: "none",
+  });
+
+  return (
+    <Flex gap="0.5rem">
+      <Button
+        rightSection={<SortIndicator direction={directions.name} />}
+        onClick={() => setDirection("name")}
+      >
+        Name
+      </Button>
+      <Button
+        rightSection={<SortIndicator direction={directions.age} />}
+        onClick={() => setDirection("age")}
+      >
+        Age
+      </Button>
+      <Button
+        rightSection={<SortIndicator direction={directions.gender} />}
+        onClick={() => setDirection("gender")}
+      >
+        Gender
+      </Button>
+      <Button
+        rightSection={<SortIndicator direction={directions.city} />}
+        onClick={() => setDirection("city")}
+      >
+        City
+      </Button>
+    </Flex>
+  );
+}
+```
+
+You can use the `setDirection` function to set the direction of a single sort
+indicator with its name. Like the `setDirection` function returned by the hook
+`useDirection`, it will set it to the next direction. You can also pass the next
+direction directly or pass a function.
+
+But when call the `setDirection` returned by the hook `useDirections`, it will
+reset all other directions to `none` - very useful if you are building a table.
 
 ## Examples
 
 ### With Different Variants
 
-<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+<DocLayout.Live
+  node={<WithDifferentVariants />}
+  code={withDifferentVariantsSourceCode['index.tsx']}
+/>
 
 The compact variant is useful when space is limited, such as in table headers.
+
+### Use with Table
+
+<DocLayout.Live
+  node={<UseWithTable />}
+  code={useWithTableSourceCode['index.tsx']}
+/>
