@@ -4,3 +4,4 @@
 - 2025-11-08: Refactor code structure.
 - 2025-11-21: Add `Field.FileInput` component. And remove useless style
   `width: 100%`.
+- 2025-12-17: Export the `useOptionalFieldContext` hook.

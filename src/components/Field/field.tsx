@@ -2,7 +2,7 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 import { useId } from "react";
 
-import styles from "./field.module.scss";
+import styles from "./field.module.css";
 import {
   FieldDescription,
   FieldError,

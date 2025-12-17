@@ -1,16 +1,16 @@
 @layer components {
   .fieldLabel {
     font-size: 0.875rem;
-    color: var(--field-label-color);
+    color: var(--fieldLabel-color);
   }
 
   .fieldDescription {
     font-size: 0.75rem;
-    color: var(--field-description-color);
+    color: var(--fieldDescription-color);
   }
 
   .fieldError {
     font-size: 0.75rem;
-    color: var(--field-error-color);
+    color: var(--fieldError-color);
   }
 }

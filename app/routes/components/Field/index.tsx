@@ -38,7 +38,7 @@ export default function FieldPage() {
         </DocLayout.Content>
       )}
       {tabsValue === "source" && (
-        <DocLayout.Content>
+        <DocLayout.Content variant="files">
           <DocLayout.Files files={sourceCode} />
         </DocLayout.Content>
       )}

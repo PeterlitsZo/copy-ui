@@ -6,7 +6,7 @@ type FieldContextState = {
 
 const FieldContext = createContext<FieldContextState | null>(null);
 
-function useFieldContext() {
+function useFieldContext(): FieldContextState {
   const context = useContext(FieldContext);
   if (!context) {
     throw new Error("useFieldContext must be used within a Field component");
@@ -14,5 +14,9 @@ function useFieldContext() {
   return context;
 }
 
+function useOptionalFieldContext(): FieldContextState | null {
+  return useContext(FieldContext);
+}
+
 export type { FieldContextState };
-export { FieldContext, useFieldContext };
+export { FieldContext, useFieldContext, useOptionalFieldContext };

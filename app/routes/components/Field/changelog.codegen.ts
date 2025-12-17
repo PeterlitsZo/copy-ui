@@ -8,4 +8,5 @@ export const changelog = ''
   + '- 2025-11-08: Refactor code structure.\n'
   + '- 2025-11-21: Add `Field.FileInput` component. And remove useless style\n'
   + '  `width: 100%`.\n'
+  + '- 2025-12-17: Export the `useOptionalFieldContext` hook.\n'
   ;

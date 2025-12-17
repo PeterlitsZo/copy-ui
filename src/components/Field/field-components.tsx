@@ -7,7 +7,7 @@ import { Input } from "@/components/Input";
 import { Select } from "@/components/Select";
 import { Textarea } from "@/components/Textarea";
 
-import styles from "./field-components.module.scss";
+import styles from "./field-components.module.css";
 import { useFieldContext } from "./field-context";
 
 // Field.Label
@@ -24,7 +24,7 @@ const FieldLabel: FC<FieldLabelProps> = (props) => {
   const { id } = useFieldContext();
 
   const stx = jss.hash({
-    "--field-label-color": theme.colors.gray["800"],
+    "--fieldLabel-color": theme.colors.gray["800"],
   });
 
   return (
@@ -52,7 +52,7 @@ const FieldDescription: FC<FieldDescriptionProps> = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--field-description-color": theme.colors.gray["600"],
+    "--fieldDescription-color": theme.colors.gray["600"],
   });
 
   return (
@@ -79,7 +79,7 @@ const FieldError: FC<FieldErrorProps> = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--field-error-color": theme.colors.red["700"],
+    "--fieldError-color": theme.colors.red["650"],
   });
 
   return (
