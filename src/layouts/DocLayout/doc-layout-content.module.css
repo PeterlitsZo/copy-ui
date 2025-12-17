@@ -1,0 +1,16 @@
+.docLayoutContent {
+  padding: 2rem 2rem 4rem 2rem;
+}
+
+.docLayoutContentVariantFiles {
+  padding: 1rem;
+}
+
+.docLayoutContentWrapper {
+  margin: 0 auto;
+  max-width: 64rem;
+}
+
+.docLayoutContentText {
+  max-width: 48rem;
+}

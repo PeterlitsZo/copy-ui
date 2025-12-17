@@ -1,9 +1,11 @@
 import type { CSSProperties, FC, ReactNode } from "react";
+
 import { Background } from "@/components/Background";
 import { CodeHighlight } from "@/components/CodeHighlight";
 import { useTheme } from "@/components/CopyUiProvider";
 import { ScrollArea } from "@/components/ScrollArea";
-import styles from "./doc-layout-live.module.scss";
+
+import styles from "./doc-layout-live.module.css";
 
 type DocLayoutLiveProps = {
   code: string;

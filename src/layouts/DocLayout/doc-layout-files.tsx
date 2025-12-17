@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ClipboardCopy, Maximize } from "lucide-react";
-import { type CSSProperties, type FC, useRef, useState } from "react";
+import { type CSSProperties, type FC, useState } from "react";
 
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { CodeHighlight } from "@/components/CodeHighlight";
@@ -11,7 +11,7 @@ import { ScrollArea } from "@/components/ScrollArea";
 import { useToast } from "@/components/Toast";
 import { Tooltip } from "@/components/Tooltip";
 
-import styles from "./doc-layout-files.module.scss";
+import styles from "./doc-layout-files.module.css";
 
 interface DocLayoutFilesProps {
   files: Record<string, string>;

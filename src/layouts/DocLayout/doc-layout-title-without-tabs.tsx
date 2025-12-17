@@ -3,7 +3,7 @@ import type { CSSProperties, FC } from "react";
 import { useTheme } from "@/components/CopyUiProvider";
 import { Typography } from "@/components/Typography";
 
-import styles from "./doc-layout-title-without-tabs.module.scss";
+import styles from "./doc-layout-title-without-tabs.module.css";
 
 type DocLayoutTitleWithoutTabsProps = {
   title: string;

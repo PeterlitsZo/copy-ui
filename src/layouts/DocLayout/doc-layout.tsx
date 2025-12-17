@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import styles from "./doc-layout.module.scss";
+import styles from "./doc-layout.module.css";
 import { DocLayoutChangelog } from "./doc-layout-changelog";
 import { DocLayoutContent } from "./doc-layout-content";
 import { DocLayoutDepGraph } from "./doc-layout-dep-graph";

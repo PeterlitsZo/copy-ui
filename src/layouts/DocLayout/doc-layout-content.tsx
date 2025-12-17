@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { Typography } from "@/components/Typography";
 
-import styles from "./doc-layout-content.module.scss";
+import styles from "./doc-layout-content.module.css";
 
 type DocLayoutContentProps = {
   variant?: "default" | "files";

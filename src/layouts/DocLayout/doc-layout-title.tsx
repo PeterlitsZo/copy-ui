@@ -4,7 +4,7 @@ import { useTheme } from "@/components/CopyUiProvider";
 import { Tabs } from "@/components/Tabs";
 import { Typography } from "@/components/Typography";
 
-import styles from "./doc-layout-title.module.scss";
+import styles from "./doc-layout-title.module.css";
 
 type DocLayoutTitleProps = {
   title: string;
