@@ -1,0 +1,51 @@
+@layer components {
+  .comboboxTrigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    text-align: start;
+    font-size: var(--selectTrigger-fontSize);
+
+    padding-inline: var(--selectTrigger-px);
+    height: var(--selectTrigger-h);
+    width: var(--selectTrigger-w);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--selectTrigger-bdColor);
+    border-radius: var(--selectTrigger-bdRadius);
+
+    background-color: white;
+
+    cursor: pointer;
+    user-select: none;
+
+    &:not([data-value-picked="true"]) {
+      color: var(--selectTrigger-placeholderColor);
+    }
+    &[data-disabled="true"] {
+      background-color: var(--selectTrigger-disabled-bgColor);
+      border-color: var(--selectTrigger-disabled-borderColor);
+      color: var(--selectTrigger-disabled-color);
+      cursor: not-allowed;
+    }
+    &:focus {
+      border-color: var(--selectTrigger-focus-borderColor);
+      outline: none;
+    }
+    &[data-opened="true"] {
+      border-color: var(--selectTrigger-focus-borderColor);
+    }
+  }
+
+  .comboboxIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--selectTrigger-lineHeight);
+    height: var(--selectTrigger-lineHeight);
+  }
+}
+

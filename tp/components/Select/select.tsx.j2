@@ -1,0 +1,144 @@
+import classNames from "classnames";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { Popover, type PopoverTriggerRender } from "@/components/Popover";
+import { resolveStyle2 } from "@/utils/resolve-style2";
+
+import { SelectList } from "./select-list";
+import { SelectTrigger } from "./select-trigger";
+
+interface SelectProps<V extends string> {
+  id?: string;
+  value?: V | null;
+  defaultValue?: V | null;
+
+  width?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
+
+  options: Array<{ value: V; label: string }>;
+  placeholder?: string;
+  disabled?: boolean;
+
+  onChange?: (value: V) => void;
+}
+
+const Select = <V extends string>(props: SelectProps<V>) => {
+  const {
+    id,
+    value = null,
+    defaultValue = null,
+    width = "md",
+    options,
+    placeholder = "Select an option",
+    disabled = false,
+    onChange,
+  } = props;
+
+  const jss = useJss();
+  const theme = useTheme();
+
+  const [triggerEl, setTriggerEl] = useState<HTMLButtonElement | null>(null);
+
+  const [internalValue, setInternalValue] = useState<V | null>(defaultValue);
+  const [triggerWidth, setTriggerWidth] = useState(0);
+
+  // Update internal value when `value` prop changes.
+  useEffect(() => {
+    setInternalValue(value ?? null);
+  }, [value]);
+
+  // Update trigger width on mount and resize.
+  useLayoutEffect(() => {
+    if (triggerEl) {
+      setTriggerWidth(triggerEl.offsetWidth);
+
+      const ro = new ResizeObserver(() => {
+        const width = triggerEl.offsetWidth;
+        if (width) {
+          setTriggerWidth(triggerEl.offsetWidth);
+        }
+      });
+      ro.observe(triggerEl);
+
+      return () => {
+        ro.disconnect();
+      };
+    }
+  }, [triggerEl]);
+
+  const showLabel = internalValue
+    ? (options.find((o) => o.value === internalValue)?.label ?? null)
+    : null;
+
+  const baseStx = jss.hash({
+    "--select-fontSize": theme.tokens.inputBaseMdFontSize,
+    "--select-lineHeight": "1.375rem",
+    "--select-borderColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--select-borderRadius": theme.tokens.inputBaseBorderRadius,
+  });
+
+  const widthStx = jss.hash(calcWidthStx({ width }));
+
+  const popoverTriggerRender: PopoverTriggerRender = useCallback(
+    ({ setRef, isOpen, onToggle }) => (
+      <SelectTrigger
+        id={id}
+        ref={(el) => {
+          setRef(el);
+          setTriggerEl(el);
+        }}
+        placeholder={placeholder}
+        className={classNames(baseStx, widthStx)}
+        disabled={disabled}
+        isOpen={isOpen}
+        onToggle={onToggle}
+        showLabel={showLabel}
+      />
+    ),
+    [id, placeholder, baseStx, widthStx, disabled, showLabel],
+  );
+
+  return (
+    <Popover>
+      <Popover.Trigger render={popoverTriggerRender} />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
+          isOpen && (
+            <SelectList
+              ref={setRef}
+              className={baseStx}
+              style={floatingStyles}
+              options={options}
+              internalValue={internalValue}
+              width={triggerWidth}
+              onItemClicked={(v) => {
+                togglePortal();
+
+                if (!disabled) {
+                  setInternalValue(v);
+                  onChange?.(v);
+                }
+              }}
+            />
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+Select.displayName = "Select";
+
+const calcWidthStx = resolveStyle2({
+  width: {
+    xs: { "--selectTrigger-w": "8rem" },
+    sm: { "--selectTrigger-w": "12rem" },
+    md: { "--selectTrigger-w": "16rem" },
+    lg: { "--selectTrigger-w": "20rem" },
+    xl: { "--selectTrigger-w": "24rem" },
+    full: { "--selectTrigger-w": "100%" },
+  },
+});
+
+export { Select };

@@ -1,0 +1,307 @@
+import dagre from "@dagrejs/dagre";
+import type { FC } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
+
+import {
+  type ColorName,
+  useJss,
+  useMode,
+  useTheme,
+} from "@/components/CopyUiProvider";
+
+const NODESEP = 25;
+const RANKSEP = 60;
+const NODE_MIN_WIDTH = 140;
+const NODE_HEIGHT = 38;
+const PADDING = 20;
+const TEXT_PADDING = 32;
+const TEXT_FONT_SIZE = 15;
+const TEXT_FONT_FAMILY = "ui-sans-serif, system-ui, sans-serif";
+
+/**
+ * Measures text width using Canvas API.
+ *
+ * Matches SVG text rendering with the given `TEXT_FONT_SIZE` and
+ * `TEXT_FONT_FAMILY`.
+ */
+function measureTextWidth(text: string): number {
+  // Create a temporary canvas element for measurement.
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return NODE_MIN_WIDTH;
+
+  // Match SVG text styling.
+  context.font = `${TEXT_FONT_SIZE}px ${TEXT_FONT_FAMILY}`;
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
+
+type GraphNode = {
+  id: string;
+  label: string;
+  color?: ColorName;
+};
+
+type GraphEdge = {
+  from: string;
+  to: string;
+};
+
+type GraphProps = {
+  nodes: Array<GraphNode>;
+  edges?: Array<GraphEdge>;
+};
+
+const Graph: FC<GraphProps> = (props) => {
+  const { nodes, edges = [] } = props;
+
+  const [isClient, setIsClient] = useState(false);
+  const [nodeWidths, setNodeWidths] = useState<Map<string, number>>(new Map());
+
+  const theme = useTheme();
+  const mode = useMode();
+  const arrowheadId = useId();
+
+  // Mark as client-side on mount.
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Measure text widths on client-side.
+  useEffect(() => {
+    if (!isClient) return;
+    const measuredWidths = new Map<string, number>();
+    for (const node of nodes) {
+      const textWidth = measureTextWidth(node.label);
+      const nodeWidth = Math.max(textWidth + TEXT_PADDING, NODE_MIN_WIDTH);
+      measuredWidths.set(node.id, nodeWidth);
+    }
+    setNodeWidths(measuredWidths);
+  }, [nodes, isClient]);
+
+  const layout = useMemo(() => {
+    const g = new dagre.graphlib.Graph();
+
+    g.setGraph({
+      rankdir: "LR",
+      nodesep: NODESEP,
+      ranksep: RANKSEP,
+    });
+
+    g.setDefaultEdgeLabel(() => ({}));
+
+    for (const node of nodes) {
+      // Use measured width if available, otherwise fall back to NODE_MIN_WIDTH.
+      //
+      // This allows SSR to work with default width, then client updates with
+      // measured width.
+      const nodeWidth = nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
+      g.setNode(node.id, {
+        label: node.label,
+        width: nodeWidth,
+        height: NODE_HEIGHT,
+      });
+    }
+
+    for (const edge of edges) {
+      g.setEdge(edge.from, edge.to);
+    }
+
+    dagre.layout(g);
+
+    const nodePositions = new Map<string, { x: number; y: number }>();
+    for (const node of nodes) {
+      const n = g.node(node.id);
+      nodePositions.set(node.id, { x: n.x, y: n.y });
+    }
+
+    const edgePaths = edges.map((edge) => {
+      const e = g.edge(edge.from, edge.to);
+      return { from: edge.from, to: edge.to, points: e.points };
+    });
+
+    let minX = Number.POSITIVE_INFINITY;
+    let minY = Number.POSITIVE_INFINITY;
+    let maxX = Number.NEGATIVE_INFINITY;
+    let maxY = Number.NEGATIVE_INFINITY;
+
+    for (const node of nodes) {
+      const pos = nodePositions.get(node.id);
+      if (!pos) continue;
+      const nodeWidth = nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
+      minX = Math.min(minX, pos.x - nodeWidth / 2);
+      minY = Math.min(minY, pos.y - NODE_HEIGHT / 2);
+      maxX = Math.max(maxX, pos.x + nodeWidth / 2);
+      maxY = Math.max(maxY, pos.y + NODE_HEIGHT / 2);
+    }
+
+    const padding = PADDING;
+    const width = maxX - minX + padding * 2;
+    const height = maxY - minY + padding * 2;
+    const offsetX = -minX + padding;
+    const offsetY = -minY + padding;
+
+    return {
+      nodePositions,
+      edgePaths,
+      nodeWidths,
+      width,
+      height,
+      offsetX,
+      offsetY,
+    };
+  }, [nodes, edges, nodeWidths]);
+
+  // Return null on server-side since text measurement requires browser APIs.
+  if (!isClient) {
+    return null;
+  }
+
+  const arrowheadColor =
+    mode === "dark" ? theme.colors.gray["400"] : theme.colors.gray["600"];
+
+  return (
+    <svg
+      role="img"
+      aria-label="graph"
+      width={layout.width}
+      height={layout.height}
+    >
+      <defs>
+        <marker
+          id={arrowheadId}
+          markerWidth="6"
+          markerHeight="6"
+          refX="6"
+          refY="3"
+          orient="auto"
+        >
+          <polygon points="0 0, 6 3, 0 6" fill={arrowheadColor} />
+        </marker>
+      </defs>
+
+      <g transform={`translate(${layout.offsetX}, ${layout.offsetY})`}>
+        {layout.edgePaths.map((edge) => (
+          <GraphEdge
+            key={`${edge.from}-${edge.to}`}
+            points={edge.points}
+            arrowheadId={arrowheadId}
+          />
+        ))}
+
+        {nodes.map((node) => {
+          const pos = layout.nodePositions.get(node.id);
+          if (!pos) return null;
+          const nodeWidth = layout.nodeWidths.get(node.id) ?? NODE_MIN_WIDTH;
+          return (
+            <GraphNode
+              key={node.id}
+              x={pos.x}
+              y={pos.y}
+              width={nodeWidth}
+              color={node.color ?? "blue"}
+              label={node.label}
+            />
+          );
+        })}
+      </g>
+    </svg>
+  );
+};
+
+Graph.displayName = "Graph";
+
+type GraphEdgeProps = {
+  points: Array<{ x: number; y: number }>;
+  arrowheadId: string;
+};
+
+const GraphEdge: FC<GraphEdgeProps> = (props) => {
+  const { points, arrowheadId } = props;
+
+  const theme = useTheme();
+  const mode = useMode();
+
+  if (points.length !== 3) return null;
+
+  const [start, control, end] = points;
+
+  const midStart = {
+    x: (start.x + control.x) / 2,
+    y: (start.y + control.y) / 2,
+  };
+  const midEnd = { x: (control.x + end.x) / 2, y: (control.y + end.y) / 2 };
+
+  const pathData = [
+    `M ${start.x} ${start.y}`,
+    `L ${midStart.x} ${midStart.y}`,
+    `C ${control.x} ${control.y} ${midEnd.x} ${midEnd.y} ${end.x} ${end.y}`,
+  ].join(" ");
+
+  const edgeColor =
+    mode === "dark" ? theme.colors.gray["400"] : theme.colors.gray["600"];
+
+  return (
+    <path
+      d={pathData}
+      fill="none"
+      stroke={edgeColor}
+      strokeWidth="1"
+      markerEnd={`url(#${arrowheadId})`}
+    />
+  );
+};
+
+type GraphNodeProps = {
+  x: number;
+  y: number;
+  width: number;
+  color: ColorName;
+  label: string;
+};
+
+const GraphNode: FC<GraphNodeProps> = (props) => {
+  const { x, y, width, color, label } = props;
+
+  const mode = useMode();
+  const theme = useTheme();
+  const jss = useJss();
+
+  const nodeTextColor =
+    mode === "dark" ? theme.colors.gray["200"] : theme.colors.gray["700"];
+  const nodeBorderColor =
+    mode === "dark" ? theme.colors[color]["450"] : theme.colors[color]["550"];
+  const nodeBackgroundColor =
+    mode === "dark" ? theme.colors[color]["700"] : theme.colors[color]["050"];
+
+  const nodeTextStx = jss.hash({
+    dominantBaseline: "middle",
+    textAnchor: "middle",
+  });
+
+  return (
+    {% raw %}
+    <g style={{ transform: `translate(${x}px, ${y}px)` }}>
+      <rect
+        x={-width / 2}
+        y={-NODE_HEIGHT / 2}
+        width={width}
+        height={NODE_HEIGHT}
+        fill={nodeBackgroundColor}
+        stroke={nodeBorderColor}
+        rx="0.25rem"
+      />
+      <text
+        className={nodeTextStx}
+        fill={nodeTextColor}
+        fontSize={TEXT_FONT_SIZE}
+        fontFamily={TEXT_FONT_FAMILY}
+      >
+        {label}
+      </text>
+    </g>
+    {% endraw %}
+  );
+};
+
+export { Graph };

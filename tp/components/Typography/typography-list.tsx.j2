@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
-import styles from "./typography-list.module.scss";
+import styles from "./typography-list.module.css";
 
 type TypographyUlProps = ComponentProps<"ul"> & {
   mt?: string;

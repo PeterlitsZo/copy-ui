@@ -1,24 +1,31 @@
 import { createContext, type FC, useEffect, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand";
 
-{% if features["with-toast-provider"] %}
 import { Toast } from "@/components/Toast";
-{% endif %}
 import { createJssState, type JssState } from "@/utils/jss";
 
+import { ClickOutsideEventListener } from "./click-outside-event-listener";
 import { DEFAULT_THEME } from "./default-theme";
-{% if features["with-mdx-provider"] %}
 import { MdxProvider } from "./mdx-provider";
-{% endif %}
 import type { Theme } from "./theme";
 import { useJss } from "./use-jss";
 
 type CopyUiStoreState = {
-  jssState: JssState;
   theme: Theme;
+  mode: "light" | "dark";
+
+  jssState: JssState;
+
+  clickOutsideEventListener: ClickOutsideEventListener;
 };
 
-type CopyUiStore = CopyUiStoreState;
+type CopyUiStoreActions = {
+  setMode: (
+    mode: "light" | "dark" | ((prevMode: "light" | "dark") => "light" | "dark"),
+  ) => void;
+};
+
+type CopyUiStore = CopyUiStoreState & CopyUiStoreActions;
 
 const CopyUiContext = createContext<StoreApi<CopyUiStore> | null>(null);
 
@@ -31,29 +38,28 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
 
   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
   if (storeRef.current === null) {
-    storeRef.current = createStore<CopyUiStore>()(() => ({
-      jssState: createJssState(),
+    storeRef.current = createStore<CopyUiStore>()((set) => ({
       theme: DEFAULT_THEME,
+      mode: "light",
+
+      jssState: createJssState(),
+
+      clickOutsideEventListener: new ClickOutsideEventListener(),
+
+      setMode: (mode) => {
+        set((state) => ({
+          mode: typeof mode === "function" ? mode(state.mode) : mode,
+        }));
+      },
     }));
   }
 
   return (
     <CopyUiContext.Provider value={storeRef.current}>
-{% if features["with-mdx-provider"] and features["with-toast-provider"] %}
       <Toast.Context>
         <MdxProvider>{children}</MdxProvider>
         <Toast.Container />
       </Toast.Context>
-{% elif features["with-mdx-provider"] %}
-      <MdxProvider>{children}</MdxProvider>
-{% elif features["with-toast-provider"] %}
-      <Toast.Context>
-        {children}
-        <Toast.Container />
-      </Toast.Context>
-{% else %}
-      {children}
-{% endif %}
       <JssSsrCss />
     </CopyUiContext.Provider>
   );

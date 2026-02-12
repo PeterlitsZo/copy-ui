@@ -9,7 +9,10 @@ pub fn generate_component(
     config: &ComponentConfig,
     output_dir: &Path,
 ) -> anyhow::Result<()> {
-    let env = Environment::new();
+    let mut env = Environment::new();
+    env.set_trim_blocks(true);
+    env.set_lstrip_blocks(true);
+    env.set_keep_trailing_newline(true);
     let ctx = context! {
         features => &config.features,
         component => component_name,

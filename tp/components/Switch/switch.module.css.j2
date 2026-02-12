@@ -1,0 +1,52 @@
+@layer components {
+  .rail {
+    position: relative;
+
+    height: var(--switchRail-h);
+    width: calc(var(--switchRail-h) * 1.75);
+
+    border-radius: 999999px;
+    border: 1px solid var(--switchRail-bdColor);
+
+    background-color: var(--switchRail-bgColor);
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.15s,
+      border-color 0.15s;
+
+    &[data-checked="true"] {
+      background-color: var(--switchRail-checked-bgColor);
+      border: 1px solid var(--switchRail-checked-bdColor);
+    }
+  }
+
+  .thumb {
+    position: absolute;
+    top: var(--switchThumb-gap);
+    left: var(--switchThumb-gap);
+
+    height: calc(var(--switchRail-h) - var(--switchThumb-gap) * 2 - 2px);
+    width: calc(var(--switchRail-h) - var(--switchThumb-gap) * 2 - 2px);
+
+    border-radius: 999999px;
+    border: 1px solid var(--switchThumb-bdColor);
+
+    background-color: var(--switchThumb-bgColor);
+
+    transition:
+      left 0.15s,
+      border-color 0.15s;
+
+    .rail[data-checked="true"] & {
+      left: calc(
+        var(--switchRail-h) *
+        1.75 -
+        var(--switchRail-h) +
+        var(--switchThumb-gap)
+      );
+      border: 1px solid var(--switchThumb-checked-bdColor);
+    }
+  }
+}

@@ -1,0 +1,157 @@
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+
+import { useJss } from "@/components/CopyUiProvider";
+import { Popover, type PopoverTriggerRender } from "@/components/Popover";
+
+import { TreeSelectList } from "./tree-select-list";
+import { TreeSelectTrigger } from "./tree-select-trigger";
+
+type OptionLeafNode<V extends string> = {
+  value: V;
+  label: string;
+};
+
+type OptionNonLeafNode<V extends string> = {
+  label: string;
+  children: Array<OptionNode<V>>;
+};
+
+type OptionNode<V extends string> = OptionLeafNode<V> | OptionNonLeafNode<V>;
+
+interface TreeSelectProps<V extends string> {
+  id?: string;
+  value?: V | null;
+  defaultValue?: V | null;
+
+  options: Array<OptionNode<V>>;
+  placeholder?: string;
+  disabled?: boolean;
+
+  onChange?: (value: V) => void;
+}
+
+const TreeSelect = <V extends string>(props: TreeSelectProps<V>) => {
+  const {
+    id,
+    value = null,
+    defaultValue = null,
+
+    options,
+    placeholder = "Select an option",
+    disabled = false,
+
+    onChange,
+  } = props;
+
+  const jss = useJss();
+
+  const [triggerEl, setTriggerEl] = useState<HTMLButtonElement | null>(null);
+
+  const [internalValue, setInternalValue] = useState<V | null>(defaultValue);
+  const [triggerWidth, setTriggerWidth] = useState(0);
+
+  // Update internal value when `value` prop changes.
+  useEffect(() => {
+    setInternalValue(value ?? null);
+  }, [value]);
+
+  // Update trigger width on mount and resize.
+  useLayoutEffect(() => {
+    if (triggerEl) {
+      setTriggerWidth(triggerEl.offsetWidth);
+
+      const ro = new ResizeObserver(() => {
+        const width = triggerEl.offsetWidth;
+        if (width) {
+          setTriggerWidth(triggerEl.offsetWidth);
+        }
+      });
+      ro.observe(triggerEl);
+
+      return () => {
+        ro.disconnect();
+      };
+    }
+  }, [triggerEl]);
+
+  // Recursively find the label for a given value in the tree
+  const findLabel = useCallback(
+    (nodes: Array<OptionNode<V>>, targetValue: V): string | null => {
+      for (const node of nodes) {
+        if ("value" in node) {
+          if (node.value === targetValue) {
+            return node.label;
+          }
+        } else {
+          const found = findLabel(node.children, targetValue);
+          if (found !== null) {
+            return found;
+          }
+        }
+      }
+      return null;
+    },
+    [],
+  );
+
+  const showLabel = internalValue ? findLabel(options, internalValue) : null;
+
+  const baseStx = jss.hash({
+    "--select-list-padding": "0.25rem",
+    "--select-list-item-padding-inline": "0.5rem",
+    "--select-main-padding-inline":
+      "calc(var(--select-list-padding) + var(--select-list-item-padding-inline))",
+  });
+
+  const popoverTriggerRender: PopoverTriggerRender = useCallback(
+    ({ setRef, isOpen, onToggle }) => (
+      <TreeSelectTrigger
+        id={id}
+        ref={(el) => {
+          setRef(el);
+          setTriggerEl(el);
+        }}
+        placeholder={placeholder}
+        className={baseStx}
+        disabled={disabled}
+        isOpen={isOpen}
+        onToggle={onToggle}
+        showLabel={showLabel}
+      />
+    ),
+    [id, placeholder, baseStx, disabled, showLabel],
+  );
+
+  return (
+    <Popover>
+      <Popover.Trigger render={popoverTriggerRender} />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
+          isOpen && (
+            <TreeSelectList
+              ref={setRef}
+              className={baseStx}
+              style={floatingStyles}
+              options={options}
+              internalValue={internalValue}
+              width={triggerWidth}
+              onItemClicked={(v: V) => {
+                togglePortal();
+
+                if (!disabled) {
+                  setInternalValue(v);
+                  onChange?.(v);
+                }
+              }}
+            />
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+TreeSelect.displayName = "TreeSelect";
+
+export { TreeSelect };

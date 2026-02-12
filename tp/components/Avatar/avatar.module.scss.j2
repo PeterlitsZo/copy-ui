@@ -1,0 +1,28 @@
+@layer components {
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+
+    font-size: calc(var(--avatar-size) / 2.5);
+    font-weight: 500;
+
+    color: var(--avatar-color);
+    border-radius: var(--avatar-bdRadius);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--avatar-bdColor);
+    background-color: var(--avatar-bgColor);
+
+    user-select: none;
+
+    overflow: hidden;
+
+    &[data-avatar-img-loaded] {
+      border-width: 0;
+    }
+  }
+}

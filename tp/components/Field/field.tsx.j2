@@ -1,0 +1,60 @@
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
+import { useId } from "react";
+
+import styles from "./field.module.css";
+import {
+  FieldDescription,
+  FieldError,
+  FieldFileInput,
+  FieldInput,
+  FieldLabel,
+  FieldSelect,
+  FieldTextarea,
+} from "./field-components";
+import { FieldContext } from "./field-context";
+
+type FieldProps = ComponentProps<"div">;
+
+type FieldComponent = FC<FieldProps> & {
+  Label: typeof FieldLabel;
+  Description: typeof FieldDescription;
+  Error: typeof FieldError;
+  Input: typeof FieldInput;
+  FileInput: typeof FieldFileInput;
+  Textarea: typeof FieldTextarea;
+  Select: typeof FieldSelect;
+};
+
+const Field: FieldComponent = (props) => {
+  const { className, children, ...rest } = props;
+
+  const id = useId();
+
+  return (
+    {% raw %}
+    <FieldContext value={{ id }}>
+      {/* biome-ignore lint/a11y/useSemanticElements: It is fine here. */}
+      <div
+        role="group"
+        className={classNames(styles.field, className)}
+        {...rest}
+      >
+        {children}
+      </div>
+    </FieldContext>
+    {% endraw %}
+  );
+};
+
+Field.displayName = "Field";
+
+Field.Label = FieldLabel;
+Field.Description = FieldDescription;
+Field.Error = FieldError;
+Field.Input = FieldInput;
+Field.FileInput = FieldFileInput;
+Field.Textarea = FieldTextarea;
+Field.Select = FieldSelect;
+
+export { Field };

@@ -1,0 +1,154 @@
+import classNames from "classnames";
+import type { CSSProperties } from "react";
+import { useLayoutEffect, useRef } from "react";
+
+import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
+
+import styles from "./background.module.scss";
+import { BackgroundContainer } from "./background-container";
+import { drawChessboard, drawDots, drawLines } from "./draw";
+
+type BackgroundKind = "dots" | "lines" | "chessboard";
+
+type BackgroundConfigDots = {
+  dotColor: string;
+};
+
+type BackgroundConfigLines = {
+  lineColor: string;
+};
+
+type BackgroundConfigChessboard = {
+  chessboardColor: string;
+};
+
+type BackgroundConfig<K extends BackgroundKind> = K extends "dots"
+  ? BackgroundConfigDots
+  : K extends "lines"
+    ? BackgroundConfigLines
+    : K extends "chessboard"
+      ? BackgroundConfigChessboard
+      : never;
+
+type BackgroundProps<K extends BackgroundKind> = {
+  className?: string;
+  style?: CSSProperties;
+  kind: K;
+  config?: BackgroundConfig<K>;
+};
+
+type BackgroundComponent = {
+  <K extends BackgroundKind>(props: BackgroundProps<K>): React.ReactNode;
+  displayName: string;
+  Container: typeof BackgroundContainer;
+};
+
+const Background: BackgroundComponent = <K extends BackgroundKind>(
+  props: BackgroundProps<K>,
+) => {
+  const { className, style, kind, config } = props;
+
+  const jss = useJss();
+  const mode = useMode();
+  const theme = useTheme();
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    const canvas = canvasRef.current;
+    if (!wrapper || !canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resizeCanvas = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = wrapper.getBoundingClientRect();
+
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+
+      ctx.scale(dpr, dpr);
+
+      drawBackground();
+    };
+    const drawBackground = () => {
+      if (!ctx) return;
+      const rect = wrapper.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (kind === "lines") {
+        const c: BackgroundConfigLines = (config as
+          | BackgroundConfigLines
+          | undefined) ?? {
+          lineColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.05)`
+              : `rgba(0, 0, 0, 0.05)`,
+        };
+        drawLines(ctx, width, height, c);
+      } else if (kind === "dots") {
+        const c: BackgroundConfigDots = (config as
+          | BackgroundConfigDots
+          | undefined) ?? {
+          dotColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.15)`
+              : `rgba(0, 0, 0, 0.15)`,
+        };
+        drawDots(ctx, width, height, c);
+      } else if (kind === "chessboard") {
+        const c: BackgroundConfigChessboard = (config as
+          | BackgroundConfigChessboard
+          | undefined) ?? {
+          chessboardColor:
+            mode === "dark"
+              ? `rgba(255, 255, 255, 0.03)`
+              : `rgba(0, 0, 0, 0.02)`,
+        };
+        drawChessboard(ctx, width, height, c);
+      }
+    };
+
+    resizeCanvas();
+
+    const resizeObserver = new ResizeObserver(() => {
+      resizeCanvas();
+    });
+    resizeObserver.observe(wrapper);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [mode, kind, config]);
+
+  const stx = jss.hash({
+    "--backgroundWrapper-bgColor":
+      mode === "dark" ? theme.colors.gray["800"] : "white",
+  });
+
+  return (
+    <div
+      className={classNames(styles.backgroundWrapper, stx, className)}
+      style={style}
+      ref={wrapperRef}
+    >
+      <canvas ref={canvasRef} />
+    </div>
+  );
+};
+
+Background.displayName = "Background";
+
+Background.Container = BackgroundContainer;
+
+export type { BackgroundProps, BackgroundKind, BackgroundConfig };
+export { Background };

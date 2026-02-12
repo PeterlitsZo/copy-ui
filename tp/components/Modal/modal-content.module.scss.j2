@@ -1,0 +1,19 @@
+@layer components {
+  .modalContent {
+    position: fixed;
+
+    top: var(--modal-content-y-offset);
+    left: 50%;
+    transform: translateX(-50%);
+
+    &[data-center="true"] {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &[data-shadow="true"] {
+      box-shadow: var(--modal-content-shadow);
+    }
+  }
+}

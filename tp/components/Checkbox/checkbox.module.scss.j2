@@ -1,0 +1,25 @@
+@layer components {
+  .checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--checkbox-bdColor);
+    border-radius: 0.25rem;
+    background-color: var(--checkbox-bgColor);
+    cursor: pointer;
+    user-select: none;
+
+    &.checked {
+      background-color: var(--checkbox-checked-bgColor);
+      border-color: var(--checkbox-checked-bdColor);
+    }
+  }
+
+  .checkboxMark {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: var(--checkbox-markColor);
+  }
+}

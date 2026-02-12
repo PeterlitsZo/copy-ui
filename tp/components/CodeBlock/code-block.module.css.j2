@@ -1,0 +1,29 @@
+@layer components {
+  .codeBlock {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--codeBlock-bdRadius);
+    background-color: var(--codeBlock-bgColor);
+  }
+
+  .codeBlockTitle {
+    font-size: 1rem;
+    color: var(--codeBlockTitle-color);
+    padding: var(--codeBlockTitle-py) var(--codeBlockTitle-px);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--codeBlockTitle-bdBottomColor);
+  }
+
+  .codeBlockScrollAreaContent {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .codeBlockCopyButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+  }
+}

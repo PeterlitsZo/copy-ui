@@ -1,0 +1,32 @@
+@layer components {
+  .tabsTabEnclosed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: var(--tab-px);
+    padding-right: var(--tab-px);
+    padding-top: var(--tab-py);
+    padding-bottom: var(--tab-py);
+
+    border-width: var(--tab-bdWidth);
+    border-style: var(--tab-bdStyle);
+    border-color: var(--tab-bdColor);
+    border-radius: var(--tab-bdRadius);
+
+    background-color: var(--tab-bgColor);
+    color: var(--tab-color);
+
+    font-size: var(--tab-fontSize);
+
+    cursor: pointer;
+
+    &[data-active="true"] {
+      border-width: var(--tab-active-bdWidth);
+      border-style: var(--tab-active-bdStyle);
+      border-color: var(--tab-active-bdColor);
+      background-color: var(--tab-active-bgColor);
+      color: var(--tab-active-color);
+    }
+  }
+}

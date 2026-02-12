@@ -1,0 +1,57 @@
+@layer components {
+  .ibsBase {
+    &:has(.fileInput:focus) {
+      outline: none;
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--fileInput-focus-bdColor);
+    }
+  }
+
+  .fileInputWrapper {
+    position: relative;
+    align-self: stretch;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    padding-inline-start: var(--fileInput-paddingInlineStart);
+    padding-inline-end: var(--fileInput-paddingInlineEnd);
+    font-size: var(--fileInput-fontSize);
+    line-height: var(--fileInput-lineHeight);
+
+    cursor: pointer;
+
+    [data-disabled="true"] & {
+      pointer-events: none;
+      cursor: inherit;
+    }
+  }
+
+  .fileInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    cursor: pointer;
+
+    [data-disabled="true"] & {
+      pointer-events: none;
+      cursor: inherit;
+    }
+  }
+
+  .fileInputText {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .fileInputText.placeholder {
+    color: var(--fileInput-placeholderColor);
+  }
+}

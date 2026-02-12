@@ -1,0 +1,92 @@
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
+
+import { useJss } from "@/components/CopyUiProvider";
+
+type Direction = "row" | "column";
+
+type AlignItems =
+  | "start"
+  | "flex-start"
+  | "center"
+  | "end"
+  | "flex-end"
+  | "stretch"
+  | "baseline";
+
+type JustifyContent =
+  | "start"
+  | "flex-start"
+  | "center"
+  | "end"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly";
+
+type FlexProps = ComponentProps<"div"> & {
+  dir?: Direction;
+  direction?: Direction;
+  items?: AlignItems;
+  alignItems?: AlignItems;
+  justify?: JustifyContent;
+  justifyContent?: JustifyContent;
+  gap?: string;
+  wrap?: boolean;
+  children?: React.ReactNode;
+};
+
+export const Flex: FC<FlexProps> = (props) => {
+  const {
+    dir = "row",
+    direction = dir,
+    items = "stretch",
+    alignItems = items,
+    justify = "flex-start",
+    justifyContent = justify,
+    gap = "0",
+    wrap = false,
+    className,
+    children,
+    ...rest
+  } = props;
+
+  const jss = useJss();
+
+  const stx = jss.hash({
+    display: "flex",
+    flexDirection: direction,
+    alignItems: normalizeAlignItems(alignItems),
+    justifyContent: normalizeJustifyContent(justifyContent),
+    gap,
+    flexWrap: wrap ? "wrap" : "nowrap",
+  });
+
+  return (
+    <div className={classNames(stx, className)} {...rest}>
+      {children}
+    </div>
+  );
+};
+
+function normalizeAlignItems(items: AlignItems): AlignItems {
+  switch (items) {
+    case "start":
+      return "flex-start";
+    case "end":
+      return "flex-end";
+    default:
+      return items;
+  }
+}
+
+function normalizeJustifyContent(justify: JustifyContent): JustifyContent {
+  switch (justify) {
+    case "start":
+      return "flex-start";
+    case "end":
+      return "flex-end";
+    default:
+      return justify;
+  }
+}

@@ -1,0 +1,47 @@
+import classNames from "classnames";
+import type { ComponentProps, FC } from "react";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+
+import styles from "./resizable.module.css";
+
+type ResizablePanelGroupProps = ComponentProps<typeof PanelGroup>;
+
+const ResizablePanelGroup: FC<ResizablePanelGroupProps> = (props) => {
+  return <PanelGroup {...props} />;
+};
+
+type ResizablePanelProps = ComponentProps<typeof Panel>;
+
+const ResizablePanel: FC<ResizablePanelProps> = (props) => {
+  return <Panel {...props} />;
+};
+
+type ResizableHandleProps = ComponentProps<typeof PanelResizeHandle>;
+
+const ResizableHandle: FC<ResizableHandleProps> = (props) => {
+  const { className, ...rest } = props;
+
+  const theme = useTheme();
+  const jss = useJss();
+
+  const stx = jss.hash({
+    "--resizableHandle-bgColor": theme.colors.gray["300"],
+  });
+
+  return (
+    <PanelResizeHandle
+      className={classNames(styles.resizableHandle, stx, className)}
+      {...rest}
+    />
+  );
+};
+
+const Resizable = {
+  PanelGroup: ResizablePanelGroup,
+  Panel: ResizablePanel,
+  Handle: ResizableHandle,
+} as const;
+
+export { Resizable };

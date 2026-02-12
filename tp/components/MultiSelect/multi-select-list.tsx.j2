@@ -1,0 +1,124 @@
+import classNames from "classnames";
+import { Check } from "lucide-react";
+import type { CSSProperties, FC, Ref } from "react";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { ScrollArea } from "@/components/ScrollArea";
+
+import styles from "./multi-select-list.module.css";
+
+type MultiSelectListProps<V extends string> = {
+  ref?: Ref<HTMLDivElement>;
+  className?: string;
+  style: CSSProperties;
+
+  options: Array<{ value: V; label: string }>;
+  internalValue?: V[] | null;
+  width: number;
+
+  onItemClicked: (value: V) => void;
+};
+
+const MultiSelectList = <V extends string>(props: MultiSelectListProps<V>) => {
+  const {
+    ref,
+    className,
+    style,
+    options,
+    internalValue,
+    width,
+    onItemClicked,
+  } = props;
+
+  const theme = useTheme();
+  const jss = useJss();
+
+  const listStx = jss.hash({
+    "--multiSelectList-p": "var(--multiSelect-listP)",
+    "--multiSelectList-fontSize": "0.875rem",
+    "--multiSelectList-lineHeight": "1.5rem",
+    "--multiSelectList-bdColor": theme.colors.gray["400"],
+    "--multiSelectList-bdRadius": "0.5rem",
+    "--multiSelectList-itemHoverBgColor": theme.colors.gray["000"],
+    "--multiSelectList-itemPx": "var(--multiSelect-listItemPx)",
+  });
+
+  const listWidthStx = jss.hash({
+    "--multiSelectList-w": `${width}px`,
+  });
+
+  const viewStx = jss.hash({
+    maxHeight: "15rem",
+  });
+
+  return (
+    <ScrollArea
+      ref={ref}
+      style={style}
+      className={classNames(
+        styles.selectListContainer,
+        listStx,
+        listWidthStx,
+        className,
+      )}
+    >
+      <ScrollArea.Viewport className={viewStx}>
+        <ScrollArea.Content>
+          <ul className={classNames(styles.selectList)}>
+            {options.map((option) => {
+              return (
+                <MultiSelectItem
+                  key={option.value}
+                  marked={internalValue?.includes(option.value) ?? false}
+                  label={option.label}
+                  onChoose={() => onItemClicked(option.value)}
+                />
+              );
+            })}
+          </ul>
+        </ScrollArea.Content>
+      </ScrollArea.Viewport>
+      <ScrollArea.ScrollbarWithThumb />
+    </ScrollArea>
+  );
+};
+
+MultiSelectList.displayName = "MultiSelect.List";
+
+type MultiSelectItemProps = {
+  marked: boolean;
+  label: string;
+  onChoose: () => void;
+};
+
+const MultiSelectItem: FC<MultiSelectItemProps> = (props) => {
+  const { marked, label, onChoose } = props;
+
+  const jss = useJss();
+  const theme = useTheme();
+  const stx = jss.hash({
+    "--multiSelectItem-markColor": theme.colors.gray["600"],
+  });
+
+  return (
+    <li className={classNames(styles.selectItem, stx)}>
+      <button
+        type="button"
+        className={styles.selectItemButton}
+        onClick={() => onChoose()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onChoose();
+          }
+        }}
+        tabIndex={0}
+      >
+        <span>{label}</span>
+        {marked && <Check />}
+      </button>
+    </li>
+  );
+};
+
+export { MultiSelectList };

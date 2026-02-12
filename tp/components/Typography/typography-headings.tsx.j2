@@ -3,7 +3,10 @@ import type { ComponentProps, FC } from "react";
 
 import { useTheme } from "@/components/CopyUiProvider";
 
-import styles from "./typography-headings.module.scss";
+import styles from "./typography-headings.module.css";
+
+// Typography.H1
+// =============================================================================
 
 type TypographyH1Props = ComponentProps<"h1"> & {
   mt?: string;
@@ -29,6 +32,9 @@ const TypographyH1: FC<TypographyH1Props> = (props) => {
     </h1>
   );
 };
+
+// Typography.H2
+// =============================================================================
 
 type TypographyH2Props = ComponentProps<"h2"> & {
   mt?: string;
@@ -58,6 +64,9 @@ const TypographyH2: FC<TypographyH2Props> = (props) => {
   );
 };
 
+// Typography.H3
+// =============================================================================
+
 type TypographyH3Props = ComponentProps<"h3"> & {
   mt?: string;
   mb?: string;
@@ -83,6 +92,9 @@ const TypographyH3: FC<TypographyH3Props> = (props) => {
   );
 };
 
+// Typography.H4
+// =============================================================================
+
 type TypographyH4Props = ComponentProps<"h4"> & {
   mt?: string;
   mb?: string;
@@ -107,5 +119,8 @@ const TypographyH4: FC<TypographyH4Props> = (props) => {
     </h4>
   );
 };
+
+// Export
+// =============================================================================
 
 export { TypographyH1, TypographyH2, TypographyH3, TypographyH4 };

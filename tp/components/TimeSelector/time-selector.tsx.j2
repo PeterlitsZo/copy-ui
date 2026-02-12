@@ -1,0 +1,110 @@
+import { Clock } from "lucide-react";
+import type { FC } from "react";
+import { useMemo } from "react";
+
+import { Button } from "@/components/Button";
+import { Popover } from "@/components/Popover";
+import { safeParseTimeRange, type TimeRange } from "./time-range";
+import { TimeSelectorPortal } from "./time-selector-portal";
+
+export type TimeSelectorProps = {
+  value?: TimeRange;
+  onChange?: (value: TimeRange) => void;
+};
+
+const TimeSelector: FC<TimeSelectorProps> = (props) => {
+  const { value, onChange } = props;
+
+  const showTitle = useMemo(() => {
+    if (value) {
+      const parsedTimeRangeResult = safeParseTimeRange(value);
+      if (parsedTimeRangeResult.ok) {
+        const parsedTimeRange = parsedTimeRangeResult.value;
+
+        // The `Last XX <unit>` format.
+        if (
+          parsedTimeRange.to.expr.t === "atom" &&
+          parsedTimeRange.to.expr.atom.t === "now"
+        ) {
+          const fromExpr = parsedTimeRange.from.expr;
+          if (fromExpr.t === "sub") {
+            const left = fromExpr.left;
+            const right = fromExpr.right;
+            if (
+              left.t === "atom" &&
+              left.atom.t === "now" &&
+              right.t === "atom" &&
+              right.atom.t === "duration"
+            ) {
+              let unit: string;
+              switch (right.atom.unit) {
+                case "m":
+                  unit = "minute";
+                  break;
+                case "h":
+                  unit = "hour";
+                  break;
+                case "d":
+                  unit = "day";
+                  break;
+                case "y":
+                  unit = "year";
+                  break;
+              }
+              if (right.atom.amount > 1) {
+                unit += "s";
+              }
+              return `Last ${right.atom.amount} ${unit}`;
+            }
+          }
+        }
+
+        // The `<from> -- <to>` format.
+        return `${value.from.v} ~ ${value.to.v}`;
+      } else {
+        return "Invalid time range";
+      }
+    }
+    return "Select Time";
+  }, [value]);
+
+  return (
+    <Popover>
+      <Popover.Trigger
+        render={({ setRef, onToggle }) => (
+          <Button
+            ref={(el) => {
+              el && setRef(el);
+              return;
+            }}
+            leftSection={<Clock size="1.25rem" />}
+            onClick={onToggle}
+          >
+            <span>{showTitle}</span>
+          </Button>
+        )}
+      />
+      <Popover.Portal
+        onClickOutside={({ closePortal }) => closePortal()}
+        render={({ setRef, togglePortal, isOpen, floatingStyles }) =>
+          isOpen && (
+            <TimeSelectorPortal
+              setRef={setRef}
+              togglePortal={togglePortal}
+              floatingStyles={floatingStyles}
+              value={value}
+              onChange={(v) => {
+                onChange?.(v);
+                togglePortal();
+              }}
+            />
+          )
+        }
+      />
+    </Popover>
+  );
+};
+
+TimeSelector.displayName = "TimeSelector";
+
+export { TimeSelector };

@@ -1,0 +1,57 @@
+@layer components {
+  .selectTrigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    text-align: start;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--multiSelectTrigger-bdColor);
+    border-radius: var(--multiSelectTrigger-bdRadius);
+
+    background-color: white;
+
+    cursor: pointer;
+    user-select: none;
+
+    &:not([data-value-picked="true"]) {
+      color: var(--multiSelectTrigger-placeholderColor);
+    }
+    &[data-disabled="true"] {
+      background-color: var(--multiSelectTrigger-disabled-bgColor);
+      border-color: var(--multiSelectTrigger-disabled-bdColor);
+      color: var(--multiSelectTrigger-disabled-color);
+      cursor: not-allowed;
+    }
+    &:focus {
+      border-color: var(--multiSelectTrigger-focus-bdColor);
+      outline: none;
+    }
+    &[data-opened="true"] {
+      border-color: var(--multiSelectTrigger-focus-bdColor);
+    }
+  }
+
+  .selectIcon {
+    color: var(--multiSelectTrigger-iconColor);
+  }
+
+  .selectLabelsContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    padding-left: var(--multiSelectTrigger-pl);
+    padding-right: var(--multiSelectTrigger-pr);
+    padding-block: 0.1875rem;
+  }
+
+  .selectLabel {
+    padding: var(--multiSelectTrigger-labelP);
+    background-color: var(--multiSelectTrigger-labelBgColor);
+    border-radius: 0.25rem;
+  }
+}

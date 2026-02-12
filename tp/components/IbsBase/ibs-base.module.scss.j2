@@ -1,0 +1,25 @@
+@layer components {
+  .ibsBase {
+    display: inline-flex;
+
+    min-height: var(--ibsBase-minH);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--ibsBase-bdColor);
+    border-radius: var(--ibsBase-bdRadius);
+
+    background-color: var(--ibsBase-bgColor);
+
+    overflow: hidden;
+
+    font-size: var(--ibsBase-fontSize);
+    line-height: var(--ibsBase-lineHeight);
+
+    &[data-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: var(--ibsBase-disabled-bgColor);
+    }
+  }
+}

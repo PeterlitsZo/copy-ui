@@ -1,0 +1,81 @@
+import classNames from "classnames";
+import { ChevronsUpDown } from "lucide-react";
+import type { FC, Ref } from "react";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+
+import styles from "./combobox-trigger.module.scss";
+
+type ComboboxTriggerProps = {
+  id?: string;
+  ref: Ref<HTMLButtonElement>;
+  className?: string;
+
+  placeholder: string;
+  disabled: boolean;
+  isOpen: boolean;
+  showLabel: string | null;
+
+  onToggle: () => void;
+};
+
+const ComboboxTrigger: FC<ComboboxTriggerProps> = (props) => {
+  const {
+    id,
+    ref,
+    className,
+    placeholder,
+    disabled,
+    isOpen,
+    showLabel,
+    onToggle,
+  } = props;
+
+  const theme = useTheme();
+  const jss = useJss();
+
+  const triggerStx = jss.hash({
+    "--selectTrigger-fontSize": theme.tokens.inputBaseMdFontSize,
+    "--selectTrigger-lineHeight": theme.tokens.inputBaseMdLineHeight,
+
+    "--selectTrigger-h": theme.tokens.inputBaseMdHeight,
+    "--selectTrigger-bdColor": theme.tokens.inputBaseDefaultBorderColor,
+    "--selectTrigger-bdRadius": theme.tokens.inputBaseBorderRadius,
+    "--selectTrigger-placeholderColor": theme.tokens.inputBasePlaceholderColor,
+    "--selectTrigger-disabled-color": theme.colors.gray["600"],
+    "--selectTrigger-disabled-bgColor": theme.colors.gray["000"],
+    "--selectTrigger-disabled-borderColor": theme.colors.gray["200"],
+    "--selectTrigger-focus-borderColor": theme.colors.blue["800"],
+
+    "--selectTrigger-px": "0.75rem",
+  });
+
+  return (
+    <button
+      id={id}
+      ref={ref}
+      className={classNames(styles.comboboxTrigger, triggerStx, className)}
+      onClick={() => !disabled && onToggle()}
+      data-value-picked={showLabel == null ? undefined : "true"}
+      data-disabled={disabled ? "true" : undefined}
+      data-opened={isOpen ? "true" : undefined}
+      type="button"
+      role="combobox"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+    >
+      {% raw %}
+      <span style={{ flex: 1 }}>
+        {showLabel !== null ? showLabel : placeholder}
+      </span>
+      {% endraw %}
+      <span className={styles.comboboxIcon}>
+        <ChevronsUpDown size="62.5%" />
+      </span>
+    </button>
+  );
+};
+
+ComboboxTrigger.displayName = "Combobox.Trigger";
+
+export { ComboboxTrigger };

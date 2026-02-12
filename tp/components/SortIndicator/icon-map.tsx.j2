@@ -1,0 +1,87 @@
+import classNames from "classnames";
+import {
+  ArrowDownUp,
+  ArrowDownWideNarrow,
+  ArrowUpWideNarrow,
+} from "lucide-react";
+import type { FC, SVGProps } from "react";
+
+import { useJss, useTheme } from "@/components/CopyUiProvider";
+
+import styles from "./icon-map.module.scss";
+import type { SortIndicatorDirection } from "./sort-indicator";
+
+type IconProps = SVGProps<SVGSVGElement> & {
+  direction?: SortIndicatorDirection;
+};
+
+const CompactIcon: FC<IconProps> = (props) => {
+  const { direction, className, ...rest } = props;
+
+  const theme = useTheme();
+  const jss = useJss();
+  const mutedStx = jss.hash({
+    fill: theme.colors.gray["400"],
+    stroke: theme.colors.gray["400"],
+  });
+  const activeStx = jss.hash({
+    fill: theme.colors.gray["600"],
+    stroke: theme.colors.gray["600"],
+  });
+
+  return (
+    <svg
+      width="12"
+      height="24"
+      viewBox="0 0 12 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="graphics-symbol"
+      className={classNames(styles.compactSortIndicator, className)}
+      {...rest}
+    >
+      <path
+        d="M10 10L6 3L2 10H10Z"
+        className={direction === "asc" ? activeStx : mutedStx}
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10 14L6 21L2 14H10Z"
+        className={direction === "desc" ? activeStx : mutedStx}
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const iconMap = {
+  default(props: IconProps) {
+    const { direction, className, ...rest } = props;
+
+    const theme = useTheme();
+    const jss = useJss();
+    const stx = jss.hash({
+      color:
+        direction === "asc" || direction === "desc"
+          ? theme.colors.gray["600"]
+          : theme.colors.gray["500"],
+    });
+
+    if (direction === "asc") {
+      return (
+        <ArrowUpWideNarrow className={classNames(stx, className)} {...rest} />
+      );
+    } else if (direction === "desc") {
+      return (
+        <ArrowDownWideNarrow className={classNames(stx, className)} {...rest} />
+      );
+    } else {
+      return <ArrowDownUp className={classNames(stx, className)} {...rest} />;
+    }
+  },
+  compact(props: IconProps) {
+    return <CompactIcon {...props} />;
+  },
+};

@@ -1,0 +1,47 @@
+@layer components {
+  .selectListContainer {
+    width: var(--multiSelectList-w);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--multiSelectList-bdColor);
+    border-radius: var(--multiSelectList-bdRadius);
+    background-color: white;
+  }
+
+  .selectList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: var(--multiSelectList-p);
+    font-size: var(--multiSelectList-fontSize);
+  }
+
+  .selectItem button {
+    display: flex;
+    align-items: center;
+
+    text-align: start;
+
+    width: 100%;
+    padding: 0.25rem var(--multiSelectList-itemPx);
+
+    border-radius: calc(var(--multiSelectList-bdRadius) * 0.5);
+
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--multiSelectList-itemHoverBgColor);
+    }
+
+    > span {
+      flex: 1;
+    }
+
+    > svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--multiSelectItem-markColor);
+    }
+  }
+}

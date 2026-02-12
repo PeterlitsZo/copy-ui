@@ -1,0 +1,204 @@
+@layer components {
+  .calendar {
+    background-color: var(--calendar-bgColor);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--calendar-bdColor);
+    border-radius: var(--calendar-bdRadius);
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .calendarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+
+    padding: var(--calendar-p);
+    padding-bottom: calc(var(--calendar-p) / 4 * 3);
+
+    > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 2rem;
+      height: 2rem;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--calendarHeaderButton-hover-bgColor);
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .calendarHeaderTitle {
+    flex: 1 0 auto;
+    text-align: center;
+    padding-inline: 0.5rem;
+  }
+
+  .calendarHeaderTitleButton {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--calendarHeaderTitleButton-hover-bgColor);
+      border-radius: 999999px;
+    }
+  }
+
+  .calendarContent thead tr {
+    display: flex;
+    padding: calc(var(--calendar-p) / 4 * 3) var(--calendar-p);
+
+    th {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+    }
+  }
+
+  .calendarContent tbody {
+    background-color: var(--calendarMain-bgColor);
+  }
+
+  .calendarContent tbody tr {
+    display: flex;
+    padding: 0 var(--calendar-p);
+
+    &:first-child {
+      padding-top: calc(var(--calendar-p) / 4 * 3);
+    }
+
+    &:last-child {
+      padding-bottom: var(--calendar-p);
+    }
+
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    td button {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999999px;
+      cursor: pointer;
+    }
+
+    td[data-selected='true'] button {
+      background-color: var(--calendarMainCell-selected-bgColor);
+      color: var(--calendarMainCell-selected-textColor);
+    }
+
+    td:not([data-selected='true']):hover button {
+      width: calc(2rem + 2px);
+      height: calc(2rem + 2px);
+      background-color: var(--calendarMainCell-hover-bgColor);
+    }
+  }
+
+  .calendarMonthYearPicker {
+    position: relative;
+    display: flex;
+    background-color: var(--calendarPicker-bgColor);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 6rem;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: 0;
+      background: linear-gradient(
+        to bottom,
+        var(--calendarPicker-bgColor),
+        transparent
+      );
+      z-index: 1;
+    }
+
+    &::after {
+      bottom: 0;
+      background: linear-gradient(
+        to top,
+        var(--calendarPicker-bgColor),
+        transparent
+      );
+      z-index: 1;
+    }
+  }
+
+  .calendarMonthYearPickerColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    // TODO (PeterlitsZo): Better idea?
+    padding: 16px; // MAGIC NUMBER - use to calculate spacer height.
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+
+  .calendarMonthYearPickerBar {
+    position: absolute;
+    top: 50%;
+    left: var(--calendar-p);
+    right: var(--calendar-p);
+    transform: translateY(-50%);
+    height: 2.5rem;
+    background-color: var(--calendarPickerBar-bgColor);
+    border-radius: 0.375rem;
+    pointer-events: none;
+  }
+
+  .calendarMonthYearPickerItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.375rem;
+    background: transparent;
+    font-size: 1.25rem;
+    position: relative;
+    height: 2.5rem; // TODO (PeterlitsZo): I think it should be 40px...
+
+    &.selected {
+      background-color: var(--calendarPicker-selected-bgColor);
+      color: var(--calendarPicker-selected-textColor);
+    }
+  }
+
+  .calendarMonthYearPickerSpacer {
+    flex-shrink: 0;
+  }
+}
