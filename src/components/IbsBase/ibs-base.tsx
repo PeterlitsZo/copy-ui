@@ -97,7 +97,7 @@ const ibsBaseStyle = (theme: Theme) =>
       },
       filled: {
         "--ibsBase-bdColor": "transparent",
-        "--ibsBase-bgColor": theme.colors.gray["000"],
+        "--ibsBase-bgColor": `color-mix(in srgb, ${theme.colors.gray["150"]} 50%, transparent)`,
       },
     },
   });
