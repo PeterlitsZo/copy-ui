@@ -1,9 +1,9 @@
 @layer components {
   .ibsBase {
+    border-color: var(--input-bdColor, var(--ibsBase-bdColor));
+
     &:has(.input:focus) {
       outline: none;
-      border-width: 1px;
-      border-style: solid;
       border-color: var(--input-focus-bdColor);
     }
   }
@@ -12,8 +12,8 @@
     align-self: stretch;
     flex: 1;
 
-    padding-inline-start: var(--input-paddingInlineStart);
-    padding-inline-end: var(--input-paddingInlineEnd);
+    padding-inline-start: var(--input-pl);
+    padding-inline-end: var(--input-pr);
     caret-color: var(--input-caretColor);
 
     outline: none;

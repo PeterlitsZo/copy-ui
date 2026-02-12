@@ -15,3 +15,5 @@
 - 2025-11-20: Support the `width` prop and let `className` and `style` props
   effect the `InputBase` component rather than the internal `input` element.
 - 2025-12-07: Use `IbsBase` component instead of `InputBase` component.
+- 2025-12-18: Use `useOptionalFieldContext` hook to get the field context for
+  the `id` prop's default value. Support `status` prop to set the error state.

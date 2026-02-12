@@ -1,19 +1,19 @@
 import { DocLayout } from "@/layouts/DocLayout";
 
-import Demo01 from "./demos/Demo01";
-import demo01SourceCode from "./demos/Demo01.source_code.codegen";
-import Demo02 from "./demos/Demo02";
-import demo02SourceCode from "./demos/Demo02.source_code.codegen";
-import Demo03 from "./demos/Demo03";
-import demo03SourceCode from "./demos/Demo03.source_code.codegen";
-import Demo04 from "./demos/Demo04";
-import demo04SourceCode from "./demos/Demo04.source_code.codegen";
-import Demo05 from "./demos/Demo05";
-import demo05SourceCode from "./demos/Demo05.source_code.codegen";
-import Demo06 from "./demos/Demo06";
-import demo06SourceCode from "./demos/Demo06.source_code.codegen";
+import Main from "./demos/Main";
+import mainSourceCode from "./demos/Main.source-code.codegen";
+import WithDifferentVariants from "./demos/WithDifferentVariants";
+import withDifferentVariantsSourceCode from "./demos/WithDifferentVariants.source-code.codegen";
+import WithLeftAndRightSections from "./demos/WithLeftAndRightSections";
+import withLeftAndRightSectionsSourceCode from "./demos/WithLeftAndRightSections.source-code.codegen";
+import WithDisabledState from "./demos/WithDisabledState";
+import withDisabledStateSourceCode from "./demos/WithDisabledState.source-code.codegen";
+import WithDifferentSizes from "./demos/WithDifferentSizes";
+import withDifferentSizesSourceCode from "./demos/WithDifferentSizes.source-code.codegen";
+import WithDifferentWidths from "./demos/WithDifferentWidths";
+import withDifferentWidthsSourceCode from "./demos/WithDifferentWidths.source-code.codegen";
 
-<DocLayout.Live node={<Demo01 />} code={demo01SourceCode} />
+<DocLayout.Live node={<Main />} code={mainSourceCode['index.tsx']} />
 
 ## Dependency Graph
 
@@ -35,22 +35,60 @@ import demo06SourceCode from "./demos/Demo06.source_code.codegen";
 
 ## Examples
 
-### Different Variants
+### With Different Variants
 
-<DocLayout.Live node={<Demo02 />} code={demo02SourceCode} />
+<DocLayout.Live
+  node={<WithDifferentVariants />}
+  code={withDifferentVariantsSourceCode['index.tsx']}
+/>
 
-### Left & Right Sections
+We can use the `variant` prop to change the variant of the input. Now we
+support two variants:
 
-<DocLayout.Live node={<Demo03 />} code={demo03SourceCode} />
+- `default`: The default variant.
+- `filled`: The filled variant.
 
-### Disabled State
+### With Left & Right Sections
 
-<DocLayout.Live node={<Demo04 />} code={demo04SourceCode} />
+<DocLayout.Live
+  node={<WithLeftAndRightSections />}
+  code={withLeftAndRightSectionsSourceCode['index.tsx']}
+/>
 
-### Different Sizes
+We can use the `leftSection` and `rightSection` props to add a left and right
+section to the input.
 
-<DocLayout.Live node={<Demo05 />} code={demo05SourceCode} />
+### With Disabled State
 
-### Different Widths
+<DocLayout.Live
+  node={<WithDisabledState />}
+  code={withDisabledStateSourceCode['index.tsx']}
+/>
 
-<DocLayout.Live node={<Demo06 />} code={demo06SourceCode} />
+We can use the `disabled` prop to disable the input.
+
+### With Different Sizes
+
+<DocLayout.Live
+  node={<WithDifferentSizes />}
+  code={withDifferentSizesSourceCode['index.tsx']}
+/>
+
+We can use the `size` prop to change the size of the input. Now we support five
+sizes:
+
+- `xs`: The smallest size.
+- `sm`: The small size.
+- `md`: The medium size.
+- `lg`: The large size.
+- `xl`: The largest size.
+
+### With Different Widths
+
+<DocLayout.Live
+  node={<WithDifferentWidths />}
+  code={withDifferentWidthsSourceCode['index.tsx']}
+/>
+
+You can use the `width` prop or its shorthand `w` prop to change the width of
+the input.
