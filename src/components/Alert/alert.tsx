@@ -24,7 +24,7 @@ const Alert: AlertComponent = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--alert-bgColor": theme.colors[color]["050"],
+    "--alert-bgColor": `color-mix(in srgb, ${theme.colors[color]["100"]} 40%, transparent)`,
     "--alert-bdColor": theme.colors[color]["400"],
     "--alert-bdRadius": "0.5rem",
     "--alert-iconColor": theme.colors[color]["700"],

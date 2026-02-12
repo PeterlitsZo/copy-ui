@@ -14,9 +14,9 @@ const AlertDescription: FC<AlertDescriptionProps> = (props) => {
   const jss = useJss();
 
   const stx = jss.hash({
-    "--alert-description-fontSize": "0.875rem",
-    "--alert-description-lineHeight": "1.125rem",
-    "--alert-description-color": theme.colors.gray["800"],
+    "--alert-description-fontSize": "calc(0.875rem + 1px)",
+    "--alert-description-lineHeight": "1.5",
+    "--alert-description-color": theme.colors.gray["750"],
   });
 
   return (

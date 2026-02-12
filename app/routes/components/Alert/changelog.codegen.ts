@@ -5,4 +5,5 @@ export const changelog = ''
   + '- 2025-11-30: Initial version.\n'
   + '- 2025-12-12: Update the styles - padding and gap - to make it look better.\n'
   + '- 2025-12-13: Update to make it look good with new colors.\n'
+  + '- 2026-02-12: Update the styles to make it looks better.\n'
   ;
