@@ -1,8 +1,5 @@
-mod ast;
 mod config;
-mod evaluator;
 mod generator;
-mod parser;
 mod templates;
 
 use std::env;
