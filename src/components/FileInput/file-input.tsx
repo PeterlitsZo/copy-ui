@@ -2,13 +2,16 @@ import classNames from "classnames";
 import { type ComponentProps, type FC, useRef, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { extractStylesProps, IbsBase } from "@/components/IbsBase";
+import {
+  extractStylesProps,
+  IbsBase,
+  type IbsBaseStyleProps,
+} from "@/components/IbsBase";
 
 import styles from "./file-input.module.css";
 
-export type FileInputProps = ComponentProps<typeof IbsBase> &
-  Omit<ComponentProps<"input">, "size"> & {
-    variant?: "default" | "filled";
+export type FileInputProps = IbsBaseStyleProps &
+  Omit<ComponentProps<"input">, "size" | "onChange"> & {
     leftSection?: React.ReactNode;
     rightSection?: React.ReactNode;
 

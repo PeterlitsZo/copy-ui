@@ -4,4 +4,6 @@
 export const changelog = ''
   + '- 2025-11-06: Initial version.\n'
   + '- 2025-12-16: Use `IbsBase` as the base component, etc.\n'
+  + '- 2026-02-13: Use `IbsBaseRootProps` in `MultiSelect` and trigger context\n'
+  + '  types instead of `ComponentProps<typeof IbsBase>`.\n'
   ;

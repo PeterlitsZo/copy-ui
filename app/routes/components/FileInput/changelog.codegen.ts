@@ -4,4 +4,6 @@
 export const changelog = ''
   + '- 2025-11-21: Initial version.\n'
   + '- 2025-12-08: Use `IbsBase` rather than the deprecated `InputBase` component.\n'
+  + '- 2026-02-13: Use `IbsBaseStyleProps` in `FileInputProps` and keep custom\n'
+  + '  `onChange` typing to avoid root event type pollution.\n'
   ;

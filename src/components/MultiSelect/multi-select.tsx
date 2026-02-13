@@ -1,5 +1,4 @@
 import {
-  type ComponentProps,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -8,7 +7,7 @@ import {
 } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
-import type { IbsBase } from "@/components/IbsBase";
+import type { IbsBaseRootProps } from "@/components/IbsBase";
 import { Popover, type PopoverTriggerRender } from "@/components/Popover";
 
 import { MultiSelectList } from "./multi-select-list";
@@ -17,10 +16,7 @@ import {
   TriggerIbsBasePropsContext,
 } from "./multi-select-trigger";
 
-type MultiSelectProps<V extends string> = Omit<
-  ComponentProps<typeof IbsBase>,
-  "onChange"
-> & {
+type MultiSelectProps<V extends string> = Omit<IbsBaseRootProps, "onChange"> & {
   id?: string;
   value?: V[] | null;
   defaultValue?: V[] | null;

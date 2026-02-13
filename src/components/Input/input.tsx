@@ -3,14 +3,16 @@ import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { useOptionalFieldContext } from "@/components/Field";
-import { extractStylesProps, IbsBase } from "@/components/IbsBase";
+import {
+  extractStylesProps,
+  IbsBase,
+  type IbsBaseStyleProps,
+} from "@/components/IbsBase";
 
 import styles from "./input.module.css";
 
-export type InputProps = ComponentProps<typeof IbsBase> &
+export type InputProps = IbsBaseStyleProps &
   Omit<ComponentProps<"input">, "size"> & {
-    variant?: "default" | "filled";
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
     status?: "error";
     leftSection?: React.ReactNode;
     rightSection?: React.ReactNode;

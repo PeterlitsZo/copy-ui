@@ -6,4 +6,6 @@ export const changelog = ''
   + '- 2025-12-16: Use `min-height` instead of `height` to let components built on\n'
   + '  top of it to have a flexible height.\n'
   + "- 2026-02-12: Update the filled variant's background color.\n"
+  + '- 2026-02-13: Export `IbsBaseStyleProps` and `IbsBaseRootProps` to provide a\n'
+  + '  stable style/root contract for components built on top of `IbsBase`.\n'
   ;

@@ -1,3 +1,3 @@
-// MultiSelect from copy-ui @ 2025-12-16.
+// MultiSelect from copy-ui @ 2026-02-13.
 
 export { MultiSelect } from "./multi-select";

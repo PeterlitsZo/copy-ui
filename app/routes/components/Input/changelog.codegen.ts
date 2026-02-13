@@ -21,4 +21,6 @@ export const changelog = ''
   + '- 2025-12-07: Use `IbsBase` component instead of `InputBase` component.\n'
   + '- 2025-12-18: Use `useOptionalFieldContext` hook to get the field context for\n'
   + "  the `id` prop's default value. Support `status` prop to set the error state.\n"
+  + '- 2026-02-13: Use `IbsBaseStyleProps` in `InputProps` to avoid DOM event type\n'
+  + '  pollution from `IbsBase` root props.\n'
   ;

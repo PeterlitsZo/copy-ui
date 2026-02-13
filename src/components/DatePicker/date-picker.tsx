@@ -1,15 +1,19 @@
 import classNames from "classnames";
 import dayjs from "dayjs";
-import type { ComponentProps, FC, KeyboardEventHandler } from "react";
+import type { FC, KeyboardEventHandler } from "react";
 import { useEffect, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { extractStylesProps, IbsBase } from "@/components/IbsBase";
+import {
+  extractStylesProps,
+  IbsBase,
+  type IbsBaseRootProps,
+} from "@/components/IbsBase";
 
 import { CalendarOpener } from "./calendar-opener";
 import styles from "./date-picker.module.css";
 
-type DatePickerProps = ComponentProps<typeof IbsBase> & {
+type DatePickerProps = IbsBaseRootProps & {
   date?: dayjs.Dayjs | null;
   onDateChange?: (value: dayjs.Dayjs | null) => void;
 };

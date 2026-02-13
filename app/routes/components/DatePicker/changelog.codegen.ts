@@ -6,4 +6,6 @@ export const changelog = ''
   + '- 2025-11-28: Support `date` and `onDateChange` props to make the component\n'
   + '  controllable.\n'
   + '- 2025-12-12: Use `IbsBase` rather than deprecated `InputBase` component.\n'
+  + '- 2026-02-13: Use `IbsBaseRootProps` instead of `ComponentProps<typeof\n'
+  + '  IbsBase>` for a clearer root/style contract.\n'
   ;

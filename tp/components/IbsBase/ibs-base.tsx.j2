@@ -10,12 +10,15 @@ import { IbsBaseRightSection } from "./ibs-base-right-section";
 import { IbsBaseWrapper } from "./ibs-base-wrapper";
 import { extractStylesProps, type StylesProps } from "./style";
 
-type IbsBaseProps = ComponentProps<"div"> &
-  StylesProps & {
-    variant?: "default" | "filled";
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
-    disabled?: boolean;
-  };
+type IbsBaseStyleProps = StylesProps & {
+  variant?: "default" | "filled";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  disabled?: boolean;
+};
+
+type IbsBaseRootProps = ComponentProps<"div"> & IbsBaseStyleProps;
+
+type IbsBaseProps = IbsBaseRootProps;
 
 type IbsBaseComponent = FC<IbsBaseProps> & {
   LeftSection: typeof IbsBaseLeftSection;
@@ -102,4 +105,5 @@ const ibsBaseStyle = (theme: Theme) =>
     },
   });
 
+export type { IbsBaseStyleProps, IbsBaseRootProps };
 export { IbsBase };

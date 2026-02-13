@@ -1,4 +1,4 @@
-// Input from copy-ui @ 2025-12-18.
+// Input from copy-ui @ 2026-02-13.
 
 export type { InputProps } from "./input";
 export { Input } from "./input";

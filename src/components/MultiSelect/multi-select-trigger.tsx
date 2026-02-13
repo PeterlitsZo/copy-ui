@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { ChevronsUpDown } from "lucide-react";
 import {
-  type ComponentProps,
   createContext,
   type FC,
   type Ref,
@@ -9,7 +8,11 @@ import {
 } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { extractStylesProps, IbsBase } from "@/components/IbsBase";
+import {
+  extractStylesProps,
+  IbsBase,
+  type IbsBaseRootProps,
+} from "@/components/IbsBase";
 
 import styles from "./multi-select-trigger.module.css";
 
@@ -118,8 +121,6 @@ const MultiSelectLabel = ({ label }: { label: string }) => {
   );
 };
 
-const TriggerIbsBasePropsContext = createContext<ComponentProps<
-  typeof IbsBase
-> | null>(null);
+const TriggerIbsBasePropsContext = createContext<IbsBaseRootProps | null>(null);
 
 export { MultiSelectTrigger, TriggerIbsBasePropsContext };
