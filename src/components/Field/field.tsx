@@ -14,7 +14,7 @@ import {
 } from "./field-components";
 import { FieldContext } from "./field-context";
 
-type FieldProps = ComponentProps<"div">;
+type FieldProps = ComponentProps<"fieldset">;
 
 type FieldComponent = FC<FieldProps> & {
   Label: typeof FieldLabel;
@@ -33,14 +33,9 @@ const Field: FieldComponent = (props) => {
 
   return (
     <FieldContext value={{ id }}>
-      {/* biome-ignore lint/a11y/useSemanticElements: It is fine here. */}
-      <div
-        role="group"
-        className={classNames(styles.field, className)}
-        {...rest}
-      >
+      <fieldset className={classNames(styles.field, className)} {...rest}>
         {children}
-      </div>
+      </fieldset>
     </FieldContext>
   );
 };

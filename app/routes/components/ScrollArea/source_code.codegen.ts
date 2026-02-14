@@ -171,11 +171,10 @@ sourceCode['scroll-area.tsx'] = ''
   + '\n'
   + '  return (\n'
   + '    <ScrollAreaContext value={scrollAreaStoreRef.current}>\n'
-  + "      {/* biome-ignore lint/a11y/noStaticElementInteractions: I think it's fine here. */}\n"
   + '      <div\n'
   + '        className={classNames(styles.scrollArea, className)}\n'
-  + '        onMouseEnter={() => setHover(true)}\n'
-  + '        onMouseLeave={() => setHover(false)}\n'
+  + '        onPointerEnter={() => setHover(true)}\n'
+  + '        onPointerLeave={() => setHover(false)}\n'
   + '        {...rest}\n'
   + '      >\n'
   + '        {children}\n'
@@ -576,7 +575,7 @@ sourceCode['scroll-area-scrollbar.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// ScrollArea from copy-ui @ 2025-12-11.\n'
+  + '// ScrollArea from copy-ui @ 2026-02-14.\n'
   + '\n'
   + 'export { ScrollArea } from "./scroll-area";\n'
   ;

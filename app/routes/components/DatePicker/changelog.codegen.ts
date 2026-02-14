@@ -8,4 +8,6 @@ export const changelog = ''
   + '- 2025-12-12: Use `IbsBase` rather than deprecated `InputBase` component.\n'
   + '- 2026-02-13: Use `IbsBaseRootProps` instead of `ComponentProps<typeof\n'
   + '  IbsBase>` for a clearer root/style contract.\n'
+  + '- 2026-02-14: Replace interactive `span` with `button` and remove\n'
+  + '  `biome-ignore` for a11y lint rules.\n'
   ;

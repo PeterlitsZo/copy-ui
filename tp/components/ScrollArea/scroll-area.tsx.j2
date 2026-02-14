@@ -48,11 +48,10 @@ const ScrollArea: ScrollAreaComponent = (props: ScrollAreaProps) => {
 
   return (
     <ScrollAreaContext value={scrollAreaStoreRef.current}>
-      {/* biome-ignore lint/a11y/noStaticElementInteractions: I think it's fine here. */}
       <div
         className={classNames(styles.scrollArea, className)}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
+        onPointerEnter={() => setHover(true)}
+        onPointerLeave={() => setHover(false)}
         {...rest}
       >
         {children}

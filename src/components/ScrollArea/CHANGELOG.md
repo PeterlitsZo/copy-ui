@@ -9,3 +9,4 @@
 - 2025-11-04: Support the `ScrollArea.ScrollbarWithThumb`.
 - 2025-12-11: Support the horizontal scrollbars with prop
   `orientation="horizontal"`.
+- 2026-02-14: Remove unnecessary `biome-ignore` around root hover handlers.

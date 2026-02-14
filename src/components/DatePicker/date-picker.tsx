@@ -223,7 +223,7 @@ const DatePickerInputPart: FC<DatePickerInputPartProps> = (props) => {
     if (onChange) onChange(internalValue);
   }, [internalValue, onChange]);
 
-  const handleKeyDown: KeyboardEventHandler<HTMLSpanElement> = (e) => {
+  const handleKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
     const val = e.key;
     const num = parseInt(val, 10);
     if (!Number.isNaN(num)) {
@@ -276,10 +276,8 @@ const DatePickerInputPart: FC<DatePickerInputPartProps> = (props) => {
   };
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: It is Just OK to use static element.
-    <span
-      /* biome-ignore lint/a11y/noNoninteractiveTabindex: Using span is OK. */
-      tabIndex={0}
+    <button
+      type="button"
       inputMode="numeric"
       className={classNames(
         styles.datePickerInputPart,
@@ -288,7 +286,7 @@ const DatePickerInputPart: FC<DatePickerInputPartProps> = (props) => {
       onKeyDown={handleKeyDown}
     >
       {internalValue !== null ? renderValue() : placeholder}
-    </span>
+    </button>
   );
 };
 

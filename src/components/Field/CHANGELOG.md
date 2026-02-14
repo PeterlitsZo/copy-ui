@@ -5,3 +5,4 @@
 - 2025-11-21: Add `Field.FileInput` component. And remove useless style
   `width: 100%`.
 - 2025-12-17: Export the `useOptionalFieldContext` hook.
+- 2026-02-14: Use a semantic `fieldset` wrapper and remove `biome-ignore`.
