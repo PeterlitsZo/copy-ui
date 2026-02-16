@@ -1,5 +1,6 @@
 [structure]
 components = "src/components"
+utils = "src/utils"
 
 [components.CopyUiProvider]
 with-mdx-provider = true
@@ -95,3 +96,7 @@ with-typography-codeblock = true
 [components.Topbar]
 
 [components.TreeSelect]
+
+[utils.jss]
+
+[utils.resolve-style2]

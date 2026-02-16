@@ -1,7 +1,7 @@
 # Copy UI
 
 Reusable React components built with TypeScript and SCSS modules. The repo also
-ships a Rust CLI that embeds templates and generates component code.
+ships a Rust CLI that embeds templates and generates component and utility code.
 
 ## Build and install the CLI
 
