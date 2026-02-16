@@ -32,3 +32,12 @@ After changing any component, agents must also:
 1. Update that component's `CHANGELOG.md`.
 2. Update the timestamp in that component's `index.ts` header comment.
 3. And then `just codegen`.
+
+## Git Commit Message Rule
+
+When creating a Git commit, the message must follow this format:
+
+1. Use one single-word commit type, such as `feat`, `fix`, or `chore`, followed
+   by a colon.
+2. After the colon, write a sentence describing the commit. The sentence must
+   start with an uppercase letter and end with a period.
