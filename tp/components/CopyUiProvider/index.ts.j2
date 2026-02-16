@@ -1,4 +1,4 @@
-// CopyUiProvider from copy-ui @ 2025-11-28.
+// CopyUiProvider from copy-ui @ 2026-02-16.
 
 export { CopyUiProvider } from "./copy-ui-provider";
 export type { ColorName, ColorNo, Theme } from "./theme";

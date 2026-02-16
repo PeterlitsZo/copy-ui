@@ -66,6 +66,23 @@ fn generate_entry(
     fs::create_dir_all(&entry_output_dir)?;
 
     let files = parse_manifest(&index_rendered);
+    let managed_files = match entry_group {
+        "components" => crate::templates::list_component_template_files(entry_name),
+        "utils" => crate::templates::list_util_template_files(entry_name),
+        _ => Err(anyhow::anyhow!(
+            "Unsupported template group: {}",
+            entry_group
+        )),
+    }
+    .with_context(|| {
+        format!(
+            "Failed to list managed template files for {} '{}'",
+            entry_kind, entry_name
+        )
+    })?;
+
+    remove_stale_generated_files(&entry_output_dir, &managed_files, &files)?;
+
     for filename in files {
         let template_source = match entry_group {
             "components" => crate::templates::get_component_file_template(entry_name, &filename),
@@ -108,6 +125,37 @@ fn parse_manifest(content: &str) -> Vec<String> {
         .filter(|line| !line.is_empty() && !line.starts_with('#'))
         .map(|line| line.to_string())
         .collect()
+}
+
+fn remove_stale_generated_files(
+    output_dir: &Path,
+    managed_files: &[String],
+    current_manifest_files: &[String],
+) -> anyhow::Result<()> {
+    let current_files: std::collections::HashSet<&str> = current_manifest_files
+        .iter()
+        .map(|file| file.as_str())
+        .collect();
+
+    for managed_file in managed_files {
+        if current_files.contains(managed_file.as_str()) {
+            continue;
+        }
+
+        let stale_path = output_dir.join(managed_file);
+        if !stale_path.exists() {
+            continue;
+        }
+
+        if stale_path.is_dir() {
+            fs::remove_dir_all(&stale_path)?;
+        } else {
+            fs::remove_file(&stale_path)?;
+        }
+        println!("Removed stale file: {}", stale_path.display());
+    }
+
+    Ok(())
 }
 
 fn render_template(

@@ -35,6 +35,7 @@ type CopyUiProviderProps = {
 
 const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
   const { children } = props;
+  const content = <MdxProvider>{children}</MdxProvider>;
 
   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
   if (storeRef.current === null) {
@@ -57,7 +58,7 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
   return (
     <CopyUiContext.Provider value={storeRef.current}>
       <Toast.Context>
-        <MdxProvider>{children}</MdxProvider>
+        {content}
         <Toast.Container />
       </Toast.Context>
       <JssSsrCss />

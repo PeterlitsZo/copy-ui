@@ -1,12 +1,16 @@
 import { createContext, type FC, useEffect, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand";
 
+{% if features["with-toast-provider"] %}
 import { Toast } from "@/components/Toast";
+{% endif %}
 import { createJssState, type JssState } from "@/utils/jss";
 
 import { ClickOutsideEventListener } from "./click-outside-event-listener";
 import { DEFAULT_THEME } from "./default-theme";
+{% if features["with-mdx-provider"] %}
 import { MdxProvider } from "./mdx-provider";
+{% endif %}
 import type { Theme } from "./theme";
 import { useJss } from "./use-jss";
 
@@ -35,6 +39,11 @@ type CopyUiProviderProps = {
 
 const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
   const { children } = props;
+  {% if features["with-mdx-provider"] %}
+  const content = <MdxProvider>{children}</MdxProvider>;
+  {% else %}
+  const content = children;
+  {% endif %}
 
   const storeRef = useRef<StoreApi<CopyUiStore> | null>(null);
   if (storeRef.current === null) {
@@ -56,10 +65,14 @@ const CopyUiProvider: FC<CopyUiProviderProps> = (props) => {
 
   return (
     <CopyUiContext.Provider value={storeRef.current}>
+      {% if features["with-toast-provider"] %}
       <Toast.Context>
-        <MdxProvider>{children}</MdxProvider>
+        {content}
         <Toast.Container />
       </Toast.Context>
+      {% else %}
+      {content}
+      {% endif %}
       <JssSsrCss />
     </CopyUiContext.Provider>
   );
