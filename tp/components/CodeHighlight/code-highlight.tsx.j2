@@ -2,7 +2,7 @@ import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { toHtml } from "hast-util-to-html";
 import { type CSSProperties, type FC, useMemo } from "react";
 
-import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
 
 import styles from "./code-highlight.module.css";
 import { highlighter } from "./highlighter";

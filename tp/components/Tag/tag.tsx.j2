@@ -2,9 +2,9 @@ import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 import tinycolor from "tinycolor2";
 
-import type { ColorName, Theme } from "@/components/CopyUiProvider";
-import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { resolveStyle2 } from "@/utils/resolve-style2";
+import type { ColorName, Theme } from "{{ components_import_base }}/CopyUiProvider";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
+import { resolveStyle2 } from "{{ utils_import_base }}/resolve-style2";
 
 import styles from "./tag.module.css";
 

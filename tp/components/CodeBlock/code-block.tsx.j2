@@ -2,11 +2,11 @@ import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Clipboard } from "lucide-react";
 import { type FC, useRef } from "react";
 
-import { CodeHighlight } from "@/components/CodeHighlight";
-import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { IconButton } from "@/components/IconButton";
-import { ScrollArea } from "@/components/ScrollArea";
-import { useToast } from "@/components/Toast";
+import { CodeHighlight } from "{{ components_import_base }}/CodeHighlight";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
+import { IconButton } from "{{ components_import_base }}/IconButton";
+import { ScrollArea } from "{{ components_import_base }}/ScrollArea";
+import { useToast } from "{{ components_import_base }}/Toast";
 
 import styles from "./code-block.module.css";
 

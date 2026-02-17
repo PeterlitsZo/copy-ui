@@ -2,9 +2,9 @@ import { createContext, type FC, useEffect, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand";
 
 {% if features["with-toast-provider"] %}
-import { Toast } from "@/components/Toast";
+import { Toast } from "{{ components_import_base }}/Toast";
 {% endif %}
-import { createJssState, type JssState } from "@/utils/jss";
+import { createJssState, type JssState } from "{{ utils_import_base }}/jss";
 
 import { ClickOutsideEventListener } from "./click-outside-event-listener";
 import { DEFAULT_THEME } from "./default-theme";

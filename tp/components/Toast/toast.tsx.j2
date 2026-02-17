@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import { type FC, useMemo } from "react";
 import { useStore } from "zustand";
-import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { Modal } from "@/components/Modal";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
+import { Modal } from "{{ components_import_base }}/Modal";
 import styles from "./toast.module.scss";
 import { ToastContext, useToastStore } from "./toast-context";
 import type { Toast as TypeToast } from "./toast-store";

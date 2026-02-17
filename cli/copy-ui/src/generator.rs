@@ -55,6 +55,8 @@ fn generate_entry(
         item => entry_name,
         class_helper_ident => generator_config.class_helper.ident(),
         class_helper_pkg => generator_config.class_helper.pkg(),
+        components_import_base => &generator_config.import.components,
+        utils_import_base => &generator_config.import.utils,
     };
 
     let index_template = match entry_group {

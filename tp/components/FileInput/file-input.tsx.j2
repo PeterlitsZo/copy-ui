@@ -1,12 +1,12 @@
 import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { type ComponentProps, type FC, useRef, useState } from "react";
 
-import { useJss, useTheme } from "@/components/CopyUiProvider";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
 import {
   extractStylesProps,
   IbsBase,
   type IbsBaseStyleProps,
-} from "@/components/IbsBase";
+} from "{{ components_import_base }}/IbsBase";
 
 import styles from "./file-input.module.css";
 

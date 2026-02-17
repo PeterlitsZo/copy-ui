@@ -60,6 +60,35 @@ impl<'de> Deserialize<'de> for ClassHelper {
 pub struct GeneratorConfig {
     #[serde(default, rename = "class-helper", alias = "class_helper")]
     pub class_helper: ClassHelper,
+
+    #[serde(default, rename = "import")]
+    pub import: GeneratorImportConfig,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct GeneratorImportConfig {
+    #[serde(default = "default_components_import_base")]
+    pub components: String,
+
+    #[serde(default = "default_utils_import_base")]
+    pub utils: String,
+}
+
+impl Default for GeneratorImportConfig {
+    fn default() -> Self {
+        Self {
+            components: default_components_import_base(),
+            utils: default_utils_import_base(),
+        }
+    }
+}
+
+fn default_components_import_base() -> String {
+    "@/components".to_string()
+}
+
+fn default_utils_import_base() -> String {
+    "@/utils".to_string()
 }
 
 #[derive(Debug, Clone, Deserialize)]

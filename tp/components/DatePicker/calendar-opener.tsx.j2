@@ -2,9 +2,9 @@ import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type dayjs from "dayjs";
 import { CalendarDays } from "lucide-react";
 import type { FC } from "react";
-import { Calendar } from "@/components/Calendar";
-import { useJss } from "@/components/CopyUiProvider";
-import { Popover } from "@/components/Popover";
+import { Calendar } from "{{ components_import_base }}/Calendar";
+import { useJss } from "{{ components_import_base }}/CopyUiProvider";
+import { Popover } from "{{ components_import_base }}/Popover";
 import styles from "./calendar-opener.module.css";
 
 type CalendarOpenerProps = {

@@ -4,6 +4,8 @@ utils = "src/utils"
 
 [generator]
 class_helper = "classnames"
+import.components = "@/components"
+import.utils = "@/utils"
 
 [components.CopyUiProvider]
 with-mdx-provider = true

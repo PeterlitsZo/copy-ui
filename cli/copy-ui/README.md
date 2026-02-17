@@ -25,6 +25,10 @@ utils = "src/utils"
 [generator]
 class-helper = "classnames"
 
+[generator.import]
+components = "@/components"
+utils = "@/utils"
+
 [components.CopyUiProvider]
 with-mdx-provider = true
 with-toast-provider = true
@@ -53,6 +57,20 @@ The `--config` default is `copy-ui.config.toml`.
 
 The `generator.class-helper` option accepts only `classnames` and `clsx`.
 If omitted, `classnames` is used by default.
+
+The optional `generator.import` section controls import path bases used by
+templates:
+
+- `generator.import.components` (default: `@/components`)
+- `generator.import.utils` (default: `@/utils`)
+
+Example for a different alias style:
+
+```toml
+[generator.import]
+components = "~components"
+utils = "~utils"
+```
 
 ## Templates
 

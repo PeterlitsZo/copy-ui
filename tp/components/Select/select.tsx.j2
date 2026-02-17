@@ -1,9 +1,9 @@
 import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
-import { useJss, useTheme } from "@/components/CopyUiProvider";
-import { Popover, type PopoverTriggerRender } from "@/components/Popover";
-import { resolveStyle2 } from "@/utils/resolve-style2";
+import { useJss, useTheme } from "{{ components_import_base }}/CopyUiProvider";
+import { Popover, type PopoverTriggerRender } from "{{ components_import_base }}/Popover";
+import { resolveStyle2 } from "{{ utils_import_base }}/resolve-style2";
 
 import { SelectList } from "./select-list";
 import { SelectTrigger } from "./select-trigger";
