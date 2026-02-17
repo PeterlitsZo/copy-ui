@@ -2,17 +2,45 @@ mod config;
 mod generator;
 mod templates;
 
+use clap::{Args, Parser, Subcommand};
 use std::env;
-use std::fs;
+use std::path::{Path, PathBuf};
+
+#[derive(Debug, Parser)]
+#[command(
+    name = "copy-ui",
+    version,
+    about = "Generate Copy-UI components",
+    arg_required_else_help = true
+)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Debug, Subcommand)]
+enum Commands {
+    Codegen(CodegenArgs),
+}
+
+#[derive(Debug, Args)]
+struct CodegenArgs {
+    #[arg(long, default_value = "copy-ui.config.toml")]
+    config: PathBuf,
+}
 
 fn main() -> anyhow::Result<()> {
+    let cli = Cli::parse();
+
+    match cli.command {
+        Commands::Codegen(args) => run_codegen(args),
+    }
+}
+
+fn run_codegen(args: CodegenArgs) -> anyhow::Result<()> {
     let pwd = env::current_dir()?;
-    let config_path = pwd.join("copy-ui.config.toml");
-
-    let config_content = fs::read_to_string(&config_path)
-        .map_err(|e| anyhow::anyhow!("Failed to read copy-ui.config.toml: {}", e))?;
-
-    let config = config::Config::from_toml(&config_content)?;
+    let config_path = to_absolute_path(&pwd, &args.config);
+    let config = config::Config::from_path(&config_path)?;
 
     let components_output_base_dir = pwd.join(&config.structure.components);
 
@@ -49,4 +77,12 @@ fn main() -> anyhow::Result<()> {
 
     println!("Done!");
     Ok(())
+}
+
+fn to_absolute_path(pwd: &Path, path: &Path) -> PathBuf {
+    if path.is_absolute() {
+        path.to_path_buf()
+    } else {
+        pwd.join(path)
+    }
 }

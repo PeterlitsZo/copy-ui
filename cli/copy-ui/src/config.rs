@@ -1,5 +1,8 @@
+use serde::de::{self, Deserializer};
+use serde::Deserialize;
 use std::collections::HashMap;
-use toml::Value;
+use std::fs;
+use std::path::Path;
 
 #[derive(Debug, Clone)]
 pub struct Config {
@@ -9,8 +12,9 @@ pub struct Config {
     pub utils: HashMap<String, ComponentConfig>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum ClassHelper {
+    #[default]
     Classnames,
     Clsx,
 }
@@ -29,113 +33,119 @@ impl ClassHelper {
             ClassHelper::Clsx => "clsx",
         }
     }
+
+    fn from_config_value(value: &str) -> Result<Self, String> {
+        match value {
+            "classnames" => Ok(ClassHelper::Classnames),
+            "clsx" => Ok(ClassHelper::Clsx),
+            _ => Err(format!(
+                "invalid generator.class-helper '{}', expected 'classnames' or 'clsx'",
+                value
+            )),
+        }
+    }
 }
 
-#[derive(Debug, Clone)]
+impl<'de> Deserialize<'de> for ClassHelper {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let value = String::deserialize(deserializer)?;
+        ClassHelper::from_config_value(&value).map_err(de::Error::custom)
+    }
+}
+
+#[derive(Debug, Clone, Deserialize, Default)]
 pub struct GeneratorConfig {
+    #[serde(default, rename = "class-helper", alias = "class_helper")]
     pub class_helper: ClassHelper,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct StructureConfig {
     pub components: String,
     pub utils: Option<String>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct ComponentConfig {
     pub features: HashMap<String, bool>,
 }
 
+#[derive(Debug, Deserialize)]
+struct StableConfig {
+    structure: StructureConfig,
+    #[serde(default)]
+    generator: GeneratorConfig,
+}
+
 impl Config {
+    pub fn from_path(path: &Path) -> anyhow::Result<Self> {
+        let content = fs::read_to_string(path)
+            .map_err(|e| anyhow::anyhow!("Failed to read {}: {}", path.display(), e))?;
+
+        Self::from_toml(&content)
+            .map_err(|e| anyhow::anyhow!("Failed to parse {}: {}", path.display(), e))
+    }
+
     pub fn from_toml(content: &str) -> anyhow::Result<Self> {
-        let value: Value = toml::from_str(content)?;
-        let root_table = value
-            .as_table()
-            .ok_or_else(|| anyhow::anyhow!("invalid config root table"))?;
+        let stable_config = parse_stable_config(content)?;
+        let value: toml::Value =
+            toml::from_str(content).map_err(|e| anyhow::anyhow!("Failed to parse TOML: {}", e))?;
 
-        let structure =
-            if let Some(structure_table) = root_table.get("structure").and_then(|v| v.as_table()) {
-                StructureConfig {
-                    components: structure_table
-                        .get("components")
-                        .and_then(|v| v.as_str())
-                        .ok_or_else(|| anyhow::anyhow!("missing structure.components"))?
-                        .to_string(),
-                    utils: structure_table
-                        .get("utils")
-                        .and_then(|v| v.as_str())
-                        .map(|v| v.to_string()),
-                }
-            } else {
-                return Err(anyhow::anyhow!("missing [structure] section"));
-            };
-
-        let mut components = HashMap::new();
-        let mut utils = HashMap::new();
-
-        if let Some(components_table) = root_table.get("components").and_then(|v| v.as_table()) {
-            for (component_name, component_value) in components_table {
-                if let Some(comp_table) = component_value.as_table() {
-                    let mut features = HashMap::new();
-                    for (feature_key, feature_value) in comp_table {
-                        if let Some(b) = feature_value.as_bool() {
-                            features.insert(feature_key.clone(), b);
-                        }
-                    }
-                    components.insert(component_name.clone(), ComponentConfig { features });
-                }
-            }
-        }
-
-        if let Some(utils_table) = root_table.get("utils").and_then(|v| v.as_table()) {
-            for (util_name, util_value) in utils_table {
-                if let Some(util_table) = util_value.as_table() {
-                    let mut features = HashMap::new();
-                    for (feature_key, feature_value) in util_table {
-                        if let Some(b) = feature_value.as_bool() {
-                            features.insert(feature_key.clone(), b);
-                        }
-                    }
-                    utils.insert(util_name.clone(), ComponentConfig { features });
-                }
-            }
-        }
-
-        Ok(Config {
-            structure,
-            generator: GeneratorConfig {
-                class_helper: parse_class_helper(root_table)?,
-            },
-            components,
-            utils,
+        Ok(Self {
+            structure: stable_config.structure,
+            generator: stable_config.generator,
+            components: parse_entries(&value, "components")?,
+            utils: parse_entries(&value, "utils")?,
         })
     }
 }
 
-fn parse_class_helper(root_table: &toml::map::Map<String, Value>) -> anyhow::Result<ClassHelper> {
-    let Some(generator_table) = root_table.get("generator") else {
-        return Ok(ClassHelper::Classnames);
+fn parse_stable_config(content: &str) -> anyhow::Result<StableConfig> {
+    let raw = ::config::Config::builder()
+        .add_source(::config::File::from_str(
+            content,
+            ::config::FileFormat::Toml,
+        ))
+        .build()
+        .map_err(|e| anyhow::anyhow!("Failed to load config: {}", e))?;
+
+    raw.try_deserialize::<StableConfig>()
+        .map_err(|e| anyhow::anyhow!("Failed to parse config: {}", e))
+}
+
+fn parse_entries(
+    value: &toml::Value,
+    section: &str,
+) -> anyhow::Result<HashMap<String, ComponentConfig>> {
+    let mut entries = HashMap::new();
+
+    let Some(table) = value.get(section).and_then(|v| v.as_table()) else {
+        return Ok(entries);
     };
 
-    let generator_table = generator_table
-        .as_table()
-        .ok_or_else(|| anyhow::anyhow!("[generator] must be a table"))?;
+    for (entry_name, entry_value) in table {
+        let entry_table = entry_value
+            .as_table()
+            .ok_or_else(|| anyhow::anyhow!("{}.{} must be a table", section, entry_name))?;
 
-    let Some(class_helper_value) = generator_table.get("class-helper") else {
-        return Ok(ClassHelper::Classnames);
-    };
+        let mut features = HashMap::new();
+        for (feature_key, feature_value) in entry_table {
+            let feature_bool = feature_value.as_bool().ok_or_else(|| {
+                anyhow::anyhow!(
+                    "{}.{}.{} must be a boolean",
+                    section,
+                    entry_name,
+                    feature_key
+                )
+            })?;
+            features.insert(feature_key.clone(), feature_bool);
+        }
 
-    let class_helper = class_helper_value
-        .as_str()
-        .ok_or_else(|| anyhow::anyhow!("generator.class-helper must be a string"))?;
-
-    match class_helper {
-        "classnames" => Ok(ClassHelper::Classnames),
-        "clsx" => Ok(ClassHelper::Clsx),
-        _ => Err(anyhow::anyhow!(
-            "invalid generator.class-helper '{}', expected 'classnames' or 'clsx'",
-            class_helper
-        )),
+        entries.insert(entry_name.clone(), ComponentConfig { features });
     }
+
+    Ok(entries)
 }

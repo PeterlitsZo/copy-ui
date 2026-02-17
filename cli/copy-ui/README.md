@@ -13,6 +13,8 @@ just install
 
 It should be in your `$PATH` after installation.
 
+## Usage
+
 Put the following into your `copy-ui.config.toml` file:
 
 ```toml
@@ -35,11 +37,22 @@ with-typography-codeblock = true
 [utils.resolve-style2]
 ```
 
-And then you can run `copy-ui` -- then those components and utils will be added
-to your project.
+Generate components and utils:
 
-The `generator.class-helper` option accepts only `classnames` and `clsx`.  If
-omitted, `classnames` is used by default.
+```bash
+copy-ui codegen
+```
+
+Use a custom config file path:
+
+```bash
+copy-ui codegen --config path/to/copy-ui.config.toml
+```
+
+The `--config` default is `copy-ui.config.toml`.
+
+The `generator.class-helper` option accepts only `classnames` and `clsx`.
+If omitted, `classnames` is used by default.
 
 ## Templates
 
