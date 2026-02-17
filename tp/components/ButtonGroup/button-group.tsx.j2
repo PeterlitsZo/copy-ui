@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import styles from "./button-group.module.scss";
@@ -14,7 +14,7 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   return (
     <div
       data-component="button-group"
-      className={classNames(styles.buttonGroup, className)}
+      className={ {{- class_helper_ident -}}(styles.buttonGroup, className)}
     >
       {children}
     </div>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import { Card } from "@/components/Card";
@@ -37,7 +37,7 @@ const AlertDialog: AlertDialogComponent = (props: AlertDialogProps) => {
     <Modal isOpen={isOpen}>
       <Modal.Overlay onClick={handleOverlayClick} />
       <Modal.Content center shadow>
-        <Card className={classNames(styles.alertDialog, className)}>
+        <Card className={ {{- class_helper_ident -}}(styles.alertDialog, className)}>
           {children}
         </Card>
       </Modal.Content>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
@@ -63,7 +63,7 @@ export const Flex: FC<FlexProps> = (props) => {
   });
 
   return (
-    <div className={classNames(stx, className)} {...rest}>
+    <div className={ {{- class_helper_ident -}}(stx, className)} {...rest}>
       {children}
     </div>
   );

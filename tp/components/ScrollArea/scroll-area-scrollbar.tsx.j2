@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { createContext, useContext, useEffect } from "react";
 import { useStore } from "zustand";
@@ -48,10 +48,9 @@ const ScrollAreaScrollbar: FC<ScrollAreaScrollbarProps> = (props) => {
       : havingVerticalThumbShow;
 
   return (
-    {% raw %}
-    <ScrollAreaScrollbarContext value={{ orientation, havingConflict }}>
+    <ScrollAreaScrollbarContext value={% raw %}{{ orientation, havingConflict }}{% endraw %}>
       <div
-        className={classNames(styles.scrollAreaScrollbar, stx, className)}
+        className={ {{- class_helper_ident -}}(styles.scrollAreaScrollbar, stx, className)}
         style={style}
         data-orientation={orientation}
         data-having-conflict={havingConflict ? "true" : "false"}
@@ -60,7 +59,6 @@ const ScrollAreaScrollbar: FC<ScrollAreaScrollbarProps> = (props) => {
         {children}
       </div>
     </ScrollAreaScrollbarContext>
-    {% endraw %}
   );
 };
 

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import dayjs from "dayjs";
 import {
   ChevronLeft,
@@ -306,7 +306,7 @@ export const Calendar: FC<CalendarProps> = (props) => {
   ]);
 
   return (
-    <div className={classNames(styles.calendar, stx)}>
+    <div className={ {{- class_helper_ident -}}(styles.calendar, stx)}>
       <div className={styles.calendarHeader}>
         <button
           type="button"

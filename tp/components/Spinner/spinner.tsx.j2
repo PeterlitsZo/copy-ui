@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Loader2Icon } from "lucide-react";
 import type { FC } from "react";
 
@@ -31,7 +31,7 @@ const Spinner: FC<SpinnerProps> = (props) => {
     <Icon
       role="status"
       aria-label="Loading"
-      className={classNames(styles.spinner, sizeStx, className)}
+      className={ {{- class_helper_ident -}}(styles.spinner, sizeStx, className)}
       {...rest}
     />
   );

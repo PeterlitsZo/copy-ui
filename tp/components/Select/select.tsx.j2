@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -88,7 +88,7 @@ const Select = <V extends string>(props: SelectProps<V>) => {
           setTriggerEl(el);
         }}
         placeholder={placeholder}
-        className={classNames(baseStx, widthStx)}
+        className={ {{- class_helper_ident -}}(baseStx, widthStx)}
         disabled={disabled}
         isOpen={isOpen}
         onToggle={onToggle}

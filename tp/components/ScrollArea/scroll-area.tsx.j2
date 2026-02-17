@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { useEffect, useRef } from "react";
 import { type StoreApi, useStore } from "zustand";
@@ -49,7 +49,7 @@ const ScrollArea: ScrollAreaComponent = (props: ScrollAreaProps) => {
   return (
     <ScrollAreaContext value={scrollAreaStoreRef.current}>
       <div
-        className={classNames(styles.scrollArea, className)}
+        className={ {{- class_helper_ident -}}(styles.scrollArea, className)}
         onPointerEnter={() => setHover(true)}
         onPointerLeave={() => setHover(false)}
         {...rest}

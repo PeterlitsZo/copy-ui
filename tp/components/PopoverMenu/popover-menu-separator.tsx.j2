@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -14,7 +14,7 @@ const PopoverMenuSeparator: FC = () => {
   });
 
   return (
-    <li className={classNames(styles.popoverMenuSeparator, separatorStx)} />
+    <li className={ {{- class_helper_ident -}}(styles.popoverMenuSeparator, separatorStx)} />
   );
 };
 

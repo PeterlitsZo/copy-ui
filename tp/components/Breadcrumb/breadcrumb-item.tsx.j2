@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
@@ -28,7 +28,7 @@ const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
     "--breadcrumbItem-color": color,
   });
 
-  return <li className={classNames(styles.breadcrumbItem, stx)}>{children}</li>;
+  return <li className={ {{- class_helper_ident -}}(styles.breadcrumbItem, stx)}>{children}</li>;
 };
 
 BreadcrumbItem.displayName = "Breadcrumb.Item";

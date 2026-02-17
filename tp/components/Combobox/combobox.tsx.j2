@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { debounce } from "es-toolkit";
 import {
   useCallback,
@@ -168,7 +168,7 @@ const Combobox = <V extends string>(props: ComboboxProps<V>) => {
           setTriggerEl(el);
         }}
         placeholder={placeholder}
-        className={classNames(baseStx, widthStx)}
+        className={ {{- class_helper_ident -}}(baseStx, widthStx)}
         disabled={disabled}
         isOpen={isOpen}
         onToggle={onToggle}

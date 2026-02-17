@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import dayjs from "dayjs";
 import type { FC, KeyboardEventHandler } from "react";
 import { useEffect, useState } from "react";
@@ -147,7 +147,7 @@ const DatePicker: FC<DatePickerProps> = (props) => {
   });
 
   return (
-    <IbsBase className={classNames(stx, baseStyleStx)} {...rest}>
+    <IbsBase className={ {{- class_helper_ident -}}(stx, baseStyleStx)} {...rest}>
       <IbsBase.Wrapper className={styles.datePickerInput}>
         <DatePickerInputPart
           placeholder="YYYY"
@@ -279,7 +279,7 @@ const DatePickerInputPart: FC<DatePickerInputPartProps> = (props) => {
     <button
       type="button"
       inputMode="numeric"
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.datePickerInputPart,
         internalValue === null && styles.noValue,
       )}

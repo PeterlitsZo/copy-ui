@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import tinycolor from "tinycolor2";
 
@@ -49,7 +49,7 @@ const Button: FC<ButtonProps> = (props) => {
 
   return (
     <button
-      className={classNames(styles.button, baseStx, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.button, baseStx, stx, className)}
       disabled={disabled}
       data-disabled={disabled ? true : undefined}
       data-variant={variant}

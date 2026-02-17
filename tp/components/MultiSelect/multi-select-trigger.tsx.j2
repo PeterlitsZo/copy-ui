@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { ChevronsUpDown } from "lucide-react";
 import {
   createContext,
@@ -75,7 +75,7 @@ const MultiSelectTrigger: FC<MultiSelectTriggerProps> = (props) => {
     <IbsBase
       id={id}
       ref={ref}
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.selectTrigger,
         triggerStx,
         baseStyleStx,
@@ -117,7 +117,7 @@ const MultiSelectLabel = ({ label }: { label: string }) => {
   });
 
   return (
-    <span className={classNames(styles.selectLabel, labelStx)}>{label}</span>
+    <span className={ {{- class_helper_ident -}}(styles.selectLabel, labelStx)}>{label}</span>
   );
 };
 

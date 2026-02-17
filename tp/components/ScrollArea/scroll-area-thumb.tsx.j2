@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { useCallback, useEffect, useState } from "react";
 import tinycolor from "tinycolor2";
@@ -78,7 +78,7 @@ const ScrollAreaThumbVertical: FC<ScrollAreaThumbProps> = (props) => {
 
   return (
     <ScrollAreaThumbVerticalInternal
-      className={classNames(styles.scrollAreaThumb, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.scrollAreaThumb, stx, className)}
       style={computedStyle}
       onMouseDown={handleMouseDown}
       onMouseEnter={() => setHover(true)}
@@ -156,7 +156,7 @@ const ScrollAreaThumbHorizontal: FC<ScrollAreaThumbProps> = (props) => {
 
   return (
     <ScrollAreaThumbHorizontalInternal
-      className={classNames(styles.scrollAreaThumb, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.scrollAreaThumb, stx, className)}
       style={computedStyle}
       onMouseDown={handleMouseDown}
       onMouseEnter={() => setHover(true)}

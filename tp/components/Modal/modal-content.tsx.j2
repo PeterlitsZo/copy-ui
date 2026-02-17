@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
@@ -22,7 +22,7 @@ const ModalContent: FC<ModalContentProps> = (props) => {
 
   return (
     <div
-      className={classNames(styles.modalContent, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.modalContent, stx, className)}
       data-center={center}
       data-shadow={shadow}
       {...rest}

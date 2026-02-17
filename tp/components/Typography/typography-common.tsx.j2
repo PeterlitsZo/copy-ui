@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -14,7 +14,7 @@ const TypographyStrong: FC<TypographyStrongProps> = (props) => {
   const { className, children, ...rest } = props;
 
   return (
-    <strong className={classNames(styles.strong, className)} {...rest}>
+    <strong className={ {{- class_helper_ident -}}(styles.strong, className)} {...rest}>
       {children}
     </strong>
   );
@@ -31,7 +31,7 @@ const TypographyEm: FC<TypographyEmProps> = (props) => {
   const { className, children, ...rest } = props;
 
   return (
-    <strong className={classNames(styles.em, className)} {...rest}>
+    <strong className={ {{- class_helper_ident -}}(styles.em, className)} {...rest}>
       {children}
     </strong>
   );
@@ -58,7 +58,7 @@ const TypographyP: FC<TypographyPProps> = (props) => {
 
   return (
     <p
-      className={classNames(styles.p, className)}
+      className={ {{- class_helper_ident -}}(styles.p, className)}
       style={computedStyle}
       {...rest}
     >
@@ -83,7 +83,7 @@ const TypographyA: FC<TypographyAProps> = (props) => {
   });
 
   return (
-    <a className={classNames(styles.a, stx, className)} {...rest}>
+    <a className={ {{- class_helper_ident -}}(styles.a, stx, className)} {...rest}>
       {children}
     </a>
   );

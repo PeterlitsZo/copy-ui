@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -21,7 +21,7 @@ const AlertDescription: FC<AlertDescriptionProps> = (props) => {
 
   return (
     <p
-      className={classNames(styles.alertDescription, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.alertDescription, stx, className)}
       {...rest}
     >
       {children}

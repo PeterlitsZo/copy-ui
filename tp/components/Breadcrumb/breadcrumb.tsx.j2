@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
@@ -30,7 +30,7 @@ const Breadcrumb: BreadcrumbComponent = (props: BreadcrumbProps) => {
     }[size],
   });
 
-  return <ol className={classNames(styles.breadcrumb, stx)}>{children}</ol>;
+  return <ol className={ {{- class_helper_ident -}}(styles.breadcrumb, stx)}>{children}</ol>;
 };
 
 Breadcrumb.displayName = "Breadcrumb";

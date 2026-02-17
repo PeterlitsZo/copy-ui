@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { Typography } from "@/components/Typography";
@@ -14,7 +14,7 @@ const CardContent: FC<CardContentProps> = (props) => {
 
   return (
     <div
-      className={classNames(styles.cardContent, className)}
+      className={ {{- class_helper_ident -}}(styles.cardContent, className)}
       data-component="card-content"
       {...rest}
     >

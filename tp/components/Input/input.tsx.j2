@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -66,14 +66,14 @@ export const Input: FC<InputProps> = (props) => {
       size={size}
       disabled={disabled}
       style={style}
-      className={classNames(styles.ibsBase, baseStx, baseStyleStx, className)}
+      className={ {{- class_helper_ident -}}(styles.ibsBase, baseStx, baseStyleStx, className)}
     >
       {leftSection && <IbsBase.LeftSection>{leftSection}</IbsBase.LeftSection>}
       {leftSection || rightSection ? (
         <IbsBase.Wrapper>
           <input
             id={id}
-            className={classNames(styles.input, inputStx)}
+            className={ {{- class_helper_ident -}}(styles.input, inputStx)}
             placeholder={placeholder}
             onChange={onChange}
             {...rest}
@@ -82,7 +82,7 @@ export const Input: FC<InputProps> = (props) => {
       ) : (
         <input
           id={id}
-          className={classNames(styles.input, inputStx)}
+          className={ {{- class_helper_ident -}}(styles.input, inputStx)}
           placeholder={placeholder}
           onChange={onChange}
           {...rest}

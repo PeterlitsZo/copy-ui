@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Check, Inbox } from "lucide-react";
 import type { CSSProperties, FC, Ref } from "react";
 
@@ -52,7 +52,7 @@ const SelectList = <V extends string>(props: SelectListProps<V>) => {
     <ScrollArea
       ref={ref}
       style={style}
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.selectListContainer,
         listStx,
         listWidthStx,
@@ -62,7 +62,7 @@ const SelectList = <V extends string>(props: SelectListProps<V>) => {
       <ScrollArea.Viewport className={viewStx}>
         <ScrollArea.Content>
           {options.length > 0 && (
-            <ul className={classNames(styles.selectList)}>
+            <ul className={ {{- class_helper_ident -}}(styles.selectList)}>
               {options.map((option) => {
                 return (
                   <SelectItem
@@ -103,7 +103,7 @@ const SelectItem: FC<SelectItemProps> = (props) => {
   });
 
   return (
-    <li className={classNames(styles.selectItem, stx)}>
+    <li className={ {{- class_helper_ident -}}(styles.selectItem, stx)}>
       <button
         type="button"
         className={styles.selectItemButton}
@@ -133,7 +133,7 @@ const EmptyState: FC = () => {
   });
 
   return (
-    <div className={classNames(styles.emptyState, stx)}>
+    <div className={ {{- class_helper_ident -}}(styles.emptyState, stx)}>
       <div className={styles.emptyStateIcon}>
         <Inbox size="1.5rem" />
       </div>

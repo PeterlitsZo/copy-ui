@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
@@ -24,7 +24,7 @@ const TableRow: FC<TableRowProps> = (props) => {
   });
 
   return (
-    <tr className={classNames(styles.TableRow, stx, className)} {...rest} />
+    <tr className={ {{- class_helper_ident -}}(styles.TableRow, stx, className)} {...rest} />
   );
 };
 

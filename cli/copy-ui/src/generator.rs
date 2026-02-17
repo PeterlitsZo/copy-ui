@@ -1,4 +1,4 @@
-use crate::config::ComponentConfig;
+use crate::config::{ComponentConfig, GeneratorConfig};
 use anyhow::Context;
 use minijinja::{context, Environment};
 use std::fs;
@@ -7,6 +7,7 @@ use std::path::Path;
 pub fn generate_component(
     component_name: &str,
     config: &ComponentConfig,
+    generator_config: &GeneratorConfig,
     output_dir: &Path,
 ) -> anyhow::Result<()> {
     generate_entry(
@@ -14,6 +15,7 @@ pub fn generate_component(
         "components",
         component_name,
         config,
+        generator_config,
         output_dir,
     )
 }
@@ -21,9 +23,17 @@ pub fn generate_component(
 pub fn generate_util(
     util_name: &str,
     config: &ComponentConfig,
+    generator_config: &GeneratorConfig,
     output_dir: &Path,
 ) -> anyhow::Result<()> {
-    generate_entry("util", "utils", util_name, config, output_dir)
+    generate_entry(
+        "util",
+        "utils",
+        util_name,
+        config,
+        generator_config,
+        output_dir,
+    )
 }
 
 fn generate_entry(
@@ -31,6 +41,7 @@ fn generate_entry(
     entry_group: &str,
     entry_name: &str,
     config: &ComponentConfig,
+    generator_config: &GeneratorConfig,
     output_dir: &Path,
 ) -> anyhow::Result<()> {
     let mut env = Environment::new();
@@ -42,6 +53,8 @@ fn generate_entry(
         component => entry_name,
         util => entry_name,
         item => entry_name,
+        class_helper_ident => generator_config.class_helper.ident(),
+        class_helper_pkg => generator_config.class_helper.pkg(),
     };
 
     let index_template = match entry_group {

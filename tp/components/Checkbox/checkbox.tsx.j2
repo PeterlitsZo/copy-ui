@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { CheckIcon } from "lucide-react";
 import { type FC, useState } from "react";
 
@@ -35,7 +35,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
     <button
       type="button"
       id={id}
-      className={classNames(styles.checkbox, stx, checked && styles.checked)}
+      className={ {{- class_helper_ident -}}(styles.checkbox, stx, checked && styles.checked)}
       onClick={() => setChecked(!checked)}
     >
       {checked && (

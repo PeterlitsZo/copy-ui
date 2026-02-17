@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { toHtml } from "hast-util-to-html";
 import { type CSSProperties, type FC, useMemo } from "react";
 
@@ -66,14 +66,12 @@ export const CodeHighlight: FC<CodeHighlightProps> = (props) => {
   });
 
   return (
-    {% raw %}
     <div
-      className={classNames(styles.codeHighlight, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.codeHighlight, stx, className)}
       style={style}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: shikijs think it is safe.
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ '{{' }} __html: html {{ '}}' }}
     />
-    {% endraw %}
   );
 };
 

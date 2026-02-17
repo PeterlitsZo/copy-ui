@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { useState } from "react";
 
@@ -59,7 +59,7 @@ const Tabs: TabsComponent = (props: TabsProps) => {
   return (
     <TabsContext.Provider value={contextValue}>
       <div
-        className={classNames(styles.tabs, tabsStx, className)}
+        className={ {{- class_helper_ident -}}(styles.tabs, tabsStx, className)}
         role="tablist"
         {...rest}
       >

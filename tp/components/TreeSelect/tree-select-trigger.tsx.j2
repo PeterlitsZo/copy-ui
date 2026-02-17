@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { ChevronsUpDown } from "lucide-react";
 import type { FC, Ref } from "react";
 
@@ -52,7 +52,7 @@ const TreeSelectTrigger: FC<TreeSelectTriggerProps> = (props) => {
     <button
       id={id}
       ref={ref}
-      className={classNames(styles.selectTrigger, triggerStx, className)}
+      className={ {{- class_helper_ident -}}(styles.selectTrigger, triggerStx, className)}
       onClick={() => !disabled && onToggle()}
       data-value-picked={showLabel == null ? undefined : "true"}
       data-disabled={disabled ? "true" : undefined}

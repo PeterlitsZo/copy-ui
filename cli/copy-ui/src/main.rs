@@ -22,6 +22,7 @@ fn main() -> anyhow::Result<()> {
         generator::generate_component(
             component_name,
             component_config,
+            &config.generator,
             &components_output_base_dir,
         )?;
     }
@@ -37,7 +38,12 @@ fn main() -> anyhow::Result<()> {
         for (util_name, util_config) in &config.utils {
             println!("Processing util: {}", util_name);
 
-            generator::generate_util(util_name, util_config, &utils_output_base_dir)?;
+            generator::generate_util(
+                util_name,
+                util_config,
+                &config.generator,
+                &utils_output_base_dir,
+            )?;
         }
     }
 

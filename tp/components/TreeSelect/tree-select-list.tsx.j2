@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Check, ChevronRight } from "lucide-react";
 import type { CSSProperties, ReactElement, Ref } from "react";
 import { useState } from "react";
@@ -68,7 +68,7 @@ const TreeSelectList = <V extends string>(props: TreeSelectListProps<V>) => {
     <ScrollArea
       ref={ref}
       style={style}
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.selectListContainer,
         listStx,
         listWidthStx,
@@ -77,7 +77,7 @@ const TreeSelectList = <V extends string>(props: TreeSelectListProps<V>) => {
     >
       <ScrollArea.Viewport className={viewStx}>
         <ScrollArea.Content>
-          <ul className={classNames(styles.selectList)}>
+          <ul className={ {{- class_helper_ident -}}(styles.selectList)}>
             {options.map((option, index) => {
               return (
                 <TreeSelectItem
@@ -135,7 +135,7 @@ const TreeSelectItem = <V extends string>(
 
   return (
     <>
-      <li className={classNames(styles.selectItem, stx)}>
+      <li className={ {{- class_helper_ident -}}(styles.selectItem, stx)}>
         <button
           type="button"
           className={styles.selectItemButton}

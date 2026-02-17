@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Clipboard } from "lucide-react";
 import { type FC, useRef } from "react";
 
@@ -77,7 +77,7 @@ const CodeBlock: FC<CodeBlockProp> = (props) => {
   };
 
   return (
-    <div className={classNames(styles.codeBlock, codeBlockStx, className)}>
+    <div className={ {{- class_helper_ident -}}(styles.codeBlock, codeBlockStx, className)}>
       {title && <div className={styles.codeBlockTitle}>{title}</div>}
       <ScrollArea>
         <ScrollArea.Viewport className={scrollAreaSizeStx}>

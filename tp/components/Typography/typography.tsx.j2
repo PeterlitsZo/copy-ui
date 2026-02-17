@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./typography.module.css";
@@ -42,7 +42,7 @@ const Typography: ComponentTypography = (props: TypographyProps) => {
   const { children, className, ...rest } = props;
 
   return (
-    <div className={classNames(styles.typography, className)} {...rest}>
+    <div className={ {{- class_helper_ident -}}(styles.typography, className)} {...rest}>
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { Card } from "@/components/Card";
@@ -11,7 +11,7 @@ const AlertDialogContent: FC<AlertDialogContentProps> = (props) => {
   const { className, ...rest } = props;
 
   return (
-    <Card.Content className={classNames(styles.content, className)} {...rest} />
+    <Card.Content className={ {{- class_helper_ident -}}(styles.content, className)} {...rest} />
   );
 };
 

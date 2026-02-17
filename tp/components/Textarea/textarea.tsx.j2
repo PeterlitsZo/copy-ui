@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -23,7 +23,7 @@ const Textarea: React.FC<TextareaProps> = (props) => {
   });
 
   return (
-    <textarea className={classNames(styles.textarea, stx, className)} {...rest}>
+    <textarea className={ {{- class_helper_ident -}}(styles.textarea, stx, className)} {...rest}>
       {children}
     </textarea>
   );

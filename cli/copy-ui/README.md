@@ -20,6 +20,9 @@ Put the following into your `copy-ui.config.toml` file:
 components = "src/components"
 utils = "src/utils"
 
+[generator]
+class-helper = "classnames"
+
 [components.CopyUiProvider]
 with-mdx-provider = true
 with-toast-provider = true
@@ -34,6 +37,9 @@ with-typography-codeblock = true
 
 And then you can run `copy-ui` -- then those components and utils will be added
 to your project.
+
+The `generator.class-helper` option accepts only `classnames` and `clsx`.  If
+omitted, `classnames` is used by default.
 
 ## Templates
 

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { CodeBlock } from "@/components/CodeBlock";
@@ -24,7 +24,7 @@ const TypographyCode: FC<TypographyCodeProps> = (props) => {
 
   return (
     <code
-      className={classNames(styles.code, className)}
+      className={ {{- class_helper_ident -}}(styles.code, className)}
       style={computedStyle}
       {...rest}
     >
@@ -44,7 +44,7 @@ const TypographyCodeBlock: FC<TypographyCodeBlockProps> = (props) => {
   return (
     <CodeBlock
       scrollAreaMaxHeight="calc(50vh + 10rem)"
-      className={classNames(styles.codeBlock, className)}
+      className={ {{- class_helper_ident -}}(styles.codeBlock, className)}
       {...rest}
     />
   );

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Check, Inbox } from "lucide-react";
 import {
   type CSSProperties,
@@ -74,7 +74,7 @@ const ComboboxList = <V extends string>(props: ComboboxListProps<V>) => {
     <div
       ref={ref}
       style={style}
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.comboboxListContainer,
         listStx,
         listWidthStx,
@@ -94,7 +94,7 @@ const ComboboxList = <V extends string>(props: ComboboxListProps<V>) => {
             {isLoading ? (
               <LoadingState />
             ) : options.length > 0 ? (
-              <ul className={classNames(styles.comboboxList)}>
+              <ul className={ {{- class_helper_ident -}}(styles.comboboxList)}>
                 {options.map((option) => {
                   return (
                     <ComboboxItem
@@ -137,7 +137,7 @@ const ComboboxItem: FC<ComboboxItemProps> = (props) => {
   });
 
   return (
-    <li className={classNames(styles.comboboxItem, stx)}>
+    <li className={ {{- class_helper_ident -}}(styles.comboboxItem, stx)}>
       <button
         type="button"
         className={styles.comboboxItemButton}
@@ -165,7 +165,7 @@ const LoadingState: FC = () => {
   });
 
   return (
-    <div className={classNames(styles.loadingState, stx)}>
+    <div className={ {{- class_helper_ident -}}(styles.loadingState, stx)}>
       <div>Loading...</div>
     </div>
   );
@@ -181,7 +181,7 @@ const EmptyState: FC = () => {
   });
 
   return (
-    <div className={classNames(styles.emptyState, stx)}>
+    <div className={ {{- class_helper_ident -}}(styles.emptyState, stx)}>
       <div className={styles.emptyStateIcon}>
         <Inbox size="1.5rem" />
       </div>

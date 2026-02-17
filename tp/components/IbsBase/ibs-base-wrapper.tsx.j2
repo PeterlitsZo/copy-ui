@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./ibs-base-wrapper.module.scss";
@@ -9,7 +9,7 @@ const IbsBaseWrapper: FC<IbsBaseWrapperProps> = (props) => {
   const { className, children, ...rest } = props;
 
   return (
-    <div className={classNames(styles.ibsBaseWrapper, className)} {...rest}>
+    <div className={ {{- class_helper_ident -}}(styles.ibsBaseWrapper, className)} {...rest}>
       {children}
     </div>
   );

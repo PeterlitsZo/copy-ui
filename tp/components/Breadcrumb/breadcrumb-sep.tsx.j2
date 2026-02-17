@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -19,7 +19,7 @@ const BreadcrumbSep: FC<BreadcrumbSepProps> = (props) => {
     "--breadcrumbSep-color": theme.colors.gray["500"],
   });
 
-  return <li className={classNames(styles.breadcrumbSep, stx)}>{children}</li>;
+  return <li className={ {{- class_helper_ident -}}(styles.breadcrumbSep, stx)}>{children}</li>;
 };
 
 BreadcrumbSep.displayName = "Breadcrumb.Sep";

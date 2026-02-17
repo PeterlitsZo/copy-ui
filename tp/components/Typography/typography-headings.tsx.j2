@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useTheme } from "@/components/CopyUiProvider";
@@ -24,7 +24,7 @@ const TypographyH1: FC<TypographyH1Props> = (props) => {
 
   return (
     <h1
-      className={classNames(styles.h1, className)}
+      className={ {{- class_helper_ident -}}(styles.h1, className)}
       style={computedStyle}
       {...rest}
     >
@@ -55,7 +55,7 @@ const TypographyH2: FC<TypographyH2Props> = (props) => {
 
   return (
     <h2
-      className={classNames(styles.h2, className)}
+      className={ {{- class_helper_ident -}}(styles.h2, className)}
       style={computedStyle}
       {...rest}
     >
@@ -83,7 +83,7 @@ const TypographyH3: FC<TypographyH3Props> = (props) => {
 
   return (
     <h3
-      className={classNames(styles.h3, className)}
+      className={ {{- class_helper_ident -}}(styles.h3, className)}
       style={computedStyle}
       {...rest}
     >
@@ -111,7 +111,7 @@ const TypographyH4: FC<TypographyH4Props> = (props) => {
 
   return (
     <h4
-      className={classNames(styles.h4, className)}
+      className={ {{- class_helper_ident -}}(styles.h4, className)}
       style={computedStyle}
       {...rest}
     >

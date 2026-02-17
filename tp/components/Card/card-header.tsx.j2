@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -21,7 +21,7 @@ const CardHeader: FC<CardHeaderProps> = (props) => {
 
   return (
     <div
-      className={classNames(styles.cardHeader, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.cardHeader, stx, className)}
       data-with-border={withBorder ? "true" : undefined}
       data-component="card-header"
       {...rest}

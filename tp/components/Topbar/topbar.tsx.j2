@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Moon, Sun } from "lucide-react";
 import type { FC } from "react";
 
@@ -38,7 +38,7 @@ const Topbar: FC<TopbarProps> = (props) => {
   });
 
   return (
-    <div className={classNames(styles.topbar, stx, className)}>
+    <div className={ {{- class_helper_ident -}}(styles.topbar, stx, className)}>
       <div className={styles.content}>
         <span className={styles.logo}>Copy UI</span>
         <div className={styles.spacer} />

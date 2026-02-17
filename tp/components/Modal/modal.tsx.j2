@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { CSSProperties, FC } from "react";
 import tinycolor from "tinycolor2";
 
@@ -37,7 +37,7 @@ const Modal: ModalComponent = (props: ModalProps) => {
   return (
     <Modal.Raw
       isOpen={isOpen}
-      className={classNames(stx, className)}
+      className={ {{- class_helper_ident -}}(stx, className)}
       style={style}
     >
       {children}

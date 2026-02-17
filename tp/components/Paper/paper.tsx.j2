@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, CSSProperties, FC } from "react";
 
 import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
@@ -42,7 +42,7 @@ const Paper: FC<PaperProps> = (props) => {
 
   return (
     <div
-      className={classNames(styles.paper, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.paper, stx, className)}
       data-with-border={withBorder}
       data-with-padding={withPadding}
       {...rest}

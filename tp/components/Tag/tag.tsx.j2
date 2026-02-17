@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { FC } from "react";
 import tinycolor from "tinycolor2";
 
@@ -46,7 +46,7 @@ const Tag: FC<TagProps> = (props) => {
   );
 
   return (
-    <div className={classNames(styles.tag, baseStx, stx)}>
+    <div className={ {{- class_helper_ident -}}(styles.tag, baseStx, stx)}>
       {withDot && <span className={styles.tagDot} />}
       <span>{children}</span>
     </div>

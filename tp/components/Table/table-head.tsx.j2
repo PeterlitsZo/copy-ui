@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./table-head.module.scss";
@@ -8,7 +8,7 @@ type TableHeadProps = ComponentProps<"th">;
 const TableHead: FC<TableHeadProps> = (props) => {
   const { className, ...rest } = props;
 
-  return <th className={classNames(styles.TableHead, className)} {...rest} />;
+  return <th className={ {{- class_helper_ident -}}(styles.TableHead, className)} {...rest} />;
 };
 
 TableHead.displayName = "Table.Head";

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type dayjs from "dayjs";
 import { CalendarDays } from "lucide-react";
 import type { FC } from "react";
@@ -30,7 +30,7 @@ const CalendarOpener: FC<CalendarOpenerProps> = (props) => {
         render={({ setRef, onToggle }) => (
           <button
             type="button"
-            className={classNames(styles.calendarOpener, stx)}
+            className={ {{- class_helper_ident -}}(styles.calendarOpener, stx)}
             ref={setRef}
             onClick={onToggle}
           >

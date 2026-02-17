@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./typography-list.module.css";
@@ -19,7 +19,7 @@ const TypographyUl: FC<TypographyUlProps> = (props) => {
 
   return (
     <ul
-      className={classNames(styles.ul, className)}
+      className={ {{- class_helper_ident -}}(styles.ul, className)}
       style={computedStyle}
       {...rest}
     >
@@ -46,7 +46,7 @@ const TypographyOl: FC<TypographyOlProps> = (props) => {
 
   return (
     <ol
-      className={classNames(styles.ol, className)}
+      className={ {{- class_helper_ident -}}(styles.ol, className)}
       style={computedStyle}
       {...rest}
     >
@@ -73,7 +73,7 @@ const TypographyLi: FC<TypographyLiProps> = (props) => {
 
   return (
     <li
-      className={classNames(styles.li, className)}
+      className={ {{- class_helper_ident -}}(styles.li, className)}
       style={computedStyle}
       {...rest}
     >

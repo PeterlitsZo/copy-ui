@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import {
   ArrowDownUp,
   ArrowDownWideNarrow,
@@ -37,7 +37,7 @@ const CompactIcon: FC<IconProps> = (props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="graphics-symbol"
-      className={classNames(styles.compactSortIndicator, className)}
+      className={ {{- class_helper_ident -}}(styles.compactSortIndicator, className)}
       {...rest}
     >
       <path
@@ -71,14 +71,14 @@ export const iconMap = {
 
     if (direction === "asc") {
       return (
-        <ArrowUpWideNarrow className={classNames(stx, className)} {...rest} />
+        <ArrowUpWideNarrow className={ {{- class_helper_ident -}}(stx, className)} {...rest} />
       );
     } else if (direction === "desc") {
       return (
-        <ArrowDownWideNarrow className={classNames(stx, className)} {...rest} />
+        <ArrowDownWideNarrow className={ {{- class_helper_ident -}}(stx, className)} {...rest} />
       );
     } else {
-      return <ArrowDownUp className={classNames(stx, className)} {...rest} />;
+      return <ArrowDownUp className={ {{- class_helper_ident -}}(stx, className)} {...rest} />;
     }
   },
   compact(props: IconProps) {

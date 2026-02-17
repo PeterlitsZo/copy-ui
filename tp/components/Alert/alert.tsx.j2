@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC, ReactNode } from "react";
 
 import { type ColorName, useJss, useTheme } from "@/components/CopyUiProvider";
@@ -33,7 +33,7 @@ const Alert: AlertComponent = (props) => {
 
   return (
     <div
-      className={classNames(styles.alert, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.alert, stx, className)}
       role="alert"
       {...rest}
     >

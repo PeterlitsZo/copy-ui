@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
@@ -44,7 +44,7 @@ const Card: CardComponent = (props: CardProps) => {
     <Paper
       radius={radius}
       withBorder={withBorder}
-      className={classNames(styles.card, stx)}
+      className={ {{- class_helper_ident -}}(styles.card, stx)}
       {...rest}
     >
       {children}

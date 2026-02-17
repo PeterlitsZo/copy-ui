@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss } from "@/components/CopyUiProvider";
@@ -18,7 +18,7 @@ const TableHeader: FC<TableHeaderProps> = (props) => {
 
   return (
     <thead
-      className={classNames(styles.TableHeader, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.TableHeader, stx, className)}
       {...rest}
     />
   );

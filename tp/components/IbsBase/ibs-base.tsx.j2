@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { type Theme, useJss, useTheme } from "@/components/CopyUiProvider";
@@ -49,7 +49,7 @@ const IbsBase: IbsBaseComponent = (props: IbsBaseProps) => {
 
   return (
     <div
-      className={classNames(styles.ibsBase, baseStx, stylesStx, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.ibsBase, baseStx, stylesStx, stx, className)}
       data-disabled={disabled || undefined}
       {...rest}
     >

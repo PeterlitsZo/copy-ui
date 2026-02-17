@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { type ComponentProps, type FC, useLayoutEffect, useRef } from "react";
 import { useStore } from "zustand";
 
@@ -49,7 +49,7 @@ const AvatarImg: FC<AvatarImgProps> = (props) => {
   return (
     imgState === "loaded" && (
       <img
-        className={classNames(styles.avatarImg, className)}
+        className={ {{- class_helper_ident -}}(styles.avatarImg, className)}
         alt={alt || "Avatar"}
         src={src}
         {...rest}

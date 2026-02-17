@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -26,7 +26,7 @@ const ToastContainer: FC = () => {
 
   return (
     <Modal.Raw>
-      <section className={classNames(styles.toastContainer, stx)}>
+      <section className={ {{- class_helper_ident -}}(styles.toastContainer, stx)}>
         <ul className={styles.toastList}>
           {toasts.map((toast) => (
             <ToastInternal key={toast.id} toast={toast} />
@@ -85,7 +85,7 @@ const ToastInternal: FC<ToastInternalProps> = ({ toast }) => {
 
   return (
     <li
-      className={classNames(styles.toast, icon != null && styles.withIcon, stx)}
+      className={ {{- class_helper_ident -}}(styles.toast, icon != null && styles.withIcon, stx)}
       onMouseEnter={() => store.getState().hoverToast?.(toast.id)}
       onMouseLeave={() => store.getState().unhoverToast?.(toast.id)}
     >

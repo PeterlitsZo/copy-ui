@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { CSSProperties, FC, Ref } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -35,7 +35,7 @@ const PopoverMenuContent: FC<PopoverMenuContentProps> = (props) => {
     <ScrollArea
       ref={ref}
       style={style}
-      className={classNames(styles.popoverMenuContent, contentStx, className)}
+      className={ {{- class_helper_ident -}}(styles.popoverMenuContent, contentStx, className)}
     >
       <ScrollArea.Viewport className={viewStx}>
         <ScrollArea.Content>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { type ComponentProps, type FC, useRef, useState } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -83,7 +83,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
       size={size}
       disabled={disabled}
       style={style}
-      className={classNames(styles.ibsBase, baseStx, baseStyleStx, className)}
+      className={ {{- class_helper_ident -}}(styles.ibsBase, baseStx, baseStyleStx, className)}
     >
       {leftSection && <IbsBase.LeftSection>{leftSection}</IbsBase.LeftSection>}
       <IbsBase.Wrapper>
@@ -98,7 +98,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
           {...rest}
         />
         <button
-          className={classNames(styles.fileInputWrapper, inputStx)}
+          className={ {{- class_helper_ident -}}(styles.fileInputWrapper, inputStx)}
           onClick={handleClick}
           type="button"
           tabIndex={disabled ? undefined : 0}
@@ -109,7 +109,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
           }}
         >
           <span
-            className={classNames(styles.fileInputText, {
+            className={ {{- class_helper_ident -}}(styles.fileInputText, {
               [styles.placeholder]: !selectedFiles?.length,
             })}
           >

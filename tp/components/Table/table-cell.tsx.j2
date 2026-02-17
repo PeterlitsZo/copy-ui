@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./table-cell.module.scss";
@@ -8,7 +8,7 @@ type TableCellProps = ComponentProps<"td">;
 const TableCell: FC<TableCellProps> = (props) => {
   const { className, ...rest } = props;
 
-  return <td className={classNames(styles.TableCell, className)} {...rest} />;
+  return <td className={ {{- class_helper_ident -}}(styles.TableCell, className)} {...rest} />;
 };
 
 TableCell.displayName = "Table.Cell";

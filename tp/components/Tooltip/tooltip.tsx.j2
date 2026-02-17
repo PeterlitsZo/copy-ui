@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { type FC, type ReactNode, useMemo } from "react";
 
 import { useJss, useTheme } from "@/components/CopyUiProvider";
@@ -54,7 +54,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
           isOpen && (
             <div
               ref={setRef}
-              className={classNames(styles.tooltip, computedStyle)}
+              className={ {{- class_helper_ident -}}(styles.tooltip, computedStyle)}
               style={floatingStyles}
             >
               {label}

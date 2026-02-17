@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./modal-overlay.module.scss";
@@ -9,7 +9,7 @@ const ModalOverlay: FC<ModalOverlayProps> = (props) => {
   const { className, ...rest } = props;
 
   return (
-    <div className={classNames(styles.modalOverlay, className)} {...rest} />
+    <div className={ {{- class_helper_ident -}}(styles.modalOverlay, className)} {...rest} />
   );
 };
 

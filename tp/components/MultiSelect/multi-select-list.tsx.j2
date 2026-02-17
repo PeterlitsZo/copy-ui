@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { Check } from "lucide-react";
 import type { CSSProperties, FC, Ref } from "react";
 
@@ -55,7 +55,7 @@ const MultiSelectList = <V extends string>(props: MultiSelectListProps<V>) => {
     <ScrollArea
       ref={ref}
       style={style}
-      className={classNames(
+      className={ {{- class_helper_ident -}}(
         styles.selectListContainer,
         listStx,
         listWidthStx,
@@ -64,7 +64,7 @@ const MultiSelectList = <V extends string>(props: MultiSelectListProps<V>) => {
     >
       <ScrollArea.Viewport className={viewStx}>
         <ScrollArea.Content>
-          <ul className={classNames(styles.selectList)}>
+          <ul className={ {{- class_helper_ident -}}(styles.selectList)}>
             {options.map((option) => {
               return (
                 <MultiSelectItem
@@ -101,7 +101,7 @@ const MultiSelectItem: FC<MultiSelectItemProps> = (props) => {
   });
 
   return (
-    <li className={classNames(styles.selectItem, stx)}>
+    <li className={ {{- class_helper_ident -}}(styles.selectItem, stx)}>
       <button
         type="button"
         className={styles.selectItemButton}

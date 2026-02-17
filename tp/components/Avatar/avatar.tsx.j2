@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import { type ComponentProps, type FC, useRef } from "react";
 import tinycolor from "tinycolor2";
 import { type StoreApi, useStore } from "zustand";
@@ -64,7 +64,7 @@ const AvatarInternal: FC<AvatarProps> = (props) => {
 
   return (
     <span
-      className={classNames(styles.avatar, stx)}
+      className={ {{- class_helper_ident -}}(styles.avatar, stx)}
       data-avatar-img-loaded={imgState === "loaded" ? true : undefined}
       {...rest}
     >

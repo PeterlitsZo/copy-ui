@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { useId } from "react";
 
@@ -32,13 +32,11 @@ const Field: FieldComponent = (props) => {
   const id = useId();
 
   return (
-    {% raw %}
-    <FieldContext value={{ id }}>
-      <fieldset className={classNames(styles.field, className)} {...rest}>
+    <FieldContext value={% raw %}{{ id }}{% endraw %}>
+      <fieldset className={ {{- class_helper_ident -}}(styles.field, className)} {...rest}>
         {children}
       </fieldset>
     </FieldContext>
-    {% endraw %}
   );
 };
 

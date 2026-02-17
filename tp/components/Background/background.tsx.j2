@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { CSSProperties } from "react";
 import { useLayoutEffect, useRef } from "react";
 
@@ -137,7 +137,7 @@ const Background: BackgroundComponent = <K extends BackgroundKind>(
 
   return (
     <div
-      className={classNames(styles.backgroundWrapper, stx, className)}
+      className={ {{- class_helper_ident -}}(styles.backgroundWrapper, stx, className)}
       style={style}
       ref={wrapperRef}
     >

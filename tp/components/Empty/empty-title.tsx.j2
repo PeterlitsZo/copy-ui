@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./empty-title.module.scss";
@@ -9,7 +9,7 @@ const EmptyTitle: FC<EmptyTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
   return (
-    <div className={classNames(styles.emptyTitle, className)} {...rest}>
+    <div className={ {{- class_helper_ident -}}(styles.emptyTitle, className)} {...rest}>
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ElementContent, Root, RootContent } from "hast";
 
 function transformCode(
@@ -49,7 +49,7 @@ function transformCode(
           { type: "text", value: "\n" },
         ];
         child.tagName = "div";
-        child.properties.class = classNames(
+        child.properties.class = {{ class_helper_ident }}(
           child.properties.class,
           opts.lineHighlightClassName, // styles.codeHighlightLine,
         );
@@ -101,7 +101,7 @@ function transformPre(
     }
 
     // Add class.
-    node.properties.class = classNames(
+    node.properties.class = {{ class_helper_ident }}(
       node.properties.class,
       opts.preClassName, // styles.codeHighlightPre,
     );

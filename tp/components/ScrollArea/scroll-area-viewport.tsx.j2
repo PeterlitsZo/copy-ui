@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 import { useLayoutEffect, useRef } from "react";
 import { useStore } from "zustand";
@@ -68,7 +68,7 @@ const ScrollAreaViewport: FC<ScrollAreaViewportProps> = (props) => {
   return (
     <div
       ref={viewportRef}
-      className={classNames(className, styles.scrollAreaViewport)}
+      className={ {{- class_helper_ident -}}(className, styles.scrollAreaViewport)}
       data-variant={variant}
       {...rest}
     >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import { useJss, useMode, useTheme } from "@/components/CopyUiProvider";
@@ -33,7 +33,7 @@ const Table: TableComponent = (props: TableProps) => {
       mode === "light" ? theme.colors.gray["200"] : theme.colors.gray["600"],
   });
 
-  return <table className={classNames(stx, className)} {...rest} />;
+  return <table className={ {{- class_helper_ident -}}(stx, className)} {...rest} />;
 };
 
 Table.displayName = "Table";
