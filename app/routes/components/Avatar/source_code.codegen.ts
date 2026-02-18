@@ -230,7 +230,7 @@ sourceCode['avatar.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Avatar from copy-ui @ 2025-12-05.\n'
+  + '// Avatar from copy-ui (version: 0.1.6, date: 2025-12-05).\n'
   + '\n'
   + 'export { Avatar } from "./avatar";\n'
   ;

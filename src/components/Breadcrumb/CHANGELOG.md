@@ -1,3 +1,3 @@
-- 2025-10-18: Initial version.
-- 2025-10-26: Support `size` prop and custom separator content.
-- 2025-11-24: Support dark mode.
+- 0.1.0 (2025-10-18): Initial version.
+- 0.1.1 (2025-10-26): Support `size` prop and custom separator content.
+- 0.1.2 (2025-11-24): Support dark mode.

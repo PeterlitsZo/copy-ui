@@ -1,0 +1,23 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-19"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Popover"
+
+files:
+  - filename: "index.ts"
+  - filename: "popover-menu-content.module.scss"
+  - filename: "popover-menu-content.tsx"
+  - filename: "popover-menu-item.module.scss"
+  - filename: "popover-menu-item.tsx"
+  - filename: "popover-menu-separator.module.scss"
+  - filename: "popover-menu-separator.tsx"
+  - filename: "popover-menu.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-19"
+    desc: "Initial version."

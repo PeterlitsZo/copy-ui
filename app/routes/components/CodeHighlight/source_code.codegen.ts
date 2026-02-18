@@ -314,7 +314,7 @@ sourceCode['transformer.ts'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// CodeHighlight from copy-ui @ 2025-12-12.\n'
+  + '// CodeHighlight from copy-ui (version: 0.1.7, date: 2025-12-12).\n'
   + '\n'
   + 'export { CodeHighlight } from "./code-highlight";\n'
   ;

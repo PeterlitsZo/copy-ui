@@ -1,0 +1,33 @@
+current:
+  version: "0.1.4"
+  date: "2026-02-14"
+
+deps:
+  - "copy-ui/components/Calendar"
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/Popover"
+  - "copy-ui/components/IbsBase"
+
+files:
+  - filename: "calendar-opener.module.css"
+  - filename: "calendar-opener.tsx"
+  - filename: "date-picker.module.css"
+  - filename: "date-picker.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-25"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-11-28"
+    desc: "Support `date` and `onDateChange` props to make the component controllable."
+  - version: "0.1.2"
+    date: "2025-12-12"
+    desc: "Use `IbsBase` rather than deprecated `InputBase` component."
+  - version: "0.1.3"
+    date: "2026-02-13"
+    desc: "Use `IbsBaseRootProps` instead of `ComponentProps<typeof IbsBase>` for a clearer root/style contract."
+  - version: "0.1.4"
+    date: "2026-02-14"
+    desc: "Replace interactive `span` with `button` and remove `biome-ignore` for a11y lint rules."

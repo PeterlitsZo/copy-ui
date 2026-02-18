@@ -1,0 +1,22 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-25"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Popover"
+  - "copy-ui/utils/resolve-style2"
+
+files:
+  - filename: "combobox-list.module.scss"
+  - filename: "combobox-list.tsx"
+  - filename: "combobox-trigger.module.scss"
+  - filename: "combobox-trigger.tsx"
+  - filename: "combobox.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-25"
+    desc: "Initial version."

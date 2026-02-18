@@ -118,7 +118,7 @@ sourceCode['icon-button.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// IconButton from copy-ui @ 2025-11-23.\n'
+  + '// IconButton from copy-ui (version: 0.1.5, date: 2025-11-23).\n'
   + '\n'
   + 'export type { IconButtonProps } from "./icon-button";\n'
   + 'export { IconButton } from "./icon-button";\n'

@@ -1,0 +1,26 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-23"
+
+deps:
+  - "copy-ui/components/Flex"
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "empty-content.tsx"
+  - filename: "empty-description.module.scss"
+  - filename: "empty-description.tsx"
+  - filename: "empty-header.module.scss"
+  - filename: "empty-header.tsx"
+  - filename: "empty-media.module.scss"
+  - filename: "empty-media.tsx"
+  - filename: "empty-title.module.scss"
+  - filename: "empty-title.tsx"
+  - filename: "empty.module.scss"
+  - filename: "empty.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-23"
+    desc: "Initial version."

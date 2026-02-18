@@ -1,0 +1,29 @@
+current:
+  version: "0.1.3"
+  date: "2025-12-08"
+
+deps:
+  - "copy-ui/components/CodeHighlight"
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/IconButton"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Toast"
+
+files:
+  - filename: "code-block.module.css"
+  - filename: "code-block.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-09"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-12"
+    desc: "Support the `className` prop."
+  - version: "0.1.2"
+    date: "2025-11-03"
+    desc: "Support the `title` prop. Rename the `height` prop to `scrollAreaHeight`, and rename the `maxHeight` prop to `scrollAreaMaxHeight`."
+  - version: "0.1.3"
+    date: "2025-12-08"
+    desc: "Add `withCopyButton` prop. Now support to copy the code to clipboard by clicking the copy button."

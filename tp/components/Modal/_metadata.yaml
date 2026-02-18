@@ -1,0 +1,30 @@
+current:
+  version: "0.1.3"
+  date: "2025-11-23"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "get-modal-root.ts"
+  - filename: "index.ts"
+  - filename: "modal-content.module.scss"
+  - filename: "modal-content.tsx"
+  - filename: "modal-overlay.module.scss"
+  - filename: "modal-overlay.tsx"
+  - filename: "modal-raw.tsx"
+  - filename: "modal.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-13"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-14"
+    desc: "Make `Modal.Content` support `center` and `shadow` props. Update `Modal.Content` styles."
+  - version: "0.1.2"
+    date: "2025-10-27"
+    desc: "Add `Modal.Raw` component."
+  - version: "0.1.3"
+    date: "2025-11-23"
+    desc: "Remove the dependency on `ThemeProvider`. Support `yOffset` prop for `Modal.Content`."

@@ -1,0 +1,39 @@
+current:
+  version: "0.1.7"
+  date: "2025-12-12"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "code-highlight.module.css"
+  - filename: "code-highlight.tsx"
+  - filename: "highlighter.ts"
+  - filename: "index.ts"
+  - filename: "transformer.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-09-12"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-09-26"
+    desc: "Add support for TSX language in CodeHighlight."
+  - version: "0.1.2"
+    date: "2025-10-05"
+    desc: "Add `withLineNumbers` prop to CodeHighlight component."
+  - version: "0.1.3"
+    date: "2025-10-11"
+    desc: "Update line-numbers' style."
+  - version: "0.1.4"
+    date: "2025-10-16"
+    desc: "Refactor code to use hast to build the HTML. That make the `CodeHighlight` component support `lineHighlight` prop, etc."
+  - version: "0.1.5"
+    date: "2025-10-22"
+    desc: "Refactor code. And use JSS for styling."
+  - version: "0.1.6"
+    date: "2025-12-08"
+    desc: "Support the highlighting for CSS language, remove the dependency on `ThemeProvider`, etc."
+  - version: "0.1.7"
+    date: "2025-12-12"
+    desc: "Support the `className` prop to CodeHighlight component."

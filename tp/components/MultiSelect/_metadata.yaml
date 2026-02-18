@@ -1,0 +1,28 @@
+current:
+  version: "0.1.2"
+  date: "2026-02-13"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/IbsBase"
+  - "copy-ui/components/Popover"
+
+files:
+  - filename: "index.ts"
+  - filename: "multi-select-list.module.css"
+  - filename: "multi-select-list.tsx"
+  - filename: "multi-select-trigger.module.css"
+  - filename: "multi-select-trigger.tsx"
+  - filename: "multi-select.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-06"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-12-16"
+    desc: "Use `IbsBase` as the base component, etc."
+  - version: "0.1.2"
+    date: "2026-02-13"
+    desc: "Use `IbsBaseRootProps` in `MultiSelect` and trigger context types instead of `ComponentProps<typeof IbsBase>`."

@@ -87,7 +87,7 @@ sourceCode['switch.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Switch from copy-ui @ 2025-12-13.\n'
+  + '// Switch from copy-ui (version: 0.1.6, date: 2025-12-13).\n'
   + '\n'
   + 'export type { SwitchProps } from "./switch";\n'
   + 'export { Switch } from "./switch";\n'

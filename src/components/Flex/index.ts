@@ -1,3 +1,3 @@
-// Flex from copy-ui @ 2025-10-26.
+// Flex from copy-ui (version: 0.1.3, date: 2025-11-19).
 
 export { Flex } from "./flex";

@@ -440,7 +440,7 @@ sourceCode['popover-store.ts'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Popover from copy-ui @ 2025-12-14.\n'
+  + '// Popover from copy-ui (version: 0.1.12, date: 2025-12-14).\n'
   + '\n'
   + 'export { type Placement, Popover } from "./popover";\n'
   + 'export type { PopoverTriggerRender } from "./popover-trigger";\n'

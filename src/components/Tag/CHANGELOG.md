@@ -1,5 +1,5 @@
-- 2025-09-26: Initial version.
-- 2025-10-08: Add alpha transparency, code formatting improvements.
-- 2025-10-21: Support `withDot` and `size` props.
-- 2025-11-20: Support more variants.
-- 2025-12-13: Update to support the new color scheme.
+- 0.1.0 (2025-09-26): Initial version.
+- 0.1.1 (2025-10-08): Add alpha transparency, code formatting improvements.
+- 0.1.2 (2025-10-21): Support `withDot` and `size` props.
+- 0.1.3 (2025-11-20): Support more variants.
+- 0.1.4 (2025-12-13): Update to support the new color scheme.

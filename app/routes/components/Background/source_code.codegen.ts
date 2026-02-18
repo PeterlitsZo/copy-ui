@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + '// Background from copy-ui @ 2025-11-23.\n'
+  + '// Background from copy-ui (version: 0.1.4, date: 2025-11-23).\n'
   + '\n'
   + 'export { Background } from "./background";\n'
   ;

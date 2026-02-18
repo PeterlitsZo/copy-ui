@@ -41,3 +41,9 @@ When creating a Git commit, the message must follow this format:
    by a colon.
 2. After the colon, write a sentence describing the commit. The sentence must
    start with an uppercase letter and end with a period.
+
+## Unit Test Policy
+
+- Do not add, modify, or delete unit tests unless the user explicitly requests
+  test changes for the current task.
+- If tests are required for validation, prefer running existing tests only.

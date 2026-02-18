@@ -1,4 +1,4 @@
-// TimeSelector from copy-ui @ 2025-11-28.
+// TimeSelector from copy-ui (version: 0.1.5, date: 2025-11-28).
 
 export type {
   ResolvedTimeRange,

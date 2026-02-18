@@ -491,7 +491,7 @@ sourceCode['tree-select-list.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// TreeSelect from copy-ui @ 2025-11-18.\n'
+  + '// TreeSelect from copy-ui (version: 0.1.0, date: 2025-11-18).\n'
   + '\n'
   + 'export { TreeSelect } from "./tree-select";\n'
   ;

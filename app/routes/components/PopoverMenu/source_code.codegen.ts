@@ -269,7 +269,7 @@ sourceCode['popover-menu-content.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// PopoverMenu from copy-ui @ 2025-11-19.\n'
+  + '// PopoverMenu from copy-ui (version: 0.1.0, date: 2025-11-19).\n'
   + '\n'
   + 'export type { Placement } from "./popover-menu";\n'
   + 'export { PopoverMenu } from "./popover-menu";\n'

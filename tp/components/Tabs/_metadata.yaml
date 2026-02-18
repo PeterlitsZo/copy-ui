@@ -1,0 +1,38 @@
+current:
+  version: "0.1.5"
+  date: "2025-12-13"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/utils/resolve-style2"
+
+files:
+  - filename: "index.ts"
+  - filename: "tab-context.ts"
+  - filename: "tabs-tab-default.module.css"
+  - filename: "tabs-tab-default.tsx"
+  - filename: "tabs-tab-enclosed.module.css"
+  - filename: "tabs-tab-enclosed.tsx"
+  - filename: "tabs-tab.tsx"
+  - filename: "tabs.module.css"
+  - filename: "tabs.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-05"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-16"
+    desc: "Adjust its styles - improve spacing and hover states."
+  - version: "0.1.2"
+    date: "2025-10-31"
+    desc: "Support the `enclosed` variant."
+  - version: "0.1.3"
+    date: "2025-11-15"
+    desc: "Adjust spacing between tabs for better visual balance. Remove the dependency on deprecated `ThemeProvider` and use `CopyUiProvider` instead."
+  - version: "0.1.4"
+    date: "2025-12-07"
+    desc: "Support the `size` prop."
+  - version: "0.1.5"
+    date: "2025-12-13"
+    desc: "Update to support the new color scheme."

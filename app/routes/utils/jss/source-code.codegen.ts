@@ -3,7 +3,7 @@
 
 const sourceCode = ''
   + '/**\n'
-  + ' * jss from copy-ui @ 2025-11-23.\n'
+  + ' * jss from copy-ui (version: 0.1.0, date: 2025-11-23).\n'
   + ' *\n'
   + ' * A simple CSS-in-JS utility function.\n'
   + ' *\n'

@@ -99,7 +99,7 @@ sourceCode['flex.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Flex from copy-ui @ 2025-10-26.\n'
+  + '// Flex from copy-ui (version: 0.1.3, date: 2025-11-19).\n'
   + '\n'
   + 'export { Flex } from "./flex";\n'
   ;

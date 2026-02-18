@@ -214,7 +214,7 @@ sourceCode['empty.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Empty from copy-ui @ 2025-11-23.\n'
+  + '// Empty from copy-ui (version: 0.1.0, date: 2025-11-23).\n'
   + '\n'
   + 'export { Empty } from "./empty";\n'
   ;

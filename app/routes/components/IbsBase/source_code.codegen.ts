@@ -271,7 +271,7 @@ sourceCode['ibs-base.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// IbsBase from copy-ui @ 2026-02-13.\n'
+  + '// IbsBase from copy-ui (version: 0.1.3, date: 2026-02-13).\n'
   + '\n'
   + 'export { IbsBase } from "./ibs-base";\n'
   + 'export type { IbsBaseRootProps, IbsBaseStyleProps } from "./ibs-base";\n'

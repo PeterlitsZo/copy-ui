@@ -1,0 +1,32 @@
+current:
+  version: "0.1.5"
+  date: "2025-11-23"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/utils/resolve-style2"
+
+files:
+  - filename: "icon-button.module.scss"
+  - filename: "icon-button.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-09-09"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-09-19"
+    desc: "Support the prop `size` (`sm`, `md` and `lg`)."
+  - version: "0.1.2"
+    date: "2025-09-26"
+    desc: "Use theme tokens for styling."
+  - version: "0.1.3"
+    date: "2025-10-11"
+    desc: "Code formatting improvements."
+  - version: "0.1.4"
+    date: "2025-10-30"
+    desc: "Add the default icon size for SVG children."
+  - version: "0.1.5"
+    date: "2025-11-23"
+    desc: "Update the CSS variables names with camelCase."

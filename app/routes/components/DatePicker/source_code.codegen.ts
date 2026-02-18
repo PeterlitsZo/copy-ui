@@ -422,7 +422,7 @@ sourceCode['calendar-opener.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// DatePicker from copy-ui @ 2026-02-14.\n'
+  + '// DatePicker from copy-ui (version: 0.1.4, date: 2026-02-14).\n'
   + '\n'
   + 'export { DatePicker } from "./date-picker";\n'
   ;

@@ -1,0 +1,19 @@
+current:
+  version: "0.1.1"
+  date: "2025-11-26"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "checkbox.module.scss"
+  - filename: "checkbox.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-25"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-11-26"
+    desc: "Support the dark mode."

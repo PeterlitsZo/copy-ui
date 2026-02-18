@@ -1,0 +1,31 @@
+current:
+  version: "0.1.2"
+  date: "2025-11-25"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "index.ts"
+  - filename: "table-body.tsx"
+  - filename: "table-cell.module.scss"
+  - filename: "table-cell.tsx"
+  - filename: "table-footer.tsx"
+  - filename: "table-head.module.scss"
+  - filename: "table-head.tsx"
+  - filename: "table-header.module.scss"
+  - filename: "table-header.tsx"
+  - filename: "table-row.module.scss"
+  - filename: "table-row.tsx"
+  - filename: "table.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-15"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-11-23"
+    desc: "Support the dark mode."
+  - version: "0.1.2"
+    date: "2025-11-25"
+    desc: "Update the `padding-block` style for `Table.Cell`."

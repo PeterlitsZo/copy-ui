@@ -1,0 +1,24 @@
+current:
+  version: "0.1.3"
+  date: "2025-11-23"
+
+deps: []
+
+files:
+  - filename: "button-group.module.scss"
+  - filename: "button-group.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-09-09"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-09-30"
+    desc: "Support `className` prop for custom styling."
+  - version: "0.1.2"
+    date: "2025-10-10"
+    desc: "Code formatting improvement."
+  - version: "0.1.3"
+    date: "2025-11-23"
+    desc: "Update the CSS variables names with camelCase."

@@ -1,6 +1,6 @@
-- 2025-09-09: Initial version.
-- 2025-09-19: Support the prop `size` (`sm`, `md` and `lg`).
-- 2025-09-26: Use theme tokens for styling.
-- 2025-10-11: Code formatting improvements.
-- 2025-10-30: Add the default icon size for SVG children.
-- 2025-11-23: Update the CSS variables names with camelCase.
+- 0.1.0 (2025-09-09): Initial version.
+- 0.1.1 (2025-09-19): Support the prop `size` (`sm`, `md` and `lg`).
+- 0.1.2 (2025-09-26): Use theme tokens for styling.
+- 0.1.3 (2025-10-11): Code formatting improvements.
+- 0.1.4 (2025-10-30): Add the default icon size for SVG children.
+- 0.1.5 (2025-11-23): Update the CSS variables names with camelCase.

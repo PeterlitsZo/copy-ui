@@ -1,0 +1,21 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-18"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Popover"
+
+files:
+  - filename: "index.ts"
+  - filename: "tree-select-list.module.scss"
+  - filename: "tree-select-list.tsx"
+  - filename: "tree-select-trigger.module.scss"
+  - filename: "tree-select-trigger.tsx"
+  - filename: "tree-select.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-18"
+    desc: "Initial version."

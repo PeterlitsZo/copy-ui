@@ -23,7 +23,7 @@ sourceCode['spinner.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Spinner from copy-ui @ 2025-12-07.\n'
+  + '// Spinner from copy-ui (version: 0.1.2, date: 2025-12-07).\n'
   + '\n'
   + 'export { Spinner } from "./spinner";\n'
   ;

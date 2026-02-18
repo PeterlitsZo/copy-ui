@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.ts'] = ''
-  + '// Input from copy-ui @ 2026-02-13.\n'
+  + '// Input from copy-ui (version: 0.1.12, date: 2026-02-13).\n'
   + '\n'
   + 'export type { InputProps } from "./input";\n'
   + 'export { Input } from "./input";\n'

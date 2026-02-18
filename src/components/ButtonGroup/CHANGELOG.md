@@ -1,4 +1,4 @@
-- 2025-09-09: Initial version.
-- 2025-09-30: Support `className` prop for custom styling.
-- 2025-10-10: Code formatting improvement.
-- 2025-11-23: Update the CSS variables names with camelCase.
+- 0.1.0 (2025-09-09): Initial version.
+- 0.1.1 (2025-09-30): Support `className` prop for custom styling.
+- 0.1.2 (2025-10-10): Code formatting improvement.
+- 0.1.3 (2025-11-23): Update the CSS variables names with camelCase.

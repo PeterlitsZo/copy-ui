@@ -1,0 +1,17 @@
+current:
+  version: "0.1.0"
+  date: "1970-01-01"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Tag"
+
+files:
+  - filename: "components.codegen.ts"
+  - filename: "index.ts"
+  - filename: "navbar.module.scss"
+  - filename: "navbar.tsx"
+  - filename: "utils.codegen.ts"
+
+changelog: []

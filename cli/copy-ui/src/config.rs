@@ -63,6 +63,9 @@ pub struct GeneratorConfig {
 
     #[serde(default, rename = "import")]
     pub import: GeneratorImportConfig,
+
+    #[serde(default, rename = "metadata")]
+    pub metadata: GeneratorMetadataConfig,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -89,6 +92,12 @@ fn default_components_import_base() -> String {
 
 fn default_utils_import_base() -> String {
     "@/utils".to_string()
+}
+
+#[derive(Debug, Clone, Deserialize, Default)]
+pub struct GeneratorMetadataConfig {
+    #[serde(default, rename = "emit-changelog", alias = "emit_changelog")]
+    pub emit_changelog: bool,
 }
 
 #[derive(Debug, Clone, Deserialize)]

@@ -1,0 +1,41 @@
+current:
+  version: "0.1.6"
+  date: "2026-02-14"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/FileInput"
+  - "copy-ui/components/Input"
+  - "copy-ui/components/Select"
+  - "copy-ui/components/Textarea"
+
+files:
+  - filename: "field-components.module.css"
+  - filename: "field-components.tsx"
+  - filename: "field-context.ts"
+  - filename: "field.module.css"
+  - filename: "field.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-10"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-12"
+    desc: "Add `Field.Select` component."
+  - version: "0.1.2"
+    date: "2025-10-27"
+    desc: "Add `Field.TextArea` component."
+  - version: "0.1.3"
+    date: "2025-11-08"
+    desc: "Refactor code structure."
+  - version: "0.1.4"
+    date: "2025-11-21"
+    desc: "Add `Field.FileInput` component. And remove useless style `width: 100%`."
+  - version: "0.1.5"
+    date: "2025-12-17"
+    desc: "Export the `useOptionalFieldContext` hook."
+  - version: "0.1.6"
+    date: "2026-02-14"
+    desc: "Use a semantic `fieldset` wrapper and remove `biome-ignore`."

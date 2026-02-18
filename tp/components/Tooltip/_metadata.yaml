@@ -1,0 +1,32 @@
+current:
+  version: "0.1.5"
+  date: "2025-12-14"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/Popover"
+
+files:
+  - filename: "index.ts"
+  - filename: "tooltip.module.css"
+  - filename: "tooltip.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-09-25"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-09-30"
+    desc: "Support `placement` prop for tooltip positioning."
+  - version: "0.1.2"
+    date: "2025-10-10"
+    desc: "Move styles into `components` CSS layer. Code formatting improvement."
+  - version: "0.1.3"
+    date: "2025-10-31"
+    desc: "Code formatting improvement."
+  - version: "0.1.4"
+    date: "2025-11-27"
+    desc: "Support the `anchor` prop to make the tooltip follow the mouse cursor."
+  - version: "0.1.5"
+    date: "2025-12-14"
+    desc: "Add `openDelay` prop to `Tooltip` to control the delay time before the tooltip is opened."

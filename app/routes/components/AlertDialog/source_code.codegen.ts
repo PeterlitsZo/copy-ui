@@ -164,7 +164,7 @@ sourceCode['alert-dialog-cancel.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// AlertDialog from copy-ui @ 2025-11-21.\n'
+  + '// AlertDialog from copy-ui (version: 0.1.0, date: 2025-11-21).\n'
   + '\n'
   + 'export type { AlertDialogProps } from "./alert-dialog";\n'
   + 'export { AlertDialog } from "./alert-dialog";\n'

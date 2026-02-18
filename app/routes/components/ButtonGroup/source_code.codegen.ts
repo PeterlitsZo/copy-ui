@@ -59,7 +59,7 @@ sourceCode['button-group.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// ButtonGroup from copy-ui @ 2025-11-23.\n'
+  + '// ButtonGroup from copy-ui (version: 0.1.3, date: 2025-11-23).\n'
   + '\n'
   + 'export type { ButtonGroupProps } from "./button-group";\n'
   + 'export { ButtonGroup } from "./button-group";\n'

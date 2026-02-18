@@ -102,7 +102,7 @@ sourceCode['sort-indicator.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// SortIndicator from copy-ui @ 2025-12-17.\n'
+  + '// SortIndicator from copy-ui (version: 0.1.5, date: 2025-12-17).\n'
   + '\n'
   + 'export type {\n'
   + '  SortIndicatorDirection,\n'

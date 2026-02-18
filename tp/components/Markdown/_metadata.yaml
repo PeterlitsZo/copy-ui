@@ -1,0 +1,22 @@
+current:
+  version: "0.1.2"
+  date: "2025-11-16"
+
+deps:
+  - "copy-ui/components/Typography"
+
+files:
+  - filename: "index.ts"
+  - filename: "markdown.tsx"
+  - filename: "rehype-codeblock.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-10"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-24"
+    desc: "Support render code blocks (using internal rehype plugins). Wrap its children in `Typography.Root`."
+  - version: "0.1.2"
+    date: "2025-11-16"
+    desc: "Support render `strong`, `em`, `ol` elements by `Typography`'s sub-components. Use `Typography` instead of `Typography.Root` as the root component."

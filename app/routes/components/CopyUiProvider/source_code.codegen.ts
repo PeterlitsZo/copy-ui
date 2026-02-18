@@ -608,7 +608,7 @@ sourceCode['use-jss.ts'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// CopyUiProvider from copy-ui @ 2026-02-16.\n'
+  + '// CopyUiProvider from copy-ui (version: 0.1.9, date: 2025-11-28).\n'
   + '\n'
   + 'export { CopyUiProvider } from "./copy-ui-provider";\n'
   + 'export type { ColorName, ColorNo, Theme } from "./theme";\n'

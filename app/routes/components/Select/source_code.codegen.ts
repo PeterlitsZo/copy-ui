@@ -359,7 +359,7 @@ sourceCode['select-list.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Select from copy-ui @ 2025-11-28.\n'
+  + '// Select from copy-ui (version: 0.1.13, date: 2025-11-28).\n'
   + '\n'
   + 'export { Select } from "./select";\n'
   ;

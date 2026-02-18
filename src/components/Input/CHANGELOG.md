@@ -1,21 +1,24 @@
-- 2025-09-11: Initial version.
-- 2025-09-13: Enhance Input component with more styling variables (
+- 0.1.0 (2025-09-11): Initial version.
+- 0.1.1 (2025-09-13): Enhance Input component with more styling variables (
   `--input-font-size`, `--input-line-height`, `--input-caret-color`,
   `--input-placeholder-color`).
-- 2025-09-22: Support the `size` props (`sm`, `md`, `lg`) for Input component to
-  adjust height and font size. Etc.
-- 2025-09-26: Use theme tokens for Input component styles.
-- 2025-09-30: Use `InputBase` as a wrapper for the Input component.
-- 2025-10-05: Support the `leftSection` and `rightSection` props for Input
-  component to add elements inside the input field on the left or right side.
-  Adjust padding based on presence of these sections.
-- 2025-10-20: Support `disabled` prop.
-- 2025-10-26: Support `variant` prop. Update styles to make it look better.
-- 2025-11-19: Remove the dependency on `ThemeProvider`.
-- 2025-11-20: Support the `width` prop and let `className` and `style` props
-  effect the `InputBase` component rather than the internal `input` element.
-- 2025-12-07: Use `IbsBase` component instead of `InputBase` component.
-- 2025-12-18: Use `useOptionalFieldContext` hook to get the field context for
-  the `id` prop's default value. Support `status` prop to set the error state.
-- 2026-02-13: Use `IbsBaseStyleProps` in `InputProps` to avoid DOM event type
-  pollution from `IbsBase` root props.
+- 0.1.2 (2025-09-22): Support the `size` props (`sm`, `md`, `lg`) for Input
+  component to adjust height and font size. Etc.
+- 0.1.3 (2025-09-26): Use theme tokens for Input component styles.
+- 0.1.4 (2025-09-30): Use `InputBase` as a wrapper for the Input component.
+- 0.1.5 (2025-10-05): Support the `leftSection` and `rightSection` props for
+  Input component to add elements inside the input field on the left or right
+  side. Adjust padding based on presence of these sections.
+- 0.1.6 (2025-10-20): Support `disabled` prop.
+- 0.1.7 (2025-10-26): Support `variant` prop. Update styles to make it look
+  better.
+- 0.1.8 (2025-11-19): Remove the dependency on `ThemeProvider`.
+- 0.1.9 (2025-11-20): Support the `width` prop and let `className` and `style`
+  props effect the `InputBase` component rather than the internal `input`
+  element.
+- 0.1.10 (2025-12-07): Use `IbsBase` component instead of `InputBase` component.
+- 0.1.11 (2025-12-18): Use `useOptionalFieldContext` hook to get the field
+  context for the `id` prop's default value. Support `status` prop to set the
+  error state.
+- 0.1.12 (2026-02-13): Use `IbsBaseStyleProps` in `InputProps` to avoid DOM
+  event type pollution from `IbsBase` root props.

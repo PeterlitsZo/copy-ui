@@ -457,7 +457,7 @@ sourceCode['time-selector-portal.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// TimeSelector from copy-ui @ 2025-11-28.\n'
+  + '// TimeSelector from copy-ui (version: 0.1.5, date: 2025-11-28).\n'
   + '\n'
   + 'export type {\n'
   + '  ResolvedTimeRange,\n'

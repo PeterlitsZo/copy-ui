@@ -29,7 +29,7 @@ sourceCode['textarea.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Textarea from copy-ui @ 2025-11-28.\n'
+  + '// Textarea from copy-ui (version: 0.1.1, date: 2025-11-28).\n'
   + '\n'
   + 'export { Textarea } from "./textarea";\n'
   ;

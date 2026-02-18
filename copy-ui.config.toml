@@ -6,6 +6,7 @@ utils = "src/utils"
 class_helper = "classnames"
 import.components = "@/components"
 import.utils = "@/utils"
+metadata.emit-changelog = true
 
 [components.CopyUiProvider]
 with-mdx-provider = true

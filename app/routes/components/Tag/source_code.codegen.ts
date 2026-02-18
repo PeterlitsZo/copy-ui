@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + '// Tag from copy-ui @ 2025-12-13.\n'
+  + '// Tag from copy-ui (version: 0.1.4, date: 2025-12-13).\n'
   + '\n'
   + 'export { Tag } from "./tag";\n'
   ;

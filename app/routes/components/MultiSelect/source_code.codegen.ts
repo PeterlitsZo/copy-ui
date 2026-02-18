@@ -351,7 +351,7 @@ sourceCode['multi-select.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// MultiSelect from copy-ui @ 2026-02-13.\n'
+  + '// MultiSelect from copy-ui (version: 0.1.2, date: 2026-02-13).\n'
   + '\n'
   + 'export { MultiSelect } from "./multi-select";\n'
   ;

@@ -1,4 +1,4 @@
-// IbsBase from copy-ui @ 2026-02-13.
+// IbsBase from copy-ui (version: 0.1.3, date: 2026-02-13).
 
 export { IbsBase } from "./ibs-base";
 export type { IbsBaseRootProps, IbsBaseStyleProps } from "./ibs-base";

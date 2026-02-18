@@ -1,0 +1,16 @@
+current:
+  version: "0.1.0"
+  date: "2025-12-07"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "index.tsx"
+  - filename: "resizable.module.css"
+  - filename: "resizable.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-12-07"
+    desc: "Initial version."

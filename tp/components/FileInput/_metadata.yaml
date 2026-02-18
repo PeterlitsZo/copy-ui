@@ -1,0 +1,23 @@
+current:
+  version: "0.1.2"
+  date: "2026-02-13"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/IbsBase"
+
+files:
+  - filename: "file-input.module.css"
+  - filename: "file-input.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-21"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-12-08"
+    desc: "Use `IbsBase` rather than the deprecated `InputBase` component."
+  - version: "0.1.2"
+    date: "2026-02-13"
+    desc: "Use `IbsBaseStyleProps` in `FileInputProps` and keep custom `onChange` typing to avoid root event type pollution."

@@ -312,7 +312,7 @@ sourceCode['graph.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Graph from copy-ui @ 2025-12-13.\n'
+  + '// Graph from copy-ui (version: 0.1.3, date: 2025-12-13).\n'
   + '\n'
   + 'export { Graph } from "./graph";\n'
   ;

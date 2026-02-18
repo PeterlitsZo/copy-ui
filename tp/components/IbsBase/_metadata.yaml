@@ -1,0 +1,33 @@
+current:
+  version: "0.1.3"
+  date: "2026-02-13"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/utils/resolve-style2"
+
+files:
+  - filename: "ibs-base-left-section.module.scss"
+  - filename: "ibs-base-left-section.tsx"
+  - filename: "ibs-base-right-section.module.scss"
+  - filename: "ibs-base-right-section.tsx"
+  - filename: "ibs-base-wrapper.module.scss"
+  - filename: "ibs-base-wrapper.tsx"
+  - filename: "ibs-base.module.scss"
+  - filename: "ibs-base.tsx"
+  - filename: "index.ts"
+  - filename: "style.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-12-07"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-12-16"
+    desc: "Use `min-height` instead of `height` to let components built on top of it to have a flexible height."
+  - version: "0.1.2"
+    date: "2026-02-12"
+    desc: "Update the filled variant's background color."
+  - version: "0.1.3"
+    date: "2026-02-13"
+    desc: "Export `IbsBaseStyleProps` and `IbsBaseRootProps` to provide a stable style/root contract for components built on top of `IbsBase`."

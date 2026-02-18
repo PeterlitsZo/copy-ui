@@ -1,3 +1,3 @@
-- 2025-10-10: Initial version.
-- 2025-11-05: Support the `size` prop.
-- 2025-12-07: Support the `icon` prop.
+- 0.1.0 (2025-10-10): Initial version.
+- 0.1.1 (2025-11-05): Support the `size` prop.
+- 0.1.2 (2025-12-07): Support the `icon` prop.

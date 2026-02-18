@@ -207,7 +207,7 @@ sourceCode['card-content-in-scroll-area.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Card from copy-ui @ 2025-12-07.\n'
+  + '// Card from copy-ui (version: 0.1.3, date: 2025-12-07).\n'
   + '\n'
   + 'export { Card } from "./card";\n'
   ;

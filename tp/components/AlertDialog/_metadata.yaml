@@ -1,0 +1,24 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-21"
+
+deps:
+  - "copy-ui/components/Button"
+  - "copy-ui/components/Card"
+  - "copy-ui/components/Modal"
+
+files:
+  - filename: "alert-dialog-action.tsx"
+  - filename: "alert-dialog-cancel.tsx"
+  - filename: "alert-dialog-content.tsx"
+  - filename: "alert-dialog-footer.module.scss"
+  - filename: "alert-dialog-footer.tsx"
+  - filename: "alert-dialog-header.tsx"
+  - filename: "alert-dialog.module.scss"
+  - filename: "alert-dialog.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-11-21"
+    desc: "Initial version."

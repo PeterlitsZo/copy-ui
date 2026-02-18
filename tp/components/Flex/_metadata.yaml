@@ -1,0 +1,24 @@
+current:
+  version: "0.1.3"
+  date: "2025-11-19"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "flex.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-02"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-04"
+    desc: "Support custom `style` prop and spread additional props. Extend from `ComponentProps<\"div\">` for better TypeScript support."
+  - version: "0.1.2"
+    date: "2025-10-26"
+    desc: "Refactor to use `useJss` for styling."
+  - version: "0.1.3"
+    date: "2025-11-19"
+    desc: "Make `Flex` support `direction`, `items` and `justify` prop as alias of `dir`, `alignItems` and `justifyContent`. Support `start` and `end` values for `justify` prop. Support append class by `className` prop."

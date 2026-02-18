@@ -32,7 +32,7 @@ sourceCode['checkbox.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Checkbox from copy-ui @ 2025-11-26.\n'
+  + '// Checkbox from copy-ui (version: 0.1.1, date: 2025-11-26).\n'
   + '\n'
   + 'export { Checkbox } from "./checkbox";\n'
   ;

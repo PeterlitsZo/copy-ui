@@ -1,7 +1,7 @@
 # The `copy-ui` CLI
 
-The `copy-ui` CLI is a tool that helps you add Copy-UI components to your
-project.
+The `copy-ui` CLI is a tool that helps you add Copy-UI components and utils to
+your project.
 
 ## Installation
 
@@ -29,6 +29,9 @@ class-helper = "classnames"
 components = "@/components"
 utils = "@/utils"
 
+[generator.metadata]
+emit-changelog = false
+
 [components.CopyUiProvider]
 with-mdx-provider = true
 with-toast-provider = true
@@ -55,11 +58,16 @@ copy-ui codegen --config path/to/copy-ui.config.toml
 
 The `--config` default is `copy-ui.config.toml`.
 
-The `generator.class-helper` option accepts only `classnames` and `clsx`.
+## Generator options
+
+### `generator.class-helper`
+
+Accepts only `classnames` and `clsx`.
 If omitted, `classnames` is used by default.
 
-The optional `generator.import` section controls import path bases used by
-templates:
+### `generator.import`
+
+Controls import path bases used by templates:
 
 - `generator.import.components` (default: `@/components`)
 - `generator.import.utils` (default: `@/utils`)
@@ -72,18 +80,64 @@ components = "~components"
 utils = "~utils"
 ```
 
+### `generator.metadata.emit-changelog`
+
+Boolean switch for metadata-driven `CHANGELOG.md` generation:
+
+- `false` (default): do not generate `CHANGELOG.md`
+- `true`: generate `CHANGELOG.md` from metadata
+
+CLI flag can override config value:
+
+```bash
+copy-ui codegen --emit-changelog true
+```
+
+## Template metadata (`_metadata.yaml`)
+
+Each template entry uses `_metadata.yaml`:
+
+- `tp/components/<Component>/_metadata.yaml`
+- `tp/utils/<Utility>/_metadata.yaml`
+
+Example:
+
+```yaml
+current:
+  version: 0.1.3
+  date: 2026-02-18
+
+deps:
+  - copy-ui/components/CopyUiProvider
+  - copy-ui/utils/resolve-style2
+
+files:
+  - filename: index.ts
+  - filename: mdx-provider.tsx
+    when: features["with-mdx-provider"]
+
+changelog:
+  - version: 0.1.3
+    date: 2026-02-18
+    desc: Replace stylesheet module from scss to css.
+```
+
+Notes:
+
+- `deps` uses string paths:
+  - `copy-ui/components/<Name>`
+  - `copy-ui/utils/<name>`
+- `files` replaces legacy `index.j2` manifest.
+- `files[].when` supports expression conditions (for example
+  `features["with-mdx-provider"]`).
+- `changelog` entries use semantic versions (`0.1.x`) with fields
+  `version`/`date`/`desc`.
+- Generated `CHANGELOG.md` wraps content automatically at 80 columns.
+
 ## Templates
 
 Templates are stored under `tp/components/<Component>/` and
 `tp/utils/<Utility>/`, and use Jinja2 syntax (rendered with `minijinja`).
 
-- `index.j2` renders to a list of file names (one per line).
-- `<filename>.j2` renders the file content for that output file.
-
-Example `index.j2` snippet:
-
-```jinja
-{% if features["with-mdx-provider"] %}
-mdx-provider.tsx
-{% endif %}
-```
+Each output file template is `<filename>.j2` and is selected by
+`_metadata.yaml -> files`.

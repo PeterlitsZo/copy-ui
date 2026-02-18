@@ -194,7 +194,7 @@ sourceCode['file-input.module.css'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// FileInput from copy-ui @ 2026-02-13.\n'
+  + '// FileInput from copy-ui (version: 0.1.2, date: 2026-02-13).\n'
   + '\n'
   + 'export type { FileInputProps } from "./file-input";\n'
   + 'export { FileInput } from "./file-input";\n'

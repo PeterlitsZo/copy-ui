@@ -121,7 +121,7 @@ sourceCode['use-toast.ts'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Toast from copy-ui @ 2025-12-13.\n'
+  + '// Toast from copy-ui (version: 0.1.6, date: 2025-12-13).\n'
   + '\n'
   + 'export { Toast } from "./toast";\n'
   + 'export { useToast } from "./use-toast";\n'

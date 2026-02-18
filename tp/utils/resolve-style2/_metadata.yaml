@@ -1,0 +1,10 @@
+current:
+  version: "0.1.0"
+  date: "2025-11-23"
+
+deps: []
+
+files:
+  - filename: "index.ts"
+
+changelog: []

@@ -401,7 +401,7 @@ sourceCode['tabs-tab-default.module.css'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Tabs from copy-ui @ 2025-12-13.\n'
+  + '// Tabs from copy-ui (version: 0.1.5, date: 2025-12-13).\n'
   + '\n'
   + 'export { Tabs } from "./tabs";\n'
   ;

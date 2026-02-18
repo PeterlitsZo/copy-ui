@@ -1,0 +1,19 @@
+current:
+  version: "0.1.1"
+  date: "2025-11-28"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "index.ts"
+  - filename: "textarea.module.scss"
+  - filename: "textarea.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-27"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-11-28"
+    desc: "Update its styles to match the style of `Input` component."

@@ -1,0 +1,26 @@
+current:
+  version: "0.1.2"
+  date: "2025-11-24"
+
+deps:
+  - "copy-ui/components/CopyUiProvider"
+
+files:
+  - filename: "breadcrumb-item.module.scss"
+  - filename: "breadcrumb-item.tsx"
+  - filename: "breadcrumb-sep.module.scss"
+  - filename: "breadcrumb-sep.tsx"
+  - filename: "breadcrumb.module.scss"
+  - filename: "breadcrumb.tsx"
+  - filename: "index.ts"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-10-18"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-10-26"
+    desc: "Support `size` prop and custom separator content."
+  - version: "0.1.2"
+    date: "2025-11-24"
+    desc: "Support dark mode."

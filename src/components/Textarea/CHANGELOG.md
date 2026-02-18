@@ -1,2 +1,2 @@
-- 2025-10-27: Initial version.
-- 2025-11-28: Update its styles to match the style of `Input` component.
+- 0.1.0 (2025-10-27): Initial version.
+- 0.1.1 (2025-11-28): Update its styles to match the style of `Input` component.

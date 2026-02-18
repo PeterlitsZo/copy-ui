@@ -278,7 +278,7 @@ sourceCode['field-components.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Field from copy-ui @ 2026-02-14.\n'
+  + '// Field from copy-ui (version: 0.1.6, date: 2026-02-14).\n'
   + '\n'
   + 'export { Field } from "./field";\n'
   + 'export { useOptionalFieldContext } from "./field-context";\n'

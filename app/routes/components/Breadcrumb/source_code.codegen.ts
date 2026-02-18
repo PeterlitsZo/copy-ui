@@ -135,7 +135,7 @@ sourceCode['breadcrumb-sep.module.scss'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Breadcrumb from copy-ui @ 2025-11-24.\n'
+  + '// Breadcrumb from copy-ui (version: 0.1.2, date: 2025-11-24).\n'
   + '\n'
   + 'export { Breadcrumb } from "./breadcrumb";\n'
   ;

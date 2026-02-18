@@ -88,7 +88,7 @@ sourceCode['tooltip.module.css'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Tooltip from copy-ui @ 2025-12-14.\n'
+  + '// Tooltip from copy-ui (version: 0.1.5, date: 2025-12-14).\n'
   + '\n'
   + 'export { Tooltip } from "./tooltip";\n'
   ;

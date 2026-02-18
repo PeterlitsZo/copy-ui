@@ -149,7 +149,7 @@ sourceCode['code-block.tsx'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// CodeBlock from copy-ui @ 2025-12-08.\n'
+  + '// CodeBlock from copy-ui (version: 0.1.3, date: 2025-12-08).\n'
   + '\n'
   + 'export { CodeBlock } from "./code-block";\n'
   ;

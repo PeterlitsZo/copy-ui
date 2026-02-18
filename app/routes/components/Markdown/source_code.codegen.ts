@@ -158,7 +158,7 @@ sourceCode['rehype-codeblock.ts'] = ''
   ;
 
 sourceCode['index.ts'] = ''
-  + '// Markdown from copy-ui @ 2025-11-16.\n'
+  + '// Markdown from copy-ui (version: 0.1.2, date: 2025-11-16).\n'
   + '\n'
   + 'export { Markdown } from "./markdown";\n'
   ;

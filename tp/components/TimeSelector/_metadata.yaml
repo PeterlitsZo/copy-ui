@@ -1,0 +1,39 @@
+current:
+  version: "0.1.5"
+  date: "2025-11-28"
+
+deps:
+  - "copy-ui/components/Button"
+  - "copy-ui/components/CopyUiProvider"
+  - "copy-ui/components/Field"
+  - "copy-ui/components/ScrollArea"
+  - "copy-ui/components/Select"
+  - "copy-ui/components/Popover"
+
+files:
+  - filename: "index.ts"
+  - filename: "time-range.ts"
+  - filename: "time-selector-portal.module.scss"
+  - filename: "time-selector-portal.tsx"
+  - filename: "time-selector.module.scss"
+  - filename: "time-selector.tsx"
+
+changelog:
+  - version: "0.1.0"
+    date: "2025-09-11"
+    desc: "Initial version."
+  - version: "0.1.1"
+    date: "2025-09-25"
+    desc: "Improved TimeSelector styles for better appearance."
+  - version: "0.1.2"
+    date: "2025-09-25"
+    desc: "Use `onToggle` instead of `onClick` in `Popover.Trigger`'s render prop."
+  - version: "0.1.3"
+    date: "2025-10-04"
+    desc: "Replace preset list with ScrollArea component. Add proper form labels with `htmlFor` attributes. Extract preset data to array. Update button styles and cancel button variant. Code formatting improvements."
+  - version: "0.1.4"
+    date: "2025-11-06"
+    desc: "Refactor code and use `Field` component for input fields. Adjust input widths and spacing, etc."
+  - version: "0.1.5"
+    date: "2025-11-28"
+    desc: "Support parsing the \"from\" and \"to\" fields to the AST. Support the timezone selection, support the `safeResolveTimeRange` function -- help user to resolve the time range to the real time range."

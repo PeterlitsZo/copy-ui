@@ -4,7 +4,7 @@
 export const sourceCode: Record<string, string> = {};
 
 sourceCode['index.tsx'] = ''
-  + '// Resizable from copy-ui @ 2025-12-07.\n'
+  + '// Resizable from copy-ui (version: 0.1.0, date: 2025-12-07).\n'
   + '\n'
   + 'export { Resizable } from "./resizable";\n'
   ;
