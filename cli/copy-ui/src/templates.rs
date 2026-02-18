@@ -1,5 +1,6 @@
 use include_dir::{include_dir, Dir};
 use serde::Deserialize;
+use std::collections::HashMap;
 use std::path::Path;
 
 static TP_DIR: Dir<'_> = include_dir!("tp");
@@ -10,13 +11,55 @@ pub struct EntryMetadata {
     pub current: CurrentRelease,
 
     #[serde(default)]
-    pub deps: Vec<String>,
+    pub deps: Vec<DependencyRule>,
 
     #[serde(default)]
     pub files: Vec<FileRule>,
 
     #[serde(default)]
     pub changelog: Vec<ChangelogEntry>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(untagged)]
+pub enum DependencyRule {
+    Path(String),
+    Rule {
+        dep: String,
+        #[serde(default)]
+        features: HashMap<String, bool>,
+        #[serde(default)]
+        when: Option<String>,
+    },
+}
+
+impl DependencyRule {
+    pub fn dep(&self) -> &str {
+        match self {
+            DependencyRule::Path(path) => path,
+            DependencyRule::Rule { dep, .. } => dep,
+        }
+    }
+
+    pub fn required_features(&self) -> Option<&HashMap<String, bool>> {
+        match self {
+            DependencyRule::Path(_) => None,
+            DependencyRule::Rule { features, .. } => {
+                if features.is_empty() {
+                    None
+                } else {
+                    Some(features)
+                }
+            }
+        }
+    }
+
+    pub fn when(&self) -> Option<&str> {
+        match self {
+            DependencyRule::Path(_) => None,
+            DependencyRule::Rule { when, .. } => when.as_deref(),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize)]

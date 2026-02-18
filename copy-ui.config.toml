@@ -9,11 +9,11 @@ import.utils = "@/utils"
 metadata.emit-changelog = true
 
 [components.CopyUiProvider]
-with-mdx-provider = true
-with-toast-provider = true
+features.with-mdx-provider = true
+features.with-toast-provider = true
 
 [components.Typography]
-with-typography-codeblock = true
+features.with-typography-codeblock = true
 
 [components.Alert]
 

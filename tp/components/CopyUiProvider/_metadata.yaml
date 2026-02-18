@@ -5,7 +5,10 @@ current:
 deps:
   - "copy-ui/components/Toast"
   - "copy-ui/utils/jss"
-  - "copy-ui/components/Typography"
+  - dep: "copy-ui/components/Typography"
+    when: 'features["with-mdx-provider"]'
+    features:
+      with-typography-codeblock: true
 
 files:
   - filename: "click-outside-event-listener.ts"

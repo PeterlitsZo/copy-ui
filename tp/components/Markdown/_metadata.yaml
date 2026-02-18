@@ -3,7 +3,9 @@ current:
   date: "2025-11-16"
 
 deps:
-  - "copy-ui/components/Typography"
+  - dep: "copy-ui/components/Typography"
+    features:
+      with-typography-codeblock: true
 
 files:
   - filename: "index.ts"

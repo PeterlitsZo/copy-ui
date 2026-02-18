@@ -20,3 +20,5 @@
   as the root component. Some minor styles are updated.
 - 0.1.10 (2025-12-07): Update the padding for `Typography.P`.
 - 0.1.11 (2025-12-12): Add `Typography.A` component.
+- 0.1.12 (2026-02-18): Support the `with-typography-codeblock` feature to
+  conditionally generate `Typography.CodeBlock` files and exports.

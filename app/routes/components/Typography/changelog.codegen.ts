@@ -24,4 +24,6 @@ export const changelog = ''
   + '  as the root component. Some minor styles are updated.\n'
   + '- 0.1.10 (2025-12-07): Update the padding for `Typography.P`.\n'
   + '- 0.1.11 (2025-12-12): Add `Typography.A` component.\n'
+  + '- 0.1.12 (2026-02-18): Support the `with-typography-codeblock` feature to\n'
+  + '  conditionally generate `Typography.CodeBlock` files and exports.\n'
   ;

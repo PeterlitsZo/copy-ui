@@ -2,7 +2,10 @@ import {{ class_helper_ident }} from "{{ class_helper_pkg }}";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./typography.module.css";
-import { TypographyCode, TypographyCodeBlock } from "./typography-code";
+import { TypographyCode } from "./typography-code";
+{% if features["with-typography-codeblock"] %}
+import { TypographyCodeBlock } from "./typography-codeblock";
+{% endif %}
 import {
   TypographyA,
   TypographyEm,
@@ -35,7 +38,9 @@ type ComponentTypography = FC<TypographyProps> & {
   Li: typeof TypographyLi;
 
   Code: typeof TypographyCode;
+{% if features["with-typography-codeblock"] %}
   CodeBlock: typeof TypographyCodeBlock;
+{% endif %}
 };
 
 const Typography: ComponentTypography = (props: TypographyProps) => {
@@ -63,7 +68,9 @@ Typography.Ol = TypographyOl;
 Typography.Li = TypographyLi;
 
 Typography.Code = TypographyCode;
+{% if features["with-typography-codeblock"] %}
 Typography.CodeBlock = TypographyCodeBlock;
+{% endif %}
 
 Typography.displayName = "Typography";
 

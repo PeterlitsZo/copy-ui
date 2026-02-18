@@ -171,15 +171,43 @@ fn parse_entries(
 
         let mut features = HashMap::new();
         for (feature_key, feature_value) in entry_table {
-            let feature_bool = feature_value.as_bool().ok_or_else(|| {
-                anyhow::anyhow!(
-                    "{}.{}.{} must be a boolean",
+            if feature_key != "features" {
+                return Err(anyhow::anyhow!(
+                    "{}.{}.{} is not supported; use {}.{}.features.{} instead",
+                    section,
+                    entry_name,
+                    feature_key,
                     section,
                     entry_name,
                     feature_key
-                )
+                ));
+            }
+
+            let nested_features = feature_value.as_table().ok_or_else(|| {
+                anyhow::anyhow!("{}.{}.features must be a table", section, entry_name)
             })?;
-            features.insert(feature_key.clone(), feature_bool);
+
+            for (nested_feature_key, nested_feature_value) in nested_features {
+                let nested_feature_bool = nested_feature_value.as_bool().ok_or_else(|| {
+                    anyhow::anyhow!(
+                        "{}.{}.features.{} must be a boolean",
+                        section,
+                        entry_name,
+                        nested_feature_key
+                    )
+                })?;
+
+                if features.contains_key(nested_feature_key) {
+                    return Err(anyhow::anyhow!(
+                        "Duplicate feature key '{}.{}.{}'",
+                        section,
+                        entry_name,
+                        nested_feature_key
+                    ));
+                }
+
+                features.insert(nested_feature_key.clone(), nested_feature_bool);
+            }
         }
 
         entries.insert(entry_name.clone(), ComponentConfig { features });

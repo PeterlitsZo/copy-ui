@@ -32,17 +32,20 @@ utils = "@/utils"
 [generator.metadata]
 emit-changelog = false
 
-[components.CopyUiProvider]
+[components.CopyUiProvider.features]
 with-mdx-provider = true
 with-toast-provider = true
 
-[components.Typography]
+[components.Typography.features]
 with-typography-codeblock = true
 
 [utils.jss]
 
 [utils.resolve-style2]
 ```
+
+Feature flags must be defined under `[components.<Name>.features]` and
+`[utils.<Name>.features]`.
 
 Generate components and utils:
 
@@ -108,7 +111,14 @@ current:
   date: 2026-02-18
 
 deps:
-  - copy-ui/components/CopyUiProvider
+  - copy-ui/components/Typography
+  - dep: copy-ui/components/CopyUiProvider
+    features:
+      with-toast-provider: true
+  - dep: copy-ui/components/Typography
+    when: features["with-mdx-provider"]
+    features:
+      with-typography-codeblock: true
   - copy-ui/utils/resolve-style2
 
 files:
@@ -124,9 +134,12 @@ changelog:
 
 Notes:
 
-- `deps` uses string paths:
-  - `copy-ui/components/<Name>`
-  - `copy-ui/utils/<name>`
+- `deps` supports either string paths or structured rules:
+  - String path: `copy-ui/components/<Name>` or `copy-ui/utils/<Name>`
+  - Rule object: `dep` + optional `when` + optional `features`
+- `deps[].features` validates required feature values from dependencies.
+- `deps[].when` conditionally enables a dependency rule using current entry
+  features (for example `features["with-mdx-provider"]`).
 - `files` replaces legacy `index.j2` manifest.
 - `files[].when` supports expression conditions (for example
   `features["with-mdx-provider"]`).

@@ -2,7 +2,8 @@ import classNames from "classnames";
 import type { ComponentProps, FC } from "react";
 
 import styles from "./typography.module.css";
-import { TypographyCode, TypographyCodeBlock } from "./typography-code";
+import { TypographyCode } from "./typography-code";
+import { TypographyCodeBlock } from "./typography-codeblock";
 import {
   TypographyA,
   TypographyEm,

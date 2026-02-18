@@ -1,6 +1,6 @@
 current:
-  version: "0.1.11"
-  date: "2025-12-12"
+  version: "0.1.12"
+  date: "2026-02-18"
 
 deps:
   - "copy-ui/components/CodeBlock"
@@ -10,6 +10,10 @@ files:
   - filename: "index.ts"
   - filename: "typography-code.module.css"
   - filename: "typography-code.tsx"
+  - filename: "typography-codeblock.module.css"
+    when: 'features["with-typography-codeblock"]'
+  - filename: "typography-codeblock.tsx"
+    when: 'features["with-typography-codeblock"]'
   - filename: "typography-common.module.css"
   - filename: "typography-common.tsx"
   - filename: "typography-headings.module.css"
@@ -56,3 +60,6 @@ changelog:
   - version: "0.1.11"
     date: "2025-12-12"
     desc: "Add `Typography.A` component."
+  - version: "0.1.12"
+    date: "2026-02-18"
+    desc: "Support the `with-typography-codeblock` feature to conditionally generate `Typography.CodeBlock` files and exports."
