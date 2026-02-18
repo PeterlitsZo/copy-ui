@@ -24,4 +24,5 @@ export const changelog = ''
   + '- 2025-11-23: Update the CSS variables names with camelCase.\n'
   + '- 2025-11-26: Add `link` variant.\n'
   + '- 2025-12-13: Update to support the new color scheme.\n'
+  + '- 2026-02-18: Replace Button stylesheet module from `scss` to `css`.\n'
   ;

@@ -6,7 +6,7 @@ import type { ColorName, Theme } from "@/components/CopyUiProvider";
 import { useJss, useTheme } from "@/components/CopyUiProvider";
 import { resolveStyle2 } from "@/utils/resolve-style2";
 
-import styles from "./button.module.scss";
+import styles from "./button.module.css";
 
 export type ButtonProps = ComponentProps<"button"> & {
   variant?: "default" | "filled" | "light" | "secondary" | "ghost" | "link";
