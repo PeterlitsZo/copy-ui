@@ -53,6 +53,18 @@ Generate components and utils:
 copy-ui codegen
 ```
 
+Add a component config (and its dependency configs):
+
+```bash
+copy-ui add component Button
+```
+
+To use a different config file:
+
+```bash
+copy-ui add component Button --config path/to/copy-ui.config.toml
+```
+
 Use a custom config file path:
 
 ```bash
