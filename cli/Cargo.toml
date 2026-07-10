@@ -1,0 +1,11 @@
+[package]
+name = "copy-ui"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.6.1", features = ["derive"] }
+inquire = "0.9.4"
+serde = { version = "1.0.228", features = ["derive"] }
+toml = "1.1.2"
+toml_edit = { version = "0.25.12", features = ["serde"] }
