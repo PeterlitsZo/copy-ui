@@ -8,7 +8,11 @@ pub(crate) struct Config {
 }
 
 impl Config {
-    pub(crate) fn from_file(filename: &str) -> ConfigResult<Self> {
+    pub(crate) fn from_file<F>(filename: F) -> ConfigResult<Self>
+    where
+        F: AsRef<str>,
+    {
+        let filename = filename.as_ref();
         let config = config::Config::builder()
             .add_source(config::File::with_name(filename))
             .build()
