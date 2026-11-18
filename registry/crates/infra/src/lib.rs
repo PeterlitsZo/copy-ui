@@ -2,29 +2,29 @@ use std::fmt::Display;
 
 use postgres_native_tls::MakeTlsConnector;
 
-pub(crate) struct Infra {
+pub struct Infra {
     database: Database,
 }
 
-pub(crate) struct InfraOptions {
-    pub(crate) database: DatabaseOptions,
+pub struct InfraOptions {
+    pub database: DatabaseOptions,
 }
 
 impl Infra {
-    pub(crate) async fn new(opts: InfraOptions) -> InfraResult<Self> {
+    pub async fn new(opts: InfraOptions) -> InfraResult<Self> {
         let database = Database::new(opts.database).await?;
         Ok(Self { database })
     }
 
-    pub(crate) async fn calc_1_plus_1(&self) -> InfraResult<i64> {
+    pub async fn calc_1_plus_1(&self) -> InfraResult<i64> {
         self.database.calc_1_plus_1().await
     }
 }
 
-pub(crate) type InfraResult<T> = Result<T, InfraError>;
+pub type InfraResult<T> = Result<T, InfraError>;
 
 #[derive(Debug, thiserror::Error)]
-pub(crate) struct InfraError {
+pub struct InfraError {
     kind: InfraErrorKind,
     msg: String,
     #[source]
@@ -91,7 +91,7 @@ enum Database {
     PostgreSql(PostgreSql),
 }
 
-pub(crate) enum DatabaseOptions {
+pub enum DatabaseOptions {
     PostgreSql(PostgreSqlOptions),
 }
 
@@ -116,8 +116,8 @@ struct PostgreSql {
     client: tokio_postgres::Client,
 }
 
-pub(crate) struct PostgreSqlOptions {
-    pub(crate) connection_address: String,
+pub struct PostgreSqlOptions {
+    pub connection_address: String,
 }
 
 impl PostgreSql {

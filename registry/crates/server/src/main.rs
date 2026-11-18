@@ -1,13 +1,10 @@
 use std::process::exit;
 
 use clap::Parser;
+use copy_ui_registry_config as config;
+use copy_ui_registry_infra as infra;
 
-mod api;
-mod app;
 mod cli;
-mod config;
-mod domain;
-mod infra;
 
 #[tokio::main]
 async fn main() {

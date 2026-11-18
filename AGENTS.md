@@ -3,6 +3,7 @@
 ## Note
 
 - Do not `git add` things that is ignored by `.gitignore`.
+- Put plans in `./plans/<date-like-20261118>/<seq-like-01>/main.md`
 
 ## Git Message
 

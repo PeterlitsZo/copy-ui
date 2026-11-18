@@ -1,0 +1,12 @@
+[package]
+name = "copy-ui-registry-infra"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+native-tls.workspace = true
+postgres-native-tls.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["rt"] }
+tokio-postgres.workspace = true

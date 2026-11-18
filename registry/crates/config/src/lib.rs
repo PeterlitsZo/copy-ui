@@ -3,12 +3,12 @@ use std::fmt::Display;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
-pub(crate) struct Config {
-    pub(crate) infra: InfraConfig,
+pub struct Config {
+    pub infra: InfraConfig,
 }
 
 impl Config {
-    pub(crate) fn from_file<F>(filename: F) -> ConfigResult<Self>
+    pub fn from_file<F>(filename: F) -> ConfigResult<Self>
     where
         F: AsRef<str>,
     {
@@ -29,10 +29,10 @@ impl Config {
     }
 }
 
-pub(crate) type ConfigResult<T> = Result<T, ConfigError>;
+pub type ConfigResult<T> = Result<T, ConfigError>;
 
 #[derive(Debug, thiserror::Error)]
-pub(crate) struct ConfigError {
+pub struct ConfigError {
     kind: ConfigErrorKind,
     msg: String,
     #[source]
@@ -87,18 +87,18 @@ enum ConfigErrorKind {
 }
 
 #[derive(Debug, Deserialize)]
-pub(crate) struct InfraConfig {
-    pub(crate) database: DatabaseConfig,
+pub struct InfraConfig {
+    pub database: DatabaseConfig,
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(tag = "type")]
-pub(crate) enum DatabaseConfig {
+pub enum DatabaseConfig {
     #[serde(rename = "PostgreSql")]
     PostgreSql(PostgreSqlConfig),
 }
 
 #[derive(Debug, Deserialize)]
-pub(crate) struct PostgreSqlConfig {
-    pub(crate) connection_address: String,
+pub struct PostgreSqlConfig {
+    pub connection_address: String,
 }

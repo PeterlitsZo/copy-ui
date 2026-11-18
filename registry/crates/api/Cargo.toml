@@ -1,0 +1,4 @@
+[package]
+name = "copy-ui-registry-api"
+version.workspace = true
+edition.workspace = true
