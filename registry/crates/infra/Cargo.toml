@@ -3,10 +3,23 @@ name = "copy-ui-registry-infra"
 version.workspace = true
 edition.workspace = true
 
+[features]
+default = []
+postgres = ["dep:anyhow", "dep:thiserror", "dep:native-tls", "dep:postgres-native-tls", "dep:tokio", "dep:tokio-postgres", "dep:tracing"]
+d1 = ["dep:worker", "dep:serde_json"]
+
 [dependencies]
-anyhow.workspace = true
-native-tls.workspace = true
-postgres-native-tls.workspace = true
-thiserror.workspace = true
-tokio = { workspace = true, features = ["rt"] }
-tokio-postgres.workspace = true
+app.workspace = true
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+anyhow = { workspace = true, optional = true }
+thiserror = { workspace = true, optional = true }
+native-tls = { workspace = true, optional = true }
+postgres-native-tls = { workspace = true, optional = true }
+tokio = { workspace = true, features = ["rt"], optional = true }
+tokio-postgres = { workspace = true, optional = true }
+tracing = { workspace = true, optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+worker = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }

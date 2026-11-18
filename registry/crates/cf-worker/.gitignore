@@ -1,0 +1,5 @@
+/build/
+/.wrangler/
+/node_modules/
+/.dev.vars*
+/wrangler.production.jsonc

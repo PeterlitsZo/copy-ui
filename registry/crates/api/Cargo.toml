@@ -2,3 +2,9 @@
 name = "copy-ui-registry-api"
 version.workspace = true
 edition.workspace = true
+
+[dependencies]
+axum.workspace = true
+app.workspace = true
+serde = { workspace = true, features = ["derive"] }
+tracing.workspace = true

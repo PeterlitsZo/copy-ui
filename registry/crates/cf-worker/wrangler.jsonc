@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "copy-ui-registry",
+  "account_id": "68b0132954928d205174f83c944a196a",
+  "workers_dev": false,
+  "routes": [{ "pattern": "copy-ui-registry.peterlits.net", "custom_domain": true }],
+  "main": "build/index.js",
+  "compatibility_date": "2026-11-18",
+  "build": { "command": "npm run build" },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "copy-ui-registry",
+    "database_id": "f9f24d10-d2fa-42aa-aaad-021d6c15da9e"
+  }]
+}

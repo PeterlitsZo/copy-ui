@@ -1,0 +1,12 @@
+{
+  "name": "copy-ui-registry-cf-worker",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "build": "node scripts/build.mjs",
+    "dry-run": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "4.164.0"
+  }
+}

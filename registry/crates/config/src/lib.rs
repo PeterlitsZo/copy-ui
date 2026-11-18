@@ -5,6 +5,8 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize)]
 pub struct Config {
     pub infra: InfraConfig,
+    #[serde(default)]
+    pub server: ServerConfig,
 }
 
 impl Config {
@@ -13,8 +15,8 @@ impl Config {
         F: AsRef<str>,
     {
         let filename = filename.as_ref();
-        let config = config::Config::builder()
-            .add_source(config::File::with_name(filename))
+        let config = config_rs::Config::builder()
+            .add_source(config_rs::File::with_name(filename))
             .build()
             .map_err(|e| {
                 ConfigError::read(&format!("read config from {:?}", filename)).with_source(e)
@@ -101,4 +103,18 @@ pub enum DatabaseConfig {
 #[derive(Debug, Deserialize)]
 pub struct PostgreSqlConfig {
     pub connection_address: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(default)]
+pub struct ServerConfig {
+    pub listen_address: std::net::SocketAddr,
+}
+
+impl Default for ServerConfig {
+    fn default() -> Self {
+        Self {
+            listen_address: ([0, 0, 0, 0], 8080).into(),
+        }
+    }
 }

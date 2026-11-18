@@ -1,0 +1,16 @@
+[package]
+name = "copy-ui-registry-cf-worker"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+axum.workspace = true
+api.workspace = true
+app.workspace = true
+infra = { workspace = true, features = ["d1"] }
+tower.workspace = true
+worker.workspace = true
+serde_json.workspace = true
